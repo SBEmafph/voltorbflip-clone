@@ -1,0 +1,8 @@
+<RCC>
+  <qresource prefix="/">
+    <file alias="assets/certificate.crt">C:/Qt/Examples/Qt-6.10.1/httpserver/simple/assets/certificate.crt</file>
+    <file alias="assets/private.key">C:/Qt/Examples/Qt-6.10.1/httpserver/simple/assets/private.key</file>
+    <file alias="assets/qt-logo.png">C:/Qt/Examples/Qt-6.10.1/httpserver/simple/assets/qt-logo.png</file>
+  </qresource>
+</RCC>
+

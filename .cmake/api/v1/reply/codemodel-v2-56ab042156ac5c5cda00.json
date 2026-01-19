@@ -1,0 +1,79 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-3da4cd45b3fa185785f0.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "simple",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "simple::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-simple-Debug-7181ddc706747b3a457c.json",
+					"name" : "simple",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "simple_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-simple_autogen-Debug-296c1f611dd7902ec0f8.json",
+					"name" : "simple_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "simple_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-simple_autogen_timestamp_deps-Debug-b59d806e2e3195e1b197.json",
+					"name" : "simple_autogen_timestamp_deps",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/simon.vogt/Documents/2_schule/IFA12C/Projekt/Test",
+		"source" : "C:/Qt/Examples/Qt-6.10.1/httpserver/simple"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}

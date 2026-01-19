@@ -1,0 +1,9 @@
+C:/Users/simon.vogt/Documents/2_schule/IFA12C/Projekt/Test/CMakeFiles/simple.dir
+C:/Users/simon.vogt/Documents/2_schule/IFA12C/Projekt/Test/CMakeFiles/edit_cache.dir
+C:/Users/simon.vogt/Documents/2_schule/IFA12C/Projekt/Test/CMakeFiles/rebuild_cache.dir
+C:/Users/simon.vogt/Documents/2_schule/IFA12C/Projekt/Test/CMakeFiles/list_install_components.dir
+C:/Users/simon.vogt/Documents/2_schule/IFA12C/Projekt/Test/CMakeFiles/install.dir
+C:/Users/simon.vogt/Documents/2_schule/IFA12C/Projekt/Test/CMakeFiles/install/local.dir
+C:/Users/simon.vogt/Documents/2_schule/IFA12C/Projekt/Test/CMakeFiles/install/strip.dir
+C:/Users/simon.vogt/Documents/2_schule/IFA12C/Projekt/Test/CMakeFiles/simple_autogen_timestamp_deps.dir
+C:/Users/simon.vogt/Documents/2_schule/IFA12C/Projekt/Test/CMakeFiles/simple_autogen.dir

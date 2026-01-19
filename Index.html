@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Mein Spiel</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; margin-top: 100px; }
+        button { font-size: 20px; padding: 10px 20px; margin: 10px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>Willkommen zum Spiel!</h1>
+    <button id="startBtn">Spiel starten</button>
+    <button id="optionsBtn">Optionen</button>
+    <button id="exitBtn">Beenden</button>
+
+    <script>
+        document.getElementById("startBtn").onclick = () => alert("Spiel startet...");
+        document.getElementById("optionsBtn").onclick = () => alert("Optionen öffnen...");
+        document.getElementById("exitBtn").onclick = () => alert("Spiel beendet.");
+    </script>
+</body>
+</html>
