@@ -2,22 +2,29 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>Mein Spiel</title>
+    <title>VoltOrbFlip</title>
     <style>
         body { font-family: sans-serif; text-align: center; margin-top: 100px; }
         button { font-size: 20px; padding: 10px 20px; margin: 10px; cursor: pointer; }
     </style>
 </head>
 <body>
-    <h1>Willkommen zum Spiel!</h1>
-    <button id="startBtn">Spiel starten</button>
-    <button id="optionsBtn">Optionen</button>
-    <button id="exitBtn">Beenden</button>
+    <h1 style="font-size: 52px;">VoltOrbFlip</h1>
+    <div>
+        <button id="playBtn" style="width: 200px; height: 100px; font-size: 42px;">Play</button>
+    </div>
+    <div>
+        <button id="rulesBtn">Rules</button>
+    </div>
+    <br><br><br><br>
+    <button id="replayBtn" style="width: 200px; height: 50px; font-size: 26px;">Watch Replay</button>
+    <button id="shopBtn" style="width: 200px; height: 50px; font-size: 26px;">Shop</button>
 
     <script>
-        document.getElementById("startBtn").onclick = () => alert("Spiel startet...");
-        document.getElementById("optionsBtn").onclick = () => alert("Optionen öffnen...");
-        document.getElementById("exitBtn").onclick = () => alert("Spiel beendet.");
+        document.getElementById("playBtn").onclick = () => {window.location.href = "/Lobby";};
+        document.getElementById("rulesBtn").onclick = () => alert("Optionen ...");
+        document.getElementById("replayBtn").onclick = () => alert("Spiel beendet.");
+        document.getElementById("shopBtn").onclick = () => alert("Spiel beendet.");
     </script>
 </body>
 </html>
