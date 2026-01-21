@@ -1,0 +1,60 @@
+# --- Qt Creator / User-spezifische Dateien ---
+*.user
+*.user.*
+*.autosave
+
+# --- Build-Artefakte (sehr wichtig!) ---
+# Ignoriert die typischen Shadow-Build-Ordner
+build-*/
+# Falls du in-source buildest (was man vermeiden sollte):
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.dll
+*.exe
+ipch/
+*.aps
+*.ncb
+*.msym
+
+# --- Generierte Dateien ---
+Makefile*
+object_script.*
+moc_*.cpp
+mocs_compilation.cpp
+ui_*.h
+qrc_*.cpp
+*.moc
+
+# --- CMake (falls du CMake statt qmake nutzt) ---
+CMakeLists.txt.user
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+
+# --- OS-spezifischer Müll ---
+.DS_Store
+Thumbs.db
+
+# --- Android spezifisch ---
+*.apk
+*.aab
+*.keystore
+!google-services.json # Falls du Firebase nutzt, diese behalten
+
+# Android Studio / Gradle Müll
+.gradle/
+build/
+captures/
+local.properties
+.externalNativeBuild/
+.cxx/
+
+# Generierte Java/Android Dateien
+/android/gen/
+/android/bin/
+/android/libs/
