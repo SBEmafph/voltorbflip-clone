@@ -2,7 +2,8 @@ name: Windows Build (Qt Widgets)
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "**" ]
+    #branches: [ "main" ]
     paths-ignore:
       - '**.md'
       - '.gitignore'
