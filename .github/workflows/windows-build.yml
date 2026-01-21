@@ -1,0 +1,48 @@
+name: Windows Build (Qt Widgets)
+
+on:
+  push:
+    branches: [ "main" ]
+    paths-ignore:
+      - '**.md'
+      - '.gitignore'
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v3
+        with:
+          version: '6.10.1'
+          host: 'windows'
+          target: 'desktop'
+          arch: 'win64_mingw' #'win64_msvc2019_64'
+
+      # GitHub findet mingw nicht...
+      - name: Setup MinGW
+        uses: egor-tensin/setup-gcc@v1
+        with:
+          version: 13.1.0
+          platform: x64
+
+      - name: Build
+        run: |
+          #cmake -B build -S . -DCMAKE_BUILD_TYPE=Release
+          cmake -G "MinGW Makefiles" -B build -S . -DCMAKE_BUILD_TYPE=Release
+          cmake --build build --config Release
+
+      # Speichert die .exe als Download auf GitHub
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: VOF-Windows-Package
+          path: |
+            build/**/*.exe
+            build/**/*.dll

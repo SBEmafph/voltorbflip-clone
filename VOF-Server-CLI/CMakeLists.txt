@@ -15,7 +15,7 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
 add_executable(VOF-Server-CLI
   main.cpp
 )
-target_link_libraries(VOF-Server-CLI Qt${QT_VERSION_MAJOR}::Core)
+target_link_libraries(VOF-Server-CLI PRIVATE VOF-Network Qt${QT_VERSION_MAJOR}::Core)
 
 include(GNUInstallDirs)
 install(TARGETS VOF-Server-CLI
