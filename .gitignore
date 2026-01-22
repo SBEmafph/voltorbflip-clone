@@ -2,10 +2,11 @@
 *.user
 *.user.*
 *.autosave
+.qtcreator/
 
 # --- Build-Artefakte (sehr wichtig!) ---
 # Ignoriert die typischen Shadow-Build-Ordner
-build-*/
+out/
 # Falls du in-source buildest (was man vermeiden sollte):
 *.o
 *.obj

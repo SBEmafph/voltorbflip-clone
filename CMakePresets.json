@@ -1,0 +1,60 @@
+{
+  "version": 3,
+  "configurePresets": [
+    {
+      "name": "base-mingw",
+	  "hidden": true,
+      "generator": "MinGW Makefiles",
+      "binaryDir": "${sourceDir}/out/build/${presetName}",
+	  "cmakeExecutable": "$env{QT_DIR}/Tools/CMake_64/bin/cmake.exe",
+      "cacheVariables": {
+        "CMAKE_CXX_STANDARD": "17",
+		"QT_MAJOR_VERSION": "6",
+		"CMAKE_PREFIX_PATH": "$env{QT_DIR}/6.10.1/mingw_64",
+		"CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}",
+        "CMAKE_CXX_FLAGS": "-Wall -Wextra",
+        "QT_STRICT_ITERATORS": "ON"
+      },
+	  "environment": {
+        "PATH": "$env{QT_DIR}/Tools/mingw1310_64/bin;$penv{PATH}"
+      },
+	  "vendor": {
+        "qt.io/QtCreator/1.0": {
+          "debugger": {
+            "DisplayName": "GNU gdb 13.1.0 for MinGW 13.1.0 64-bit",
+            "Abis": ["x86-windows-msys-pe-64bit"],
+            "Binary": "$env{QT_DIR}/Tools/mingw1310_64/bin/gdb.exe",
+            "EngineType": 1,
+            "Version": "13.1.0"
+          }
+        }
+      }
+    },
+    {
+      "name": "dev-debug",
+      "displayName": "Debug",
+      "inherits": "base-mingw",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    },
+    {
+      "name": "dev-release",
+      "displayName": "Release",
+      "inherits": "base-mingw",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "build-all-debug",
+      "configurePreset": "dev-debug"
+    },
+    {
+      "name": "build-all-release",
+      "configurePreset": "dev-release"
+    }
+  ]
+}
