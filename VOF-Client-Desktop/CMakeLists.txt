@@ -26,9 +26,12 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(VOF-Client-Desktop
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
-        lobby.ui match.ui mainwindow.ui menu.ui
-        menu.h
-        menu.cpp
+        mainwindow.ui
+        menu.ui menu.h menu.cpp
+        rules.ui rules.h rules.cpp
+        lobby.ui lobby.h lobby.cpp
+        match.h match.cpp match.ui
+        replay.h replay.cpp replay.ui
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET VOF-Client-Desktop APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
