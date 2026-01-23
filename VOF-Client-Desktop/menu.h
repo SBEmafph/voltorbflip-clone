@@ -2,6 +2,10 @@
 #define MENU_H
 
 #include <QMainWindow>
+#include "Lobby.h"
+#include "rules.h"
+#include "match.h"
+#include "replay.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -14,10 +18,21 @@ class Menu : public QMainWindow
     Q_OBJECT
 
 public:
-    Menu(QWidget *parent = nullptr);
+    explicit Menu(QWidget *parent = nullptr);
     ~Menu();
+
+private slots:
+    void on_playBtn_clicked();    // Lobby öffnen
+    void on_rulesBtn_clicked();   // Rules öffnen
+    void on_replayBtn_clicked();  // Replay öffnen
 
 private:
     Ui::Menu *ui;
+
+    Lobby *lobby;
+    rules *rulesWindow;
+    Match *matchWindow;
+    replay *replayWindow;
 };
+
 #endif // MENU_H
