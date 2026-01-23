@@ -36,12 +36,12 @@ void VoltOrbFlipServer::startServer(quint16 port)
 {
     QHostAddress ipAddress;
     const QList<QHostAddress> ipAddressesList = QNetworkInterface::allAddresses();
-    for (const QHostAddress &entry : ipAddressesList) {
-        if (entry != QHostAddress::LocalHost && entry.toIPv4Address()) {
-            ipAddress = entry;
-            break;
-        }
-    }
+    // for (const QHostAddress &entry : ipAddressesList) {
+    //     if (entry != QHostAddress::LocalHost && entry.toIPv4Address()) {
+    //         ipAddress = entry;
+    //         break;
+    //     }
+    // }
     // if we did not find one, use IPv4 localhost
     if (ipAddress.isNull()){
         ipAddress = QHostAddress::LocalHost;
