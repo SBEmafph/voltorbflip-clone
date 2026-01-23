@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>470</height>
+    <height>500</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -140,7 +140,7 @@
     </font>
    </property>
    <property name="text">
-    <string>R2</string>
+    <string>R3</string>
    </property>
   </widget>
   <widget class="QPushButton" name="replay2Btn_3">
@@ -159,7 +159,7 @@
     </font>
    </property>
    <property name="text">
-    <string>R2</string>
+    <string>R4</string>
    </property>
   </widget>
   <widget class="QPushButton" name="replay2Btn_4">
@@ -178,7 +178,7 @@
     </font>
    </property>
    <property name="text">
-    <string>R2</string>
+    <string>R5</string>
    </property>
   </widget>
   <widget class="QPushButton" name="replay2Btn_5">
@@ -197,7 +197,7 @@
     </font>
    </property>
    <property name="text">
-    <string>R2</string>
+    <string>R8</string>
    </property>
   </widget>
   <widget class="QPushButton" name="replay2Btn_6">
@@ -216,7 +216,7 @@
     </font>
    </property>
    <property name="text">
-    <string>R2</string>
+    <string>R9</string>
    </property>
   </widget>
   <widget class="QPushButton" name="replay2Btn_7">
@@ -235,7 +235,7 @@
     </font>
    </property>
    <property name="text">
-    <string>R2</string>
+    <string>R10</string>
    </property>
   </widget>
   <widget class="QPushButton" name="replay2Btn_8">
@@ -254,7 +254,7 @@
     </font>
    </property>
    <property name="text">
-    <string>R2</string>
+    <string>R7</string>
    </property>
   </widget>
   <widget class="QPushButton" name="replay1Btn_2">
@@ -273,7 +273,33 @@
     </font>
    </property>
    <property name="text">
-    <string>R1</string>
+    <string>R6</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="okBtn">
+   <property name="geometry">
+    <rect>
+     <x>290</x>
+     <y>460</y>
+     <width>91</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+     <pointsize>16</pointsize>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>Exit</string>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>20</width>
+     <height>20</height>
+    </size>
    </property>
   </widget>
  </widget>

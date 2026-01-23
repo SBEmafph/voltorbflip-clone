@@ -16,9 +16,9 @@ set(TS_FILES VOF-Client-Desktop_de_DE.ts)
 
 set(PROJECT_SOURCES
         main.cpp
-        mainwindow.cpp
-        mainwindow.h
-        mainwindow.ui
+
+
+
         ${TS_FILES}
 )
 
@@ -26,12 +26,13 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(VOF-Client-Desktop
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
-        mainwindow.ui
+
         menu.ui menu.h menu.cpp
         rules.ui rules.h rules.cpp
         lobby.ui lobby.h lobby.cpp
         match.h match.cpp match.ui
         replay.h replay.cpp replay.ui
+        shop.h shop.cpp shop.ui
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET VOF-Client-Desktop APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

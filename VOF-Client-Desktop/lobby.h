@@ -26,6 +26,7 @@ signals:
 private slots:
     void on_quitBtn_clicked();
     void onMatchTimeout();
+    void on_replayBtn_clicked();   // NEU
 
 private:
     Ui::Lobby *ui;
@@ -33,7 +34,7 @@ private:
     int secondsLeft;
 
 protected:
-    void showEvent(QShowEvent *event) override; // reset timer on sh
+    void showEvent(QShowEvent *event) override;
 };
 
 #endif // LOBBY_H

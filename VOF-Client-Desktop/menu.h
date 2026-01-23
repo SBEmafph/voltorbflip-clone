@@ -22,9 +22,9 @@ public:
     ~Menu();
 
 private slots:
-    void on_playBtn_clicked();    // Lobby öffnen
-    void on_rulesBtn_clicked();   // Rules öffnen
-    void on_replayBtn_clicked();  // Replay öffnen
+    void on_playBtn_clicked();     // Lobby öffnen
+    void on_rulesBtn_clicked();    // Rules öffnen
+    void on_replayBtn_clicked();   // Replay öffnen (NEU für menu.ui)
 
 private:
     Ui::Menu *ui;
