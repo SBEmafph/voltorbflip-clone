@@ -6,6 +6,7 @@
 #include "rules.h"
 #include "match.h"
 #include "replay.h"
+#include "Client.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -33,6 +34,7 @@ private:
     rules *rulesWindow;
     Match *matchWindow;
     replay *replayWindow;
+    Client *client;
 };
 
 #endif // MENU_H

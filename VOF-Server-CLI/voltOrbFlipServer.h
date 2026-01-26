@@ -22,13 +22,13 @@ class VoltOrbFlipServer : public QObject
 public:
     explicit VoltOrbFlipServer(QObject *parent = nullptr);
     void startServer(quint16 port = 0);
-    void attach();
     void detach(NetworkObserver* obs);
     void processInput(int playerId, std::string Input);
     bool verifyInput(std::string input);
     void applyMove(std::string input);
 
 public slots:
+    void attach();
     void notifyClients();
 
 private:

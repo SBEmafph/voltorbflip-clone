@@ -47,7 +47,6 @@ void VoltOrbFlipServer::startServer(quint16 port)
         ipAddress = QHostAddress::LocalHost;
     }
 
-    m_tcpServer = new QTcpServer(this);
     if (!m_tcpServer->listen(ipAddress, port)) {
         err
             << "Unable to start the server: %s"

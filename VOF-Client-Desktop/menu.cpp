@@ -8,6 +8,7 @@ Menu::Menu(QWidget *parent)
     , rulesWindow(new rules(this))
     , matchWindow(new Match(this))
     , replayWindow(new replay(this))
+    , client(new Client(this))
 {
     ui->setupUi(this);
 
@@ -41,14 +42,11 @@ Menu::Menu(QWidget *parent)
 Menu::~Menu()
 {
     delete ui;
-    delete lobby;
-    delete rulesWindow;
-    delete matchWindow;
-    delete replayWindow;
 }
 
 void Menu::on_playBtn_clicked()
 {
+    client->m_attach();
     lobby->show();
     this->hide();
 }
