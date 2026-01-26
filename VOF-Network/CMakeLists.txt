@@ -27,6 +27,7 @@ add_library(VOF-Network STATIC
   GameState.h
   IObserver.h
   PlayerState.h
+  Constants.h
 )
 
 target_include_directories(

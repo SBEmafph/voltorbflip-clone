@@ -1,5 +1,5 @@
-#include "replay.h"
-#include "ui_replay.h"
+#include "Replay.h"
+#include "ui_Replay.h"
 
 replay::replay(QWidget *parent)
     : QMainWindow(parent)

@@ -1,6 +1,6 @@
 #include <QCoreApplication>
 
-#include "voltOrbFlipServer.h"
+#include "VoltOrbFlipServer.h"
 
 int main(int argc, char *argv[])
 {

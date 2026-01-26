@@ -26,7 +26,7 @@ find_package(
 set(TS_FILES VOF-Client-Desktop_de_DE.ts)
 
 set(PROJECT_SOURCES
-        main.cpp
+    Main.cpp
         ${TS_FILES}
 )
 
@@ -34,12 +34,13 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(VOF-Client-Desktop
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
-        menu.ui menu.h menu.cpp
-        rules.ui rules.h rules.cpp
-        lobby.ui lobby.h lobby.cpp
-        match.h match.cpp match.ui
-        replay.h replay.cpp replay.ui
-        client.h client.cpp
+        Menu.ui Menu.h Menu.cpp
+        Rules.ui Rules.h Rules.cpp
+        Lobby.ui Lobby.h Lobby.cpp
+        Match.h Match.cpp Match.ui
+        Replay.h Replay.cpp Replay.ui
+        Client.h Client.cpp
+        Config.h Config.cpp
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET VOF-Client-Desktop APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
@@ -65,6 +66,7 @@ endif()
 
 target_link_libraries(
     VOF-Client-Desktop
+    PRIVATE VOF-Network
     PRIVATE Qt${QT_VERSION_MAJOR}::Widgets
     PRIVATE Qt${QT_VERSION_MAJOR}::Network
 )

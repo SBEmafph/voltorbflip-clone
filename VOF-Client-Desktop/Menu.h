@@ -3,9 +3,9 @@
 
 #include <QMainWindow>
 #include "Lobby.h"
-#include "rules.h"
-#include "match.h"
-#include "replay.h"
+#include "Rules.h"
+#include "Match.h"
+#include "Replay.h"
 #include "Client.h"
 
 QT_BEGIN_NAMESPACE

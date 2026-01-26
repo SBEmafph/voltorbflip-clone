@@ -5,17 +5,39 @@
 
 #include "IObserver.h"
 
-class NetworkObserver : IObserver
+QT_BEGIN_NAMESPACE
+class QTcpSocket;
+QT_END_NAMESPACE
+
+
+class NetworkObserver :  public QObject, public IObserver
 {
+    Q_OBJECT
+signals:
+    void m_identify(quint32 id, quint16 token);
+
+public slots:
+    void m_onReadyRead();
+
 public:
-    NetworkObserver(QTcpSocket* clientSocket) : m_socket(clientSocket){}
-    //void setSocket();
-    QTcpSocket* getSocket();
+    NetworkObserver(QTcpSocket* clientSocket, QObject* parent);
+    void m_setSocket(QTcpSocket* socketIn) { m_socket = socketIn; m_socket->setParent(this); }
+    QTcpSocket* m_getSocket() { return m_socket; }
     //void saveState();
-    void updateStates(const GameState &state);
+    void m_proceedToMatch();
+    QDataStream m_getDataStream();
+    void m_reconnect(QTcpSocket* SocketIn);
+
+    quint16 m_getToken() const { return m_token; }
+    void m_setToken(quint16 newToken) { m_token = newToken; }
+
+    void m_updateStates(const GameState &state);
 private:
-    QTcpSocket* m_socket;
-    QByteArray prepareDataForThisPlayer(const GameState &);
+    quint16 m_token;
+    QDataStream m_in;
+    QDataStream m_out;
+    QTcpSocket* m_socket = nullptr;
+    QByteArray m_prepareDataForPlayer(const GameState &);
 };
 
 #endif // NETWORKOBSERVER_H

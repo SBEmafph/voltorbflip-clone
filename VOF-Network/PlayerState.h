@@ -6,6 +6,7 @@
 
 struct PlayerState{
 public:
+    bool m_ready;
     bool m_fItemEquipped[3];
     bool m_fRevealed[25];
     quint8 m_bBoard[25];

@@ -8,12 +8,11 @@
 #include "GameState.h"
 #include "NetworkObserver.h"
 
+
 QT_BEGIN_NAMESPACE
 class QTcpServer;
 class QTcpSocket;
 QT_END_NAMESPACE
-
-static const quint8 MAX_CLIENTS = 8;
 
 class VoltOrbFlipServer : public QObject
 {
@@ -21,15 +20,16 @@ class VoltOrbFlipServer : public QObject
 
 public:
     explicit VoltOrbFlipServer(QObject *parent = nullptr);
-    void startServer(quint16 port = 0);
-    void detach(NetworkObserver* obs);
-    void processInput(int playerId, std::string Input);
-    bool verifyInput(std::string input);
-    void applyMove(std::string input);
+    void m_startServer(quint16 port = 0);
+    void m_detach(NetworkObserver* obs);
+    void m_processInput(int playerId, std::string Input);
+    bool m_verifyInput(std::string input);
+    void m_applyMove(std::string input);
 
 public slots:
-    void attach();
-    void notifyClients();
+    void m_processHandshake(quint32 ID, quint16 token);
+    void m_attach();
+    void m_notifyClients();
 
 private:
     quint8 m_findFirstFreeSlot();
@@ -37,6 +37,8 @@ private:
 
     GameState m_gamestate;
     QMap<quint8, NetworkObserver*> m_clients;
+
+    void deletePlayerInfo(quint32 playerId);
 
 };
 

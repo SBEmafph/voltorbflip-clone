@@ -1,5 +1,5 @@
 #include "Lobby.h"
-#include "./ui_lobby.h"
+#include "./ui_Lobby.h"
 #include <QShowEvent>
 
 Lobby::Lobby(QWidget *parent)
@@ -11,16 +11,16 @@ Lobby::Lobby(QWidget *parent)
     ui->setupUi(this);
 
     // Connect the timeout to decrease secondsLeft
-    matchTimer->setInterval(1000); // 1 second
-    connect(matchTimer, &QTimer::timeout, this, [this]() {
-        secondsLeft--;
-        ui->timerLabel->setText("Game starts in " + QString::number(secondsLeft) + "s");
+    // matchTimer->setInterval(1000); // 1 second
+    // connect(matchTimer, &QTimer::timeout, this, [this]() {
+    //     secondsLeft--;
+    //     ui->timerLabel->setText("Game starts in " + QString::number(secondsLeft) + "s");
 
-        if (secondsLeft <= 0) {
-            matchTimer->stop();
-            onMatchTimeout();  // reuse your existing function
-        }
-    });
+    //     if (secondsLeft <= 0) {
+    //         matchTimer->stop();
+    //         onMatchTimeout();  // reuse your existing function
+    //     }
+    // });
 }
 
 // Reset timer every time the Lobby window is shown

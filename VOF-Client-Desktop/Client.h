@@ -16,6 +16,9 @@ public:
     explicit Client(QObject *parent = nullptr);
 public slots:
     void m_attach();
+    void m_readLobbyState();
+    bool m_checkStartLobby();
+    void m_identify();
 signals:
 
 private:

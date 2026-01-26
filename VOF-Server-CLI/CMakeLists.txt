@@ -24,9 +24,11 @@ find_package(
 )
 
 add_executable(VOF-Server-CLI
-  main.cpp
-  voltOrbFlipServer.h
-  voltOrbFlipServer.cpp
+  Main.cpp
+  VoltOrbFlipServer.h
+  VoltOrbFlipServer.cpp
+  VoltOrbFlipServer.cpp VoltOrbFlipServer.h
+  VoltOrbFlipServer.h
 )
 target_link_libraries(
   VOF-Server-CLI

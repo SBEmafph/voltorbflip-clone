@@ -1,5 +1,5 @@
-#include "match.h"
-#include "ui_match.h"
+#include "Match.h"
+#include "ui_Match.h"
 
 Match::Match(QWidget *parent)
     : QMainWindow(parent)

@@ -7,7 +7,7 @@ class IObserver
 {
 public:
     virtual ~IObserver(){};
-    virtual void updateStates(const GameState &state) = 0;
+    virtual void m_updateStates(const GameState &state) = 0;
 };
 
 #endif // IOBSERVER_H

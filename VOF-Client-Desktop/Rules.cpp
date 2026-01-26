@@ -1,5 +1,5 @@
-#include "rules.h"
-#include "ui_rules.h"
+#include "Rules.h"
+#include "ui_Rules.h"
 
 rules::rules(QWidget *parent) :
     QMainWindow(parent),  // wie Lobby
