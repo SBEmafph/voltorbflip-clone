@@ -10,6 +10,7 @@ Menu::Menu(QWidget *parent)
     , replayWindow(new replay(this))
 {
     ui->setupUi(this);
+    rulesWindow->hide();
 
     // Zurück von Lobby
     connect(lobby, &Lobby::backToMenu, this, [this]() {
@@ -60,7 +61,7 @@ void Menu::on_playBtn_clicked()
 void Menu::on_rulesBtn_clicked()
 {
     rulesWindow->show();
-    this->hide();
+    //this->hide();
 }
 
 void Menu::on_replayBtn_clicked()

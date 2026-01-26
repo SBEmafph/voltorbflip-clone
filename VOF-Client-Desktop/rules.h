@@ -1,14 +1,14 @@
 #ifndef RULES_H
 #define RULES_H
 
-#include <QMainWindow>
+#include <QWidget>
 
 namespace Ui
 {
     class rules;
 }
 
-class rules : public QMainWindow
+class rules : public QWidget
 {
     Q_OBJECT
 
@@ -20,7 +20,7 @@ signals:
     void backToMenu();
 
 private slots:
-    void on_okBtn_clicked();
+    void on_exitBtn_clicked();
 
 private:
     Ui::rules *ui;

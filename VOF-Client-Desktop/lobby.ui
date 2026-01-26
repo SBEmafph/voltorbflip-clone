@@ -13,19 +13,27 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: #14845C;</string>
+  </property>
   <widget class="QLabel" name="player2">
    <property name="geometry">
     <rect>
-     <x>390</x>
-     <y>280</y>
-     <width>131</width>
-     <height>31</height>
+     <x>370</x>
+     <y>320</y>
+     <width>151</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <family>Consolas</family>
+     <pointsize>12</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;
+border: 2px solid #ffffff;</string>
    </property>
    <property name="frameShape">
     <enum>QFrame::Shape::Box</enum>
@@ -40,10 +48,10 @@
   <widget class="QPushButton" name="shopBtn">
    <property name="geometry">
     <rect>
-     <x>530</x>
-     <y>550</y>
+     <x>710</x>
+     <y>370</y>
      <width>221</width>
-     <height>71</height>
+     <height>61</height>
     </rect>
    </property>
    <property name="font">
@@ -52,6 +60,18 @@
      <pointsize>18</pointsize>
      <bold>false</bold>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#shopBtn {
+    border-radius: 10px;
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#shopBtn:hover {
+    background-color: #3cb079;
+}</string>
    </property>
    <property name="text">
     <string>Shop</string>
@@ -66,10 +86,10 @@
   <widget class="QLabel" name="timerLabel">
    <property name="geometry">
     <rect>
-     <x>360</x>
-     <y>80</y>
-     <width>331</width>
-     <height>71</height>
+     <x>350</x>
+     <y>70</y>
+     <width>351</width>
+     <height>81</height>
     </rect>
    </property>
    <property name="font">
@@ -77,6 +97,10 @@
      <family>Consolas</family>
      <pointsize>20</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;
+border: 2px solid #ffffff;</string>
    </property>
    <property name="text">
     <string>Game starts in ...</string>
@@ -89,15 +113,20 @@
    <property name="geometry">
     <rect>
      <x>530</x>
-     <y>360</y>
-     <width>131</width>
-     <height>31</height>
+     <y>420</y>
+     <width>151</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <family>Consolas</family>
+     <pointsize>12</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;
+border: 2px solid #ffffff;</string>
    </property>
    <property name="frameShape">
     <enum>QFrame::Shape::Box</enum>
@@ -112,10 +141,10 @@
   <widget class="QPushButton" name="inviteBtn">
    <property name="geometry">
     <rect>
-     <x>530</x>
-     <y>630</y>
+     <x>120</x>
+     <y>370</y>
      <width>221</width>
-     <height>71</height>
+     <height>61</height>
     </rect>
    </property>
    <property name="font">
@@ -124,6 +153,18 @@
      <pointsize>18</pointsize>
      <bold>false</bold>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#inviteBtn {
+    border-radius: 10px;
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#inviteBtn:hover {
+    background-color: #3cb079;
+}</string>
    </property>
    <property name="text">
     <string>Invite</string>
@@ -139,15 +180,20 @@
    <property name="geometry">
     <rect>
      <x>530</x>
-     <y>240</y>
-     <width>131</width>
-     <height>31</height>
+     <y>270</y>
+     <width>151</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <family>Consolas</family>
+     <pointsize>12</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;
+border: 2px solid #ffffff;</string>
    </property>
    <property name="frameShape">
     <enum>QFrame::Shape::Box</enum>
@@ -162,16 +208,21 @@
   <widget class="QLabel" name="player4">
    <property name="geometry">
     <rect>
-     <x>390</x>
-     <y>360</y>
-     <width>131</width>
-     <height>31</height>
+     <x>370</x>
+     <y>420</y>
+     <width>151</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <family>Consolas</family>
+     <pointsize>12</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;
+border: 2px solid #ffffff;</string>
    </property>
    <property name="frameShape">
     <enum>QFrame::Shape::Box</enum>
@@ -186,10 +237,10 @@
   <widget class="QPushButton" name="replayBtn">
    <property name="geometry">
     <rect>
-     <x>300</x>
-     <y>550</y>
+     <x>710</x>
+     <y>300</y>
      <width>221</width>
-     <height>71</height>
+     <height>61</height>
     </rect>
    </property>
    <property name="font">
@@ -198,6 +249,18 @@
      <pointsize>18</pointsize>
      <bold>false</bold>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#replayBtn {
+    border-radius: 10px;
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#replayBtn:hover {
+    background-color: #3cb079;
+}</string>
    </property>
    <property name="text">
     <string>Watch Replay</string>
@@ -213,15 +276,20 @@
    <property name="geometry">
     <rect>
      <x>530</x>
-     <y>320</y>
-     <width>131</width>
-     <height>31</height>
+     <y>370</y>
+     <width>151</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <family>Consolas</family>
+     <pointsize>12</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;
+border: 2px solid #ffffff;</string>
    </property>
    <property name="frameShape">
     <enum>QFrame::Shape::Box</enum>
@@ -236,18 +304,30 @@
   <widget class="QPushButton" name="quitBtn">
    <property name="geometry">
     <rect>
-     <x>300</x>
-     <y>630</y>
-     <width>221</width>
-     <height>71</height>
+     <x>880</x>
+     <y>710</y>
+     <width>131</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <family>Consolas</family>
-     <pointsize>18</pointsize>
+     <pointsize>12</pointsize>
      <bold>false</bold>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#quitBtn {
+    border-radius: 5px;
+    background-color: #de5331;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#quitBtn:hover {
+    background-color: #e86241;
+}</string>
    </property>
    <property name="text">
     <string>Quit Lobby</string>
@@ -262,16 +342,21 @@
   <widget class="QLabel" name="player1">
    <property name="geometry">
     <rect>
-     <x>390</x>
-     <y>240</y>
-     <width>131</width>
-     <height>31</height>
+     <x>370</x>
+     <y>270</y>
+     <width>151</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <family>Consolas</family>
+     <pointsize>12</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;
+border: 2px solid #ffffff;</string>
    </property>
    <property name="frameShape">
     <enum>QFrame::Shape::Box</enum>
@@ -286,16 +371,21 @@
   <widget class="QLabel" name="player3">
    <property name="geometry">
     <rect>
-     <x>390</x>
-     <y>320</y>
-     <width>131</width>
-     <height>31</height>
+     <x>370</x>
+     <y>370</y>
+     <width>151</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <family>Consolas</family>
+     <pointsize>12</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;
+border: 2px solid #ffffff;</string>
    </property>
    <property name="frameShape">
     <enum>QFrame::Shape::Box</enum>
@@ -311,15 +401,20 @@
    <property name="geometry">
     <rect>
      <x>530</x>
-     <y>280</y>
-     <width>131</width>
-     <height>31</height>
+     <y>320</y>
+     <width>151</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <family>Consolas</family>
+     <pointsize>12</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;
+border: 2px solid #ffffff;</string>
    </property>
    <property name="frameShape">
     <enum>QFrame::Shape::Box</enum>
@@ -331,7 +426,85 @@
     <set>Qt::AlignmentFlag::AlignCenter</set>
    </property>
   </widget>
+  <widget class="QPushButton" name="startBtn">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>300</y>
+     <width>221</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+     <pointsize>18</pointsize>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#startBtn {
+    border-radius: 10px;
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#startBtn:hover {
+    background-color: #3cb079;
+}</string>
+   </property>
+   <property name="text">
+    <string>Start Game</string>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>20</width>
+     <height>20</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>260</x>
+     <y>70</y>
+     <width>81</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="voltorb_img.qrc">:/:/images/images/Voltorb.png</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>710</x>
+     <y>70</y>
+     <width>81</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="voltorb_img.qrc">:/:/images/images/Voltorb.png</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="voltorb_img.qrc"/>
+ </resources>
  <connections/>
 </ui>
