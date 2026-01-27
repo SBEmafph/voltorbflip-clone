@@ -40,12 +40,32 @@ void Client::m_attach()
     m_tcpSocket->connectToHost(QHostAddress::LocalHost, 16000);
 }
 
+void Client::m_detach()
+{
+    m_tcpSocket->abort();
+    m_tcpSocket->disconnectFromHost();
+    m_tcpSocket->deleteLater();
+
+}
+
 void Client::m_identify()
 {
+    if (m_tcpSocket->state() != QAbstractSocket::ConnectedState) {
+        qDebug() << "Not Connected. M_attach...";
+        m_attach();
+
+        if (!m_tcpSocket->waitForConnected(3000)) {
+            qDebug() << "Could not connect:" << m_tcpSocket->errorString();
+            return;
+        }
+    }
+
+    qDebug() << "Connected. Sending Identification";
+
     QJsonObject config = VOF::loadOrCreateConfig();
 
     quint8 command = VOF::LoginRequest;
-    quint32 id = config["playerID"].toInt();
+    quint32 id = QRandomGenerator::global()->generate();;//config["playerID"].toInt();
     quint16 token = config["sessionToken"].toInt();
 
     QByteArray packet;

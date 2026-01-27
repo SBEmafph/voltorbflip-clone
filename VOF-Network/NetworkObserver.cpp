@@ -15,6 +15,8 @@ NetworkObserver::NetworkObserver(QTcpSocket* clientSocket, QObject* parent)
     m_out.setDevice(m_socket);
     m_out.setVersion(QDataStream::Qt_6_5);
 
+    connect(m_socket, &QTcpSocket::readyRead,
+            this, &NetworkObserver::m_onReadyRead);
 }
 
 void NetworkObserver::m_updateStates(const GameState &state)
@@ -39,9 +41,6 @@ void NetworkObserver::m_reconnect(QTcpSocket *SocketIn)
 
     m_in.setDevice(m_socket);
     m_out.setDevice(m_socket);
-
-    connect(m_socket, &QTcpSocket::readyRead,
-            this, &NetworkObserver::m_onReadyRead);
 }
 
 void NetworkObserver::m_onReadyRead()

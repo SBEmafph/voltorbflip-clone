@@ -61,19 +61,13 @@ void VoltOrbFlipServer::m_startServer(quint16 port)
 
 void VoltOrbFlipServer::m_attach()
 {
-    quint8 slotID = 8;
-    if(m_clients.count() < VOF::MAX_CLIENTS){
-        slotID = m_findFirstFreeSlot();
-        QTcpSocket* clientConnection = m_tcpServer->nextPendingConnection();
-        NetworkObserver* player = new NetworkObserver(clientConnection, this);
-        m_clients.insert(slotID, player);
-        connect(clientConnection, &QAbstractSocket::disconnected,
-                clientConnection, &QObject::deleteLater);
-        out << "Welcome Player" << slotID << Qt::endl;
-    }
-    else{
-        out << "ERR: Already Full" << Qt::endl;
-    }
+    QTcpSocket* clientConnection = m_tcpServer->nextPendingConnection();
+    NetworkObserver* player = new NetworkObserver(clientConnection, this);
+
+    connect(clientConnection, &QAbstractSocket::disconnected,
+            clientConnection, &QObject::deleteLater);
+    connect(player, &NetworkObserver::m_identify,
+            this, &VoltOrbFlipServer::m_processHandshake);
 }
 
 void VoltOrbFlipServer::m_processHandshake(quint32 idIn, quint16 tokenIn)
@@ -90,7 +84,7 @@ void VoltOrbFlipServer::m_processHandshake(quint32 idIn, quint16 tokenIn)
             anon->deleteLater();
         }
         else{
-            err << "ERR: Wrong token for slot" << idIn;
+            err << "ERR: Wrong token for slot" << idIn << Qt::endl;
             anon->m_getSocket()->disconnectFromHost();
         }
     }
@@ -98,7 +92,8 @@ void VoltOrbFlipServer::m_processHandshake(quint32 idIn, quint16 tokenIn)
         if(m_clients.count() < VOF::MAX_CLIENTS){
             quint8 slotID = m_findFirstFreeSlot();
             m_clients.insert(slotID, anon);
-            out << "Welcome Player " << slotID << Qt::endl;
+            out << "Welcome Player " << idIn
+                << "on lobbyslot " << slotID << Qt::endl;
         }
         else{
             out << "ERR: Already Full" << Qt::endl;

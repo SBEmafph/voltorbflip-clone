@@ -46,7 +46,7 @@ Menu::~Menu()
 
 void Menu::on_playBtn_clicked()
 {
-    client->m_attach();
+    client->m_identify();
     lobby->show();
     this->hide();
 }
