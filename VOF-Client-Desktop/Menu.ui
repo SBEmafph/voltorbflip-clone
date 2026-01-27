@@ -13,12 +13,15 @@
   <property name="windowTitle">
    <string>Client</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: #14845C;</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QPushButton" name="shopBtn">
     <property name="geometry">
      <rect>
       <x>510</x>
-      <y>580</y>
+      <y>550</y>
       <width>221</width>
       <height>71</height>
      </rect>
@@ -29,6 +32,18 @@
       <pointsize>18</pointsize>
       <bold>false</bold>
      </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton#shopBtn {
+    border-radius: 10px;
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#shopBtn:hover {
+    background-color: #3cb079;
+}</string>
     </property>
     <property name="text">
      <string>Shop</string>
@@ -56,7 +71,7 @@
     <property name="geometry">
      <rect>
       <x>460</x>
-      <y>380</y>
+      <y>376</y>
       <width>91</width>
       <height>31</height>
      </rect>
@@ -67,6 +82,18 @@
       <pointsize>16</pointsize>
       <bold>false</bold>
      </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton#rulesBtn {
+    border-radius: 5px;
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#rulesBtn:hover {
+    background-color: #3cb079;
+}</string>
     </property>
     <property name="text">
      <string>Rules</string>
@@ -81,18 +108,30 @@
    <widget class="QPushButton" name="playBtn">
     <property name="geometry">
      <rect>
-      <x>410</x>
+      <x>380</x>
       <y>280</y>
-      <width>191</width>
+      <width>251</width>
       <height>100</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>Consolas</family>
-      <pointsize>26</pointsize>
+      <pointsize>48</pointsize>
       <bold>false</bold>
      </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton#playBtn {
+    border-radius: 10px;
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#playBtn:hover {
+    background-color: #3cb079;
+}</string>
     </property>
     <property name="text">
      <string>Play</string>
@@ -104,14 +143,17 @@
      </size>
     </property>
     <property name="default">
-     <bool>true</bool>
+     <bool>false</bool>
+    </property>
+    <property name="flat">
+     <bool>false</bool>
     </property>
    </widget>
    <widget class="QPushButton" name="replayBtn">
     <property name="geometry">
      <rect>
       <x>280</x>
-      <y>580</y>
+      <y>550</y>
       <width>221</width>
       <height>71</height>
      </rect>
@@ -123,6 +165,18 @@
       <bold>false</bold>
      </font>
     </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton#replayBtn {
+    border-radius: 10px;
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#replayBtn:hover {
+    background-color: #3cb079;
+}</string>
+    </property>
     <property name="text">
      <string>Watch Replay</string>
     </property>
@@ -133,33 +187,69 @@
      </size>
     </property>
    </widget>
-   <widget class="QWidget" name="verticalLayoutWidget">
+   <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>80</y>
-      <width>1031</width>
-      <height>84</height>
+      <x>740</x>
+      <y>90</y>
+      <width>81</width>
+      <height>81</height>
      </rect>
     </property>
-    <layout class="QVBoxLayout" name="verticalLayout">
-     <item>
-      <widget class="QLabel" name="Titel">
-       <property name="font">
-        <font>
-         <family>Consolas</family>
-         <pointsize>42</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>VoltOrbFlip</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignmentFlag::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-    </layout>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="voltorb_img.qrc">:/:/images/images/Voltorb.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Titel">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>90</y>
+      <width>441</width>
+      <height>82</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Consolas</family>
+      <pointsize>42</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: white;
+border: 2px solid #ffffff;</string>
+    </property>
+    <property name="text">
+     <string>VoltOrbFlip</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignmentFlag::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>90</y>
+      <width>81</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="voltorb_img.qrc">:/:/images/images/Voltorb.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -174,6 +264,8 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
- <resources/>
+ <resources>
+  <include location="voltorb_img.qrc"/>
+ </resources>
  <connections/>
 </ui>

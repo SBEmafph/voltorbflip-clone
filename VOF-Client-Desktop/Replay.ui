@@ -6,18 +6,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>470</height>
+    <width>840</width>
+    <height>300</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: #14845C;</string>
+  </property>
   <widget class="QPushButton" name="importBtn">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>400</y>
+     <x>240</x>
+     <y>220</y>
      <width>171</width>
      <height>51</height>
     </rect>
@@ -27,6 +30,18 @@
      <family>Consolas</family>
      <pointsize>18</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#importBtn {
+	border-radius: 10px;
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#importBtn:hover {
+    background-color: #3cb079;
+}</string>
    </property>
    <property name="text">
     <string>Import</string>
@@ -35,8 +50,8 @@
   <widget class="QPushButton" name="exportBtn">
    <property name="geometry">
     <rect>
-     <x>210</x>
-     <y>400</y>
+     <x>420</x>
+     <y>220</y>
      <width>171</width>
      <height>51</height>
     </rect>
@@ -46,6 +61,18 @@
      <family>Consolas</family>
      <pointsize>18</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#exportBtn {
+	border-radius: 10px;
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#exportBtn:hover {
+    background-color: #3cb079;
+}</string>
    </property>
    <property name="text">
     <string>Export</string>
@@ -55,10 +82,14 @@
    <property name="geometry">
     <rect>
      <x>12</x>
-     <y>69</y>
-     <width>371</width>
-     <height>321</height>
+     <y>79</y>
+     <width>811</width>
+     <height>131</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;
+border: 2px solid #ffffff;</string>
    </property>
    <property name="frameShape">
     <enum>QFrame::Shape::Box</enum>
@@ -70,10 +101,10 @@
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>100</x>
-     <y>10</y>
-     <width>191</width>
-     <height>51</height>
+     <x>0</x>
+     <y>0</y>
+     <width>841</width>
+     <height>301</height>
     </rect>
    </property>
    <property name="font">
@@ -82,15 +113,22 @@
      <pointsize>28</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;
+border: 5px solid #ffffff;</string>
+   </property>
    <property name="text">
     <string>Replays</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
    </property>
   </widget>
   <widget class="QPushButton" name="replay1Btn">
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>80</y>
+     <y>90</y>
      <width>151</width>
      <height>51</height>
     </rect>
@@ -100,6 +138,17 @@
      <family>Consolas</family>
      <pointsize>18</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#replay1Btn {
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#replay1Btn:hover {
+    background-color: #3cb079;
+}</string>
    </property>
    <property name="text">
     <string>R1</string>
@@ -108,8 +157,8 @@
   <widget class="QPushButton" name="replay2Btn">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>140</y>
+     <x>180</x>
+     <y>90</y>
      <width>151</width>
      <height>51</height>
     </rect>
@@ -120,15 +169,236 @@
      <pointsize>18</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#replay2Btn {
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#replay2Btn:hover {
+    background-color: #3cb079;
+}</string>
+   </property>
    <property name="text">
     <string>R2</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="replay2Btn_2">
+  <widget class="QPushButton" name="replay3Btn">
+   <property name="geometry">
+    <rect>
+     <x>340</x>
+     <y>90</y>
+     <width>151</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#replay3Btn {
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#replay3Btn:hover {
+    background-color: #3cb079;
+}</string>
+   </property>
+   <property name="text">
+    <string>R3</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="replay4Btn">
+   <property name="geometry">
+    <rect>
+     <x>500</x>
+     <y>90</y>
+     <width>151</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#replay4Btn {
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#replay4Btn:hover {
+    background-color: #3cb079;
+}</string>
+   </property>
+   <property name="text">
+    <string>R4</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="replay5Btn">
+   <property name="geometry">
+    <rect>
+     <x>660</x>
+     <y>90</y>
+     <width>151</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#replay5Btn {
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#replay5Btn:hover {
+    background-color: #3cb079;
+}</string>
+   </property>
+   <property name="text">
+    <string>R5</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="replay8Btn">
+   <property name="geometry">
+    <rect>
+     <x>340</x>
+     <y>150</y>
+     <width>151</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#replay8Btn {
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#replay8Btn:hover {
+    background-color: #3cb079;
+}</string>
+   </property>
+   <property name="text">
+    <string>R8</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="replay9Btn">
+   <property name="geometry">
+    <rect>
+     <x>500</x>
+     <y>150</y>
+     <width>151</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#replay9Btn {
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#replay9Btn:hover {
+    background-color: #3cb079;
+}</string>
+   </property>
+   <property name="text">
+    <string>R9</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="replay10Btn">
+   <property name="geometry">
+    <rect>
+     <x>660</x>
+     <y>150</y>
+     <width>151</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#replay10Btn {
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#replay10Btn:hover {
+    background-color: #3cb079;
+}</string>
+   </property>
+   <property name="text">
+    <string>R10</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="replay7Btn">
+   <property name="geometry">
+    <rect>
+     <x>180</x>
+     <y>150</y>
+     <width>151</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#replay7Btn {
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#replay7Btn:hover {
+    background-color: #3cb079;
+}</string>
+   </property>
+   <property name="text">
+    <string>R7</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="replay6Btn">
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>200</y>
+     <y>150</y>
      <width>151</width>
      <height>51</height>
     </rect>
@@ -139,144 +409,117 @@
      <pointsize>18</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#replay6Btn {
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#replay6Btn:hover {
+    background-color: #3cb079;
+}</string>
+   </property>
    <property name="text">
-    <string>R2</string>
+    <string>R6</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="replay2Btn_3">
+  <widget class="QPushButton" name="exitBtn">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>260</y>
-     <width>151</width>
-     <height>51</height>
+     <x>730</x>
+     <y>250</y>
+     <width>91</width>
+     <height>31</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <family>Consolas</family>
-     <pointsize>18</pointsize>
+     <pointsize>16</pointsize>
+     <bold>false</bold>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#exitBtn {
+    border-radius: 5px;
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#exitBtn:hover {
+    background-color: #3cb079;
+}</string>
+   </property>
    <property name="text">
-    <string>R2</string>
+    <string>Exit</string>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>20</width>
+     <height>20</height>
+    </size>
    </property>
   </widget>
-  <widget class="QPushButton" name="replay2Btn_4">
+  <widget class="QLabel" name="label_3">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>320</y>
-     <width>151</width>
-     <height>51</height>
+     <x>10</x>
+     <y>10</y>
+     <width>31</width>
+     <height>31</height>
     </rect>
    </property>
-   <property name="font">
-    <font>
-     <family>Consolas</family>
-     <pointsize>18</pointsize>
-    </font>
-   </property>
    <property name="text">
-    <string>R2</string>
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="voltorb_img.qrc">:/:/images/images/Voltorb.png</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
    </property>
   </widget>
-  <widget class="QPushButton" name="replay2Btn_5">
+  <widget class="QLabel" name="label_4">
    <property name="geometry">
     <rect>
-     <x>220</x>
-     <y>200</y>
-     <width>151</width>
-     <height>51</height>
+     <x>800</x>
+     <y>10</y>
+     <width>31</width>
+     <height>31</height>
     </rect>
    </property>
-   <property name="font">
-    <font>
-     <family>Consolas</family>
-     <pointsize>18</pointsize>
-    </font>
-   </property>
    <property name="text">
-    <string>R2</string>
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="voltorb_img.qrc">:/:/images/images/Voltorb.png</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
    </property>
   </widget>
-  <widget class="QPushButton" name="replay2Btn_6">
-   <property name="geometry">
-    <rect>
-     <x>220</x>
-     <y>260</y>
-     <width>151</width>
-     <height>51</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Consolas</family>
-     <pointsize>18</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>R2</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="replay2Btn_7">
-   <property name="geometry">
-    <rect>
-     <x>220</x>
-     <y>320</y>
-     <width>151</width>
-     <height>51</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Consolas</family>
-     <pointsize>18</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>R2</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="replay2Btn_8">
-   <property name="geometry">
-    <rect>
-     <x>220</x>
-     <y>140</y>
-     <width>151</width>
-     <height>51</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Consolas</family>
-     <pointsize>18</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>R2</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="replay1Btn_2">
-   <property name="geometry">
-    <rect>
-     <x>220</x>
-     <y>80</y>
-     <width>151</width>
-     <height>51</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Consolas</family>
-     <pointsize>18</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>R1</string>
-   </property>
-  </widget>
+  <zorder>label_2</zorder>
+  <zorder>importBtn</zorder>
+  <zorder>exportBtn</zorder>
+  <zorder>label</zorder>
+  <zorder>replay1Btn</zorder>
+  <zorder>replay2Btn</zorder>
+  <zorder>replay3Btn</zorder>
+  <zorder>replay4Btn</zorder>
+  <zorder>replay5Btn</zorder>
+  <zorder>replay8Btn</zorder>
+  <zorder>replay9Btn</zorder>
+  <zorder>replay10Btn</zorder>
+  <zorder>replay7Btn</zorder>
+  <zorder>replay6Btn</zorder>
+  <zorder>exitBtn</zorder>
+  <zorder>label_3</zorder>
+  <zorder>label_4</zorder>
  </widget>
- <resources/>
+ <resources>
+  <include location="voltorb_img.qrc"/>
+ </resources>
  <connections/>
 </ui>

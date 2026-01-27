@@ -6,10 +6,9 @@ Lobby::Lobby(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::Lobby)
     , matchTimer(new QTimer(this))
-    , secondsLeft(10) // countdown in seconds
+    , secondsLeft(10)
 {
     ui->setupUi(this);
-
     // Connect the timeout to decrease secondsLeft
     // matchTimer->setInterval(1000); // 1 second
     // connect(matchTimer, &QTimer::timeout, this, [this]() {
@@ -21,14 +20,15 @@ Lobby::Lobby(QWidget *parent)
     //         onMatchTimeout();  // reuse your existing function
     //     }
     // });
+    // Replay-Button explizit verbinden (falls Auto-Connect nicht greift)
+    connect(ui->replayBtn, &QPushButton::clicked,
+            this, &Lobby::on_replayBtn_clicked);
 }
 
-// Reset timer every time the Lobby window is shown
 void Lobby::showEvent(QShowEvent *event)
 {
     QMainWindow::showEvent(event);
 
-    // Reset countdown
     secondsLeft = 10;
     ui->timerLabel->setText("Game starts in " + QString::number(secondsLeft) + "s");
     matchTimer->start();
@@ -39,19 +39,24 @@ Lobby::~Lobby()
     delete ui;
 }
 
-// Quit button clicked
 void Lobby::on_quitBtn_clicked()
 {
     matchTimer->stop();
-    secondsLeft = 10;  // reset countdown
+    secondsLeft = 10;
     ui->timerLabel->setText("Game starts in " + QString::number(secondsLeft) + "s");
     emit backToMenu();
     this->hide();
 }
 
-// Called when 10 seconds are up
 void Lobby::onMatchTimeout()
 {
     emit startMatch();
     this->hide();
+}
+
+// NEU: gleiches Verhalten wie im Menu
+void Lobby::on_replayBtn_clicked()
+{
+    emit backToMenu();   // optional: falls du Menü zeigen willst
+    this->hide();        // Lobby schließen
 }

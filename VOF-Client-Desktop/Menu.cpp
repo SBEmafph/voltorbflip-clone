@@ -11,6 +11,7 @@ Menu::Menu(QWidget *parent)
     , client(new Client(this))
 {
     ui->setupUi(this);
+    rulesWindow->hide();
 
     // Zurück von Lobby
     connect(lobby, &Lobby::backToMenu, this, [this]() {
@@ -37,6 +38,10 @@ Menu::Menu(QWidget *parent)
     connect(replayWindow, &replay::backToMenu, this, [this]() {
         this->show();
     });
+
+    // Replay-Button auf menu.ui explizit verbinden (falls Auto-Connect nicht greift)
+    connect(ui->replayBtn, &QPushButton::clicked,
+            this, &Menu::on_replayBtn_clicked);
 }
 
 Menu::~Menu()
@@ -54,7 +59,7 @@ void Menu::on_playBtn_clicked()
 void Menu::on_rulesBtn_clicked()
 {
     rulesWindow->show();
-    this->hide();
+    //this->hide();
 }
 
 void Menu::on_replayBtn_clicked()

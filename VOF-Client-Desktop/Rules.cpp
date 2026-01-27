@@ -1,11 +1,17 @@
 #include "Rules.h"
 #include "ui_Rules.h"
 
-rules::rules(QWidget *parent) :
-    QMainWindow(parent),  // wie Lobby
-    ui(new Ui::rules)
+rules::rules(QWidget *parent)
+    : QWidget(parent)
+    , ui(new Ui::rules)
 {
     ui->setupUi(this);
+
+    // Kein echtes Popup → sonst Fokus-/Klick-Probleme
+    this->setWindowFlags(Qt::FramelessWindowHint | Qt::Tool);
+
+    // Optional: immer über dem Menü
+    this->setAttribute(Qt::WA_ShowWithoutActivating, false);
 }
 
 rules::~rules()
@@ -13,8 +19,8 @@ rules::~rules()
     delete ui;
 }
 
-void rules::on_okBtn_clicked()
+void rules::on_exitBtn_clicked()
 {
-    emit backToMenu(); // Menü informieren
-    this->hide();      // Rules-Fenster ausblenden
+    this->hide();   // Rules ausblenden
+   // emit backToMenu(); // optional, falls du es weiter nutzen willst
 }

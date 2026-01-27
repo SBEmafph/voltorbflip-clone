@@ -41,6 +41,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         Replay.h Replay.cpp Replay.ui
         Client.h Client.cpp
         Config.h Config.cpp
+        shop.h shop.cpp shop.ui
+        voltorb_img.qrc
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET VOF-Client-Desktop APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
