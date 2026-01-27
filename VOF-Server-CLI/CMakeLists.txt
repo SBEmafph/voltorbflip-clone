@@ -29,6 +29,7 @@ add_executable(VOF-Server-CLI
   VoltOrbFlipServer.cpp
   VoltOrbFlipServer.cpp VoltOrbFlipServer.h
   VoltOrbFlipServer.h
+  PlayerProfile.h
 )
 target_link_libraries(
   VOF-Server-CLI

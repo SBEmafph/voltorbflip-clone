@@ -10,9 +10,6 @@
     <height>768</height>
    </rect>
   </property>
-  <property name="windowTitle">
-   <string>Client</string>
-  </property>
   <property name="styleSheet">
    <string notr="true">background-color: #14845C;</string>
   </property>

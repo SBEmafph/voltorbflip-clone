@@ -1,5 +1,5 @@
-#include "shop.h"
-#include "ui_shop.h"
+#include "Shop.h"
+#include "ui_Shop.h"
 
 shop::shop(QWidget *parent)
     : QWidget(parent)

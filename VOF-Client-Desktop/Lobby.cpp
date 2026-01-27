@@ -57,6 +57,6 @@ void Lobby::onMatchTimeout()
 // NEU: gleiches Verhalten wie im Menu
 void Lobby::on_replayBtn_clicked()
 {
-    emit backToMenu();   // optional: falls du Menü zeigen willst
-    this->hide();        // Lobby schließen
+    //emit backToMenu();   // optional: falls du Menü zeigen willst
+    //this->hide();        // Lobby schließen
 }

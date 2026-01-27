@@ -14,29 +14,43 @@ class NetworkObserver :  public QObject, public IObserver
 {
     Q_OBJECT
 signals:
-    void m_identify(quint32 id, quint16 token);
+    void sig_identificationReceived(quint32 id, quint16 token);
+    void sig_newAccountRequested(NetworkObserver * pNetworkObserver);
+    void sig_quit(NetworkObserver * pNetworkObserver);
 
 public slots:
-    void m_onReadyRead();
+    void slot_onReadyRead();
 
 public:
     NetworkObserver(QTcpSocket* clientSocket, QObject* parent);
-    void m_setSocket(QTcpSocket* socketIn) { m_socket = socketIn; m_socket->setParent(this); }
-    QTcpSocket* m_getSocket() { return m_socket; }
     //void saveState();
     void m_proceedToMatch();
-    QDataStream m_getDataStream();
+
     void m_reconnect(QTcpSocket* SocketIn);
-
-    quint16 m_getToken() const { return m_token; }
-    void m_setToken(quint16 newToken) { m_token = newToken; }
-
     void m_updateStates(const GameState &state);
+    void m_requestIdentification();
+
+    void m_updateLogin(quint32 dwIDin, quint16 wTokenIn);
+
+    void m_setSocket(QTcpSocket* socketIn) { m_pTcpSocket = socketIn; m_pTcpSocket->setParent(this); }
+    QTcpSocket* m_getSocket() { return m_pTcpSocket; }
+
+    quint8 m_getSlotId() const { return m_bSlotID; }
+    void m_setSlotId(quint8 bSlotIDin) { m_dwID = bSlotIDin; }
+
+    quint16 m_getToken() const { return m_wToken; }
+    void m_setToken(quint16 wTokenIn) { m_wToken = wTokenIn; }
+
+    quint32 m_getId() const { return m_dwID; }
+    void m_setId(quint32 dwIDin) { m_dwID = dwIDin; }
+
 private:
-    quint16 m_token;
+    quint8 m_bSlotID;
+    quint16 m_wToken;
+    quint32 m_dwID;
     QDataStream m_in;
     QDataStream m_out;
-    QTcpSocket* m_socket = nullptr;
+    QTcpSocket* m_pTcpSocket = nullptr;
     QByteArray m_prepareDataForPlayer(const GameState &);
 };
 

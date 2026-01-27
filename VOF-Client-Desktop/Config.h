@@ -6,7 +6,7 @@
 
 namespace VOF {
 QString getConfigPath();
-void saveConfig(const QString& name, quint32 id, quint16 token);
+void writeConfig(quint32 id, quint16 token, const QString& name, bool force = false);
 QJsonObject loadOrCreateConfig();
 
 } // namespace VOF

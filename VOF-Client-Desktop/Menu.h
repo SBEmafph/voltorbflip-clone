@@ -20,7 +20,11 @@ class Menu : public QMainWindow
 
 public:
     explicit Menu(QWidget *parent = nullptr);
+    void m_setPlayerConfig(quint32 ID = 0, quint16 token = 0, QString name = 0, bool force = false);
     ~Menu();
+
+protected:
+    void closeEvent(QCloseEvent *event) override;
 
 private slots:
     void on_playBtn_clicked();     // Lobby öffnen
@@ -34,7 +38,7 @@ private:
     rules *rulesWindow;
     Match *matchWindow;
     replay *replayWindow;
-    Client *client;
+    Client *m_client;
 };
 
 #endif // MENU_H

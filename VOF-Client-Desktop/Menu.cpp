@@ -1,6 +1,8 @@
 #include "Menu.h"
 #include "./ui_Menu.h"
 
+#include <QCloseEvent>
+
 Menu::Menu(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::Menu)
@@ -8,7 +10,7 @@ Menu::Menu(QWidget *parent)
     , rulesWindow(new rules(this))
     , matchWindow(new Match(this))
     , replayWindow(new replay(this))
-    , client(new Client(this))
+    , m_client(new Client(this))
 {
     ui->setupUi(this);
     rulesWindow->hide();
@@ -44,6 +46,21 @@ Menu::Menu(QWidget *parent)
             this, &Menu::on_replayBtn_clicked);
 }
 
+void Menu::m_setPlayerConfig(quint32 ID, quint16 token, QString name, bool force)
+{
+    m_client->m_setID(ID);
+    m_client->m_setToken(token);
+    m_client->m_setName(name);
+    m_client->m_updateConfig(force);
+}
+
+void Menu::closeEvent(QCloseEvent *event) { //slow close because of connection?
+    if (m_client) {
+        m_client->slot_detach();
+    }
+    event->accept();
+}
+
 Menu::~Menu()
 {
     delete ui;
@@ -51,7 +68,7 @@ Menu::~Menu()
 
 void Menu::on_playBtn_clicked()
 {
-    client->m_identify();
+    m_client->slot_attach();
     lobby->show();
     this->hide();
 }
@@ -65,5 +82,5 @@ void Menu::on_rulesBtn_clicked()
 void Menu::on_replayBtn_clicked()
 {
     replayWindow->show();
-    this->hide();
+    //this->hide();
 }
