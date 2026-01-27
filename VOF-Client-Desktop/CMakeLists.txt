@@ -27,13 +27,15 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
 
-        menu.ui menu.h menu.cpp
-        rules.ui rules.h rules.cpp
-        lobby.ui lobby.h lobby.cpp
-        match.h match.cpp match.ui
-        replay.h replay.cpp replay.ui
-        shop.h shop.cpp shop.ui
-        voltorb_img.qrc
+        Menu.ui Menu.h Menu.cpp
+        Rules.ui Rules.h Rules.cpp
+        Lobby.ui Lobby.h Lobby.cpp
+        Match.h Match.cpp Match.ui
+        Replay.h Replay.cpp Replay.ui
+        Shop.h Shop.cpp Shop.ui
+
+        Settings.h Settings.cpp Settings.ui
+        resources.qrc
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET VOF-Client-Desktop APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

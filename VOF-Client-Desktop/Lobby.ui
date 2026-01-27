@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>VoltOrbFlip/Lobby</string>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: #14845C;</string>
@@ -33,7 +33,7 @@
    </property>
    <property name="styleSheet">
     <string notr="true">color: white;
-border: 2px solid #ffffff;</string>
+border: 2px solid #FFFF99;</string>
    </property>
    <property name="frameShape">
     <enum>QFrame::Shape::Box</enum>
@@ -100,7 +100,8 @@ QPushButton#shopBtn:hover {
    </property>
    <property name="styleSheet">
     <string notr="true">color: white;
-border: 2px solid #ffffff;</string>
+border: 2px solid #ffffff;
+background: url(:/images/images/CheckeredPattern.png);</string>
    </property>
    <property name="text">
     <string>Game starts in ...</string>
@@ -126,7 +127,7 @@ border: 2px solid #ffffff;</string>
    </property>
    <property name="styleSheet">
     <string notr="true">color: white;
-border: 2px solid #ffffff;</string>
+border: 2px solid #FFB6C1;</string>
    </property>
    <property name="frameShape">
     <enum>QFrame::Shape::Box</enum>
@@ -193,7 +194,7 @@ QPushButton#inviteBtn:hover {
    </property>
    <property name="styleSheet">
     <string notr="true">color: white;
-border: 2px solid #ffffff;</string>
+border: 2px solid #CC99FF;</string>
    </property>
    <property name="frameShape">
     <enum>QFrame::Shape::Box</enum>
@@ -222,7 +223,7 @@ border: 2px solid #ffffff;</string>
    </property>
    <property name="styleSheet">
     <string notr="true">color: white;
-border: 2px solid #ffffff;</string>
+border: 2px solid #99CCFF;</string>
    </property>
    <property name="frameShape">
     <enum>QFrame::Shape::Box</enum>
@@ -289,7 +290,7 @@ QPushButton#replayBtn:hover {
    </property>
    <property name="styleSheet">
     <string notr="true">color: white;
-border: 2px solid #ffffff;</string>
+border: 2px solid #FFD699;</string>
    </property>
    <property name="frameShape">
     <enum>QFrame::Shape::Box</enum>
@@ -356,7 +357,7 @@ QPushButton#quitBtn:hover {
    </property>
    <property name="styleSheet">
     <string notr="true">color: white;
-border: 2px solid #ffffff;</string>
+border: 2px solid #FF9999;</string>
    </property>
    <property name="frameShape">
     <enum>QFrame::Shape::Box</enum>
@@ -385,7 +386,7 @@ border: 2px solid #ffffff;</string>
    </property>
    <property name="styleSheet">
     <string notr="true">color: white;
-border: 2px solid #ffffff;</string>
+border: 2px solid #99FF99;</string>
    </property>
    <property name="frameShape">
     <enum>QFrame::Shape::Box</enum>
@@ -414,7 +415,7 @@ border: 2px solid #ffffff;</string>
    </property>
    <property name="styleSheet">
     <string notr="true">color: white;
-border: 2px solid #ffffff;</string>
+border: 2px solid #99FFFF;</string>
    </property>
    <property name="frameShape">
     <enum>QFrame::Shape::Box</enum>
@@ -426,7 +427,7 @@ border: 2px solid #ffffff;</string>
     <set>Qt::AlignmentFlag::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QPushButton" name="startBtn">
+  <widget class="QPushButton" name="StartBtn">
    <property name="geometry">
     <rect>
      <x>120</x>
@@ -443,14 +444,14 @@ border: 2px solid #ffffff;</string>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">QPushButton#startBtn {
+    <string notr="true">QPushButton#StartBtn {
     border-radius: 10px;
     background-color: #309F6A;
     color: white;
     border: 2px solid #ffffff;
 }
 
-QPushButton#startBtn:hover {
+QPushButton#StartBtn:hover {
     background-color: #3cb079;
 }</string>
    </property>
@@ -477,7 +478,7 @@ QPushButton#startBtn:hover {
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap resource="voltorb_img.qrc">:/:/images/images/Voltorb.png</pixmap>
+    <pixmap resource="resources.qrc">:/images/images/Voltorb.png</pixmap>
    </property>
    <property name="scaledContents">
     <bool>true</bool>
@@ -496,7 +497,7 @@ QPushButton#startBtn:hover {
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap resource="voltorb_img.qrc">:/:/images/images/Voltorb.png</pixmap>
+    <pixmap resource="resources.qrc">:/images/images/Voltorb.png</pixmap>
    </property>
    <property name="scaledContents">
     <bool>true</bool>
@@ -504,7 +505,7 @@ QPushButton#startBtn:hover {
   </widget>
  </widget>
  <resources>
-  <include location="voltorb_img.qrc"/>
+  <include location="resources.qrc"/>
  </resources>
  <connections/>
 </ui>

@@ -1,5 +1,5 @@
-#include "rules.h"
-#include "ui_rules.h"
+#include "Rules.h"
+#include "ui_Rules.h"
 
 rules::rules(QWidget *parent)
     : QWidget(parent)
@@ -7,10 +7,7 @@ rules::rules(QWidget *parent)
 {
     ui->setupUi(this);
 
-    // Kein echtes Popup → sonst Fokus-/Klick-Probleme
     this->setWindowFlags(Qt::FramelessWindowHint | Qt::Tool);
-
-    // Optional: immer über dem Menü
     this->setAttribute(Qt::WA_ShowWithoutActivating, false);
 }
 
@@ -21,6 +18,5 @@ rules::~rules()
 
 void rules::on_exitBtn_clicked()
 {
-    this->hide();   // Rules ausblenden
-   // emit backToMenu(); // optional, falls du es weiter nutzen willst
+    this->hide();
 }

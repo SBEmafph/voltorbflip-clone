@@ -3,8 +3,9 @@
 
 #include <QWidget>
 
-namespace Ui {
-class shop;
+namespace Ui
+{
+    class shop;
 }
 
 class shop : public QWidget
@@ -14,6 +15,9 @@ class shop : public QWidget
 public:
     explicit shop(QWidget *parent = nullptr);
     ~shop();
+
+private slots:
+    void on_exitBtn_clicked();
 
 private:
     Ui::shop *ui;

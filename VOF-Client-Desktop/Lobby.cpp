@@ -1,5 +1,5 @@
 #include "Lobby.h"
-#include "./ui_lobby.h"
+#include "./ui_Lobby.h"
 #include <QShowEvent>
 
 Lobby::Lobby(QWidget *parent)
@@ -32,12 +32,22 @@ void Lobby::showEvent(QShowEvent *event)
 
     secondsLeft = 10;
     ui->timerLabel->setText("Game starts in " + QString::number(secondsLeft) + "s");
-    matchTimer->start();
+    //matchTimer->start();
 }
 
 Lobby::~Lobby()
 {
     delete ui;
+}
+
+void Lobby::on_StartBtn_clicked()
+{
+    if (matchTimer->isActive())
+        return;
+
+    secondsLeft = 10;
+    ui->timerLabel->setText("Game starts in " + QString::number(secondsLeft) + "s");
+    matchTimer->start();
 }
 
 void Lobby::on_quitBtn_clicked()
@@ -55,9 +65,8 @@ void Lobby::onMatchTimeout()
     this->hide();
 }
 
-// NEU: gleiches Verhalten wie im Menu
 void Lobby::on_replayBtn_clicked()
 {
-    emit backToMenu();   // optional: falls du Menü zeigen willst
-    this->hide();        // Lobby schließen
+    //emit backToMenu();
+    this->show();
 }

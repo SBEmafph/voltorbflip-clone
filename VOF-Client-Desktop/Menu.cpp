@@ -1,5 +1,5 @@
-#include "menu.h"
-#include "./ui_menu.h"
+#include "Menu.h"
+#include "./ui_Menu.h"
 
 Menu::Menu(QWidget *parent)
     : QMainWindow(parent)
@@ -8,9 +8,14 @@ Menu::Menu(QWidget *parent)
     , rulesWindow(new rules(this))
     , matchWindow(new Match(this))
     , replayWindow(new replay(this))
+    , shopWindow(new shop(this))
+    , SettingsWindow(new Settings(this))
 {
     ui->setupUi(this);
     rulesWindow->hide();
+    replayWindow->hide();
+    shopWindow->hide();
+    SettingsWindow->hide();
 
     // Zurück von Lobby
     connect(lobby, &Lobby::backToMenu, this, [this]() {
@@ -33,14 +38,16 @@ Menu::Menu(QWidget *parent)
         this->show();
     });
 
-    // Zurück von Replay
-    connect(replayWindow, &replay::backToMenu, this, [this]() {
-        this->show();
-    });
+    // Replay öffnen
+    connect(ui->ReplayBtn, &QPushButton::clicked,
+            this, &Menu::on_ReplayBtn_clicked);
 
-    // Replay-Button auf menu.ui explizit verbinden (falls Auto-Connect nicht greift)
-    connect(ui->replayBtn, &QPushButton::clicked,
-            this, &Menu::on_replayBtn_clicked);
+    // Shop öffnen
+    connect(ui->ShopBtn, &QPushButton::clicked,
+            this, &Menu::on_ShopBtn_clicked);
+
+    connect(ui->SettingsBtn, &QPushButton::clicked,
+            this, &Menu::on_SettingsBtn_clicked);
 }
 
 Menu::~Menu()
@@ -50,22 +57,32 @@ Menu::~Menu()
     delete rulesWindow;
     delete matchWindow;
     delete replayWindow;
+    delete shopWindow;
+    delete SettingsWindow;
 }
 
-void Menu::on_playBtn_clicked()
+void Menu::on_PlayBtn_clicked()
 {
     lobby->show();
     this->hide();
 }
 
-void Menu::on_rulesBtn_clicked()
+void Menu::on_RulesBtn_clicked()
 {
     rulesWindow->show();
-    //this->hide();
 }
 
-void Menu::on_replayBtn_clicked()
+void Menu::on_ReplayBtn_clicked()
 {
     replayWindow->show();
-    this->hide();
+}
+
+void Menu::on_ShopBtn_clicked()
+{
+    shopWindow->show();
+}
+
+void Menu::on_SettingsBtn_clicked()
+{
+    SettingsWindow->show();
 }

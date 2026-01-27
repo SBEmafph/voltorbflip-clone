@@ -3,13 +3,16 @@
 
 #include <QMainWindow>
 #include "Lobby.h"
-#include "rules.h"
-#include "match.h"
-#include "replay.h"
+#include "Rules.h"
+#include "Match.h"
+#include "Replay.h"
+#include "Shop.h"
+#include "Settings.h"
 
 QT_BEGIN_NAMESPACE
-namespace Ui {
-class Menu;
+namespace Ui
+{
+    class Menu;
 }
 QT_END_NAMESPACE
 
@@ -22,9 +25,11 @@ public:
     ~Menu();
 
 private slots:
-    void on_playBtn_clicked();     // Lobby öffnen
-    void on_rulesBtn_clicked();    // Rules öffnen
-    void on_replayBtn_clicked();   // Replay öffnen (NEU für menu.ui)
+    void on_PlayBtn_clicked();
+    void on_RulesBtn_clicked();
+    void on_ReplayBtn_clicked();
+    void on_ShopBtn_clicked();
+    void on_SettingsBtn_clicked();
 
 private:
     Ui::Menu *ui;
@@ -33,6 +38,8 @@ private:
     rules *rulesWindow;
     Match *matchWindow;
     replay *replayWindow;
+    shop *shopWindow;
+    Settings *SettingsWindow;
 };
 
 #endif // MENU_H

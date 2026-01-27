@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>VoltOrbFlip/Match</string>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: #14845C;</string>
@@ -54,7 +54,7 @@ QPushButton#quitBtn:hover {
     </size>
    </property>
   </widget>
-  <widget class="QLabel" name="level">
+  <widget class="QLabel" name="Level">
    <property name="geometry">
     <rect>
      <x>240</x>
@@ -78,7 +78,7 @@ border: 2px solid #ffffff;</string>
     <set>Qt::AlignmentFlag::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QLabel" name="currentScore">
+  <widget class="QLabel" name="CurrentScore">
    <property name="geometry">
     <rect>
      <x>360</x>
@@ -102,7 +102,7 @@ border: 2px solid #ffffff;</string>
     <set>Qt::AlignmentFlag::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QLabel" name="totalScore">
+  <widget class="QLabel" name="TotalScore">
    <property name="geometry">
     <rect>
      <x>530</x>
@@ -461,7 +461,7 @@ QPushButton#itemBtn:hover {
     <string>Item</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="openMemo">
+  <widget class="QPushButton" name="OpenMemo">
    <property name="geometry">
     <rect>
      <x>780</x>
@@ -474,7 +474,7 @@ QPushButton#itemBtn:hover {
     <string>Open</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="closeMemo">
+  <widget class="QPushButton" name="CloseMemo">
    <property name="geometry">
     <rect>
      <x>830</x>
@@ -504,9 +504,13 @@ QPushButton#itemBtn:hover {
    </property>
    <property name="styleSheet">
     <string notr="true">QPushButton#F1_1 {
-    background-color: #309F6A;
     color: white;
     border: 2px solid #ffffff;
+
+    background-color: transparent;
+    background-image: url(:/images/images/CardPattern.png);
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 QPushButton#F1_1:hover {
@@ -1601,7 +1605,7 @@ background: #BF65DD;</string>
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap resource="voltorb_img.qrc">:/:/images/images/Voltorb.png</pixmap>
+    <pixmap resource="resources.qrc">:/images/images/Voltorb.png</pixmap>
    </property>
    <property name="scaledContents">
     <bool>true</bool>
@@ -1623,7 +1627,7 @@ background: #BF65DD;</string>
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap resource="voltorb_img.qrc">:/:/images/images/Voltorb.png</pixmap>
+    <pixmap resource="resources.qrc">:/images/images/Voltorb.png</pixmap>
    </property>
    <property name="scaledContents">
     <bool>true</bool>
@@ -1645,7 +1649,7 @@ background: #BF65DD;</string>
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap resource="voltorb_img.qrc">:/:/images/images/Voltorb.png</pixmap>
+    <pixmap resource="resources.qrc">:/images/images/Voltorb.png</pixmap>
    </property>
    <property name="scaledContents">
     <bool>true</bool>
@@ -1667,7 +1671,7 @@ background: #BF65DD;</string>
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap resource="voltorb_img.qrc">:/:/images/images/Voltorb.png</pixmap>
+    <pixmap resource="resources.qrc">:/images/images/Voltorb.png</pixmap>
    </property>
    <property name="scaledContents">
     <bool>true</bool>
@@ -1689,7 +1693,7 @@ background: #BF65DD;</string>
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap resource="voltorb_img.qrc">:/:/images/images/Voltorb.png</pixmap>
+    <pixmap resource="resources.qrc">:/images/images/Voltorb.png</pixmap>
    </property>
    <property name="scaledContents">
     <bool>true</bool>
@@ -1711,7 +1715,7 @@ background: #BF65DD;</string>
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap resource="voltorb_img.qrc">:/:/images/images/Voltorb.png</pixmap>
+    <pixmap resource="resources.qrc">:/images/images/Voltorb.png</pixmap>
    </property>
    <property name="scaledContents">
     <bool>true</bool>
@@ -1733,7 +1737,7 @@ background: #BF65DD;</string>
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap resource="voltorb_img.qrc">:/:/images/images/Voltorb.png</pixmap>
+    <pixmap resource="resources.qrc">:/images/images/Voltorb.png</pixmap>
    </property>
    <property name="scaledContents">
     <bool>true</bool>
@@ -1755,7 +1759,7 @@ background: #BF65DD;</string>
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap resource="voltorb_img.qrc">:/:/images/images/Voltorb.png</pixmap>
+    <pixmap resource="resources.qrc">:/images/images/Voltorb.png</pixmap>
    </property>
    <property name="scaledContents">
     <bool>true</bool>
@@ -1777,7 +1781,7 @@ background: #BF65DD;</string>
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap resource="voltorb_img.qrc">:/:/images/images/Voltorb.png</pixmap>
+    <pixmap resource="resources.qrc">:/images/images/Voltorb.png</pixmap>
    </property>
    <property name="scaledContents">
     <bool>true</bool>
@@ -1799,7 +1803,7 @@ background: #BF65DD;</string>
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap resource="voltorb_img.qrc">:/:/images/images/Voltorb.png</pixmap>
+    <pixmap resource="resources.qrc">:/images/images/Voltorb.png</pixmap>
    </property>
    <property name="scaledContents">
     <bool>true</bool>
@@ -1807,7 +1811,7 @@ background: #BF65DD;</string>
   </widget>
  </widget>
  <resources>
-  <include location="voltorb_img.qrc"/>
+  <include location="resources.qrc"/>
  </resources>
  <connections/>
 </ui>

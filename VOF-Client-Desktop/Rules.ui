@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>VoltOrbFlip/Rules</string>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: #14845C;</string>
@@ -28,7 +28,7 @@
    <property name="font">
     <font>
      <family>Consolas</family>
-     <pointsize>18</pointsize>
+     <pointsize>24</pointsize>
      <bold>true</bold>
     </font>
    </property>
@@ -41,31 +41,6 @@ border: 5px solid #ffffff;</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
-   </property>
-  </widget>
-  <widget class="QLabel" name="rulesText">
-   <property name="geometry">
-    <rect>
-     <x>32</x>
-     <y>49</y>
-     <width>471</width>
-     <height>331</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>10</pointsize>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color: white;
-border: 2px solid #ffffff;</string>
-   </property>
-   <property name="frameShape">
-    <enum>QFrame::Shape::Box</enum>
-   </property>
-   <property name="text">
-    <string>TextLabel</string>
    </property>
   </widget>
   <widget class="QPushButton" name="exitBtn">
@@ -87,13 +62,13 @@ border: 2px solid #ffffff;</string>
    <property name="styleSheet">
     <string notr="true">QPushButton#exitBtn {
     border-radius: 5px;
-    background-color: #309F6A;
+    background-color: #de5331;
     color: white;
     border: 2px solid #ffffff;
 }
 
 QPushButton#exitBtn:hover {
-    background-color: #3cb079;
+    background-color: #e86241;
 }</string>
    </property>
    <property name="text">
@@ -119,7 +94,7 @@ QPushButton#exitBtn:hover {
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap resource="voltorb_img.qrc">:/:/images/images/Voltorb.png</pixmap>
+    <pixmap resource="resources.qrc">:/images/images/Voltorb.png</pixmap>
    </property>
    <property name="scaledContents">
     <bool>true</bool>
@@ -138,15 +113,48 @@ QPushButton#exitBtn:hover {
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap resource="voltorb_img.qrc">:/:/images/images/Voltorb.png</pixmap>
+    <pixmap resource="resources.qrc">:/images/images/Voltorb.png</pixmap>
    </property>
    <property name="scaledContents">
     <bool>true</bool>
    </property>
   </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>80</y>
+     <width>491</width>
+     <height>291</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+     <pointsize>12</pointsize>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;
+border: 2px solid #ffffff;</string>
+   </property>
+   <property name="lineWidth">
+    <number>-1</number>
+   </property>
+   <property name="midLineWidth">
+    <number>0</number>
+   </property>
+   <property name="text">
+    <string>Rules</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignmentFlag::AlignCenter</set>
+   </property>
+  </widget>
  </widget>
  <resources>
-  <include location="voltorb_img.qrc"/>
+  <include location="resources.qrc"/>
  </resources>
  <connections/>
 </ui>

@@ -6,8 +6,9 @@
 #include <QLabel>
 
 QT_BEGIN_NAMESPACE
-namespace Ui {
-class Lobby;
+namespace Ui
+{
+    class Lobby;
 }
 QT_END_NAMESPACE
 
@@ -21,12 +22,13 @@ public:
 
 signals:
     void backToMenu();
-    void startMatch();   // Wechsel zu Match
+    void startMatch();
 
 private slots:
-    void on_quitBtn_clicked();
     void onMatchTimeout();
-    void on_replayBtn_clicked();   // NEU
+    void on_StartBtn_clicked();
+    void on_quitBtn_clicked();
+    void on_replayBtn_clicked();
 
 private:
     Ui::Lobby *ui;

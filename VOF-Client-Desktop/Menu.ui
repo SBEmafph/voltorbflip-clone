@@ -11,18 +11,18 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Client</string>
+   <string>VoltOrbFlip/Menu</string>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: #14845C;</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="shopBtn">
+   <widget class="QPushButton" name="ShopBtn">
     <property name="geometry">
      <rect>
       <x>510</x>
       <y>550</y>
-      <width>221</width>
+      <width>231</width>
       <height>71</height>
      </rect>
     </property>
@@ -34,14 +34,14 @@
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">QPushButton#shopBtn {
+     <string notr="true">QPushButton#ShopBtn {
     border-radius: 10px;
     background-color: #309F6A;
     color: white;
     border: 2px solid #ffffff;
 }
 
-QPushButton#shopBtn:hover {
+QPushButton#ShopBtn:hover {
     background-color: #3cb079;
 }</string>
     </property>
@@ -67,7 +67,7 @@ QPushButton#shopBtn:hover {
      <bool>false</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="rulesBtn">
+   <widget class="QPushButton" name="RulesBtn">
     <property name="geometry">
      <rect>
       <x>460</x>
@@ -84,14 +84,14 @@ QPushButton#shopBtn:hover {
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">QPushButton#rulesBtn {
+     <string notr="true">QPushButton#RulesBtn {
     border-radius: 5px;
     background-color: #309F6A;
     color: white;
     border: 2px solid #ffffff;
 }
 
-QPushButton#rulesBtn:hover {
+QPushButton#RulesBtn:hover {
     background-color: #3cb079;
 }</string>
     </property>
@@ -105,7 +105,7 @@ QPushButton#rulesBtn:hover {
      </size>
     </property>
    </widget>
-   <widget class="QPushButton" name="playBtn">
+   <widget class="QPushButton" name="PlayBtn">
     <property name="geometry">
      <rect>
       <x>380</x>
@@ -122,14 +122,14 @@ QPushButton#rulesBtn:hover {
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">QPushButton#playBtn {
+     <string notr="true">QPushButton#PlayBtn {
     border-radius: 10px;
     background-color: #309F6A;
     color: white;
     border: 2px solid #ffffff;
 }
 
-QPushButton#playBtn:hover {
+QPushButton#PlayBtn:hover {
     background-color: #3cb079;
 }</string>
     </property>
@@ -149,12 +149,12 @@ QPushButton#playBtn:hover {
      <bool>false</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="replayBtn">
+   <widget class="QPushButton" name="ReplayBtn">
     <property name="geometry">
      <rect>
-      <x>280</x>
+      <x>270</x>
       <y>550</y>
-      <width>221</width>
+      <width>231</width>
       <height>71</height>
      </rect>
     </property>
@@ -166,14 +166,14 @@ QPushButton#playBtn:hover {
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">QPushButton#replayBtn {
+     <string notr="true">QPushButton#ReplayBtn {
     border-radius: 10px;
     background-color: #309F6A;
     color: white;
     border: 2px solid #ffffff;
 }
 
-QPushButton#replayBtn:hover {
+QPushButton#ReplayBtn:hover {
     background-color: #3cb079;
 }</string>
     </property>
@@ -200,7 +200,7 @@ QPushButton#replayBtn:hover {
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap resource="voltorb_img.qrc">:/:/images/images/Voltorb.png</pixmap>
+     <pixmap resource="resources.qrc">:/images/images/Voltorb.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -223,7 +223,8 @@ QPushButton#replayBtn:hover {
     </property>
     <property name="styleSheet">
      <string notr="true">color: white;
-border: 2px solid #ffffff;</string>
+border: 2px solid #ffffff;
+background: url(:/images/images/CheckeredPattern.png);</string>
     </property>
     <property name="text">
      <string>VoltOrbFlip</string>
@@ -245,12 +246,58 @@ border: 2px solid #ffffff;</string>
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap resource="voltorb_img.qrc">:/:/images/images/Voltorb.png</pixmap>
+     <pixmap resource="resources.qrc">:/images/images/Voltorb.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
     </property>
    </widget>
+   <widget class="QPushButton" name="SettingsBtn">
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>470</y>
+      <width>231</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Consolas</family>
+      <pointsize>18</pointsize>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton#SettingsBtn {
+    border-radius: 10px;
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#SettingsBtn:hover {
+    background-color: #3cb079;
+}</string>
+    </property>
+    <property name="text">
+     <string>Settings</string>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>20</width>
+      <height>20</height>
+     </size>
+    </property>
+   </widget>
+   <zorder>ShopBtn</zorder>
+   <zorder>RulesBtn</zorder>
+   <zorder>PlayBtn</zorder>
+   <zorder>ReplayBtn</zorder>
+   <zorder>label</zorder>
+   <zorder>label_2</zorder>
+   <zorder>SettingsBtn</zorder>
+   <zorder>Titel</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -265,7 +312,7 @@ border: 2px solid #ffffff;</string>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources>
-  <include location="voltorb_img.qrc"/>
+  <include location="resources.qrc"/>
  </resources>
  <connections/>
 </ui>
