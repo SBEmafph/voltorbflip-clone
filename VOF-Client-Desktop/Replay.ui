@@ -428,9 +428,9 @@ QPushButton#replay6Btn:hover {
   <widget class="QPushButton" name="exitBtn">
    <property name="geometry">
     <rect>
-     <x>730</x>
+     <x>700</x>
      <y>250</y>
-     <width>91</width>
+     <width>121</width>
      <height>31</height>
     </rect>
    </property>

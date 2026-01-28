@@ -22,8 +22,8 @@ Lobby::Lobby(QWidget *parent)
     });
 
     // Replay-Button explizit verbinden (falls Auto-Connect nicht greift)
-    connect(ui->replayBtn, &QPushButton::clicked,
-            this, &Lobby::on_replayBtn_clicked);
+    connect(ui->ReplayBtn, &QPushButton::clicked,
+            this, &Lobby::on_ReplayBtn_clicked);
 }
 
 void Lobby::showEvent(QShowEvent *event)
@@ -32,7 +32,6 @@ void Lobby::showEvent(QShowEvent *event)
 
     secondsLeft = 10;
     ui->timerLabel->setText("Game starts in " + QString::number(secondsLeft) + "s");
-    //matchTimer->start();
 }
 
 Lobby::~Lobby()
@@ -65,8 +64,12 @@ void Lobby::onMatchTimeout()
     this->hide();
 }
 
-void Lobby::on_replayBtn_clicked()
+void Lobby::on_ReplayBtn_clicked()
 {
-    //emit backToMenu();
+    this->show();
+}
+
+void Lobby::on_ShopBtn_clicked()
+{
     this->show();
 }

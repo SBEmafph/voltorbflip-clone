@@ -46,9 +46,9 @@ border: 5px solid #ffffff;</string>
   <widget class="QPushButton" name="exitBtn">
    <property name="geometry">
     <rect>
-     <x>410</x>
+     <x>390</x>
      <y>390</y>
-     <width>91</width>
+     <width>121</width>
      <height>31</height>
     </rect>
    </property>

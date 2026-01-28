@@ -454,9 +454,9 @@ QPushButton#icon3:hover {
   <widget class="QPushButton" name="exitBtn">
    <property name="geometry">
     <rect>
-     <x>570</x>
+     <x>540</x>
      <y>290</y>
-     <width>91</width>
+     <width>121</width>
      <height>31</height>
     </rect>
    </property>

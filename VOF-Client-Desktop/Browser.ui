@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Settings</class>
- <widget class="QWidget" name="Settings">
+ <class>Browser</class>
+ <widget class="QWidget" name="Browser">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>VoltOrbFlip/Settings</string>
+   <string>Form</string>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: #14845C;</string>
@@ -43,7 +43,7 @@ border: 5px solid #ffffff;</string>
     <number>0</number>
    </property>
    <property name="text">
-    <string>Settings</string>
+    <string>Servers</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
@@ -77,6 +77,69 @@ border: 5px solid #ffffff;</string>
    </property>
    <property name="text">
     <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="QTextEdit" name="m_SzIP">
+   <property name="geometry">
+    <rect>
+     <x>180</x>
+     <y>150</y>
+     <width>251</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="layoutDirection">
+    <enum>Qt::LayoutDirection::LeftToRight</enum>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;
+background-color: #309F6A;
+border: 2px solid #ffffff;</string>
+   </property>
+   <property name="horizontalScrollBarPolicy">
+    <enum>Qt::ScrollBarPolicy::ScrollBarAsNeeded</enum>
+   </property>
+   <property name="placeholderText">
+    <string>192.168.1.1</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>180</x>
+     <y>110</y>
+     <width>251</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+     <pointsize>18</pointsize>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;
+</string>
+   </property>
+   <property name="lineWidth">
+    <number>-1</number>
+   </property>
+   <property name="midLineWidth">
+    <number>0</number>
+   </property>
+   <property name="text">
+    <string>Connect to ...</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
@@ -120,67 +183,42 @@ QPushButton#ExitBtn:hover {
     </size>
    </property>
   </widget>
-  <widget class="QLabel" name="label_4">
+  <widget class="QPushButton" name="ConnectBtn">
    <property name="geometry">
     <rect>
-     <x>200</x>
-     <y>110</y>
-     <width>211</width>
-     <height>41</height>
+     <x>20</x>
+     <y>250</y>
+     <width>121</width>
+     <height>31</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <family>Consolas</family>
-     <pointsize>18</pointsize>
+     <pointsize>16</pointsize>
      <bold>false</bold>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">color: white;
-</string>
-   </property>
-   <property name="lineWidth">
-    <number>-1</number>
-   </property>
-   <property name="midLineWidth">
-    <number>0</number>
+    <string notr="true">QPushButton#ConnectBtn {
+    border-radius: 5px;
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#ConnectBtn:hover {
+    background-color: #3cb079;
+}</string>
    </property>
    <property name="text">
-    <string>Player Name</string>
+    <string>Connect</string>
    </property>
-   <property name="alignment">
-    <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
-   </property>
-  </widget>
-  <widget class="QTextEdit" name="m_SzName">
-   <property name="geometry">
-    <rect>
-     <x>190</x>
-     <y>150</y>
-     <width>231</width>
-     <height>51</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Consolas</family>
-     <pointsize>18</pointsize>
-    </font>
-   </property>
-   <property name="layoutDirection">
-    <enum>Qt::LayoutDirection::LeftToRight</enum>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color: white;
-background-color: #309F6A;
-border: 2px solid #ffffff;</string>
-   </property>
-   <property name="horizontalScrollBarPolicy">
-    <enum>Qt::ScrollBarPolicy::ScrollBarAsNeeded</enum>
-   </property>
-   <property name="placeholderText">
-    <string>Player1</string>
+   <property name="iconSize">
+    <size>
+     <width>20</width>
+     <height>20</height>
+    </size>
    </property>
   </widget>
   <widget class="QLabel" name="label_5">

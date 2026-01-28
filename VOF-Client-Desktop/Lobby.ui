@@ -45,7 +45,7 @@ border: 2px solid #FFFF99;</string>
     <set>Qt::AlignmentFlag::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QPushButton" name="shopBtn">
+  <widget class="QPushButton" name="ShopBtn">
    <property name="geometry">
     <rect>
      <x>710</x>
@@ -62,14 +62,14 @@ border: 2px solid #FFFF99;</string>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">QPushButton#shopBtn {
+    <string notr="true">QPushButton#ShopBtn {
     border-radius: 10px;
     background-color: #309F6A;
     color: white;
     border: 2px solid #ffffff;
 }
 
-QPushButton#shopBtn:hover {
+QPushButton#ShopBtn:hover {
     background-color: #3cb079;
 }</string>
    </property>
@@ -235,7 +235,7 @@ border: 2px solid #99CCFF;</string>
     <set>Qt::AlignmentFlag::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QPushButton" name="replayBtn">
+  <widget class="QPushButton" name="ReplayBtn">
    <property name="geometry">
     <rect>
      <x>710</x>
@@ -252,14 +252,14 @@ border: 2px solid #99CCFF;</string>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">QPushButton#replayBtn {
+    <string notr="true">QPushButton#ReplayBtn {
     border-radius: 10px;
     background-color: #309F6A;
     color: white;
     border: 2px solid #ffffff;
 }
 
-QPushButton#replayBtn:hover {
+QPushButton#ReplayBtn:hover {
     background-color: #3cb079;
 }</string>
    </property>

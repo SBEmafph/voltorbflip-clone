@@ -10,44 +10,30 @@ Menu::Menu(QWidget *parent)
     , replayWindow(new replay(this))
     , shopWindow(new shop(this))
     , SettingsWindow(new Settings(this))
+    , BrowserWindow(new Browser(this))
 {
     ui->setupUi(this);
+
     rulesWindow->hide();
     replayWindow->hide();
     shopWindow->hide();
     SettingsWindow->hide();
+    BrowserWindow->hide();
+    lobby->hide();
 
-    // Zurück von Lobby
-    connect(lobby, &Lobby::backToMenu, this, [this]() {
-        this->show();
-    });
+    // Browser Form
+    connect(BrowserWindow, &Browser::connectRequested,
+            this, &Menu::on_BrowserConnect);
 
-    // Lobby → Match
-    connect(lobby, &Lobby::startMatch, this, [this]() {
-        this->hide();
-        matchWindow->show();
-    });
-
-    // Zurück von Rules
-    connect(rulesWindow, &rules::backToMenu, this, [this]() {
-        this->show();
-    });
-
-    // Zurück von Match
+    // Match Form
     connect(matchWindow, &Match::backToMenu, this, [this]() {
         this->show();
     });
 
-    // Replay öffnen
-    connect(ui->ReplayBtn, &QPushButton::clicked,
-            this, &Menu::on_ReplayBtn_clicked);
-
-    // Shop öffnen
-    connect(ui->ShopBtn, &QPushButton::clicked,
-            this, &Menu::on_ShopBtn_clicked);
-
-    connect(ui->SettingsBtn, &QPushButton::clicked,
-            this, &Menu::on_SettingsBtn_clicked);
+    connect(ui->ReplayBtn, &QPushButton::clicked, this, &Menu::on_ReplayBtn_clicked);
+    connect(ui->ShopBtn, &QPushButton::clicked, this, &Menu::on_ShopBtn_clicked);
+    connect(ui->SettingsBtn, &QPushButton::clicked, this, &Menu::on_SettingsBtn_clicked);
+    connect(ui->PlayBtn, &QPushButton::clicked, this, &Menu::on_PlayBtn_clicked);
 }
 
 Menu::~Menu()
@@ -59,17 +45,29 @@ Menu::~Menu()
     delete replayWindow;
     delete shopWindow;
     delete SettingsWindow;
+    delete BrowserWindow;
 }
 
 void Menu::on_PlayBtn_clicked()
 {
-    lobby->show();
+    BrowserWindow->show();
+}
+
+void Menu::on_BrowserConnect()
+{
+    BrowserWindow->hide();
     this->hide();
+    lobby->show();
 }
 
 void Menu::on_RulesBtn_clicked()
 {
     rulesWindow->show();
+}
+
+void Menu::on_SettingsBtn_clicked()
+{
+    SettingsWindow->show();
 }
 
 void Menu::on_ReplayBtn_clicked()
@@ -80,9 +78,4 @@ void Menu::on_ReplayBtn_clicked()
 void Menu::on_ShopBtn_clicked()
 {
     shopWindow->show();
-}
-
-void Menu::on_SettingsBtn_clicked()
-{
-    SettingsWindow->show();
 }

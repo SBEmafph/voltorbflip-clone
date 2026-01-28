@@ -8,6 +8,7 @@
 #include "Replay.h"
 #include "Shop.h"
 #include "Settings.h"
+#include "Browser.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui
@@ -31,6 +32,8 @@ private slots:
     void on_ShopBtn_clicked();
     void on_SettingsBtn_clicked();
 
+    void on_BrowserConnect();
+
 private:
     Ui::Menu *ui;
 
@@ -40,6 +43,7 @@ private:
     replay *replayWindow;
     shop *shopWindow;
     Settings *SettingsWindow;
+    Browser *BrowserWindow;
 };
 
 #endif // MENU_H

@@ -33,7 +33,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         Match.h Match.cpp Match.ui
         Replay.h Replay.cpp Replay.ui
         Shop.h Shop.cpp Shop.ui
-
+        Browser.h Browser.cpp Browser.ui
         Settings.h Settings.cpp Settings.ui
         resources.qrc
     )

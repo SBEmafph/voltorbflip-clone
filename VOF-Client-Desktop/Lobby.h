@@ -28,7 +28,8 @@ private slots:
     void onMatchTimeout();
     void on_StartBtn_clicked();
     void on_quitBtn_clicked();
-    void on_replayBtn_clicked();
+    void on_ReplayBtn_clicked();
+    void on_ShopBtn_clicked();
 
 private:
     Ui::Lobby *ui;
