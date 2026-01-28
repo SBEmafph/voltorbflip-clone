@@ -66,7 +66,8 @@ QPushButton#quitBtn:hover {
    <property name="styleSheet">
     <string notr="true">border-radius: 5px;
 color: white;
-border: 2px solid #ffffff;</string>
+border: 2px solid #ffffff;
+background-color: #309F6A;</string>
    </property>
    <property name="frameShape">
     <enum>QFrame::Shape::Box</enum>
@@ -90,7 +91,8 @@ border: 2px solid #ffffff;</string>
    <property name="styleSheet">
     <string notr="true">border-radius: 5px;
 color: white;
-border: 2px solid #ffffff;</string>
+border: 2px solid #ffffff;
+background-color: #309F6A;</string>
    </property>
    <property name="frameShape">
     <enum>QFrame::Shape::Box</enum>
@@ -114,7 +116,8 @@ border: 2px solid #ffffff;</string>
    <property name="styleSheet">
     <string notr="true">border-radius: 5px;
 color: white;
-border: 2px solid #ffffff;</string>
+border: 2px solid #ffffff;
+background-color: #309F6A;</string>
    </property>
    <property name="frameShape">
     <enum>QFrame::Shape::Box</enum>
@@ -465,7 +468,7 @@ QPushButton#itemBtn:hover {
    <property name="geometry">
     <rect>
      <x>780</x>
-     <y>120</y>
+     <y>80</y>
      <width>51</width>
      <height>29</height>
     </rect>
@@ -478,7 +481,7 @@ QPushButton#itemBtn:hover {
    <property name="geometry">
     <rect>
      <x>830</x>
-     <y>120</y>
+     <y>80</y>
      <width>51</width>
      <height>29</height>
     </rect>
@@ -518,7 +521,18 @@ QPushButton#F1_1:hover {
 }</string>
    </property>
    <property name="text">
-    <string>F1_1</string>
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>:/images/images/CardPattern.png</normalon>
+    </iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>77</width>
+     <height>77</height>
+    </size>
    </property>
   </widget>
   <widget class="QPushButton" name="F1_2">
@@ -542,7 +556,18 @@ QPushButton#F1_2:hover {
 }</string>
    </property>
    <property name="text">
-    <string>F1_2</string>
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>:/images/images/CardPattern.png</normalon>
+    </iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>77</width>
+     <height>77</height>
+    </size>
    </property>
   </widget>
   <widget class="QPushButton" name="F1_3">
@@ -566,7 +591,18 @@ QPushButton#F1_3:hover {
 }</string>
    </property>
    <property name="text">
-    <string>F1_3</string>
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>:/images/images/CardPattern.png</normalon>
+    </iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>77</width>
+     <height>77</height>
+    </size>
    </property>
   </widget>
   <widget class="QPushButton" name="F1_4">
@@ -590,7 +626,18 @@ QPushButton#F1_4:hover {
 }</string>
    </property>
    <property name="text">
-    <string>F1_4</string>
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>:/images/images/CardPattern.png</normalon>
+    </iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>77</width>
+     <height>77</height>
+    </size>
    </property>
   </widget>
   <widget class="QPushButton" name="F1_5">
@@ -614,12 +661,17 @@ QPushButton#F1_5:hover {
 }</string>
    </property>
    <property name="text">
-    <string>F1_5</string>
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>:/images/images/CardPattern.png</normalon>
+    </iconset>
    </property>
    <property name="iconSize">
     <size>
-     <width>20</width>
-     <height>20</height>
+     <width>77</width>
+     <height>77</height>
     </size>
    </property>
   </widget>
@@ -644,7 +696,18 @@ QPushButton#F2_1:hover {
 }</string>
    </property>
    <property name="text">
-    <string>F2_1</string>
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>:/images/images/CardPattern.png</normalon>
+    </iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>77</width>
+     <height>77</height>
+    </size>
    </property>
   </widget>
   <widget class="QPushButton" name="F2_2">
@@ -668,7 +731,18 @@ QPushButton#F2_2:hover {
 }</string>
    </property>
    <property name="text">
-    <string>F2_2</string>
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>:/images/images/CardPattern.png</normalon>
+    </iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>77</width>
+     <height>77</height>
+    </size>
    </property>
   </widget>
   <widget class="QPushButton" name="F2_3">
@@ -692,7 +766,18 @@ QPushButton#F2_3:hover {
 }</string>
    </property>
    <property name="text">
-    <string>F2_3</string>
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>:/images/images/CardPattern.png</normalon>
+    </iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>77</width>
+     <height>77</height>
+    </size>
    </property>
   </widget>
   <widget class="QPushButton" name="F2_4">
@@ -716,7 +801,18 @@ QPushButton#F2_4:hover {
 }</string>
    </property>
    <property name="text">
-    <string>F2_4</string>
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>:/images/images/CardPattern.png</normalon>
+    </iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>77</width>
+     <height>77</height>
+    </size>
    </property>
   </widget>
   <widget class="QPushButton" name="F2_5">
@@ -740,7 +836,18 @@ QPushButton#F2_5:hover {
 }</string>
    </property>
    <property name="text">
-    <string>F2_5</string>
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>:/images/images/CardPattern.png</normalon>
+    </iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>77</width>
+     <height>77</height>
+    </size>
    </property>
   </widget>
   <widget class="QPushButton" name="F3_1">
@@ -764,7 +871,18 @@ QPushButton#F3_1:hover {
 }</string>
    </property>
    <property name="text">
-    <string>F3_1</string>
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>:/images/images/CardPattern.png</normalon>
+    </iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>77</width>
+     <height>77</height>
+    </size>
    </property>
   </widget>
   <widget class="QPushButton" name="F3_2">
@@ -788,7 +906,18 @@ QPushButton#F3_2:hover {
 }</string>
    </property>
    <property name="text">
-    <string>F3_2</string>
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>:/images/images/CardPattern.png</normalon>
+    </iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>77</width>
+     <height>77</height>
+    </size>
    </property>
   </widget>
   <widget class="QPushButton" name="F3_3">
@@ -812,7 +941,18 @@ QPushButton#F3_3:hover {
 }</string>
    </property>
    <property name="text">
-    <string>F3_3</string>
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>:/images/images/CardPattern.png</normalon>
+    </iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>77</width>
+     <height>77</height>
+    </size>
    </property>
   </widget>
   <widget class="QPushButton" name="F3_4">
@@ -836,7 +976,18 @@ QPushButton#F3_4:hover {
 }</string>
    </property>
    <property name="text">
-    <string>F3_4</string>
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>:/images/images/CardPattern.png</normalon>
+    </iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>77</width>
+     <height>77</height>
+    </size>
    </property>
   </widget>
   <widget class="QPushButton" name="F3_5">
@@ -860,7 +1011,18 @@ QPushButton#F3_5:hover {
 }</string>
    </property>
    <property name="text">
-    <string>F3_5</string>
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>:/images/images/CardPattern.png</normalon>
+    </iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>77</width>
+     <height>77</height>
+    </size>
    </property>
   </widget>
   <widget class="QPushButton" name="F5_1">
@@ -884,7 +1046,18 @@ QPushButton#F5_1:hover {
 }</string>
    </property>
    <property name="text">
-    <string>F5_1</string>
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>:/images/images/CardPattern.png</normalon>
+    </iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>77</width>
+     <height>77</height>
+    </size>
    </property>
   </widget>
   <widget class="QPushButton" name="F5_2">
@@ -908,7 +1081,18 @@ QPushButton#F5_2:hover {
 }</string>
    </property>
    <property name="text">
-    <string>F5_2</string>
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>:/images/images/CardPattern.png</normalon>
+    </iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>77</width>
+     <height>77</height>
+    </size>
    </property>
   </widget>
   <widget class="QPushButton" name="F5_3">
@@ -932,7 +1116,18 @@ QPushButton#F5_3:hover {
 }</string>
    </property>
    <property name="text">
-    <string>F5_3</string>
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>:/images/images/CardPattern.png</normalon>
+    </iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>77</width>
+     <height>77</height>
+    </size>
    </property>
    <property name="checkable">
     <bool>false</bool>
@@ -962,7 +1157,18 @@ QPushButton#F5_4:hover {
 }</string>
    </property>
    <property name="text">
-    <string>F5_4</string>
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>:/images/images/CardPattern.png</normalon>
+    </iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>77</width>
+     <height>77</height>
+    </size>
    </property>
   </widget>
   <widget class="QPushButton" name="F5_5">
@@ -986,7 +1192,18 @@ QPushButton#F5_5:hover {
 }</string>
    </property>
    <property name="text">
-    <string>F5_5</string>
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>:/images/images/CardPattern.png</normalon>
+    </iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>77</width>
+     <height>77</height>
+    </size>
    </property>
   </widget>
   <widget class="QPushButton" name="F4_1">
@@ -1010,7 +1227,18 @@ QPushButton#F4_1:hover {
 }</string>
    </property>
    <property name="text">
-    <string>F4_1</string>
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>:/images/images/CardPattern.png</normalon>
+    </iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>77</width>
+     <height>77</height>
+    </size>
    </property>
   </widget>
   <widget class="QPushButton" name="F4_2">
@@ -1034,7 +1262,18 @@ QPushButton#F4_2:hover {
 }</string>
    </property>
    <property name="text">
-    <string>F4_2</string>
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>:/images/images/CardPattern.png</normalon>
+    </iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>77</width>
+     <height>77</height>
+    </size>
    </property>
   </widget>
   <widget class="QPushButton" name="F4_3">
@@ -1058,7 +1297,18 @@ QPushButton#F4_3:hover {
 }</string>
    </property>
    <property name="text">
-    <string>F4_3</string>
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>:/images/images/CardPattern.png</normalon>
+    </iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>77</width>
+     <height>77</height>
+    </size>
    </property>
   </widget>
   <widget class="QPushButton" name="F4_4">
@@ -1082,7 +1332,18 @@ QPushButton#F4_4:hover {
 }</string>
    </property>
    <property name="text">
-    <string>F4_4</string>
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>:/images/images/CardPattern.png</normalon>
+    </iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>77</width>
+     <height>77</height>
+    </size>
    </property>
   </widget>
   <widget class="QPushButton" name="F4_5">
@@ -1106,7 +1367,18 @@ QPushButton#F4_5:hover {
 }</string>
    </property>
    <property name="text">
-    <string>F4_5</string>
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>:/images/images/CardPattern.png</normalon>
+    </iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>77</width>
+     <height>77</height>
+    </size>
    </property>
   </widget>
   <widget class="QLabel" name="P1_x">

@@ -25,6 +25,17 @@ Menu::Menu(QWidget *parent)
     connect(BrowserWindow, &Browser::connectRequested,
             this, &Menu::on_BrowserConnect);
 
+    // Lobby → zurück zum Menu
+    connect(lobby, &Lobby::backToMenu, this, [this]() {
+        this->show();
+    });
+
+    // Lobby → Match
+    connect(lobby, &Lobby::startMatch, this, [this]() {
+        lobby->hide();
+        matchWindow->show();
+    });
+
     // Match Form
     connect(matchWindow, &Match::backToMenu, this, [this]() {
         this->show();

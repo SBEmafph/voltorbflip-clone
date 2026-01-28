@@ -13,6 +13,11 @@
   <property name="windowTitle">
    <string>VoltOrbFlip/Menu</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normalon>:/images/images/Voltorb.png</normalon>
+   </iconset>
+  </property>
   <property name="styleSheet">
    <string notr="true">background-color: #14845C;</string>
   </property>
