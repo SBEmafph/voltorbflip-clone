@@ -9,6 +9,7 @@ Lobby::Lobby(QWidget *parent)
     , secondsLeft(10)
 {
     ui->setupUi(this);
+    this->setFixedSize(this->size()); //Fenstergröße anpassen blockieren
 
     matchTimer->setInterval(1000);
     connect(matchTimer, &QTimer::timeout, this, [this]() {

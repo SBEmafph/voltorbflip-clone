@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>530</width>
-    <height>440</height>
+    <width>800</width>
+    <height>600</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -21,8 +21,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>531</width>
-     <height>441</height>
+     <width>801</width>
+     <height>601</height>
     </rect>
    </property>
    <property name="font">
@@ -46,8 +46,8 @@ border: 5px solid #ffffff;</string>
   <widget class="QPushButton" name="exitBtn">
    <property name="geometry">
     <rect>
-     <x>390</x>
-     <y>390</y>
+     <x>660</x>
+     <y>550</y>
      <width>121</width>
      <height>31</height>
     </rect>
@@ -103,7 +103,7 @@ QPushButton#exitBtn:hover {
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>490</x>
+     <x>760</x>
      <y>10</y>
      <width>31</width>
      <height>31</height>
@@ -122,10 +122,10 @@ QPushButton#exitBtn:hover {
   <widget class="QLabel" name="label_3">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>80</y>
-     <width>491</width>
-     <height>291</height>
+     <x>30</x>
+     <y>70</y>
+     <width>741</width>
+     <height>451</height>
     </rect>
    </property>
    <property name="font">
@@ -146,10 +146,10 @@ border: 2px solid #ffffff;</string>
     <number>0</number>
    </property>
    <property name="text">
-    <string>Rules</string>
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Man wird zuerst mit einem 5x5 Spielfeld konfrontiert, indem alle Karten zum Start des Spiels verdeckt sind.&lt;/p&gt;&lt;p&gt;Hinter den einzelnen Felder kann entweder eine 1, eine 2, eine 3 oder ein Voltorb versteckt sein.&lt;/p&gt;&lt;p&gt;Die Ziffern sind die Punktzahl, die sich mit jeder weiteren Ziffer um dessen Wert multipliziert. z.B. man deckt folgende Karten auf: 1-1-3-2-1.&lt;/p&gt;&lt;p&gt;Dann ist die erreichte Punktzahl 1x1x3x2x1 = 12 Punkte.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;Falls ein Voltorb aufgedeckt wird, dann endet das Spiel und man muss neu starten.&lt;/p&gt;&lt;p&gt;Die einzelnen Reihen und Spalten ergeben die am Rand unten und rechts stehenden Felder.&lt;/p&gt;&lt;p&gt;Diese geben Auskunft darüber, wie viele Voltorbs in der jeweiligen Reihe/Spalte versteckt sind und die zusammenaddierte Punktzahl.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;Das Ziel ist es, pro Stufe alle x2 und x3 Felder aufzudecken, um so in die nächste Stufe zu gelangen.&lt;/p&gt;&lt;p&gt;Mit jeder Stufe erhöhen sich die Anzahl and x2 und x3 Felder.&lt;/p&gt;&lt;p&gt;Wenn man 3 mal hintereinander das Spielfeld nicht löst, weil man einen Voltorb aufgedeckt hat, wird man um eine Stufe zurückgesetzt&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
    <property name="alignment">
-    <set>Qt::AlignmentFlag::AlignCenter</set>
+    <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
    </property>
   </widget>
  </widget>

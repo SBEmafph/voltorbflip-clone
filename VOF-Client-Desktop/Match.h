@@ -16,13 +16,20 @@ public:
     ~Match();
 
 signals:
-    void backToMenu();        // NEU
+    void backToMenu();   // BESTEHEND
 
 private slots:
-    void on_quitBtn_clicked(); // NEU
+    void on_quitBtn_clicked();   // BESTEHEND
+
+    // >>> NEU (nach deinen Regeln)
+    void VerbOpenMemoButtons();
+    void VerbCloseMemoButtons();
 
 private:
-    Ui::Match *ui;
+    Ui::Match *ui;   // BESTEHEND
+
+    // >>> NEU
+    void VerbSetMemoButtonsVisible(bool fVisible);
 };
 
 #endif // MATCH_H

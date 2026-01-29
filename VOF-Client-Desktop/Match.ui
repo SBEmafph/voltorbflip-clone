@@ -58,10 +58,16 @@ QPushButton#quitBtn:hover {
    <property name="geometry">
     <rect>
      <x>240</x>
-     <y>70</y>
+     <y>60</y>
      <width>111</width>
      <height>41</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Sans Serif Collection</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="styleSheet">
     <string notr="true">border-radius: 5px;
@@ -73,7 +79,7 @@ background-color: #309F6A;</string>
     <enum>QFrame::Shape::Box</enum>
    </property>
    <property name="text">
-    <string>level</string>
+    <string>Level: 1</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -83,10 +89,16 @@ background-color: #309F6A;</string>
    <property name="geometry">
     <rect>
      <x>360</x>
-     <y>70</y>
+     <y>60</y>
      <width>161</width>
      <height>41</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="styleSheet">
     <string notr="true">border-radius: 5px;
@@ -98,7 +110,7 @@ background-color: #309F6A;</string>
     <enum>QFrame::Shape::Box</enum>
    </property>
    <property name="text">
-    <string>currentScore</string>
+    <string>Score: 008</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -108,10 +120,16 @@ background-color: #309F6A;</string>
    <property name="geometry">
     <rect>
      <x>530</x>
-     <y>70</y>
+     <y>60</y>
      <width>151</width>
      <height>41</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="styleSheet">
     <string notr="true">border-radius: 5px;
@@ -123,7 +141,7 @@ background-color: #309F6A;</string>
     <enum>QFrame::Shape::Box</enum>
    </property>
    <property name="text">
-    <string>totalScore</string>
+    <string>Total: 008</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -439,7 +457,7 @@ QProgressBar::chunk {
     <enum>Qt::Orientation::Vertical</enum>
    </property>
   </widget>
-  <widget class="QPushButton" name="itemBtn">
+  <widget class="QPushButton" name="ItemBtn">
    <property name="geometry">
     <rect>
      <x>690</x>
@@ -448,15 +466,21 @@ QProgressBar::chunk {
      <height>81</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
    <property name="styleSheet">
-    <string notr="true">QPushButton#itemBtn {
+    <string notr="true">QPushButton#ItemBtn {
 	border-radius: 5px;
     background-color: #309F6A;
     color: white;
     border: 2px solid #ffffff;
 }
 
-QPushButton#itemBtn:hover {
+QPushButton#ItemBtn:hover {
     background-color: #3cb079;
 }</string>
    </property>
@@ -464,7 +488,7 @@ QPushButton#itemBtn:hover {
     <string>Item</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="OpenMemo">
+  <widget class="QPushButton" name="OpenMemoBtn">
    <property name="geometry">
     <rect>
      <x>780</x>
@@ -473,11 +497,28 @@ QPushButton#itemBtn:hover {
      <height>29</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#OpenMemoBtn {
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#OpenMemoBtn:hover {
+    background-color: #3cb079;
+}</string>
+   </property>
    <property name="text">
     <string>Open</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="CloseMemo">
+  <widget class="QPushButton" name="CloseMemoBtn">
    <property name="geometry">
     <rect>
      <x>830</x>
@@ -485,6 +526,23 @@ QPushButton#itemBtn:hover {
      <width>51</width>
      <height>29</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#CloseMemoBtn {
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#CloseMemoBtn:hover {
+    background-color: #3cb079;
+}</string>
    </property>
    <property name="text">
     <string>Close</string>
@@ -1390,6 +1448,11 @@ QPushButton#F4_5:hover {
      <height>31</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+    </font>
+   </property>
    <property name="styleSheet">
     <string notr="true">color: white;
 border: 2px solid #ffffff;
@@ -1413,6 +1476,11 @@ background: #DE7055;</string>
      <width>81</width>
      <height>51</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+    </font>
    </property>
    <property name="styleSheet">
     <string notr="true">color: white;
@@ -1438,6 +1506,11 @@ background: #DE7055;</string>
      <height>31</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+    </font>
+   </property>
    <property name="styleSheet">
     <string notr="true">color: white;
 border: 2px solid #ffffff;
@@ -1461,6 +1534,11 @@ background: #45A746;</string>
      <width>81</width>
      <height>51</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+    </font>
    </property>
    <property name="styleSheet">
     <string notr="true">color: white;
@@ -1486,6 +1564,11 @@ background: #45A746;</string>
      <height>31</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+    </font>
+   </property>
    <property name="styleSheet">
     <string notr="true">color: white;
 border: 2px solid #ffffff;
@@ -1509,6 +1592,11 @@ background: #E69F43;</string>
      <width>81</width>
      <height>51</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+    </font>
    </property>
    <property name="styleSheet">
     <string notr="true">color: white;
@@ -1534,6 +1622,11 @@ background: #E69F43;</string>
      <height>31</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+    </font>
+   </property>
    <property name="styleSheet">
     <string notr="true">color: white;
 border: 2px solid #ffffff;
@@ -1557,6 +1650,11 @@ background: #3792F5;</string>
      <width>81</width>
      <height>51</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+    </font>
    </property>
    <property name="styleSheet">
     <string notr="true">color: white;
@@ -1582,6 +1680,11 @@ background: #3792F5;</string>
      <height>31</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+    </font>
+   </property>
    <property name="styleSheet">
     <string notr="true">color: white;
 border: 2px solid #ffffff;
@@ -1605,6 +1708,11 @@ background: #BF65DD;</string>
      <width>81</width>
      <height>51</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+    </font>
    </property>
    <property name="styleSheet">
     <string notr="true">color: white;
@@ -1630,6 +1738,11 @@ background: #BF65DD;</string>
      <height>31</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+    </font>
+   </property>
    <property name="styleSheet">
     <string notr="true">color: white;
 border: 2px solid #ffffff;
@@ -1653,6 +1766,11 @@ background: #DE7055;</string>
      <width>81</width>
      <height>51</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+    </font>
    </property>
    <property name="styleSheet">
     <string notr="true">color: white;
@@ -1678,6 +1796,11 @@ background: #DE7055;</string>
      <height>31</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+    </font>
+   </property>
    <property name="styleSheet">
     <string notr="true">color: white;
 border: 2px solid #ffffff;
@@ -1701,6 +1824,11 @@ background: #45A746;</string>
      <width>81</width>
      <height>51</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+    </font>
    </property>
    <property name="styleSheet">
     <string notr="true">color: white;
@@ -1726,6 +1854,11 @@ background: #45A746;</string>
      <height>31</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+    </font>
+   </property>
    <property name="styleSheet">
     <string notr="true">color: white;
 border: 2px solid #ffffff;
@@ -1749,6 +1882,11 @@ background: #E69F43;</string>
      <width>81</width>
      <height>51</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+    </font>
    </property>
    <property name="styleSheet">
     <string notr="true">color: white;
@@ -1774,6 +1912,11 @@ background: #E69F43;</string>
      <height>31</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+    </font>
+   </property>
    <property name="styleSheet">
     <string notr="true">color: white;
 border: 2px solid #ffffff;
@@ -1797,6 +1940,11 @@ background: #3792F5;</string>
      <width>81</width>
      <height>51</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+    </font>
    </property>
    <property name="styleSheet">
     <string notr="true">color: white;
@@ -1822,6 +1970,11 @@ background: #3792F5;</string>
      <height>31</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+    </font>
+   </property>
    <property name="styleSheet">
     <string notr="true">color: white;
 border: 2px solid #ffffff;
@@ -1845,6 +1998,11 @@ background: #BF65DD;</string>
      <width>81</width>
      <height>51</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+    </font>
    </property>
    <property name="styleSheet">
     <string notr="true">color: white;
@@ -2081,6 +2239,1233 @@ background: #BF65DD;</string>
     <bool>true</bool>
    </property>
   </widget>
+  <widget class="QLabel" name="label_12">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>450</y>
+     <width>181</width>
+     <height>181</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="resources.qrc">:/images/images/Voltorb.png</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_13">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>110</y>
+     <width>181</width>
+     <height>181</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="resources.qrc">:/images/images/Voltorb.png</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="MemoOrbBtn">
+   <property name="geometry">
+    <rect>
+     <x>780</x>
+     <y>120</y>
+     <width>51</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#MemoOrbBtn {
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#MemoOrbBtn:hover {
+    background-color: #3cb079;
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>:/images/images/Voltorb.png</normalon>
+    </iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>40</width>
+     <height>40</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="ItemBtn_3">
+   <property name="geometry">
+    <rect>
+     <x>780</x>
+     <y>233</y>
+     <width>101</width>
+     <height>101</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#ItemBtn {
+	border-radius: 5px;
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#ItemBtn:hover {
+    background-color: #3cb079;
+}</string>
+   </property>
+   <property name="text">
+    <string>Item</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="ItemBtn_4">
+   <property name="geometry">
+    <rect>
+     <x>780</x>
+     <y>347</y>
+     <width>101</width>
+     <height>101</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#ItemBtn {
+	border-radius: 5px;
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#ItemBtn:hover {
+    background-color: #3cb079;
+}</string>
+   </property>
+   <property name="text">
+    <string>Item</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="ItemBtn_5">
+   <property name="geometry">
+    <rect>
+     <x>780</x>
+     <y>460</y>
+     <width>101</width>
+     <height>101</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#ItemBtn {
+	border-radius: 5px;
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#ItemBtn:hover {
+    background-color: #3cb079;
+}</string>
+   </property>
+   <property name="text">
+    <string>Item</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="ItemBtn_6">
+   <property name="geometry">
+    <rect>
+     <x>890</x>
+     <y>460</y>
+     <width>101</width>
+     <height>101</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#ItemBtn {
+	border-radius: 5px;
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#ItemBtn:hover {
+    background-color: #3cb079;
+}</string>
+   </property>
+   <property name="text">
+    <string>Item</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="ItemBtn_7">
+   <property name="geometry">
+    <rect>
+     <x>890</x>
+     <y>233</y>
+     <width>101</width>
+     <height>101</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#ItemBtn {
+	border-radius: 5px;
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#ItemBtn:hover {
+    background-color: #3cb079;
+}</string>
+   </property>
+   <property name="text">
+    <string>Item</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="ItemBtn_8">
+   <property name="geometry">
+    <rect>
+     <x>890</x>
+     <y>120</y>
+     <width>101</width>
+     <height>101</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#ItemBtn {
+	border-radius: 5px;
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#ItemBtn:hover {
+    background-color: #3cb079;
+}</string>
+   </property>
+   <property name="text">
+    <string>Item</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="ItemBtn_9">
+   <property name="geometry">
+    <rect>
+     <x>890</x>
+     <y>347</y>
+     <width>101</width>
+     <height>101</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#ItemBtn {
+	border-radius: 5px;
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#ItemBtn:hover {
+    background-color: #3cb079;
+}</string>
+   </property>
+   <property name="text">
+    <string>Item</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="Memo3Btn">
+   <property name="geometry">
+    <rect>
+     <x>830</x>
+     <y>170</y>
+     <width>51</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+     <pointsize>24</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#Memo3Btn {
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#Memo3Btn:hover {
+    background-color: #3cb079;
+}</string>
+   </property>
+   <property name="text">
+    <string>3</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="Memo1Btn">
+   <property name="geometry">
+    <rect>
+     <x>830</x>
+     <y>120</y>
+     <width>51</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+     <pointsize>24</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#Memo1Btn {
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#Memo2Btn:hover {
+    background-color: #3cb079;
+}</string>
+   </property>
+   <property name="text">
+    <string>1</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="Memo2Btn">
+   <property name="geometry">
+    <rect>
+     <x>780</x>
+     <y>170</y>
+     <width>51</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+     <pointsize>24</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#Memo2Btn {
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#Memo2Btn:hover {
+    background-color: #3cb079;
+}</string>
+   </property>
+   <property name="text">
+    <string>2</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="Level_2">
+   <property name="geometry">
+    <rect>
+     <x>780</x>
+     <y>120</y>
+     <width>101</width>
+     <height>101</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+     <pointsize>24</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;
+border: 2px solid #ffffff;
+background-color: #309F6A;</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Shape::Box</enum>
+   </property>
+   <property name="text">
+    <string>Memo</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignmentFlag::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="P2_F1_1">
+   <property name="geometry">
+    <rect>
+     <x>890</x>
+     <y>580</y>
+     <width>20</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Sans Serif Collection</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;
+border: 1px solid #ffffff;
+background-color: #309F6A;</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Shape::Box</enum>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignmentFlag::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="P2_F1_2">
+   <property name="geometry">
+    <rect>
+     <x>910</x>
+     <y>580</y>
+     <width>20</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Sans Serif Collection</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;
+border: 1px solid #ffffff;
+background-color: #309F6A;</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Shape::Box</enum>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignmentFlag::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="P2_F1_3">
+   <property name="geometry">
+    <rect>
+     <x>930</x>
+     <y>580</y>
+     <width>20</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Sans Serif Collection</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;
+border: 1px solid #ffffff;
+background-color: #309F6A;</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Shape::Box</enum>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignmentFlag::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="P2_F1_4">
+   <property name="geometry">
+    <rect>
+     <x>950</x>
+     <y>580</y>
+     <width>20</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Sans Serif Collection</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;
+border: 1px solid #ffffff;
+background-color: #309F6A;</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Shape::Box</enum>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignmentFlag::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="P2_F1_5">
+   <property name="geometry">
+    <rect>
+     <x>970</x>
+     <y>580</y>
+     <width>20</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Sans Serif Collection</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;
+border: 1px solid #ffffff;
+background-color: #309F6A;</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Shape::Box</enum>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignmentFlag::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="P2_F5_1">
+   <property name="geometry">
+    <rect>
+     <x>890</x>
+     <y>660</y>
+     <width>20</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Sans Serif Collection</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;
+border: 1px solid #ffffff;
+background-color: #309F6A;</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Shape::Box</enum>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignmentFlag::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="P2_F4_1">
+   <property name="geometry">
+    <rect>
+     <x>890</x>
+     <y>640</y>
+     <width>20</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Sans Serif Collection</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;
+border: 1px solid #ffffff;
+background-color: #309F6A;</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Shape::Box</enum>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignmentFlag::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="P2_F3_1">
+   <property name="geometry">
+    <rect>
+     <x>890</x>
+     <y>620</y>
+     <width>20</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Sans Serif Collection</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;
+border: 1px solid #ffffff;
+background-color: #309F6A;</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Shape::Box</enum>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignmentFlag::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="P2_F2_1">
+   <property name="geometry">
+    <rect>
+     <x>890</x>
+     <y>600</y>
+     <width>20</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Sans Serif Collection</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;
+border: 1px solid #ffffff;
+background-color: #309F6A;</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Shape::Box</enum>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignmentFlag::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="P2_F2_2">
+   <property name="geometry">
+    <rect>
+     <x>910</x>
+     <y>600</y>
+     <width>20</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Sans Serif Collection</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;
+border: 1px solid #ffffff;
+background-color: #309F6A;</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Shape::Box</enum>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignmentFlag::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="P2_F2_3">
+   <property name="geometry">
+    <rect>
+     <x>930</x>
+     <y>600</y>
+     <width>20</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Sans Serif Collection</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;
+border: 1px solid #ffffff;
+background-color: #309F6A;</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Shape::Box</enum>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignmentFlag::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="P2_F2_4">
+   <property name="geometry">
+    <rect>
+     <x>950</x>
+     <y>600</y>
+     <width>20</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Sans Serif Collection</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;
+border: 1px solid #ffffff;
+background-color: #309F6A;</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Shape::Box</enum>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignmentFlag::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="P2_F2_5">
+   <property name="geometry">
+    <rect>
+     <x>970</x>
+     <y>600</y>
+     <width>20</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Sans Serif Collection</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;
+border: 1px solid #ffffff;
+background-color: #309F6A;</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Shape::Box</enum>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignmentFlag::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="P2_F3_2">
+   <property name="geometry">
+    <rect>
+     <x>910</x>
+     <y>620</y>
+     <width>20</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Sans Serif Collection</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;
+border: 1px solid #ffffff;
+background-color: #309F6A;</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Shape::Box</enum>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignmentFlag::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="P2_F3_3">
+   <property name="geometry">
+    <rect>
+     <x>930</x>
+     <y>620</y>
+     <width>20</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Sans Serif Collection</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;
+border: 1px solid #ffffff;
+background-color: #309F6A;</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Shape::Box</enum>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignmentFlag::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="P2_F3_4">
+   <property name="geometry">
+    <rect>
+     <x>950</x>
+     <y>620</y>
+     <width>20</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Sans Serif Collection</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;
+border: 1px solid #ffffff;
+background-color: #309F6A;</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Shape::Box</enum>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignmentFlag::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="P2_F3_5">
+   <property name="geometry">
+    <rect>
+     <x>970</x>
+     <y>620</y>
+     <width>20</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Sans Serif Collection</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;
+border: 1px solid #ffffff;
+background-color: #309F6A;</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Shape::Box</enum>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignmentFlag::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="P2_F4_2">
+   <property name="geometry">
+    <rect>
+     <x>910</x>
+     <y>640</y>
+     <width>20</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Sans Serif Collection</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;
+border: 1px solid #ffffff;
+background-color: #309F6A;</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Shape::Box</enum>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignmentFlag::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="P2_F4_3">
+   <property name="geometry">
+    <rect>
+     <x>930</x>
+     <y>640</y>
+     <width>20</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Sans Serif Collection</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;
+border: 1px solid #ffffff;
+background-color: #309F6A;</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Shape::Box</enum>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignmentFlag::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="P2_F4_4">
+   <property name="geometry">
+    <rect>
+     <x>950</x>
+     <y>640</y>
+     <width>20</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Sans Serif Collection</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;
+border: 1px solid #ffffff;
+background-color: #309F6A;</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Shape::Box</enum>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignmentFlag::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="P2_F4_5">
+   <property name="geometry">
+    <rect>
+     <x>970</x>
+     <y>640</y>
+     <width>20</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Sans Serif Collection</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;
+border: 1px solid #ffffff;
+background-color: #309F6A;</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Shape::Box</enum>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignmentFlag::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="P2_F5_2">
+   <property name="geometry">
+    <rect>
+     <x>910</x>
+     <y>660</y>
+     <width>20</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Sans Serif Collection</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;
+border: 1px solid #ffffff;
+background-color: #309F6A;</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Shape::Box</enum>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignmentFlag::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="P2_F5_3">
+   <property name="geometry">
+    <rect>
+     <x>930</x>
+     <y>660</y>
+     <width>20</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Sans Serif Collection</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;
+border: 1px solid #ffffff;
+background-color: #309F6A;</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Shape::Box</enum>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignmentFlag::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="P2_F5_4">
+   <property name="geometry">
+    <rect>
+     <x>950</x>
+     <y>660</y>
+     <width>20</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Sans Serif Collection</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;
+border: 1px solid #ffffff;
+background-color: #309F6A;</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Shape::Box</enum>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignmentFlag::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="P2_F5_5">
+   <property name="geometry">
+    <rect>
+     <x>970</x>
+     <y>660</y>
+     <width>20</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Sans Serif Collection</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;
+border: 1px solid #ffffff;
+background-color: #309F6A;</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Shape::Box</enum>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignmentFlag::AlignCenter</set>
+   </property>
+  </widget>
+  <zorder>Level_2</zorder>
+  <zorder>label_12</zorder>
+  <zorder>label_13</zorder>
+  <zorder>quitBtn</zorder>
+  <zorder>Level</zorder>
+  <zorder>CurrentScore</zorder>
+  <zorder>TotalScore</zorder>
+  <zorder>score_P1</zorder>
+  <zorder>score_P2</zorder>
+  <zorder>score_P3</zorder>
+  <zorder>score_P4</zorder>
+  <zorder>score_P5</zorder>
+  <zorder>score_P6</zorder>
+  <zorder>score_P7</zorder>
+  <zorder>score_P8</zorder>
+  <zorder>ItemBtn</zorder>
+  <zorder>OpenMemoBtn</zorder>
+  <zorder>CloseMemoBtn</zorder>
+  <zorder>F1_1</zorder>
+  <zorder>F1_2</zorder>
+  <zorder>F1_3</zorder>
+  <zorder>F1_4</zorder>
+  <zorder>F1_5</zorder>
+  <zorder>F2_1</zorder>
+  <zorder>F2_2</zorder>
+  <zorder>F2_3</zorder>
+  <zorder>F2_4</zorder>
+  <zorder>F2_5</zorder>
+  <zorder>F3_1</zorder>
+  <zorder>F3_2</zorder>
+  <zorder>F3_3</zorder>
+  <zorder>F3_4</zorder>
+  <zorder>F3_5</zorder>
+  <zorder>F5_1</zorder>
+  <zorder>F5_2</zorder>
+  <zorder>F5_3</zorder>
+  <zorder>F5_4</zorder>
+  <zorder>F5_5</zorder>
+  <zorder>F4_1</zorder>
+  <zorder>F4_2</zorder>
+  <zorder>F4_3</zorder>
+  <zorder>F4_4</zorder>
+  <zorder>F4_5</zorder>
+  <zorder>P1_x</zorder>
+  <zorder>M1_x</zorder>
+  <zorder>P1_x_2</zorder>
+  <zorder>M1_x_2</zorder>
+  <zorder>P1_x_3</zorder>
+  <zorder>M1_x_3</zorder>
+  <zorder>P1_x_4</zorder>
+  <zorder>M1_x_4</zorder>
+  <zorder>P1_x_5</zorder>
+  <zorder>M1_x_5</zorder>
+  <zorder>Px_1</zorder>
+  <zorder>Mx_1</zorder>
+  <zorder>Px_2</zorder>
+  <zorder>Mx_2</zorder>
+  <zorder>Px_3</zorder>
+  <zorder>Mx_3</zorder>
+  <zorder>Px_4</zorder>
+  <zorder>Mx_4</zorder>
+  <zorder>Px_5</zorder>
+  <zorder>Mx_5</zorder>
+  <zorder>label_2</zorder>
+  <zorder>label_3</zorder>
+  <zorder>label_4</zorder>
+  <zorder>label_5</zorder>
+  <zorder>label_6</zorder>
+  <zorder>label_7</zorder>
+  <zorder>label_8</zorder>
+  <zorder>label_9</zorder>
+  <zorder>label_10</zorder>
+  <zorder>label_11</zorder>
+  <zorder>MemoOrbBtn</zorder>
+  <zorder>ItemBtn_3</zorder>
+  <zorder>ItemBtn_4</zorder>
+  <zorder>ItemBtn_5</zorder>
+  <zorder>ItemBtn_6</zorder>
+  <zorder>ItemBtn_7</zorder>
+  <zorder>ItemBtn_8</zorder>
+  <zorder>ItemBtn_9</zorder>
+  <zorder>Memo3Btn</zorder>
+  <zorder>Memo1Btn</zorder>
+  <zorder>Memo2Btn</zorder>
+  <zorder>P2_F1_1</zorder>
+  <zorder>P2_F1_2</zorder>
+  <zorder>P2_F1_3</zorder>
+  <zorder>P2_F1_4</zorder>
+  <zorder>P2_F1_5</zorder>
+  <zorder>P2_F5_1</zorder>
+  <zorder>P2_F4_1</zorder>
+  <zorder>P2_F3_1</zorder>
+  <zorder>P2_F2_1</zorder>
+  <zorder>P2_F2_2</zorder>
+  <zorder>P2_F2_3</zorder>
+  <zorder>P2_F2_4</zorder>
+  <zorder>P2_F2_5</zorder>
+  <zorder>P2_F3_2</zorder>
+  <zorder>P2_F3_3</zorder>
+  <zorder>P2_F3_4</zorder>
+  <zorder>P2_F3_5</zorder>
+  <zorder>P2_F4_2</zorder>
+  <zorder>P2_F4_3</zorder>
+  <zorder>P2_F4_4</zorder>
+  <zorder>P2_F4_5</zorder>
+  <zorder>P2_F5_2</zorder>
+  <zorder>P2_F5_3</zorder>
+  <zorder>P2_F5_4</zorder>
+  <zorder>P2_F5_5</zorder>
  </widget>
  <resources>
   <include location="resources.qrc"/>

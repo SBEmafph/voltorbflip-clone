@@ -13,6 +13,7 @@ Menu::Menu(QWidget *parent)
     , BrowserWindow(new Browser(this))
 {
     ui->setupUi(this);
+    this->setFixedSize(this->size()); //Fenstergröße anpassen blockieren
 
     rulesWindow->hide();
     replayWindow->hide();
