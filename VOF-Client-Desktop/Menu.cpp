@@ -46,8 +46,8 @@ Menu::Menu(QWidget *parent)
     connect(ui->ShopBtn, &QPushButton::clicked, this, &Menu::on_ShopBtn_clicked);
     connect(ui->SettingsBtn, &QPushButton::clicked, this, &Menu::on_SettingsBtn_clicked);
     connect(ui->PlayBtn, &QPushButton::clicked, this, &Menu::on_PlayBtn_clicked);
-    connect(ui->exitBtn, &QPushButton::clicked,
-            this, &Menu::onExitBtn_clicked);
+    //connect(ui->exitBtn, &QPushButton::clicked,
+    //        this, &Menu::onExitBtn_clicked);
 }
 
 void Menu::m_setPlayerConfig(quint32 ID, quint16 token, QString name, bool force)
@@ -101,6 +101,7 @@ void Menu::on_ShopBtn_clicked()
     shopWindow->show();
 }
 
+/*
 void Menu::onExitBtn_clicked()
 {
     m_client->slot_detach();
@@ -114,3 +115,4 @@ void Menu::onExitBtn_clicked()
         QTimer::singleShot(1000, qApp, &QCoreApplication::quit);
     }
 }
+*/

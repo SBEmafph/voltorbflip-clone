@@ -9,6 +9,7 @@
 #include "Shop.h"
 #include "Settings.h"
 #include "Browser.h"
+#include "Client.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui
@@ -24,6 +25,7 @@ class Menu : public QMainWindow
 public:
     explicit Menu(QWidget *parent = nullptr);
     ~Menu();
+    void m_setPlayerConfig(quint32 ID, quint16 Token, QString profile, bool Force);
 
 private slots:
     void on_PlayBtn_clicked();
@@ -44,6 +46,7 @@ private:
     shop *shopWindow;
     Settings *SettingsWindow;
     Browser *BrowserWindow;
+    Client *m_client;
 };
 
 #endif // MENU_H
