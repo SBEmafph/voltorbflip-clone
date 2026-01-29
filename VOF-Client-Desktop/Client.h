@@ -16,7 +16,7 @@ class Client : public QObject
     Q_OBJECT
 signals:
     void sig_identificationSent();
-    //void sig_matchAction(VOF::Action action, quint8 x, quint8 y);
+    void sig_matchAction(VOF::Action action, quint8 x, quint8 y);
     void sig_newLoginSaved();
     void sig_connected();
     void sig_lobbySelected();
@@ -33,8 +33,6 @@ public slots:
     void m_readLobbyState();
     bool m_checkStartLobby();
     void m_sendIdentification();
-
-    void slot_sendMatchAction(VOF::Action action, quint8 x, quint8 y);
 
     void m_updateConfig(quint32 ID = 0, quint16 token = 0, QString name = "", bool force = false);
 
@@ -55,6 +53,7 @@ public slots:
 
 
 private slots:
+    void slot_sendMatchAction(VOF::Action action, quint8 x, quint8 y);
 
 private:
     QTcpSocket *m_tcpSocket = nullptr;

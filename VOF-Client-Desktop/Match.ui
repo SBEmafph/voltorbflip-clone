@@ -548,6 +548,897 @@ QPushButton#CloseMemoBtn:hover {
     <string>Close</string>
    </property>
   </widget>
+  <widget class="QPushButton" name="F1_1">
+   <property name="geometry">
+    <rect>
+     <x>240</x>
+     <y>120</y>
+     <width>81</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#F1_1 {
+    color: white;
+    border: 2px solid #ffffff;
+
+    background-color: transparent;
+    background-image: url(:/images/images/CardPattern.png);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+QPushButton#F1_1:hover {
+    background-color: #3cb079;
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>:/images/images/CardPattern.png</normalon>
+    </iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>77</width>
+     <height>77</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="F1_2">
+   <property name="geometry">
+    <rect>
+     <x>330</x>
+     <y>120</y>
+     <width>81</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#F1_2 {
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#F1_2:hover {
+    background-color: #3cb079;
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>:/images/images/CardPattern.png</normalon>
+    </iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>77</width>
+     <height>77</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="F1_3">
+   <property name="geometry">
+    <rect>
+     <x>420</x>
+     <y>120</y>
+     <width>81</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#F1_3 {
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#F1_3:hover {
+    background-color: #3cb079;
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>:/images/images/CardPattern.png</normalon>
+    </iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>77</width>
+     <height>77</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="F1_4">
+   <property name="geometry">
+    <rect>
+     <x>510</x>
+     <y>120</y>
+     <width>81</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#F1_4 {
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#F1_4:hover {
+    background-color: #3cb079;
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>:/images/images/CardPattern.png</normalon>
+    </iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>77</width>
+     <height>77</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="F1_5">
+   <property name="geometry">
+    <rect>
+     <x>600</x>
+     <y>120</y>
+     <width>81</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#F1_5 {
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#F1_5:hover {
+    background-color: #3cb079;
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>:/images/images/CardPattern.png</normalon>
+    </iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>77</width>
+     <height>77</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="F2_1">
+   <property name="geometry">
+    <rect>
+     <x>240</x>
+     <y>210</y>
+     <width>81</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#F2_1 {
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#F2_1:hover {
+    background-color: #3cb079;
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>:/images/images/CardPattern.png</normalon>
+    </iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>77</width>
+     <height>77</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="F2_2">
+   <property name="geometry">
+    <rect>
+     <x>330</x>
+     <y>210</y>
+     <width>81</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#F2_2 {
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#F2_2:hover {
+    background-color: #3cb079;
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>:/images/images/CardPattern.png</normalon>
+    </iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>77</width>
+     <height>77</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="F2_3">
+   <property name="geometry">
+    <rect>
+     <x>420</x>
+     <y>210</y>
+     <width>81</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#F2_3 {
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#F2_3:hover {
+    background-color: #3cb079;
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>:/images/images/CardPattern.png</normalon>
+    </iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>77</width>
+     <height>77</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="F2_4">
+   <property name="geometry">
+    <rect>
+     <x>510</x>
+     <y>210</y>
+     <width>81</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#F2_4 {
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#F2_4:hover {
+    background-color: #3cb079;
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>:/images/images/CardPattern.png</normalon>
+    </iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>77</width>
+     <height>77</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="F2_5">
+   <property name="geometry">
+    <rect>
+     <x>600</x>
+     <y>210</y>
+     <width>81</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#F2_5 {
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#F2_5:hover {
+    background-color: #3cb079;
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>:/images/images/CardPattern.png</normalon>
+    </iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>77</width>
+     <height>77</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="F3_1">
+   <property name="geometry">
+    <rect>
+     <x>240</x>
+     <y>300</y>
+     <width>81</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#F3_1 {
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#F3_1:hover {
+    background-color: #3cb079;
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>:/images/images/CardPattern.png</normalon>
+    </iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>77</width>
+     <height>77</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="F3_2">
+   <property name="geometry">
+    <rect>
+     <x>330</x>
+     <y>300</y>
+     <width>81</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#F3_2 {
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#F3_2:hover {
+    background-color: #3cb079;
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>:/images/images/CardPattern.png</normalon>
+    </iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>77</width>
+     <height>77</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="F3_3">
+   <property name="geometry">
+    <rect>
+     <x>420</x>
+     <y>300</y>
+     <width>81</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#F3_3 {
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#F3_3:hover {
+    background-color: #3cb079;
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>:/images/images/CardPattern.png</normalon>
+    </iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>77</width>
+     <height>77</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="F3_4">
+   <property name="geometry">
+    <rect>
+     <x>510</x>
+     <y>300</y>
+     <width>81</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#F3_4 {
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#F3_4:hover {
+    background-color: #3cb079;
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>:/images/images/CardPattern.png</normalon>
+    </iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>77</width>
+     <height>77</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="F3_5">
+   <property name="geometry">
+    <rect>
+     <x>600</x>
+     <y>300</y>
+     <width>81</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#F3_5 {
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#F3_5:hover {
+    background-color: #3cb079;
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>:/images/images/CardPattern.png</normalon>
+    </iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>77</width>
+     <height>77</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="F5_1">
+   <property name="geometry">
+    <rect>
+     <x>240</x>
+     <y>480</y>
+     <width>81</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#F5_1 {
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#F5_1:hover {
+    background-color: #3cb079;
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>:/images/images/CardPattern.png</normalon>
+    </iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>77</width>
+     <height>77</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="F5_2">
+   <property name="geometry">
+    <rect>
+     <x>330</x>
+     <y>480</y>
+     <width>81</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#F5_2 {
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#F5_2:hover {
+    background-color: #3cb079;
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>:/images/images/CardPattern.png</normalon>
+    </iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>77</width>
+     <height>77</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="F5_3">
+   <property name="geometry">
+    <rect>
+     <x>420</x>
+     <y>480</y>
+     <width>81</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#F5_3 {
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#F5_3:hover {
+    background-color: #3cb079;
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>:/images/images/CardPattern.png</normalon>
+    </iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>77</width>
+     <height>77</height>
+    </size>
+   </property>
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="checked">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="F5_4">
+   <property name="geometry">
+    <rect>
+     <x>510</x>
+     <y>480</y>
+     <width>81</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#F5_4 {
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#F5_4:hover {
+    background-color: #3cb079;
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>:/images/images/CardPattern.png</normalon>
+    </iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>77</width>
+     <height>77</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="F5_5">
+   <property name="geometry">
+    <rect>
+     <x>600</x>
+     <y>480</y>
+     <width>81</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#F5_5 {
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#F5_5:hover {
+    background-color: #3cb079;
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>:/images/images/CardPattern.png</normalon>
+    </iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>77</width>
+     <height>77</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="F4_1">
+   <property name="geometry">
+    <rect>
+     <x>240</x>
+     <y>390</y>
+     <width>81</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#F4_1 {
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#F4_1:hover {
+    background-color: #3cb079;
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>:/images/images/CardPattern.png</normalon>
+    </iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>77</width>
+     <height>77</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="F4_2">
+   <property name="geometry">
+    <rect>
+     <x>330</x>
+     <y>390</y>
+     <width>81</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#F4_2 {
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#F4_2:hover {
+    background-color: #3cb079;
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>:/images/images/CardPattern.png</normalon>
+    </iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>77</width>
+     <height>77</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="F4_3">
+   <property name="geometry">
+    <rect>
+     <x>420</x>
+     <y>390</y>
+     <width>81</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#F4_3 {
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#F4_3:hover {
+    background-color: #3cb079;
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>:/images/images/CardPattern.png</normalon>
+    </iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>77</width>
+     <height>77</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="F4_4">
+   <property name="geometry">
+    <rect>
+     <x>510</x>
+     <y>390</y>
+     <width>81</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#F4_4 {
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#F4_4:hover {
+    background-color: #3cb079;
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>:/images/images/CardPattern.png</normalon>
+    </iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>77</width>
+     <height>77</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="F4_5">
+   <property name="geometry">
+    <rect>
+     <x>600</x>
+     <y>390</y>
+     <width>81</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#F4_5 {
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#F4_5:hover {
+    background-color: #3cb079;
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>:/images/images/CardPattern.png</normalon>
+    </iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>77</width>
+     <height>77</height>
+    </size>
+   </property>
+  </widget>
   <widget class="QLabel" name="P1_x">
    <property name="geometry">
     <rect>
@@ -1396,23 +2287,13 @@ background: #BF65DD;</string>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">QPushButton { /*Nicht ausgewählt*/
-    background-color: #707070; /*Grau*/
+    <string notr="true">QPushButton#MemoOrbBtn {
+    background-color: #309F6A;
     color: white;
     border: 2px solid #ffffff;
-	border-radius: 4px;
 }
 
-QPushButton:hover {
-    background-color: #808080;
-}
-
-QPushButton:checked {
-    background-color: #309F6A; /*Grün*/
-    border: 2px solid #E3B448; /* Gold*/
-}
-
-QPushButton:checked:hover {
+QPushButton#MemoOrbBtn:hover {
     background-color: #3cb079;
 }</string>
    </property>
@@ -1429,9 +2310,6 @@ QPushButton:checked:hover {
      <width>40</width>
      <height>40</height>
     </size>
-   </property>
-   <property name="checkable">
-    <bool>true</bool>
    </property>
   </widget>
   <widget class="QPushButton" name="ItemBtn_3">
@@ -1625,31 +2503,18 @@ QPushButton#ItemBtn:hover {
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">QPushButton { /*Nicht ausgewählt*/
-    background-color: #707070; /*Grau*/
+    <string notr="true">QPushButton#Memo3Btn {
+    background-color: #309F6A;
     color: white;
     border: 2px solid #ffffff;
-	border-radius: 4px;
 }
 
-QPushButton:hover {
-    background-color: #808080;
-}
-
-QPushButton:checked {
-    background-color: #309F6A; /*Grün*/
-    border: 2px solid #E3B448; /* Gold*/
-}
-
-QPushButton:checked:hover {
+QPushButton#Memo3Btn:hover {
     background-color: #3cb079;
 }</string>
    </property>
    <property name="text">
     <string>3</string>
-   </property>
-   <property name="checkable">
-    <bool>true</bool>
    </property>
   </widget>
   <widget class="QPushButton" name="Memo1Btn">
@@ -1667,35 +2532,19 @@ QPushButton:checked:hover {
      <pointsize>24</pointsize>
     </font>
    </property>
-   <property name="mouseTracking">
-    <bool>true</bool>
-   </property>
    <property name="styleSheet">
-    <string notr="true">QPushButton { /*Nicht ausgewählt*/
-    background-color: #707070; /*Grau*/
+    <string notr="true">QPushButton#Memo1Btn {
+    background-color: #309F6A;
     color: white;
     border: 2px solid #ffffff;
-	border-radius: 4px;
 }
 
-QPushButton:hover {
-    background-color: #808080;
-}
-
-QPushButton:checked {
-    background-color: #309F6A; /*Grün*/
-    border: 2px solid #E3B448; /* Gold*/
-}
-
-QPushButton:checked:hover {
+QPushButton#Memo2Btn:hover {
     background-color: #3cb079;
 }</string>
    </property>
    <property name="text">
     <string>1</string>
-   </property>
-   <property name="checkable">
-    <bool>true</bool>
    </property>
   </widget>
   <widget class="QPushButton" name="Memo2Btn">
@@ -1714,31 +2563,18 @@ QPushButton:checked:hover {
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">QPushButton { /*Nicht ausgewählt*/
-    background-color: #707070; /*Grau*/
+    <string notr="true">QPushButton#Memo2Btn {
+    background-color: #309F6A;
     color: white;
     border: 2px solid #ffffff;
-	border-radius: 4px;
 }
 
-QPushButton:hover {
-    background-color: #808080;
-}
-
-QPushButton:checked {
-    background-color: #309F6A; /*Grün*/
-    border: 2px solid #E3B448; /* Gold*/
-}
-
-QPushButton:checked:hover {
+QPushButton#Memo2Btn:hover {
     background-color: #3cb079;
 }</string>
    </property>
    <property name="text">
     <string>2</string>
-   </property>
-   <property name="checkable">
-    <bool>true</bool>
    </property>
   </widget>
   <widget class="QLabel" name="Level_2">
@@ -2521,18 +3357,6 @@ background-color: #309F6A;</string>
     <set>Qt::AlignmentFlag::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QWidget" name="gridLayoutWidget">
-   <property name="geometry">
-    <rect>
-     <x>239</x>
-     <y>120</y>
-     <width>441</width>
-     <height>441</height>
-    </rect>
-   </property>
-   <layout class="QGridLayout" name="gameGrid"/>
-  </widget>
-  <zorder>gridLayoutWidget</zorder>
   <zorder>Level_2</zorder>
   <zorder>label_12</zorder>
   <zorder>label_13</zorder>
@@ -2551,6 +3375,31 @@ background-color: #309F6A;</string>
   <zorder>ItemBtn</zorder>
   <zorder>OpenMemoBtn</zorder>
   <zorder>CloseMemoBtn</zorder>
+  <zorder>F1_1</zorder>
+  <zorder>F1_2</zorder>
+  <zorder>F1_3</zorder>
+  <zorder>F1_4</zorder>
+  <zorder>F1_5</zorder>
+  <zorder>F2_1</zorder>
+  <zorder>F2_2</zorder>
+  <zorder>F2_3</zorder>
+  <zorder>F2_4</zorder>
+  <zorder>F2_5</zorder>
+  <zorder>F3_1</zorder>
+  <zorder>F3_2</zorder>
+  <zorder>F3_3</zorder>
+  <zorder>F3_4</zorder>
+  <zorder>F3_5</zorder>
+  <zorder>F5_1</zorder>
+  <zorder>F5_2</zorder>
+  <zorder>F5_3</zorder>
+  <zorder>F5_4</zorder>
+  <zorder>F5_5</zorder>
+  <zorder>F4_1</zorder>
+  <zorder>F4_2</zorder>
+  <zorder>F4_3</zorder>
+  <zorder>F4_4</zorder>
+  <zorder>F4_5</zorder>
   <zorder>P1_x</zorder>
   <zorder>M1_x</zorder>
   <zorder>P1_x_2</zorder>

@@ -33,10 +33,8 @@ private slots:
     void on_ReplayBtn_clicked();
     void on_ShopBtn_clicked();
     void on_SettingsBtn_clicked();
-    void onExitBtn_clicked();
+
     void on_BrowserConnect();
-    void on_backToMenu();
-    void on_matchAction(VOF::Action action, quint8 x, quint8 y);
 
 private:
     Ui::Menu *ui;
