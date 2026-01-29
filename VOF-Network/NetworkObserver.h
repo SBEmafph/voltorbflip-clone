@@ -10,24 +10,29 @@ class QTcpSocket;
 QT_END_NAMESPACE
 
 
-class NetworkObserver :  public QObject, public IObserver
+class NWObs :  public QObject, public IObserver
 {
     Q_OBJECT
 signals:
-    void sig_identificationReceived(quint32 id, quint16 token);
-    void sig_newAccountRequested(NetworkObserver * pNetworkObserver);
-    void sig_quit(NetworkObserver * pNetworkObserver);
+    void sig_identificationReceived(NWObs * pNWObs, quint32 id, quint16 token);
+    void sig_newAccountRequested(NWObs * pNWObs);
+    void sig_quit(NWObs * pNWObs);
+    void sig_lobbyRequest(NWObs * pNWObs, quint8 lobby);
 
 public slots:
     void slot_onReadyRead();
+    void slot_loginSuccessful();
 
 public:
-    NetworkObserver(QTcpSocket* clientSocket, QObject* parent);
-    //void saveState();
+    NWObs(QTcpSocket* clientSocket, QObject* parent);
+    void updateFullState(const GameState &state);
+    void onPlayerStatusChanged(quint32 dwPlayerId, bool fIsReady);
+    void onTileRevealed(quint32 dwPlayerId, quint8 bTileIndex, quint8 bValue);
+
     void m_proceedToMatch();
+    //void saveState();
 
     void m_reconnect(QTcpSocket* SocketIn);
-    void m_updateStates(const GameState &state);
     void m_requestIdentification();
 
     void m_updateLogin(quint32 dwIDin, quint16 wTokenIn);

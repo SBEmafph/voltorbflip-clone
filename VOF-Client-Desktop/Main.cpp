@@ -29,9 +29,11 @@ int main(int argc, char *argv[])
     quint32 ID = szID.toInt();
     QString szToken = (argc > 3) ? argv[3] : 0;
     quint16 Token = szToken.toInt();
+    QString szForce = (argc > 4) ? argv[4] : 0;
+    bool Force = szForce.toInt();
 
     Menu w;
-    w.m_setPlayerConfig(ID, Token, profile, true);
+    w.m_setPlayerConfig(ID, Token, profile, Force);
     w.show();
 
     return a.exec();

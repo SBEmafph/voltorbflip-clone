@@ -24,10 +24,12 @@ find_package(
 add_library(VOF-Network STATIC
   NetworkObserver.cpp
   NetworkObserver.h
-  GameState.h
+
   IObserver.h
-  PlayerState.h
-  Constants.h
+
+
+  GlobalDefines.h
+  GlobalDefines.cpp
 )
 
 target_include_directories(

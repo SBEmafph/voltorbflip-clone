@@ -5,18 +5,12 @@
 #include <QList>
 #include <QDateTime>
 
-struct MoveRecord {
-    QString timestamp;
-    QString input;
-    int resultScore;
-    bool wasGameOver;
-};
+#include "GlobalDefines.h"
 
 struct PlayerProfile {
-    quint32 id;
+    PlayerIdentity identity;
     quint16 token;
-    QString name;
-    QList<MoveRecord> moveHistory;
+    QMap<quint8, Move> everyMatch;
 };
 
 #endif // PLAYERPROFILE_H

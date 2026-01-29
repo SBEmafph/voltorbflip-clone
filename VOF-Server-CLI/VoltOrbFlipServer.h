@@ -5,7 +5,7 @@
 #include <QList>
 #include <QString>
 
-#include "GameState.h"
+#include "GlobalDefines.h"
 #include "NetworkObserver.h"
 #include "PlayerProfile.h"
 
@@ -21,6 +21,8 @@ class VoltOrbFlipServer : public QObject
 
 signals:
     void sig_identificationValid(quint32 dwIDout, quint16 wTokenout);
+    void sig_lobbyUpdate(NWObs* pNWObs, quint8 lobbyIDin = 0);
+    void sig_loginSuccessful();
 
 public:
     explicit VoltOrbFlipServer(QObject *parent = nullptr);
@@ -30,21 +32,22 @@ public:
     void m_applyMove(std::string input);
 
 public slots:
-    void slot_assignLobby(NetworkObserver* pNetworkObserver, quint8 lobbyIDin = 0);
+    void slot_assignLobby(NWObs* pNWObs, quint8 lobbyIDin = 0);
     void slot_attach();
-    void slot_notifyClients();
-    void slot_processHandshake(quint32 ID, quint16 token);
-    void slot_provideNewLogin(NetworkObserver* pNetworkObserver);
-    void slot_refreshToken(NetworkObserver* pNetworkObserver);
-    void slot_detach(NetworkObserver* obs);
+    void slot_updateClientsGameState();
+    void slot_onLobbyStatusUpdate(quint32 dwPlayerId, bool fIsReady);
+    void slot_processHandshake(NWObs* pNWObs, quint32 ID, quint16 token);
+    void slot_provideNewLogin(NWObs* pNWObs);
+    void slot_refreshToken(NWObs* pNWObs);
+    void slot_detach(NWObs* pNWObs);
 
 private:
     QTcpServer *m_pTcpServer = nullptr;
     QMap<quint32, PlayerProfile> m_playerDatabase;
-    QMap<quint32, NetworkObserver*> m_clients;
+    QMap<quint32, NWObs*> m_clients;
 
     GameState m_tGamestate;
-    QMap<quint8, NetworkObserver*> m_lobby;
+    QMap<quint8, NWObs*> m_lobby;
 
     quint8 m_findFirstFreeSlot();
     quint32 m_getNextFreePlayerId();

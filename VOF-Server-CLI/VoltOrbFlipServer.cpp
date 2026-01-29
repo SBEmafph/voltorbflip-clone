@@ -1,13 +1,11 @@
 
 #include <QtNetwork>
 #include <QtCore>
-#include <QTextStream>
+
 
 #include "VoltOrbFlipServer.h"
-#include "Constants.h"
 
-QTextStream err(stderr);
-QTextStream out(stdout);
+
 
 VoltOrbFlipServer::VoltOrbFlipServer(QObject *parent)
     : m_pTcpServer (new QTcpServer(this) )
@@ -16,10 +14,17 @@ VoltOrbFlipServer::VoltOrbFlipServer(QObject *parent)
     m_startServer(16000);
 }
 
-void VoltOrbFlipServer::slot_notifyClients()
+void VoltOrbFlipServer::slot_updateClientsGameState()
 {
-    foreach (NetworkObserver* player, m_clients) {
-        player->m_updateStates(m_tGamestate);
+    foreach (NWObs* player, m_clients) {
+        player->updateFullState(m_tGamestate);
+    }
+}
+
+void VoltOrbFlipServer::slot_onLobbyStatusUpdate(quint32 dwPlayerId, bool fIsReady)
+{
+    foreach (NWObs* player, m_clients) {
+        player->onPlayerStatusChanged(dwPlayerId, fIsReady);
     }
 }
 
@@ -47,7 +52,7 @@ quint16 VoltOrbFlipServer::m_generateUniqueToken()
         newToken = static_cast<quint16>(QRandomGenerator::global()->bounded(1, 65536));
         unique = true;
 
-        for (NetworkObserver* obs : m_clients.values()) {
+        for (NWObs* obs : m_clients.values()) {
             if (obs->m_getToken() == newToken) {
                 unique = false;
                 break;
@@ -73,120 +78,142 @@ void VoltOrbFlipServer::m_startServer(quint16 port)
     }
 
     if (!m_pTcpServer->listen(ipAddress, port)) {
-        err
+        LOG_ERR
             << "Unable to start the server: %s"
             << m_pTcpServer->errorString()
             << Qt::endl;
         return;
     }
-    out << "The server is running on IP: " << ipAddress.toString() << Qt::endl;
-    out << "Port: " << m_pTcpServer->serverPort() << Qt::endl;
+    LOG_OUT << "[SV] The server is running on IP: " << ipAddress.toString() << Qt::endl;
+    LOG_OUT << "[SV] Port: " << m_pTcpServer->serverPort() << Qt::endl;
 }
 
 void VoltOrbFlipServer::slot_attach()
 {
     QTcpSocket* clientConnection = m_pTcpServer->nextPendingConnection();
-    NetworkObserver* player = new NetworkObserver(clientConnection, this);
+    NWObs* player = new NWObs(clientConnection, this);
 
     player->m_requestIdentification();
     connect(clientConnection, &QAbstractSocket::disconnected,
             clientConnection, &QObject::deleteLater);
-    connect(player, &NetworkObserver::sig_identificationReceived,
+    connect(player, &NWObs::sig_identificationReceived,
             this, &VoltOrbFlipServer::slot_processHandshake);
-    connect(player, &NetworkObserver::sig_newAccountRequested,
+    connect(player, &NWObs::sig_newAccountRequested,
             this, &VoltOrbFlipServer::slot_provideNewLogin);
-    connect(player, &NetworkObserver::sig_quit,
+    connect(player, &NWObs::sig_lobbyRequest,
+            this, &VoltOrbFlipServer::slot_assignLobby);
+    connect(player, &NWObs::sig_quit,
             this, &VoltOrbFlipServer::slot_detach);
+
+    connect(this, &VoltOrbFlipServer::sig_loginSuccessful,
+            player, &NWObs::slot_loginSuccessful);
+
 }
 
-void VoltOrbFlipServer::slot_assignLobby(NetworkObserver* pNWObs, quint8 lobbyIDin)
+void VoltOrbFlipServer::slot_assignLobby(NWObs* pNWObs, quint8 lobbyIDin)
 {
     if(m_lobby.count() < VOF::MAX_CLIENTS){
         quint8 slotID = m_findFirstFreeSlot();
         m_lobby.insert(slotID, pNWObs);
         pNWObs->m_setSlotId(lobbyIDin);
-        out << "Welcome Player " << pNWObs->m_getId()
-            << " in Lobby lobbyIDin" << lobbyIDin
-            << " on lobbyslot " << slotID << Qt::endl;
+        LOG_OUT << "[SV] Welcome Player " << pNWObs->m_getId()
+            << " in Lobby " << lobbyIDin
+            << " on Lobby Slot " << slotID << Qt::endl;
+        emit sig_lobbyUpdate(pNWObs, lobbyIDin);
     }
     else{
-        out << "ERR: Lobby " << lobbyIDin
+        LOG_OUT << "[SV] ERR: Lobby " << lobbyIDin
             << " Already Full" << Qt::endl;
     }
 }
 
-void VoltOrbFlipServer::slot_processHandshake(quint32 idIn, quint16 tokenIn)
+void VoltOrbFlipServer::slot_processHandshake(NWObs* pNWObs, quint32 idIn, quint16 tokenIn)
 {
-    out << "INF: Handshake with " << idIn
+    LOG_OUT << "[SV] INF: Handshake with " << idIn
         << " on " << tokenIn << Qt::endl;
 
-    NetworkObserver* anon = qobject_cast<NetworkObserver*>(sender());
-    connect(anon->m_getSocket(), &QAbstractSocket::disconnected,
-            anon, &QObject::deleteLater);
+    //NWObs* pNWObs = qobject_cast<NWObs*>(sender());
+    //connect(pNWObs->m_getSocket(), &QAbstractSocket::disconnected,
+    //        pNWObs, &QObject::deleteLater);
 
     if(m_playerDatabase.contains(idIn)){ //known ID
-        if(m_clients.contains(idIn)){ //currently playing
-            NetworkObserver* existingPlayer = m_clients[idIn];
-            if(existingPlayer->m_getToken() == tokenIn) //correct token -> recomnnect
+        LOG_OUT << "[SV] known ID : " << idIn << Qt::endl;
+        if(!m_clients.contains(idIn)){ //currently not connected
+            PlayerProfile existingPlayer = m_playerDatabase[idIn];
+            if(existingPlayer.token == tokenIn) //correct token -> recomnnect
             {
-                out << "INF: Welcome back " << idIn << Qt::endl;
-                existingPlayer->m_setSocket(anon->m_getSocket()); //implied connection issue
-                anon->deleteLater();
+                LOG_OUT << "[SV] INF: Welcome back " << idIn << Qt::endl;
+                emit sig_loginSuccessful();
                 return;
             }
-            else{ //incorrect token -> impostor among us
-                err << "ERR: Wrong token for slot " << idIn << Qt::endl;
-                anon->m_getSocket()->disconnectFromHost();
+            else{ //first login this server life -> refresh token
+                LOG_ERR << "[SV] ERR: Wrong token for slot " << idIn << Qt::endl;
+                slot_refreshToken(pNWObs);
                 return;
-                //slot_provideNewLogin(anon);
             }
-        }
+            /* NWObs* existingPlayer = m_clients[idIn];
+            // if(existingPlayer->m_getToken() == tokenIn) //correct token -> recomnnect
+            // {
+            //     out << "INF: Welcome back " << idIn << Qt::endl;
+            //     existingPlayer->m_setSocket(pNWObs->m_getSocket()); //implied connection issue
+            //     pNWObs->deleteLater();
+            //     return;
+            // }
+            // else{ //incorrect token -> impostor among us
+            //     err << "ERR: Wrong token for slot " << idIn << Qt::endl;
+            //     pNWObs->m_getSocket()->disconnectFromHost();
+            //     return;
+            //     //slot_provideNewLogin(anon);
+            */
+        }//id already in use LOG_OUT << " [SV] id already connected :" << idIn << Qt::endl;
         else{ //first login this server life -> refresh token
-            slot_refreshToken(anon);
+            LOG_ERR << "ERR Handshake requested while connected" << Qt::endl;
+            slot_refreshToken(pNWObs);
             return;
         }
     }
     else{ //new player
-        //out << "ERR: ClientID not usable" << Qt::endl;
-        slot_provideNewLogin(anon);
+        //LOG_OUT << "ERR: ClientID not usable" << Qt::endl;
+        LOG_OUT << "[SV] unknownID : " << idIn << Qt::endl;
+        slot_provideNewLogin(pNWObs);
         return;
     }
 }
 
-void VoltOrbFlipServer::slot_provideNewLogin(NetworkObserver * pNetworkObserver)
+void VoltOrbFlipServer::slot_provideNewLogin(NWObs * pNWObs)
 {
-    out << "INF: New Login Requested" << Qt::endl;
+    LOG_OUT << "[SV] INF: New Login Requested" << Qt::endl;
     quint32 dwID = m_getNextFreePlayerId();
     quint16 wToken = m_generateUniqueToken();
-    //out << "serverProvideLogin " << dwID << " : " << wToken << Qt::endl;
-    PlayerProfile player;
-    player.id = dwID;
-    player.token = wToken;
-    m_playerDatabase.insert(dwID, player);
-    m_clients.insert(dwID, pNetworkObserver);
-    out << "INF: Welcome " << dwID << " to the server" << Qt::endl;
-    pNetworkObserver->m_updateLogin(dwID, wToken);
+    LOG_OUT << "[SV] serverProvideLogin " << dwID << " : " << wToken << Qt::endl;
+    PlayerProfile profile;
+    profile.identity.id = dwID;
+    profile.token = wToken;
+    m_playerDatabase.insert(dwID, profile);
+    m_clients.insert(dwID, pNWObs);
+    LOG_OUT << "[SV] INF: Welcome " << dwID << " to the server" << Qt::endl;
+    pNWObs->m_updateLogin(dwID, wToken);
 }
 
-void VoltOrbFlipServer::slot_refreshToken(NetworkObserver *pNetworkObserver)
+void VoltOrbFlipServer::slot_refreshToken(NWObs *pNWObs)
 {
-    quint32 dwID = pNetworkObserver->m_getId();
+    quint32 dwID = pNWObs->m_getId();
     quint16 wToken = m_generateUniqueToken();
-    out << "serverProvideLogin " << dwID << " : " << wToken << Qt::endl;
-    PlayerProfile player = m_playerDatabase[dwID];
-    player.token = wToken;
-    m_clients.insert(dwID, pNetworkObserver);
-    out << "INF: Welcome " << dwID << " back to the server" << Qt::endl;
-    pNetworkObserver->m_updateLogin(dwID, wToken);
+    LOG_OUT << "[SV] serverRefreshToken " << dwID << " : " << wToken << Qt::endl;
+    PlayerProfile profile = m_playerDatabase[dwID];
+    profile.token = wToken;
+    m_clients.insert(dwID, pNWObs);
+    LOG_OUT << "[SV] INF: Welcome " << dwID << " back to the server" << Qt::endl;
+    pNWObs->m_updateLogin(dwID, wToken);
 }
 
-void VoltOrbFlipServer::slot_detach(NetworkObserver *obs)
+void VoltOrbFlipServer::slot_detach(NWObs *pNWObs)
 {
-    quint32 dwID = obs->m_getId();
-    out << "INF: Goodbye " << dwID << Qt::endl;
+    quint32 dwID = pNWObs->m_getId();
+    LOG_OUT << "[SV] INF: Goodbye " << dwID << Qt::endl << Qt::endl;
     m_lobby.remove(dwID);
     m_clients.remove(dwID);
-    obs->deleteLater();
+    pNWObs->deleteLater();
 }
 
 void VoltOrbFlipServer::m_processInput(int playerId, std::string Input)
