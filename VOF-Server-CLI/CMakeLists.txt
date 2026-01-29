@@ -9,13 +9,34 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
+find_package(
+  QT NAMES Qt6 Qt5
+  REQUIRED COMPONENTS
+  Core
+  Network
+)
+
+find_package(
+  Qt${QT_VERSION_MAJOR}
+  REQUIRED COMPONENTS
+  Core
+  Network
+)
 
 add_executable(VOF-Server-CLI
-  main.cpp
+  Main.cpp
+  VoltOrbFlipServer.h
+  VoltOrbFlipServer.cpp
+  VoltOrbFlipServer.cpp VoltOrbFlipServer.h
+  VoltOrbFlipServer.h
+  PlayerProfile.h
 )
-target_link_libraries(VOF-Server-CLI Qt${QT_VERSION_MAJOR}::Core)
+target_link_libraries(
+  VOF-Server-CLI
+  PRIVATE VOF-Network
+  Qt${QT_VERSION_MAJOR}::Core
+  Qt${QT_VERSION_MAJOR}::Network
+)
 
 include(GNUInstallDirs)
 install(TARGETS VOF-Server-CLI

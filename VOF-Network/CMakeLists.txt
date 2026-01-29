@@ -5,17 +5,45 @@ project(VOF-Network LANGUAGES CXX)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
+
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
-
-add_library(VOF-Network STATIC
-  vofnetwork.cpp
-  vofnetwork.h
+find_package(
+  QT NAMES Qt6 Qt5
+  REQUIRED COMPONENTS
+  Core Network
 )
 
-target_link_libraries(VOF-Network PRIVATE Qt${QT_VERSION_MAJOR}::Core)
+find_package(
+  Qt${QT_VERSION_MAJOR}
+  REQUIRED COMPONENTS
+  Core Network
+)
 
-target_compile_definitions(VOF-Network PRIVATE VOF_NETWORK_LIBRARY)
+add_library(VOF-Network STATIC
+  NetworkObserver.cpp
+  NetworkObserver.h
+
+  IObserver.h
+
+
+  GlobalDefines.h
+  GlobalDefines.cpp
+)
+
+target_include_directories(
+  VOF-Network INTERFACE
+  ${CMAKE_CURRENT_SOURCE_DIR}
+)
+
+target_link_libraries(
+  VOF-Network PRIVATE
+  Qt${QT_VERSION_MAJOR}::Core
+  Qt${QT_VERSION_MAJOR}::Network
+)
+
+target_compile_definitions(
+  VOF-Network
+  PRIVATE VOF_NETWORK_LIBRARY
+)

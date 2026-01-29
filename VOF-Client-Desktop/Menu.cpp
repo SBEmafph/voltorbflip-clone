@@ -11,6 +11,7 @@ Menu::Menu(QWidget *parent)
     , shopWindow(new shop(this))
     , SettingsWindow(new Settings(this))
     , BrowserWindow(new Browser(this))
+    , m_client(new Client(this))
 {
     ui->setupUi(this);
 
@@ -45,6 +46,13 @@ Menu::Menu(QWidget *parent)
     connect(ui->ShopBtn, &QPushButton::clicked, this, &Menu::on_ShopBtn_clicked);
     connect(ui->SettingsBtn, &QPushButton::clicked, this, &Menu::on_SettingsBtn_clicked);
     connect(ui->PlayBtn, &QPushButton::clicked, this, &Menu::on_PlayBtn_clicked);
+    connect(ui->exitBtn, &QPushButton::clicked,
+            this, &Menu::onExitBtn_clicked);
+}
+
+void Menu::m_setPlayerConfig(quint32 ID, quint16 token, QString name, bool force)
+{
+    m_client->m_updateConfig(ID, token, name, force);
 }
 
 Menu::~Menu()
@@ -62,6 +70,8 @@ Menu::~Menu()
 void Menu::on_PlayBtn_clicked()
 {
     BrowserWindow->show();
+    m_client->slot_attach();
+    m_client->slot_joinSelectedLobby();
 }
 
 void Menu::on_BrowserConnect()
@@ -89,4 +99,18 @@ void Menu::on_ReplayBtn_clicked()
 void Menu::on_ShopBtn_clicked()
 {
     shopWindow->show();
+}
+
+void Menu::onExitBtn_clicked()
+{
+    m_client->slot_detach();
+
+    if (m_client->m_getTcpSocket()->state() == QAbstractSocket::UnconnectedState) {
+        LOG_OUT << "Socket already closed. Quitting immediately." << Qt::endl;
+        qApp->quit();
+    } else {
+        connect(m_client->m_getTcpSocket(),
+        &QTcpSocket::disconnected, qApp, &QCoreApplication::quit);
+        QTimer::singleShot(1000, qApp, &QCoreApplication::quit);
+    }
 }
