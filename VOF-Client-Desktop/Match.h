@@ -2,6 +2,10 @@
 #define MATCH_H
 
 #include <QMainWindow>
+#include <QButtonGroup>
+
+#include "CardButton.h"
+#include "GlobalDefines.h"
 
 namespace Ui {
 class Match;
@@ -16,20 +20,24 @@ public:
     ~Match();
 
 signals:
-    void backToMenu();   // BESTEHEND
+    void sig_backToMenu();
+    void sig_action(VOF::Action action, quint8 x, quint8 y);
 
 private slots:
-    void on_quitBtn_clicked();   // BESTEHEND
-
-    // >>> NEU (nach deinen Regeln)
-    void VerbOpenMemoButtons();
-    void VerbCloseMemoButtons();
+    void on_quitBtn_clicked();
+    void m_openMemoButtons();
+    void m_closeMemoButtons();
 
 private:
-    Ui::Match *ui;   // BESTEHEND
+    Ui::Match *ui;
+    QWidget *gameContainer;
+    QGridLayout *gridLayout;
+    VOF::Action currentAction = VOF::Click; // 0 = Aufdecken, 1-3 = Zahlen-Notiz, 4 = Voltorb-Notiz
+    QButtonGroup *memoGroup;
 
-    // >>> NEU
-    void VerbSetMemoButtonsVisible(bool fVisible);
+    void m_setUpMemoButtons();
+    void m_setMemoButtonsVisible(bool fVisible);
+    void handleCardClick(CardButton *btn);
 };
 
 #endif // MATCH_H

@@ -24,7 +24,7 @@ void VoltOrbFlipServer::slot_updateClientsGameState()
 void VoltOrbFlipServer::slot_onLobbyStatusUpdate(quint32 dwPlayerId, bool fIsReady)
 {
     foreach (NWObs* player, m_clients) {
-        player->onPlayerStatusChanged(dwPlayerId, fIsReady);
+        player->onPlayerReadyState(dwPlayerId, fIsReady);
     }
 }
 
@@ -60,6 +60,44 @@ quint16 VoltOrbFlipServer::m_generateUniqueToken()
         }
     }
     return newToken;
+}
+
+void VoltOrbFlipServer::m_unpackMove(quint8 * action, quint8 * x, quint8 * y, quint16 playerMove)
+{
+    *action = playerMove >> 12;
+    *y = playerMove >> 8;
+    *x = playerMove >> 4;
+    LOG_OUT << " playerMove " << playerMove
+            << " action " << action
+            << " y " << y
+            << " x " << x << Qt::endl;
+}
+
+void VoltOrbFlipServer::revealTile(quint8 &x, quint8 &y, PlayerSessionState &playerState)
+{
+    //calculate tile
+    quint8 pos = ((y * VOF::COLUMN_LENGTH) + x);
+    playerState.fRevealed[pos] = true;
+}
+
+quint8 VoltOrbFlipServer::calculatePoints(quint8 &x, quint8 &y, PlayerSessionState &playerState)
+{
+    quint8 res = 0;
+    quint8 pos = ((y * VOF::COLUMN_LENGTH) + x);
+    quint8 tileValue = playerState.bBoard[pos];
+    if(tileValue != VOF::Tile::Bomb)
+    {
+        if(playerState.bCurrentScore != 0){
+            res *= playerState.bCurrentScore * tileValue;
+        }
+        else{
+            res  = tileValue;
+        }
+    }
+    else{
+        LOG_OUT << "bomb" << Qt::endl;
+    }
+    return res;
 }
 
 void VoltOrbFlipServer::m_startServer(quint16 port)
@@ -104,6 +142,8 @@ void VoltOrbFlipServer::slot_attach()
             this, &VoltOrbFlipServer::slot_assignLobby);
     connect(player, &NWObs::sig_quit,
             this, &VoltOrbFlipServer::slot_detach);
+    connect(player, &NWObs::sig_playerMove,
+            this, &VoltOrbFlipServer::m_processInput);
 
     connect(this, &VoltOrbFlipServer::sig_loginSuccessful,
             player, &NWObs::slot_loginSuccessful);
@@ -216,9 +256,16 @@ void VoltOrbFlipServer::slot_detach(NWObs *pNWObs)
     pNWObs->deleteLater();
 }
 
-void VoltOrbFlipServer::m_processInput(int playerId, std::string Input)
+void VoltOrbFlipServer::m_processInput(NWObs* pNWObs, quint16 playerMove)
 {
-
+    quint8 action;
+    quint8 x;
+    quint8 y;
+    m_unpackMove(&action, &x, &y, playerMove);
+    if(action == VOF::Action::Click){
+        PlayerSessionState playerState = m_tGamestate.tPlayerList[pNWObs->m_getSlotId()] ;
+        revealTile(x, y, playerState);
+    }
 }
 
 bool VoltOrbFlipServer::m_verifyInput(std::string input)

@@ -23,7 +23,7 @@ void NWObs::updateFullState(const GameState &state)
     QByteArray data = m_prepareDataForPlayer(state);
 }
 
-void NWObs::onPlayerStatusChanged(quint32 dwPlayerId, bool fIsReady)
+void NWObs::onPlayerReadyState(quint32 dwPlayerId, bool fIsReady)
 {
 
 }
@@ -105,6 +105,11 @@ void NWObs::slot_onReadyRead()
         else
             emit sig_identificationReceived(this, id, token);
         break;
+    case VOF::Command::PlayerMove:
+        quint8 packedMove;
+        m_in >> packedMove;
+        LOG_OUT << "[NW] PlayerMove " << packedMove << Qt::endl;
+        emit sig_playerMove(this, packedMove);
     case VOF::Command::Quit:
         //out << "nwobs quit";
         emit sig_quit(this);

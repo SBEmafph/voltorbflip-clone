@@ -27,28 +27,34 @@ Menu::Menu(QWidget *parent)
     connect(BrowserWindow, &Browser::connectRequested,
             this, &Menu::on_BrowserConnect);
 
-    // Lobby → zurück zum Menu
-    connect(lobby, &Lobby::backToMenu, this, [this]() {
-        this->show();
-    });
-
     // Lobby → Match
     connect(lobby, &Lobby::startMatch, this, [this]() {
         lobby->hide();
         matchWindow->show();
     });
 
-    // Match Form
-    connect(matchWindow, &Match::backToMenu, this, [this]() {
-        this->show();
-    });
+    // Lobby → zurück zum Menu
+    connect(lobby, &Lobby::backToMenu,
+            this, &Menu::on_backToMenu);
 
-    connect(ui->ReplayBtn, &QPushButton::clicked, this, &Menu::on_ReplayBtn_clicked);
-    connect(ui->ShopBtn, &QPushButton::clicked, this, &Menu::on_ShopBtn_clicked);
-    connect(ui->SettingsBtn, &QPushButton::clicked, this, &Menu::on_SettingsBtn_clicked);
-    connect(ui->PlayBtn, &QPushButton::clicked, this, &Menu::on_PlayBtn_clicked);
-    //connect(ui->exitBtn, &QPushButton::clicked,
-    //        this, &Menu::onExitBtn_clicked);
+
+    // Match Form
+    connect(matchWindow, &Match::sig_backToMenu,
+            this, &Menu::on_backToMenu);
+
+    connect(matchWindow, &Match::sig_action,
+            m_client, &Client::slot_sendMatchAction);
+
+    connect(ui->ReplayBtn, &QPushButton::clicked,
+            this, &Menu::on_ReplayBtn_clicked);
+    connect(ui->ShopBtn, &QPushButton::clicked,
+            this, &Menu::on_ShopBtn_clicked);
+    connect(ui->SettingsBtn, &QPushButton::clicked,
+            this, &Menu::on_SettingsBtn_clicked);
+    connect(ui->PlayBtn, &QPushButton::clicked,
+            this, &Menu::on_PlayBtn_clicked);
+    connect(ui->ExitBtn, &QPushButton::clicked,
+            this, &Menu::onExitBtn_clicked);
 }
 
 void Menu::m_setPlayerConfig(quint32 ID, quint16 token, QString name, bool force)
@@ -71,15 +77,25 @@ Menu::~Menu()
 void Menu::on_PlayBtn_clicked()
 {
     BrowserWindow->show();
-    m_client->slot_attach();
-    m_client->slot_joinSelectedLobby();
 }
 
 void Menu::on_BrowserConnect()
 {
+    m_client->slot_attach();
     BrowserWindow->hide();
     this->hide();
     lobby->show();
+}
+
+void Menu::on_backToMenu()
+{
+    m_client->slot_detach();
+    this->show();
+}
+
+void Menu::on_matchAction(VOF::Action action, quint8 x, quint8 y)
+{
+    m_client->slot_sendMatchAction(action, x, y);
 }
 
 void Menu::on_RulesBtn_clicked()
@@ -102,7 +118,7 @@ void Menu::on_ShopBtn_clicked()
     shopWindow->show();
 }
 
-/*
+
 void Menu::onExitBtn_clicked()
 {
     m_client->slot_detach();
@@ -116,4 +132,4 @@ void Menu::onExitBtn_clicked()
         QTimer::singleShot(1000, qApp, &QCoreApplication::quit);
     }
 }
-*/
+

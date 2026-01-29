@@ -15,9 +15,6 @@ Client::Client(QObject *parent)
     m_out.setDevice(m_tcpSocket);
     m_out.setVersion(QDataStream::Qt_6_5);
 
-    connect(this, &Client::sig_matchAction,
-            this, &Client::slot_sendMatchAction);
-
     connect(this, &Client::sig_connected,
             this, &Client::slot_joinSelectedLobby);
 }
@@ -227,7 +224,9 @@ void Client::m_updateConfig(quint32 dwIDIn, quint16 wtokenIN, QString szNameIn, 
 
 void Client::slot_sendMatchAction(VOF::Action action, quint8 x, quint8 y)
 {
+    LOG_OUT << action << " x: " << x << " y: " << y << Qt::endl;
     quint16 packedMove = m_packMove(action, x, y);
+    LOG_OUT << packedMove << Qt::endl;
     m_out << VOF::Command::PlayerMove;
     m_out << packedMove;
     m_tcpSocket->flush();

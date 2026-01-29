@@ -46,6 +46,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         Browser.h Browser.cpp Browser.ui
         Settings.h Settings.cpp Settings.ui
         resources.qrc
+        CardButton.h
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET VOF-Client-Desktop APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

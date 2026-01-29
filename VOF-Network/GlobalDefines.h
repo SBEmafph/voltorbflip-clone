@@ -65,6 +65,8 @@ struct MatchReplay {
 
 namespace VOF {
 static const quint8 MAX_CLIENTS = 8;
+static const quint8 ROW_LENGTH = 5;
+static const quint8 COLUMN_LENGTH = 5;
 static const quint16 DEFAULT_PORT = 16000;
 
 enum Action : quint8{
@@ -74,6 +76,13 @@ enum Action : quint8{
     Note3 = 3,
     NoteBomb = 4,
     Lense = 5
+};
+
+enum Tile : quint8{
+    One = 1,
+    Two = 2,
+    Three = 3,
+    Bomb = 4
 };
 
 enum Command : qint8 {
