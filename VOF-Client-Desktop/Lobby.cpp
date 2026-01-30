@@ -61,6 +61,16 @@ void Lobby::on_StartBtn_clicked()
     matchTimer->start();
 }
 
+void Lobby::on_StartBtn_clicked()
+{
+    if (matchTimer->isActive())
+        return;
+
+    secondsLeft = 0;
+    ui->timerLabel->setText("Game starts in " + QString::number(secondsLeft) + "s");
+    matchTimer->start();
+}
+
 void Lobby::on_quitBtn_clicked()
 {
     matchTimer->stop();
