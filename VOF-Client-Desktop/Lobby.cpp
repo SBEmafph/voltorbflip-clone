@@ -9,24 +9,11 @@ Lobby::Lobby(QWidget *parent)
     , secondsLeft(10)
 {
     ui->setupUi(this);
-
-    // Connect the timeout to decrease secondsLeft
-    // matchTimer->setInterval(1000); // 1 second
-    // connect(matchTimer, &QTimer::timeout, this, [this]() {
-    //     secondsLeft--;
-    //     ui->timerLabel->setText("Game starts in " + QString::number(secondsLeft) + "s");
-    //     if (secondsLeft <= 0) {
-    //         matchTimer->stop();
-    //         onMatchTimeout();  // reuse your existing function
-    //     }
-    // });
-
     this->setFixedSize(this->size()); //Fenstergröße anpassen blockieren
     matchTimer->setInterval(1000);
     connect(matchTimer, &QTimer::timeout, this, [this]() {
         secondsLeft--;
         ui->timerLabel->setText("Game starts in " + QString::number(secondsLeft) + "s");
-
         if (secondsLeft <= 0) {
             matchTimer->stop();
             onMatchTimeout();
@@ -49,16 +36,6 @@ void Lobby::showEvent(QShowEvent *event)
 Lobby::~Lobby()
 {
     delete ui;
-}
-
-void Lobby::on_StartBtn_clicked()
-{
-    if (matchTimer->isActive())
-        return;
-
-    secondsLeft = 0;
-    ui->timerLabel->setText("Game starts in " + QString::number(secondsLeft) + "s");
-    matchTimer->start();
 }
 
 void Lobby::on_StartBtn_clicked()

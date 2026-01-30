@@ -133,3 +133,16 @@ void Match::handleCardClick(CardButton *btn) {
     }
     emit sig_action(currentAction, btn->r, btn->c);
 }
+
+void Match::handleCardClick(CardButton *btn) {
+    if (currentMemoType == 0) {
+        // Karte normal umdrehen (Logik für Punkte/Game Over)
+        btn->setText("2"); // Beispielwert
+        btn->setStyleSheet("background-color: #4CAF50; color: black;");
+        for(int i=1; i<=4; i++) btn->toggleMemo(i); // Hack: Toggle twice logic needed?
+    }
+    else {
+        // Nur eine Notiz anheften/entfernen
+        btn->toggleMemo(currentMemoType);
+    }
+}

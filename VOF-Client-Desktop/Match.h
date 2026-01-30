@@ -6,6 +6,7 @@
 
 #include "CardButton.h"
 #include "GlobalDefines.h"
+#include "CardButton.h"
 
 namespace Ui {
 class Match;
@@ -27,6 +28,7 @@ private slots:
     void on_quitBtn_clicked();
     void m_openMemoButtons();
     void m_closeMemoButtons();
+    void backToMenu();
 
 private:
     Ui::Match *ui;
@@ -37,6 +39,8 @@ private:
 
     void m_setUpMemoButtons();
     void m_setMemoButtonsVisible(bool fVisible);
+
+    int currentMemoType = 0; // 0 = Aufdecken, 1-3 = Zahlen-Notiz, 4 = Voltorb-Notiz
     void handleCardClick(CardButton *btn);
 };
 

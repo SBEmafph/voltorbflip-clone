@@ -37,7 +37,6 @@ Menu::Menu(QWidget *parent)
     connect(lobby, &Lobby::backToMenu,
             this, &Menu::on_backToMenu);
 
-
     // Match Form
     connect(matchWindow, &Match::sig_backToMenu,
             this, &Menu::on_backToMenu);
@@ -54,7 +53,7 @@ Menu::Menu(QWidget *parent)
     connect(ui->PlayBtn, &QPushButton::clicked,
             this, &Menu::on_PlayBtn_clicked);
     connect(ui->ExitBtn, &QPushButton::clicked,
-            this, &Menu::onExitBtn_clicked);
+            this, &Menu::onExitBtn_clicked);   
 }
 
 void Menu::m_setPlayerConfig(quint32 ID, quint16 token, QString name, bool force)
@@ -117,7 +116,6 @@ void Menu::on_ShopBtn_clicked()
 {
     shopWindow->show();
 }
-
 
 void Menu::onExitBtn_clicked()
 {
