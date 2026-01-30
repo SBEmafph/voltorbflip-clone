@@ -7,65 +7,89 @@ QTextStream err(stderr);
 
 GameLogic::GameLogic() {}
 
-// ===== interne Helfer =====
-void GameLogic::PlaceExactValue(Field& Field5x5, QChar Value, int Count)
+// ===== Placing and initializing tile values =====
+void GameLogic::PlaceExactValue(Field& Field5x5, quint8 Value, int Count)
 {
     Q_ASSERT(Count <= 25);
+
     int Placed = 0;
     while (Placed < Count)
     {
-        int Row = QRandomGenerator::global()->bounded(5);
-        int Col = QRandomGenerator::global()->bounded(5);
+        int Index = QRandomGenerator::global()->bounded(25);
+        if (Field5x5[Index] != VOF::TILE_MINE && Field5x5[Index] != 0)
+            continue;
 
-        if (Field5x5[Row][Col] == '\0')
+        if (Field5x5[Index] == VOF::TILE_MINE)
         {
-            Field5x5[Row][Col] = Value;
+            Field5x5[Index] = Value;
+            ++Placed;
+        }
+        else if(Field5x5[Index] == 0)
+        {
+            Field5x5[Index] = Value;
             ++Placed;
         }
     }
 }
 
-void GameLogic::FillRemainingWithValue(Field& Field5x5, QChar Value)
+void GameLogic::FillRemainingWithValue(Field& Field5x5, quint8 Value)
 {
-    for (int Row = 0; Row < 5; ++Row)
+    for (int i = 0; i < 25; ++i)
     {
-        for (int Col = 0; Col < 5; ++Col)
-        {
-            if (Field5x5[Row][Col] == '\0')
-            {
-                Field5x5[Row][Col] = Value;
-            }
-        }
+        if (Field5x5[i] == 0)
+            Field5x5[i] = Value;
     }
 }
 
-// ===== Feld generieren abhängig vom Level =====
+// ===== Generate field depending on level =====
 Field GameLogic::GenerateField5x5_Level(quint8 bLevel)
 {
-    Field Field5x5(5, QVector<QChar>(5, '\0'));
+    Field Field5x5(25, VOF::TILE_MIN_VALUE);
 
-    const int MineCount = 4 + bLevel; // Level1=5, L2=6, L3=7
+    const int MineCount = 4 + bLevel; // Level1=5, Level2=6, Level3=7
 
-    int TwoCount = 0;
-    int ThreeCount = 0;
-
-    switch(bLevel)
+    // Place Mines
+    int placed = 0;
+    while(placed < MineCount)
     {
-    case 1: TwoCount = 2; ThreeCount = 1; break;
-    case 2: TwoCount = 3; ThreeCount = 1; break;
-    case 3: TwoCount = 3; ThreeCount = 2; break;
-    default: TwoCount = 2; ThreeCount = 1; break;
+        int idx = QRandomGenerator::global()->bounded(25);
+        if(Field5x5[idx] != VOF::TILE_MINE)
+        {
+            Field5x5[idx] = VOF::TILE_MINE;
+            placed++;
+        }
     }
 
-    PlaceExactValue(Field5x5, 'X', MineCount);
-    PlaceExactValue(Field5x5, '2', TwoCount);
-    PlaceExactValue(Field5x5, '3', ThreeCount);
-    FillRemainingWithValue(Field5x5, '1');
+    // Place 2 and 3 values
+    int twoCount = (bLevel == 1) ? 2 : 3;
+    int threeCount = (bLevel == 3) ? 2 : 1;
+
+    placed = 0;
+    while(placed < twoCount)
+    {
+        int idx = QRandomGenerator::global()->bounded(25);
+        if(Field5x5[idx] == VOF::TILE_MIN_VALUE)
+        {
+            Field5x5[idx] = 2;
+            placed++;
+        }
+    }
+
+    placed = 0;
+    while(placed < threeCount)
+    {
+        int idx = QRandomGenerator::global()->bounded(25);
+        if(Field5x5[idx] == VOF::TILE_MIN_VALUE)
+        {
+            Field5x5[idx] = 3;
+            placed++;
+        }
+    }
 
     return Field5x5;
 }
 
-// ===== Summen & Minen zählen =====
+// ===== Calculate sums and mine counts =====
 void GameLogic::CalculateSumsAndMines(const Field& Field5x5,
                                       QVector<quint8>& RowSums,
                                       QVector<quint8>& ColSums,
@@ -77,7 +101,7 @@ void GameLogic::CalculateSumsAndMines(const Field& Field5x5,
     RowMines.resize(5);
     ColMines.resize(5);
 
-    for (int i = 0; i < 5; ++i)
+    for(int i=0;i<5;i++)
     {
         RowSums[i] = 0;
         ColSums[i] = 0;
@@ -85,93 +109,96 @@ void GameLogic::CalculateSumsAndMines(const Field& Field5x5,
         ColMines[i] = 0;
     }
 
-    for (int row = 0; row < 5; ++row)
+    for(int row=0; row<5; row++)
     {
-        for (int col = 0; col < 5; ++col)
+        for(int col=0; col<5; col++)
         {
-            QChar c = Field5x5[row][col];
-            quint8 val = (c == 'X') ? 0 : c.digitValue();
+            int idx = row*5 + col;
+            quint8 val = Field5x5[idx];
 
-            RowSums[row] += val;
-            ColSums[col] += val;
-
-            if (c == 'X')
+            if(val == VOF::TILE_MINE)
             {
                 RowMines[row]++;
                 ColMines[col]++;
+            }
+            else
+            {
+                RowSums[row] += val;
+                ColSums[col] += val;
             }
         }
     }
 }
 
-// ===== Feld ausgeben =====
-void GameLogic::PrintField(const Field& Field5x5, const bool fRevealed[5][5])
+// ===== Print field =====
+void GameLogic::PrintField(const Field& Field5x5, const bool fRevealed[25])
 {
-    for (int row = 0; row < 5; ++row)
+    for(int row=0; row<5; row++)
     {
-        for (int col = 0; col < 5; ++col)
+        for(int col=0; col<5; col++)
         {
-            if (fRevealed && !fRevealed[row][col])
+            int idx = row*5 + col;
+            if(fRevealed && !fRevealed[idx])
                 out << "* ";
             else
-                out << Field5x5[row][col] << " ";
+                out << (Field5x5[idx] == VOF::TILE_MINE ? "X" : QString::number(Field5x5[idx])) << " ";
         }
         out << "\n";
     }
     out << "\n";
 }
 
-// ===== Level abgeschlossen prüfen =====
-bool GameLogic::IsLevelCompleted(const Field& field, const bool fRevealed[5][5])
+// ===== Check if level is completed =====
+bool GameLogic::IsLevelCompleted(const Field& field, const bool fRevealed[25])
 {
-    for (int row = 0; row < 5; ++row)
+    for(int row=0; row<5; row++)
     {
-        for (int col = 0; col < 5; ++col)
+        for(int col=0; col<5; col++)
         {
-            QChar c = field[row][col];
-            if ((c == '2' || c == '3') && !fRevealed[row][col])
+            int idx = row*5 + col;
+            quint8 val = field[idx];
+            if((val==2 || val==3) && !fRevealed[idx])
                 return false;
         }
     }
     return true;
 }
 
-// ===== Feld aufdecken + Score + Level-Logik =====
-void GameLogic::RevealTileWithScore(Field& field, bool fRevealed[5][5],
-                                    int row, int col,
-                                    quint8& bCurrentScore,
-                                    quint8& bLevel)
+// ===== Reveal tile, update score and level =====
+void GameLogic::RevealTileWithScore(Field& field, bool fRevealed[25], int row, int col, quint8& bCurrentScore, quint8& bLevel)
 {
-    if (fRevealed[row][col]) return;
+    int idx = row*5 + col;
 
-    fRevealed[row][col] = true;
-    QChar c = field[row][col];
+    if(fRevealed[idx]) return;
 
-    if (c == 'X')
+    fRevealed[idx] = true;
+
+    quint8 value = field[idx];
+
+    if(value == VOF::TILE_MINE)
     {
-        if (bLevel > 1) bLevel--;
         bCurrentScore = 0;
+        if(bLevel>1) bLevel--;
         return;
     }
 
-    quint8 value = static_cast<quint8>(c.digitValue());
-    if (bCurrentScore == 0)
+    if(bCurrentScore == 0)
         bCurrentScore = value;
     else
         bCurrentScore *= value;
 
-    // Prüfen, ob alle 2er/3er aufgedeckt → Level up
-    if (IsLevelCompleted(field, fRevealed))
+    if(IsLevelCompleted(field, fRevealed))
     {
-        if (bLevel < 3) bLevel++;
+        if(bLevel < 3) bLevel++;
         bCurrentScore = 0;
     }
 }
 
-// ===== Level beenden =====
+// ===== Finish level =====
 void GameLogic::NextLevel(quint8& bCurrentScore, quint8& bTotalScore, quint8& bLevel)
 {
     bTotalScore += bCurrentScore;
     bCurrentScore = 0;
-    if (bLevel < 3) bLevel++;
+
+    if(bLevel < 3) bLevel++;
 }
