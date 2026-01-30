@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QList>
 #include <QString>
+#include <QTimer>
 
 #include "GlobalDefines.h"
 #include "NetworkObserver.h"
@@ -31,7 +32,6 @@ public:
     void m_processInput(NWObs* pNWObs, quint16 playerMove);
     bool m_verifyInput(std::string input);
     void m_applyMove(std::string input);
-
     void m_startMatch();
     void m_generateBoard(PlayerSessionState& player);
     Field m_convertBoardToField(const PlayerSessionState& player);
@@ -62,6 +62,8 @@ private:
     void m_logMove(quint32 playerId, std::string input, int result, bool gameOver);
     void m_unpackMove(quint8 &action, quint8 &x, quint8 &y, quint16 playerMove);
     void m_revealTile(quint8 &x, quint8 &y, PlayerSessionState &playerState);
+    void m_checkWinCondition();
+    void m_handlePlayerWin(quint8 bWinnerSlot);
     quint8 m_calculatePoints(quint8 &x, quint8 &y, PlayerSessionState &playerState);
 };
 

@@ -280,6 +280,7 @@ void VoltOrbFlipServer::m_applyMove(std::string input)
     m_convertFieldToBoard(player, field);
 
     slot_updateClientsGameState();
+    m_checkWinCondition();
 }
 
 // ===== Conversions =====
@@ -304,11 +305,12 @@ void VoltOrbFlipServer::m_generateBoard(PlayerSessionState& player)
 
     for(int i = 0; i < 25; ++i)
     {
-        player.bBoard[i] = field[i]; // direkter Wert
+        player.bBoard[i] = field[i];
         player.fRevealed[i] = false;
     }
 
     player.bCurrentScore = 0;
+    m_checkWinCondition();
 }
 
 // ===== Start match =====
@@ -324,4 +326,50 @@ void VoltOrbFlipServer::m_startMatch()
     }
 
     slot_updateClientsGameState();
+}
+
+
+void VoltOrbFlipServer::m_checkWinCondition()
+{
+    for(auto it = m_tGamestate.tPlayerList.begin(); it != m_tGamestate.tPlayerList.end(); ++it)
+    {
+        quint8 slot = it.key();
+        PlayerSessionState& player = it.value();
+
+        if(player.bTotalScore >= 100)
+        {
+            m_handlePlayerWin(slot);
+            return;
+        }
+    }
+}
+
+void VoltOrbFlipServer::m_handlePlayerWin(quint8 bWinnerSlot)
+{
+    LOG_OUT << "[SV] Player on Slot " << bWinnerSlot << " wins the match!" << Qt::endl;
+
+    m_tGamestate.fIsGameRunning = false;
+    slot_updateClientsGameState();
+
+    // After Player won, return all Players back to menu
+    QTimer::singleShot(10000, this, [this]()
+    {
+        LOG_OUT << "[SV] Returning all players to menu..." << Qt::endl;
+
+        for(auto& player : m_tGamestate.tPlayerList)
+        {
+            player.bLevel = 1;
+            player.bTotalScore = 0;
+            player.bCurrentScore = 0;
+
+            for(int i = 0; i < 25; ++i)
+            {
+                player.fRevealed[i] = false;
+                player.bBoard[i] = 0;
+            }
+        }
+
+        m_tGamestate.fIsGameRunning = false;
+        slot_updateClientsGameState();
+    });
 }
