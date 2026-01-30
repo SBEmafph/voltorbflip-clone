@@ -50,3 +50,19 @@ void Match::VerbSetMemoButtonsVisible(bool fVisible)
     ui->Memo3Btn->setVisible(fVisible);
     ui->MemoOrbBtn->setVisible(fVisible);
 }
+
+void Match::handleCardClick(CardButton *btn) {
+    if (currentAction == VOF::Click) {
+        // Karte normal umdrehen (Logik für Punkte/Game Over)
+        btn->setText("2"); // Beispielwert
+        btn->setStyleSheet("background-color: #4CAF50; color: black;");
+        btn->setEnabled(false);
+        for(int i=1; i<=4; i++) btn->toggleMemo(i); // Hack: Toggle twice logic needed?
+    }
+    else {
+        // Nur eine Notiz anheften/entfernen
+        btn->toggleMemo(currentAction);
+    }
+    emit sig_action(currentAction, btn->r, btn->c);
+}
+

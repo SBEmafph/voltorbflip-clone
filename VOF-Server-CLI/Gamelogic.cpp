@@ -1,7 +1,6 @@
 #include "GameLogic.h"
 #include <QRandomGenerator>
 #include <QTextStream>
-#include <iostream>
 
 QTextStream out(stdout);
 QTextStream err(stderr);

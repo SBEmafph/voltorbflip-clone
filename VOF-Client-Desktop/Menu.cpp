@@ -40,10 +40,16 @@ Menu::Menu(QWidget *parent)
         matchWindow->show();
     });
 
-    // Zurück von Match
-    connect(matchWindow, &Match::backToMenu, this, [this]() {
-        this->show();
-    });
+    // Lobby → zurück zum Menu
+    connect(lobby, &Lobby::backToMenu,
+            this, &Menu::on_backToMenu);
+
+    // Match Form
+    connect(matchWindow, &Match::sig_backToMenu,
+            this, &Menu::on_backToMenu);
+
+    connect(matchWindow, &Match::sig_action,
+            m_client, &Client::slot_sendMatchAction);
 
     connect(ui->ReplayBtn, &QPushButton::clicked,
             this, &Menu::on_ReplayBtn_clicked);
@@ -53,7 +59,7 @@ Menu::Menu(QWidget *parent)
             this, &Menu::on_SettingsBtn_clicked);
     connect(ui->PlayBtn, &QPushButton::clicked,
             this, &Menu::on_PlayBtn_clicked);
-    connect(ui->exitBtn, &QPushButton::clicked,
+    connect(ui->ExitBtn, &QPushButton::clicked,
             this, &Menu::onExitBtn_clicked);
 }
 

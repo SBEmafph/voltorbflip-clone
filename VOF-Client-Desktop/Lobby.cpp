@@ -9,19 +9,17 @@ Lobby::Lobby(QWidget *parent)
     , secondsLeft(10)
 {
     ui->setupUi(this);
+    this->setFixedSize(this->size()); //Fenstergröße anpassen blockieren
+    matchTimer->setInterval(1000);
+    connect(matchTimer, &QTimer::timeout, this, [this]() {
+        secondsLeft--;
+        ui->timerLabel->setText("Game starts in " + QString::number(secondsLeft) + "s");
+        if (secondsLeft <= 0) {
+            matchTimer->stop();
+            onMatchTimeout();
+        }
+    });
 
-    // Connect the timeout to decrease secondsLeft
-    // matchTimer->setInterval(1000); // 1 second
-    // connect(matchTimer, &QTimer::timeout, this, [this]() {
-    //     secondsLeft--;
-    //     ui->timerLabel->setText("Game starts in " + QString::number(secondsLeft) + "s");
-    //     if (secondsLeft <= 0) {
-    //         matchTimer->stop();
-    //         onMatchTimeout();  // reuse your existing function
-    //     }
-    // });
-
-     this->setFixedSize(this->size()); //Fenstergröße anpassen blockieren
     // Replay-Button explizit verbinden (falls Auto-Connect nicht greift)
     connect(ui->ReplayBtn, &QPushButton::clicked,
             this, &Lobby::on_ReplayBtn_clicked);
