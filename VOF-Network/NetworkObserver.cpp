@@ -66,6 +66,10 @@ void NWObs::m_reconnect(QTcpSocket *SocketIn)
 
     m_in.setDevice(m_pTcpSocket);
     m_out.setDevice(m_pTcpSocket);
+    /*
+     *     connect(m_socket, &QTcpSocket::readyRead,
+            this, &NetworkObserver::m_onReadyRead);
+     */
 }
 
 void NWObs::slot_onReadyRead()

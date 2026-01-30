@@ -26,8 +26,6 @@ add_library(VOF-Network STATIC
   NetworkObserver.h
 
   IObserver.h
-
-
   GlobalDefines.h
   GlobalDefines.cpp
 )

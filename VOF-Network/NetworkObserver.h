@@ -9,7 +9,6 @@ QT_BEGIN_NAMESPACE
 class QTcpSocket;
 QT_END_NAMESPACE
 
-
 class NWObs :  public QObject, public IObserver
 {
     Q_OBJECT
@@ -56,6 +55,7 @@ private:
     QDataStream m_in;
     QDataStream m_out;
     QTcpSocket* m_pTcpSocket = nullptr;
+
     QByteArray m_prepareDataForPlayer(const GameState &);
 };
 

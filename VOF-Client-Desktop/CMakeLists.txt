@@ -34,7 +34,6 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(VOF-Client-Desktop
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
-
         Client.h Client.cpp
         Config.h Config.cpp
         Menu.ui Menu.h Menu.cpp
