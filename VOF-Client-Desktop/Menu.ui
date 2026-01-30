@@ -301,6 +301,56 @@ QPushButton#SettingsBtn:hover {
      </size>
     </property>
    </widget>
+   <widget class="QPushButton" name="exitBtn">
+    <property name="geometry">
+     <rect>
+      <x>770</x>
+      <y>550</y>
+      <width>231</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Consolas</family>
+      <pointsize>18</pointsize>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton#ShopBtn {
+    border-radius: 10px;
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#ShopBtn:hover {
+    background-color: #3cb079;
+}</string>
+    </property>
+    <property name="text">
+     <string>Exit</string>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>20</width>
+      <height>20</height>
+     </size>
+    </property>
+    <property name="checkable">
+     <bool>false</bool>
+    </property>
+    <property name="checked">
+     <bool>false</bool>
+    </property>
+    <property name="default">
+     <bool>false</bool>
+    </property>
+    <property name="flat">
+     <bool>false</bool>
+    </property>
+   </widget>
    <zorder>ShopBtn</zorder>
    <zorder>RulesBtn</zorder>
    <zorder>PlayBtn</zorder>
@@ -309,6 +359,7 @@ QPushButton#SettingsBtn:hover {
    <zorder>label_2</zorder>
    <zorder>SettingsBtn</zorder>
    <zorder>Titel</zorder>
+   <zorder>exitBtn</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

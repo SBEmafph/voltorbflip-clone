@@ -14,7 +14,7 @@
 QT_BEGIN_NAMESPACE
 namespace Ui
 {
-    class Menu;
+class Menu;
 }
 QT_END_NAMESPACE
 
@@ -25,7 +25,7 @@ class Menu : public QMainWindow
 public:
     explicit Menu(QWidget *parent = nullptr);
     ~Menu();
-    void m_setPlayerConfig(quint32 ID, quint16 Token, QString profile, bool Force);
+    void m_setPlayerConfig(quint32 ID = 0, quint16 token = 0, QString name = 0, bool force = false);
 
 private slots:
     void on_PlayBtn_clicked();
@@ -33,7 +33,7 @@ private slots:
     void on_ReplayBtn_clicked();
     void on_ShopBtn_clicked();
     void on_SettingsBtn_clicked();
-
+    void onExitBtn_clicked();
     void on_BrowserConnect();
 
 private:
@@ -48,5 +48,7 @@ private:
     Browser *BrowserWindow;
     Client *m_client;
 };
+
+
 
 #endif // MENU_H
