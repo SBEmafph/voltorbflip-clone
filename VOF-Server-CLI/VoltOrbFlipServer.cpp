@@ -4,8 +4,6 @@
 
 #include "VoltOrbFlipServer.h"
 
-
-
 VoltOrbFlipServer::VoltOrbFlipServer(QObject *parent)
     : m_pTcpServer (new QTcpServer(this) )
 {
@@ -23,7 +21,7 @@ void VoltOrbFlipServer::slot_updateClientsGameState()
 void VoltOrbFlipServer::slot_onLobbyStatusUpdate(quint32 dwPlayerId, bool fIsReady)
 {
     foreach (NWObs* player, m_clients) {
-        player->onPlayerStatusChanged(dwPlayerId, fIsReady);
+        player->onPlayerReadyState(dwPlayerId, fIsReady);
     }
 }
 
@@ -61,17 +59,54 @@ quint16 VoltOrbFlipServer::m_generateUniqueToken()
     return newToken;
 }
 
+void VoltOrbFlipServer::m_unpackMove(quint8 &action, quint8 &x, quint8 &y, quint16 playerMove)
+{
+    action = ((playerMove & 0x0F00) >> 8);
+    x = ((playerMove & 0x00F0) >> 4);
+    y = (playerMove & 0x000F);
+    LOG_OUT << " playerMove " << playerMove
+            << " action " << action
+            << " x " << x
+            << " y " << y << Qt::endl;
+}
+
+void VoltOrbFlipServer::m_revealTile(quint8 &x, quint8 &y, PlayerSessionState &playerState)
+{
+    quint8 pos = ((y * VOF::COLUMN_LENGTH) + x);
+    playerState.fRevealed[pos] = true;
+}
+
+quint8 VoltOrbFlipServer::m_calculatePoints(quint8 &x, quint8 &y, PlayerSessionState &playerState)
+{
+    quint8 res = 0;
+    quint8 pos = ((y * VOF::COLUMN_LENGTH) + x);
+    quint8 tileValue = playerState.bBoard[pos];
+    if(tileValue != VOF::Tile::Bomb)
+    {
+        if(playerState.bCurrentScore != 0){
+            res *= playerState.bCurrentScore * tileValue;
+        }
+        else{
+            res  = tileValue;
+        }
+    }
+    else{
+        LOG_OUT << "bomb" << Qt::endl;
+    }
+    return res;
+}
+
 void VoltOrbFlipServer::m_startServer(quint16 port)
 {
     QHostAddress ipAddress;
     const QList<QHostAddress> ipAddressesList = QNetworkInterface::allAddresses();
-    // for (const QHostAddress &entry : ipAddressesList) {
-    //     if (entry != QHostAddress::LocalHost && entry.toIPv4Address()) {
-    //         ipAddress = entry;
-    //         break;
-    //     }
-    // }
-    // if we did not find one, use IPv4 localhost
+    for (const QHostAddress &entry : ipAddressesList) {
+        if (entry != QHostAddress::LocalHost && entry.toIPv4Address()) {
+            //ipAddress = entry;
+            break;
+        }
+    }
+    //if we did not find one, use IPv4 localhost
     if (ipAddress.isNull()){
         ipAddress = QHostAddress::LocalHost;
     }
@@ -103,10 +138,11 @@ void VoltOrbFlipServer::slot_attach()
             this, &VoltOrbFlipServer::slot_assignLobby);
     connect(player, &NWObs::sig_quit,
             this, &VoltOrbFlipServer::slot_detach);
+    connect(player, &NWObs::sig_playerMove,
+            this, &VoltOrbFlipServer::m_processInput);
 
     connect(this, &VoltOrbFlipServer::sig_loginSuccessful,
             player, &NWObs::slot_loginSuccessful);
-
 }
 
 void VoltOrbFlipServer::slot_assignLobby(NWObs* pNWObs, quint8 lobbyIDin)
@@ -131,10 +167,6 @@ void VoltOrbFlipServer::slot_processHandshake(NWObs* pNWObs, quint32 idIn, quint
     LOG_OUT << "[SV] INF: Handshake with " << idIn
         << " on " << tokenIn << Qt::endl;
 
-    //NWObs* pNWObs = qobject_cast<NWObs*>(sender());
-    //connect(pNWObs->m_getSocket(), &QAbstractSocket::disconnected,
-    //        pNWObs, &QObject::deleteLater);
-
     if(m_playerDatabase.contains(idIn)){ //known ID
         LOG_OUT << "[SV] known ID : " << idIn << Qt::endl;
         if(!m_clients.contains(idIn)){ //currently not connected
@@ -150,20 +182,6 @@ void VoltOrbFlipServer::slot_processHandshake(NWObs* pNWObs, quint32 idIn, quint
                 slot_refreshToken(pNWObs);
                 return;
             }
-            /* NWObs* existingPlayer = m_clients[idIn];
-            // if(existingPlayer->m_getToken() == tokenIn) //correct token -> recomnnect
-            // {
-            //     out << "INF: Welcome back " << idIn << Qt::endl;
-            //     existingPlayer->m_setSocket(pNWObs->m_getSocket()); //implied connection issue
-            //     pNWObs->deleteLater();
-            //     return;
-            // }
-            // else{ //incorrect token -> impostor among us
-            //     err << "ERR: Wrong token for slot " << idIn << Qt::endl;
-            //     pNWObs->m_getSocket()->disconnectFromHost();
-            //     return;
-            //     //slot_provideNewLogin(anon);
-            */
         }//id already in use LOG_OUT << " [SV] id already connected :" << idIn << Qt::endl;
         else{ //first login this server life -> refresh token
             LOG_ERR << "ERR Handshake requested while connected" << Qt::endl;
@@ -215,9 +233,18 @@ void VoltOrbFlipServer::slot_detach(NWObs *pNWObs)
     pNWObs->deleteLater();
 }
 
-void VoltOrbFlipServer::m_processInput(int playerId, std::string Input)
+void VoltOrbFlipServer::m_processInput(NWObs* pNWObs, quint16 playerMove)
 {
-
+    quint8 action;
+    quint8 x;
+    quint8 y;
+    m_unpackMove(action, x, y, playerMove);
+    if(action == VOF::Action::Click){
+        PlayerSessionState& pPlayerState = m_tGamestate.tPlayerList[pNWObs->m_getSlotId()] ;
+        m_revealTile(x, y, pPlayerState);
+        m_calculatePoints(x, y, pPlayerState);
+    }
+    slot_updateClientsGameState();
 }
 
 bool VoltOrbFlipServer::m_verifyInput(std::string input)

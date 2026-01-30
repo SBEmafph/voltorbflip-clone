@@ -29,11 +29,6 @@ Menu::Menu(QWidget *parent)
     connect(BrowserWindow, &Browser::connectRequested,
             this, &Menu::on_BrowserConnect);
 
-    // Zurück von Lobby
-    connect(lobby, &Lobby::backToMenu, this, [this]() {
-        this->show();
-    });
-
     // Lobby → Match
     connect(lobby, &Lobby::startMatch, this, [this]() {
         lobby->hide();
@@ -43,6 +38,7 @@ Menu::Menu(QWidget *parent)
     // Lobby → zurück zum Menu
     connect(lobby, &Lobby::backToMenu,
             this, &Menu::on_backToMenu);
+
 
     // Match Form
     connect(matchWindow, &Match::sig_backToMenu,
@@ -84,8 +80,6 @@ Menu::~Menu()
 void Menu::on_PlayBtn_clicked()
 {
     BrowserWindow->show();
-    m_client->slot_attach();
-    m_client->slot_joinSelectedLobby();
 }
 
 void Menu::on_BrowserConnect()
@@ -94,7 +88,12 @@ void Menu::on_BrowserConnect()
     this->hide();
     lobby->show();
     m_client->slot_attach();
-    m_client->slot_joinSelectedLobby();
+}
+
+void Menu::on_backToMenu()
+{
+    m_client->slot_detach();
+    this->show();
 }
 
 void Menu::on_RulesBtn_clicked()
@@ -117,6 +116,7 @@ void Menu::on_ShopBtn_clicked()
     shopWindow->show();
 }
 
+
 void Menu::onExitBtn_clicked()
 {
     m_client->slot_detach();
@@ -130,3 +130,4 @@ void Menu::onExitBtn_clicked()
         QTimer::singleShot(1000, qApp, &QCoreApplication::quit);
     }
 }
+

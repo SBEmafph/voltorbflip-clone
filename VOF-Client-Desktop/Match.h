@@ -6,7 +6,6 @@
 
 #include "CardButton.h"
 #include "GlobalDefines.h"
-#include "CardButton.h"
 
 namespace Ui {
 class Match;
@@ -21,18 +20,21 @@ public:
     ~Match();
 
 signals:
-    void backToMenu();   // BESTEHEND
+    void sig_backToMenu();
+    void sig_action(VOF::Action action, quint8 x, quint8 y);
 
 private slots:
     void on_quitBtn_clicked();
     void m_openMemoButtons();
     void m_closeMemoButtons();
-    void backToMenu();
 
 
 private:
-    Ui::Match *ui;   // BESTEHEND
-    int currentMemoType = 0; // 0 = Aufdecken, 1-3 = Zahlen-Notiz, 4 = Voltorb-Notiz
+    Ui::Match *ui;
+    QWidget *gameContainer;
+    QGridLayout *gridLayout;
+    VOF::Action currentAction = VOF::Click; // 0 = Aufdecken, 1-3 = Zahlen-Notiz, 4 = Voltorb-Notiz
+    QButtonGroup *memoGroup;
 
     void m_setUpMemoButtons();
     void m_setMemoButtonsVisible(bool fVisible);

@@ -27,7 +27,7 @@ signals:
 public:
     explicit VoltOrbFlipServer(QObject *parent = nullptr);
     void m_startServer(quint16 port = 0);
-    void m_processInput(int playerId, std::string Input);
+    void m_processInput(NWObs* pNWObs, quint16 playerMove);
     bool m_verifyInput(std::string input);
     void m_applyMove(std::string input);
 
@@ -54,6 +54,9 @@ private:
     quint16 m_generateUniqueToken();
     void m_deletePlayerInfo(quint32 playerId);
     void m_logMove(quint32 playerId, std::string input, int result, bool gameOver);
+    void m_unpackMove(quint8 &action, quint8 &x, quint8 &y, quint16 playerMove);
+    void m_revealTile(quint8 &x, quint8 &y, PlayerSessionState &playerState);
+    quint8 m_calculatePoints(quint8 &x, quint8 &y, PlayerSessionState &playerState);
 };
 
 #endif // VOLTORBFLIPSERVER_H

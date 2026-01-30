@@ -20,10 +20,11 @@ NWObs::NWObs(QTcpSocket* clientSocket, QObject* parent)
 
 void NWObs::updateFullState(const GameState &state)
 {
-    QByteArray data = m_prepareDataForPlayer(state);
+    //QByteArray data = m_prepareDataForPlayer(state);
+    //m_out;
 }
 
-void NWObs::onPlayerStatusChanged(quint32 dwPlayerId, bool fIsReady)
+void NWObs::onPlayerReadyState(quint32 dwPlayerId, bool fIsReady)
 {
 
 }
@@ -109,9 +110,16 @@ void NWObs::slot_onReadyRead()
         else
             emit sig_identificationReceived(this, id, token);
         break;
+    case VOF::Command::PlayerMove:
+        quint16 packedMove;
+        m_in >> packedMove;
+        LOG_OUT << "[NW] PlayerMove " << packedMove << Qt::endl;
+        emit sig_playerMove(this, packedMove);
+        break;
     case VOF::Command::Quit:
         //out << "nwobs quit";
         emit sig_quit(this);
+        break;
     default:
         break;
     }

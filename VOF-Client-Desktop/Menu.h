@@ -35,6 +35,7 @@ private slots:
     void on_SettingsBtn_clicked();
     void onExitBtn_clicked();
     void on_BrowserConnect();
+    void on_backToMenu();
 
 private:
     Ui::Menu *ui;

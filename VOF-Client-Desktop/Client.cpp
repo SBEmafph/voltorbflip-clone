@@ -15,9 +15,6 @@ Client::Client(QObject *parent)
     m_out.setDevice(m_tcpSocket);
     m_out.setVersion(QDataStream::Qt_6_5);
 
-    connect(this, &Client::sig_matchAction,
-            this, &Client::slot_sendMatchAction);
-
     connect(this, &Client::sig_connected,
             this, &Client::slot_joinSelectedLobby);
 }
@@ -49,7 +46,7 @@ void Client::m_loadConfig(bool fForce)
 }
 
 quint16 Client::m_packMove(VOF::Action action, quint8 x, quint8 y) {
-    return static_cast<quint16>(action | (x << 4) | (y << 8));
+    return static_cast<quint16>((action << 8) | (x << 4) | y);
     //click '0' on field (2,3) -> 0x0230
 }
 
@@ -66,7 +63,6 @@ void Client::slot_onReadyRead()
         case VOF::Command::LoginRequest:
             if (!m_in.commitTransaction()) return;
             m_sendIdentification();
-            emit sig_identificationSent();
             break;
         case VOF::Command::NewLoginConfig:
             quint32 tempID;
@@ -172,17 +168,17 @@ void Client::m_sendIdentification()
     m_out << m_dwID;
     m_out << m_wToken;
     m_tcpSocket->flush();
+    emit sig_identificationSent();
 }
 
 void Client::slot_joinSelectedLobby()
 {
     //for testing we will only use one lobby
-    //slot_attach();
     if(!m_fInLobby){
         m_out << VOF::Command::LobbyJoinRequest;
         m_out << m_dwID;
         m_out << m_wToken;
-        m_out << m_bLobbyID;
+        m_out << m_selectedLobbyID;
         m_tcpSocket->flush();
         m_fInLobby = true;
     }
@@ -227,7 +223,9 @@ void Client::m_updateConfig(quint32 dwIDIn, quint16 wtokenIN, QString szNameIn, 
 
 void Client::slot_sendMatchAction(VOF::Action action, quint8 x, quint8 y)
 {
+    LOG_OUT << "action " << action << " x: " << x << " y: " << y << Qt::endl;
     quint16 packedMove = m_packMove(action, x, y);
+    LOG_OUT << packedMove << Qt::endl;
     m_out << VOF::Command::PlayerMove;
     m_out << packedMove;
     m_tcpSocket->flush();
