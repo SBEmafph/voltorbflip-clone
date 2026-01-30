@@ -54,6 +54,11 @@ void NWObs::m_updateLogin(quint32 dwIDin, quint16 wTokenIn)
     m_pTcpSocket->flush();
 }
 
+void NWObs::onPlayerStatusChanged(quint32 dwIDin, bool fIsReady)
+{
+
+}
+
 void NWObs::m_proceedToMatch()
 {
     return;

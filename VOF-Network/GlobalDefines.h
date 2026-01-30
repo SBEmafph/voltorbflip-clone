@@ -38,6 +38,13 @@ static const quint8 TILE_MINE = 0;        // Mine tile
 static const quint8 TILE_MIN_VALUE = 1;   // Minimum value tile
 static const quint8 TILE_MAX_VALUE = 9;   // Maximum value tile
 
+enum Tile : quint8{
+    One = 1,
+    Two = 2,
+    Three = 3,
+    Bomb = 4
+};
+
 // Player actions
 enum Action : quint8 {
     Click = 0,

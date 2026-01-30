@@ -48,7 +48,8 @@ public:
 
     quint32 m_getId() const { return m_dwID; }
     void m_setId(quint32 dwIDin) { m_dwID = dwIDin; }
-
+    
+    void onPlayerStatusChanged(quint32 dwIDin, bool fIsReady);
 private:
     quint8 m_blobbyID;
     quint8 m_bSlotID;
