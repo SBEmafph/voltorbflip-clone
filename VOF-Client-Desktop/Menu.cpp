@@ -14,6 +14,7 @@ Menu::Menu(QWidget *parent)
     , m_client(new Client(this))
 {
     ui->setupUi(this);
+    this->setFixedSize(this->size()); //Fenstergröße anpassen blockieren
 
     rulesWindow->hide();
     replayWindow->hide();
