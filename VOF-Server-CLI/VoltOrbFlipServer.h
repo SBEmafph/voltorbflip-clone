@@ -8,6 +8,7 @@
 #include "GlobalDefines.h"
 #include "NetworkObserver.h"
 #include "PlayerProfile.h"
+#include "Gamelogic.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -30,6 +31,11 @@ public:
     void m_processInput(int playerId, std::string Input);
     bool m_verifyInput(std::string input);
     void m_applyMove(std::string input);
+
+    void m_startMatch();
+    void m_generateBoard(PlayerSessionState& player);
+    Field m_convertBoardToField(const PlayerSessionState& player);
+    void m_convertFieldToBoard(PlayerSessionState& player, const Field& field);
 
 public slots:
     void slot_assignLobby(NWObs* pNWObs, quint8 lobbyIDin = 0);
