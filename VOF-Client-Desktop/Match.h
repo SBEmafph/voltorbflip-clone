@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QButtonGroup>
+#include <QGridLayout>
 
 #include "CardButton.h"
 #include "GlobalDefines.h"
@@ -18,6 +19,7 @@ class Match : public QMainWindow
 public:
     explicit Match(QWidget *parent = nullptr);
     ~Match();
+    void resetBoard();
 
 signals:
     void sig_backToMenu();
@@ -28,12 +30,12 @@ private slots:
     void m_openMemoButtons();
     void m_closeMemoButtons();
 
-
 private:
     Ui::Match *ui;
     QWidget *gameContainer;
     QGridLayout *gridLayout;
-    VOF::Action currentAction = VOF::Click; // 0 = Aufdecken, 1-3 = Zahlen-Notiz, 4 = Voltorb-Notiz
+
+    VOF::Action currentAction = VOF::Click;
     QButtonGroup *memoGroup;
 
     void m_setUpMemoButtons();
