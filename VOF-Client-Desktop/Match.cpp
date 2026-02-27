@@ -98,12 +98,35 @@ void Match::m_setMemoButtonsVisible(bool fVisible)
 
 void Match::handleCardClick(CardButton *btn)
 {
+    const int idx = btn->r * 5 + btn->c;
+
     if (currentAction == VOF::Click) {
-        btn->setText("2"); // Example
-        btn->setStyleSheet("background-color: #4CAF50; color: black;");
+
+        if (m_revealed[idx])
+            return;
+
+        // Spiellogik anwenden
+        GameLogic::RevealTileWithScore(
+            m_field,
+            m_revealed,
+            btn->r,
+            btn->c,
+            m_currentScore,
+            m_level
+            );
+
+        quint8 value = m_field[idx];
+
+        if (value == VOF::TILE_MINE) {
+            btn->setText("X");
+            btn->setStyleSheet("background-color: #B71C1C; color: white;");
+        } else {
+            btn->setText(QString::number(value));
+            btn->setStyleSheet("background-color: #4CAF50; color: black;");
+        }
+
         btn->setEnabled(false);
 
-        // Clear any memo icons once the card is revealed
         for (int i = 0; i < 4; ++i)
             btn->memos[i]->hide();
     }
@@ -111,7 +134,6 @@ void Match::handleCardClick(CardButton *btn)
         btn->toggleMemo(currentAction);
     }
 
-    // Forward user action to game/server logic
     emit sig_action(currentAction, btn->c, btn->r);
 }
 
@@ -119,25 +141,27 @@ void Match::resetBoard()
 {
     currentAction = VOF::Click;
 
+    m_level = 1;
+    m_currentScore = 0;
+    m_field = GameLogic::GenerateField5x5_Level(m_level);
+    std::fill(std::begin(m_revealed), std::end(m_revealed), false);
+
     memoGroup->setExclusive(false);
     if (memoGroup->checkedButton())
         memoGroup->checkedButton()->setChecked(false);
     memoGroup->setExclusive(true);
 
-    for (int row = 0; row < ui->gameGrid->rowCount(); ++row) {
-        for (int col = 0; col < ui->gameGrid->columnCount(); ++col) {
-            QLayoutItem *item = ui->gameGrid->itemAtPosition(row, col);
-            if (!item) continue;
-
-            CardButton *btn = qobject_cast<CardButton*>(item->widget());
-            if (!btn) continue;
-
-            btn->setText("");
-            btn->setEnabled(true);
-            btn->setStyleSheet("background-color: #2D7D46; border: 2px solid #E3B448;");
-
-            for (int i = 0; i < 4; ++i)
-                btn->memos[i]->hide();
+    for (int row = 0; row < 5; ++row) {
+        for (int col = 0; col < 5; ++col) {
+            if (auto *item = ui->gameGrid->itemAtPosition(row, col)) {
+                if (auto *btn = qobject_cast<CardButton*>(item->widget())) {
+                    btn->setText("");
+                    btn->setEnabled(true);
+                    btn->setStyleSheet("background-color: #2D7D46; border: 2px solid #E3B448;");
+                    for (int i = 0; i < 4; ++i)
+                        btn->memos[i]->hide();
+                }
+            }
         }
     }
 }

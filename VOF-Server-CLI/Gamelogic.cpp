@@ -2,9 +2,6 @@
 #include <QRandomGenerator>
 #include <QTextStream>
 
-QTextStream out(stdout);
-QTextStream err(stderr);
-
 GameLogic::GameLogic() {}
 
 // ===== Placing and initializing tile values =====

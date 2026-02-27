@@ -23,18 +23,23 @@ find_package(
   Network
 )
 
-add_executable(VOF-Server-CLI
-  Main.cpp
-  VoltOrbFlipServer.h
+add_library(VOF-Server-CLI
+
   VoltOrbFlipServer.cpp
-  VoltOrbFlipServer.cpp VoltOrbFlipServer.h
   VoltOrbFlipServer.h
   PlayerProfile.h
-  Gamelogic.h Gamelogic.cpp
+  Gamelogic.h
+  Gamelogic.cpp
 )
+
+target_include_directories(
+  VOF-Server-CLI INTERFACE
+  ${CMAKE_CURRENT_SOURCE_DIR}
+)
+
 target_link_libraries(
   VOF-Server-CLI
-  PRIVATE VOF-Network
+  PUBLIC VOF-Network
   Qt${QT_VERSION_MAJOR}::Core
   Qt${QT_VERSION_MAJOR}::Network
 )

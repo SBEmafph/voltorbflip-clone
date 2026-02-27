@@ -7,6 +7,7 @@
 
 #include "CardButton.h"
 #include "GlobalDefines.h"
+#include "Gamelogic.h"
 
 namespace Ui {
 class Match;
@@ -37,6 +38,11 @@ private:
 
     VOF::Action currentAction = VOF::Click;
     QButtonGroup *memoGroup;
+
+    Field m_field;          // 5x5 Spielfeld (25 Werte)
+    bool  m_revealed[25];   // Aufgedeckte Felder
+    quint8 m_level = 1;
+    quint8 m_currentScore = 0;
 
     void m_setUpMemoButtons();
     void m_setMemoButtonsVisible(bool fVisible);

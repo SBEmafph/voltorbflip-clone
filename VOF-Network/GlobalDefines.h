@@ -1,6 +1,8 @@
 #ifndef GLOBALDEFINES_H
 #define GLOBALDEFINES_H
 
+#pragma once
+
 #include <QtTypes>
 #include <QMap>
 #include <QString>
