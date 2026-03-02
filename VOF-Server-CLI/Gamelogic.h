@@ -23,7 +23,7 @@ public:
     // ===== Level logic =====
     static bool IsLevelCompleted(const Field& field, const bool fRevealed[25]);
     static void RevealTileWithScore(Field& field, bool fRevealed[25], int row, int col, quint8& bCurrentScore, quint8& bLevel);
-    static void NextLevel(quint8& bCurrentScore, quint8& bTotalScore, quint8& bLevel);
+    static bool FinishLevelIfCompleted(const Field& field, const bool fRevealed[25], quint8& bCurrentScore, quint8& bTotalScore, quint8& bLevel);
 
 private:
     // ===== Placing and initializing tile values =====

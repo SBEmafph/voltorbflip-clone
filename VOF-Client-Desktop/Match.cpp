@@ -27,7 +27,10 @@ Match::Match(QWidget *parent)
         }
     }
 
-    resetBoard();
+    m_level = 1;
+    m_totalScore = 0;
+
+    startLevel();
 }
 
 Match::~Match()
@@ -37,7 +40,10 @@ Match::~Match()
 
 void Match::on_quitBtn_clicked()
 {
-    resetBoard();
+    m_level = 1;
+    m_totalScore = 0;
+    startLevel();
+
     emit sig_backToMenu();
     this->hide();
 }
@@ -100,51 +106,118 @@ void Match::handleCardClick(CardButton *btn)
 {
     const int idx = btn->r * 5 + btn->c;
 
-    if (currentAction == VOF::Click) {
+    if (currentAction != VOF::Click) {
+        btn->toggleMemo(currentAction);
+        emit sig_action(currentAction, btn->c, btn->r);
+        return;
+    }
 
-        if (m_revealed[idx])
-            return;
+    if (m_revealed[idx])
+        return;
 
-        // Spiellogik anwenden
-        GameLogic::RevealTileWithScore(
+    // 1) Feld aufdecken + Score berechnen
+    GameLogic::RevealTileWithScore(
+        m_field,
+        m_revealed,
+        btn->r,
+        btn->c,
+        m_currentScore,
+        m_level
+        );
+
+    // 2) UI: Tile anzeigen
+    quint8 value = m_field[idx];
+
+    if (value == VOF::TILE_MINE) {
+        btn->setText("X");
+        btn->setStyleSheet("background-color: #B71C1C; color: white;");
+    } else {
+        btn->setText(QString::number(value));
+        btn->setStyleSheet("background-color: #4CAF50; color: black;");
+    }
+
+    btn->setEnabled(false);
+
+    for (int i = 0; i < 4; ++i)
+        btn->memos[i]->hide();
+
+    // 3) Levelabschluss ausschließlich über GameLogic
+    if (GameLogic::FinishLevelIfCompleted(
             m_field,
             m_revealed,
-            btn->r,
-            btn->c,
             m_currentScore,
-            m_level
-            );
-
-        quint8 value = m_field[idx];
-
-        if (value == VOF::TILE_MINE) {
-            btn->setText("X");
-            btn->setStyleSheet("background-color: #B71C1C; color: white;");
-        } else {
-            btn->setText(QString::number(value));
-            btn->setStyleSheet("background-color: #4CAF50; color: black;");
-        }
-
-        btn->setEnabled(false);
-
-        for (int i = 0; i < 4; ++i)
-            btn->memos[i]->hide();
+            m_totalScore,
+            m_level))
+    {
+        startLevel();   // erzeugt neues Feld + Reset
+        return;
     }
-    else {
-        btn->toggleMemo(currentAction);
-    }
+
+    // 4) Labels aktualisieren
+    ui->CurrentScoreLabel->setText(
+        QString("Current: %1").arg(m_currentScore)
+        );
+
+    ui->TotalScoreLabel->setText(
+        QString("Total: %1").arg(m_totalScore)
+        );
+
+    ui->LevelLabel->setText(
+        QString("Level: %1").arg(m_level)
+        );
 
     emit sig_action(currentAction, btn->c, btn->r);
+}
+
+void Match::startLevel()
+{
+    m_levelCompleted = false;
+
+    m_field = GameLogic::GenerateField5x5_Level(m_level);
+    std::fill(std::begin(m_revealed), std::end(m_revealed), false);
+
+    m_currentScore = 0;
+    resetBoard();
+}
+
+void Match::updateRowColLabels(
+    const QVector<quint8>& RowSums,
+    const QVector<quint8>& ColSums,
+    const QVector<quint8>& RowMines,
+    const QVector<quint8>& ColMines)
+{
+    // Spalten
+    for (int i = 0; i < 5; ++i) {
+        QLabel* scoreLabel = findChild<QLabel*>(QString("Px_%1").arg(i+1));
+        if (scoreLabel)
+            scoreLabel->setText(QString::number(ColSums[i]));
+
+        QLabel* mineLabel = findChild<QLabel*>(QString("Mx_%1").arg(i+1));
+        if (mineLabel)
+            mineLabel->setText(QString::number(ColMines[i]));
+    }
+
+    // Reihen
+    for (int i = 0; i < 5; ++i) {
+        QLabel* scoreLabel = findChild<QLabel*>(QString("P%1_x").arg(i+1));
+        if (scoreLabel)
+            scoreLabel->setText(QString::number(RowSums[i]));
+
+        QLabel* mineLabel = findChild<QLabel*>(QString("M%1_x").arg(i+1));
+        if (mineLabel)
+            mineLabel->setText(QString::number(RowMines[i]));
+    }
 }
 
 void Match::resetBoard()
 {
     currentAction = VOF::Click;
 
-    m_level = 1;
     m_currentScore = 0;
-    m_field = GameLogic::GenerateField5x5_Level(m_level);
-    std::fill(std::begin(m_revealed), std::end(m_revealed), false);
+
+    QVector<quint8> rowSums, colSums, rowMines, colMines;
+    GameLogic::CalculateSumsAndMines(m_field, rowSums, colSums, rowMines, colMines);
+    updateRowColLabels(rowSums, colSums, rowMines, colMines);
 
     memoGroup->setExclusive(false);
     if (memoGroup->checkedButton())
@@ -164,4 +237,8 @@ void Match::resetBoard()
             }
         }
     }
+
+    ui->CurrentScoreLabel->setText(QString("Current: %1").arg(m_currentScore));
+    ui->TotalScoreLabel->setText(QString("Total: %1").arg(m_totalScore));
+    ui->LevelLabel->setText(QString("Level: %1").arg(m_level));
 }

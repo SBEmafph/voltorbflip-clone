@@ -21,6 +21,14 @@ public:
     explicit Match(QWidget *parent = nullptr);
     ~Match();
     void resetBoard();
+    void startLevel();
+    void updateRowColLabels(
+        const QVector<quint8>& RowSums,
+        const QVector<quint8>& ColSums,
+        const QVector<quint8>& RowMines,
+        const QVector<quint8>& ColMines
+        );
+
 
 signals:
     void sig_backToMenu();
@@ -43,6 +51,8 @@ private:
     bool  m_revealed[25];   // Aufgedeckte Felder
     quint8 m_level = 1;
     quint8 m_currentScore = 0;
+    quint8 m_totalScore = 0;
+    bool m_levelCompleted = false;
 
     void m_setUpMemoButtons();
     void m_setMemoButtonsVisible(bool fVisible);

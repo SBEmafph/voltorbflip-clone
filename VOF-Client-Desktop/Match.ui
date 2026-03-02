@@ -54,7 +54,7 @@ QPushButton#quitBtn:hover {
     </size>
    </property>
   </widget>
-  <widget class="QLabel" name="Level">
+  <widget class="QLabel" name="LevelLabel">
    <property name="geometry">
     <rect>
      <x>240</x>
@@ -85,7 +85,7 @@ background-color: #309F6A;</string>
     <set>Qt::AlignmentFlag::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QLabel" name="CurrentScore">
+  <widget class="QLabel" name="CurrentScoreLabel">
    <property name="geometry">
     <rect>
      <x>360</x>
@@ -110,13 +110,13 @@ background-color: #309F6A;</string>
     <enum>QFrame::Shape::Box</enum>
    </property>
    <property name="text">
-    <string>Score: 008</string>
+    <string>Score: 0</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignmentFlag::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QLabel" name="TotalScore">
+  <widget class="QLabel" name="TotalScoreLabel">
    <property name="geometry">
     <rect>
      <x>530</x>
@@ -141,7 +141,7 @@ background-color: #309F6A;</string>
     <enum>QFrame::Shape::Box</enum>
    </property>
    <property name="text">
-    <string>Total: 008</string>
+    <string>Total: 0</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -606,7 +606,7 @@ background: #DE7055;</string>
     <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
    </property>
   </widget>
-  <widget class="QLabel" name="P1_x_2">
+  <widget class="QLabel" name="P2_x">
    <property name="geometry">
     <rect>
      <x>690</x>
@@ -635,7 +635,7 @@ background: #45A746;</string>
     <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
    </property>
   </widget>
-  <widget class="QLabel" name="M1_x_2">
+  <widget class="QLabel" name="M2_x">
    <property name="geometry">
     <rect>
      <x>690</x>
@@ -664,7 +664,7 @@ background: #45A746;</string>
     <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
    </property>
   </widget>
-  <widget class="QLabel" name="P1_x_3">
+  <widget class="QLabel" name="P3_x">
    <property name="geometry">
     <rect>
      <x>690</x>
@@ -693,7 +693,7 @@ background: #E69F43;</string>
     <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
    </property>
   </widget>
-  <widget class="QLabel" name="M1_x_3">
+  <widget class="QLabel" name="M3_x">
    <property name="geometry">
     <rect>
      <x>690</x>
@@ -722,7 +722,7 @@ background: #E69F43;</string>
     <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
    </property>
   </widget>
-  <widget class="QLabel" name="P1_x_4">
+  <widget class="QLabel" name="P4_x">
    <property name="geometry">
     <rect>
      <x>690</x>
@@ -751,7 +751,7 @@ background: #3792F5;</string>
     <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
    </property>
   </widget>
-  <widget class="QLabel" name="M1_x_4">
+  <widget class="QLabel" name="M4_x">
    <property name="geometry">
     <rect>
      <x>690</x>
@@ -780,7 +780,7 @@ background: #3792F5;</string>
     <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
    </property>
   </widget>
-  <widget class="QLabel" name="P1_x_5">
+  <widget class="QLabel" name="P5_x">
    <property name="geometry">
     <rect>
      <x>690</x>
@@ -809,7 +809,7 @@ background: #BF65DD;</string>
     <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
    </property>
   </widget>
-  <widget class="QLabel" name="M1_x_5">
+  <widget class="QLabel" name="M5_x">
    <property name="geometry">
     <rect>
      <x>690</x>
@@ -2537,9 +2537,9 @@ background-color: #309F6A;</string>
   <zorder>label_12</zorder>
   <zorder>label_13</zorder>
   <zorder>quitBtn</zorder>
-  <zorder>Level</zorder>
-  <zorder>CurrentScore</zorder>
-  <zorder>TotalScore</zorder>
+  <zorder>LevelLabel</zorder>
+  <zorder>CurrentScoreLabel</zorder>
+  <zorder>TotalScoreLabel</zorder>
   <zorder>score_P1</zorder>
   <zorder>score_P2</zorder>
   <zorder>score_P3</zorder>
@@ -2553,14 +2553,14 @@ background-color: #309F6A;</string>
   <zorder>CloseMemoBtn</zorder>
   <zorder>P1_x</zorder>
   <zorder>M1_x</zorder>
-  <zorder>P1_x_2</zorder>
-  <zorder>M1_x_2</zorder>
-  <zorder>P1_x_3</zorder>
-  <zorder>M1_x_3</zorder>
-  <zorder>P1_x_4</zorder>
-  <zorder>M1_x_4</zorder>
-  <zorder>P1_x_5</zorder>
-  <zorder>M1_x_5</zorder>
+  <zorder>P2_x</zorder>
+  <zorder>M2_x</zorder>
+  <zorder>P3_x</zorder>
+  <zorder>M3_x</zorder>
+  <zorder>P4_x</zorder>
+  <zorder>M4_x</zorder>
+  <zorder>P5_x</zorder>
+  <zorder>M5_x</zorder>
   <zorder>Px_1</zorder>
   <zorder>Mx_1</zorder>
   <zorder>Px_2</zorder>

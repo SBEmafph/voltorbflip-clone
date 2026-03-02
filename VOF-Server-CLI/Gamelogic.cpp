@@ -162,40 +162,49 @@ bool GameLogic::IsLevelCompleted(const Field& field, const bool fRevealed[25])
 }
 
 // ===== Reveal tile, update score and level =====
-void GameLogic::RevealTileWithScore(Field& field, bool fRevealed[25], int row, int col, quint8& bCurrentScore, quint8& bLevel)
+void GameLogic::RevealTileWithScore(
+    Field& field,
+    bool fRevealed[25],
+    int row,
+    int col,
+    quint8& bCurrentScore,
+    quint8& /* bLevel */)   // Level hier ignorieren
 {
-    int idx = row*5 + col;
+    int idx = row * 5 + col;
 
-    if(fRevealed[idx]) return;
+    if (fRevealed[idx])
+        return;
 
     fRevealed[idx] = true;
 
     quint8 value = field[idx];
 
-    if(value == VOF::TILE_MINE)
-    {
+    if (value == VOF::TILE_MINE) {
         bCurrentScore = 0;
-        if(bLevel>1) bLevel--;
         return;
     }
 
-    if(bCurrentScore == 0)
+    if (bCurrentScore == 0)
         bCurrentScore = value;
     else
         bCurrentScore *= value;
-
-    if(IsLevelCompleted(field, fRevealed))
-    {
-        if(bLevel < 3) bLevel++;
-        bCurrentScore = 0;
-    }
 }
 
-// ===== Finish level =====
-void GameLogic::NextLevel(quint8& bCurrentScore, quint8& bTotalScore, quint8& bLevel)
+bool GameLogic::FinishLevelIfCompleted(
+    const Field& field,
+    const bool fRevealed[25],
+    quint8& bCurrentScore,
+    quint8& bTotalScore,
+    quint8& bLevel)
 {
+    if (!IsLevelCompleted(field, fRevealed))
+        return false;
+
     bTotalScore += bCurrentScore;
     bCurrentScore = 0;
 
-    if(bLevel < 3) bLevel++;
+    if (bLevel < 3)
+        bLevel++;
+
+    return true;
 }
