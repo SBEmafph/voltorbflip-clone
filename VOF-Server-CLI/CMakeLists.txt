@@ -23,13 +23,11 @@ find_package(
   Network
 )
 
-add_library(VOF-Server-CLI
-
+add_executable(VOF-Server-CLI
+  Main.cpp
   VoltOrbFlipServer.cpp
   VoltOrbFlipServer.h
   PlayerProfile.h
-  Gamelogic.h
-  Gamelogic.cpp
 )
 
 target_include_directories(

@@ -72,7 +72,6 @@ endif()
 target_link_libraries(
     VOF-Client-Desktop
     PRIVATE VOF-Network
-    PRIVATE VOF-Server-CLI
     PRIVATE Qt${QT_VERSION_MAJOR}::Widgets
     PRIVATE Qt${QT_VERSION_MAJOR}::Network
 )

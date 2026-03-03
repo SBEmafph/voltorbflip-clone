@@ -1,4 +1,6 @@
 #include "GameLogic.h"
+#include "GlobalDefines.h"
+
 #include <QRandomGenerator>
 #include <QTextStream>
 

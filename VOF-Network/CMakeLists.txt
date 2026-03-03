@@ -28,6 +28,8 @@ add_library(VOF-Network STATIC
   IObserver.h
   GlobalDefines.h
   GlobalDefines.cpp
+  Gamelogic.cpp
+  Gamelogic.h
 )
 
 target_include_directories(

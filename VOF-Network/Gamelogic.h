@@ -1,7 +1,7 @@
 #ifndef GAMELOGIC_H
 #define GAMELOGIC_H
 
-#include "GlobalDefines.h"
+
 #include <QVector>
 
 using Field = QVector<quint8>;
