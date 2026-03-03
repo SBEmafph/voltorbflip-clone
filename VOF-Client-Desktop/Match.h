@@ -1,7 +1,7 @@
 #ifndef MATCH_H
 #define MATCH_H
 
-#include <QMainWindow>
+#include <QWidget>
 #include <QButtonGroup>
 #include <QGridLayout>
 
@@ -13,7 +13,7 @@ namespace Ui {
 class Match;
 }
 
-class Match : public QMainWindow
+class Match : public QWidget
 {
     Q_OBJECT
 

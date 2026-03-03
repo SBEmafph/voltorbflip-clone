@@ -1,7 +1,7 @@
 #ifndef LOBBY_H
 #define LOBBY_H
 
-#include <QMainWindow>
+#include <QWidget>
 #include <QTimer>
 #include <QLabel>
 
@@ -12,7 +12,7 @@ namespace Ui
 }
 QT_END_NAMESPACE
 
-class Lobby : public QMainWindow
+class Lobby : public QWidget
 {
     Q_OBJECT
 

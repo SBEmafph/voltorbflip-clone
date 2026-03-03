@@ -17,22 +17,20 @@ Menu::Menu(QWidget *parent)
 {
     ui->setupUi(this);
     this->setFixedSize(this->size()); //Fenstergröße anpassen blockieren
-
-    rulesWindow->hide();
-    replayWindow->hide();
-    shopWindow->hide();
-    SettingsWindow->hide();
-    BrowserWindow->hide();
-    lobby->hide();
+    ui->stack->addWidget(lobby);        //index 1
+    ui->stack->addWidget(matchWindow);  //index 2
+    ui->stack->setCurrentWidget(ui->menu);
 
     // Browser Form
     connect(BrowserWindow, &Browser::connectRequested,
+            m_client, &Client::slot_attach);
+
+    connect(m_client, &Client::sig_connected,
             this, &Menu::on_BrowserConnect);
 
     // Lobby → Match
     connect(lobby, &Lobby::startMatch, this, [this]() {
-        lobby->hide();
-        matchWindow->show();
+        ui->stack->setCurrentWidget(matchWindow);
     });
 
     // Lobby → zurück zum Menu
@@ -85,15 +83,13 @@ void Menu::on_PlayBtn_clicked()
 void Menu::on_BrowserConnect()
 {
     BrowserWindow->hide();
-    this->hide();
-    lobby->show();
-    m_client->slot_attach();
+    ui->stack->setCurrentWidget(lobby);
 }
 
 void Menu::on_backToMenu()
 {
     m_client->slot_detach();
-    this->show();
+    ui->stack->setCurrentWidget(ui->menu);
 }
 
 void Menu::on_RulesBtn_clicked()

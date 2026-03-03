@@ -28,24 +28,34 @@
    <string notr="true">background-color: #14845C;</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="ShopBtn">
+   <widget class="QStackedWidget" name="stack">
     <property name="geometry">
      <rect>
-      <x>510</x>
-      <y>550</y>
-      <width>231</width>
-      <height>71</height>
+      <x>0</x>
+      <y>0</y>
+      <width>1024</width>
+      <height>768</height>
      </rect>
     </property>
-    <property name="font">
-     <font>
-      <family>Consolas</family>
-      <pointsize>18</pointsize>
-      <bold>false</bold>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton#ShopBtn {
+    <widget class="QWidget" name="menu">
+     <widget class="QPushButton" name="ShopBtn">
+      <property name="geometry">
+       <rect>
+        <x>490</x>
+        <y>540</y>
+        <width>231</width>
+        <height>71</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Consolas</family>
+        <pointsize>18</pointsize>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton#ShopBtn {
     border-radius: 10px;
     background-color: #309F6A;
     color: white;
@@ -55,129 +65,74 @@
 QPushButton#ShopBtn:hover {
     background-color: #3cb079;
 }</string>
-    </property>
-    <property name="text">
-     <string>Shop</string>
-    </property>
-    <property name="iconSize">
-     <size>
-      <width>20</width>
-      <height>20</height>
-     </size>
-    </property>
-    <property name="checkable">
-     <bool>false</bool>
-    </property>
-    <property name="checked">
-     <bool>false</bool>
-    </property>
-    <property name="default">
-     <bool>false</bool>
-    </property>
-    <property name="flat">
-     <bool>false</bool>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="RulesBtn">
-    <property name="geometry">
-     <rect>
-      <x>460</x>
-      <y>376</y>
-      <width>91</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Consolas</family>
-      <pointsize>16</pointsize>
-      <bold>false</bold>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton#RulesBtn {
-    border-radius: 5px;
-    background-color: #309F6A;
-    color: white;
-    border: 2px solid #ffffff;
-}
-
-QPushButton#RulesBtn:hover {
-    background-color: #3cb079;
-}</string>
-    </property>
-    <property name="text">
-     <string>Rules</string>
-    </property>
-    <property name="iconSize">
-     <size>
-      <width>20</width>
-      <height>20</height>
-     </size>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="PlayBtn">
-    <property name="geometry">
-     <rect>
-      <x>380</x>
-      <y>280</y>
-      <width>251</width>
-      <height>100</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Consolas</family>
-      <pointsize>48</pointsize>
-      <bold>false</bold>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton#PlayBtn {
-    border-radius: 10px;
-    background-color: #309F6A;
-    color: white;
-    border: 2px solid #ffffff;
-}
-
-QPushButton#PlayBtn:hover {
-    background-color: #3cb079;
-}</string>
-    </property>
-    <property name="text">
-     <string>Play</string>
-    </property>
-    <property name="iconSize">
-     <size>
-      <width>20</width>
-      <height>20</height>
-     </size>
-    </property>
-    <property name="default">
-     <bool>false</bool>
-    </property>
-    <property name="flat">
-     <bool>false</bool>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="ReplayBtn">
-    <property name="geometry">
-     <rect>
-      <x>270</x>
-      <y>550</y>
-      <width>231</width>
-      <height>71</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Consolas</family>
-      <pointsize>18</pointsize>
-      <bold>false</bold>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton#ReplayBtn {
+      </property>
+      <property name="text">
+       <string>Shop</string>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>20</width>
+        <height>20</height>
+       </size>
+      </property>
+      <property name="checkable">
+       <bool>false</bool>
+      </property>
+      <property name="checked">
+       <bool>false</bool>
+      </property>
+      <property name="default">
+       <bool>false</bool>
+      </property>
+      <property name="flat">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QLabel" name="Titel">
+      <property name="geometry">
+       <rect>
+        <x>270</x>
+        <y>80</y>
+        <width>441</width>
+        <height>82</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Consolas</family>
+        <pointsize>42</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: white;
+border: 2px solid #ffffff;
+background: url(:/images/images/CheckeredPattern.png);</string>
+      </property>
+      <property name="text">
+       <string>VoltOrbFlip</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignmentFlag::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="ReplayBtn">
+      <property name="geometry">
+       <rect>
+        <x>250</x>
+        <y>540</y>
+        <width>231</width>
+        <height>71</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Consolas</family>
+        <pointsize>18</pointsize>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton#ReplayBtn {
     border-radius: 10px;
     background-color: #309F6A;
     color: white;
@@ -187,141 +142,57 @@ QPushButton#PlayBtn:hover {
 QPushButton#ReplayBtn:hover {
     background-color: #3cb079;
 }</string>
-    </property>
-    <property name="text">
-     <string>Watch Replay</string>
-    </property>
-    <property name="iconSize">
-     <size>
-      <width>20</width>
-      <height>20</height>
-     </size>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>740</x>
-      <y>90</y>
-      <width>81</width>
-      <height>81</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="pixmap">
-     <pixmap resource="resources.qrc">:/images/images/Voltorb.png</pixmap>
-    </property>
-    <property name="scaledContents">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QLabel" name="Titel">
-    <property name="geometry">
-     <rect>
-      <x>290</x>
-      <y>90</y>
-      <width>441</width>
-      <height>82</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Consolas</family>
-      <pointsize>42</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: white;
-border: 2px solid #ffffff;
-background: url(:/images/images/CheckeredPattern.png);</string>
-    </property>
-    <property name="text">
-     <string>VoltOrbFlip</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignmentFlag::AlignCenter</set>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_2">
-    <property name="geometry">
-     <rect>
-      <x>200</x>
-      <y>90</y>
-      <width>81</width>
-      <height>81</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="pixmap">
-     <pixmap resource="resources.qrc">:/images/images/Voltorb.png</pixmap>
-    </property>
-    <property name="scaledContents">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="SettingsBtn">
-    <property name="geometry">
-     <rect>
-      <x>390</x>
-      <y>470</y>
-      <width>231</width>
-      <height>71</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Consolas</family>
-      <pointsize>18</pointsize>
-      <bold>false</bold>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton#SettingsBtn {
-    border-radius: 10px;
-    background-color: #309F6A;
-    color: white;
-    border: 2px solid #ffffff;
-}
-
-QPushButton#SettingsBtn:hover {
-    background-color: #3cb079;
-}</string>
-    </property>
-    <property name="text">
-     <string>Settings</string>
-    </property>
-    <property name="iconSize">
-     <size>
-      <width>20</width>
-      <height>20</height>
-     </size>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="ExitBtn">
-    <property name="geometry">
-     <rect>
-      <x>820</x>
-      <y>590</y>
-      <width>171</width>
-      <height>39</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Consolas</family>
-      <pointsize>18</pointsize>
-      <bold>false</bold>
-     </font>
-    </property>
-    <property name="mouseTracking">
-     <bool>true</bool>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {
+      </property>
+      <property name="text">
+       <string>Watch Replay</string>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>20</width>
+        <height>20</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_2">
+      <property name="geometry">
+       <rect>
+        <x>180</x>
+        <y>80</y>
+        <width>81</width>
+        <height>81</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap resource="resources.qrc">:/images/images/Voltorb.png</pixmap>
+      </property>
+      <property name="scaledContents">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="ExitBtn">
+      <property name="geometry">
+       <rect>
+        <x>800</x>
+        <y>580</y>
+        <width>171</width>
+        <height>39</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Consolas</family>
+        <pointsize>18</pointsize>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="mouseTracking">
+       <bool>true</bool>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
     border-radius: 10px;
     background-color: #de5331;
     color: white;
@@ -331,50 +202,171 @@ QPushButton#SettingsBtn:hover {
 QPushButton:hover {
     background-color: #3cb079;
 }</string>
-    </property>
-    <property name="text">
-     <string>Exit</string>
-    </property>
-    <property name="iconSize">
-     <size>
-      <width>20</width>
-      <height>20</height>
-     </size>
-    </property>
-    <property name="checkable">
-     <bool>false</bool>
-    </property>
-    <property name="checked">
-     <bool>false</bool>
-    </property>
-    <property name="default">
-     <bool>false</bool>
-    </property>
-    <property name="flat">
-     <bool>false</bool>
-    </property>
+      </property>
+      <property name="text">
+       <string>Exit</string>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>20</width>
+        <height>20</height>
+       </size>
+      </property>
+      <property name="checkable">
+       <bool>false</bool>
+      </property>
+      <property name="checked">
+       <bool>false</bool>
+      </property>
+      <property name="default">
+       <bool>false</bool>
+      </property>
+      <property name="flat">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="PlayBtn">
+      <property name="geometry">
+       <rect>
+        <x>360</x>
+        <y>270</y>
+        <width>251</width>
+        <height>100</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Consolas</family>
+        <pointsize>48</pointsize>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton#PlayBtn {
+    border-radius: 10px;
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#PlayBtn:hover {
+    background-color: #3cb079;
+}</string>
+      </property>
+      <property name="text">
+       <string>Play</string>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>20</width>
+        <height>20</height>
+       </size>
+      </property>
+      <property name="default">
+       <bool>false</bool>
+      </property>
+      <property name="flat">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="SettingsBtn">
+      <property name="geometry">
+       <rect>
+        <x>370</x>
+        <y>460</y>
+        <width>231</width>
+        <height>71</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Consolas</family>
+        <pointsize>18</pointsize>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton#SettingsBtn {
+    border-radius: 10px;
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#SettingsBtn:hover {
+    background-color: #3cb079;
+}</string>
+      </property>
+      <property name="text">
+       <string>Settings</string>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>20</width>
+        <height>20</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="RulesBtn">
+      <property name="geometry">
+       <rect>
+        <x>440</x>
+        <y>366</y>
+        <width>91</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Consolas</family>
+        <pointsize>16</pointsize>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton#RulesBtn {
+    border-radius: 5px;
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#RulesBtn:hover {
+    background-color: #3cb079;
+}</string>
+      </property>
+      <property name="text">
+       <string>Rules</string>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>20</width>
+        <height>20</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>720</x>
+        <y>80</y>
+        <width>81</width>
+        <height>81</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap resource="resources.qrc">:/images/images/Voltorb.png</pixmap>
+      </property>
+      <property name="scaledContents">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </widget>
    </widget>
-   <zorder>ExitBtn</zorder>
-   <zorder>ShopBtn</zorder>
-   <zorder>RulesBtn</zorder>
-   <zorder>PlayBtn</zorder>
-   <zorder>ReplayBtn</zorder>
-   <zorder>label</zorder>
-   <zorder>label_2</zorder>
-   <zorder>SettingsBtn</zorder>
-   <zorder>Titel</zorder>
   </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>1024</width>
-     <height>25</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources>
   <include location="resources.qrc"/>

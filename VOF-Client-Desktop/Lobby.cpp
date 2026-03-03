@@ -3,7 +3,7 @@
 #include <QShowEvent>
 
 Lobby::Lobby(QWidget *parent)
-    : QMainWindow(parent)
+    : QWidget(parent)
     , ui(new Ui::Lobby)
     , matchTimer(new QTimer(this))
     , secondsLeft(10)
@@ -27,10 +27,12 @@ Lobby::Lobby(QWidget *parent)
 
 void Lobby::showEvent(QShowEvent *event)
 {
+    /*
     QMainWindow::showEvent(event);
 
     secondsLeft = 10;
     ui->timerLabel->setText("Game starts in " + QString::number(secondsLeft) + "s");
+    */
 }
 
 Lobby::~Lobby()
@@ -54,21 +56,21 @@ void Lobby::on_quitBtn_clicked()
     secondsLeft = 10;
     ui->timerLabel->setText("Game starts in " + QString::number(secondsLeft) + "s");
     emit backToMenu();
-    this->hide();
+    //this->hide();
 }
 
 void Lobby::onMatchTimeout()
 {
     emit startMatch();
-    this->hide();
+    //this->hide();
 }
 
 void Lobby::on_ReplayBtn_clicked()
 {
-    this->show();
+    //this->show();
 }
 
 void Lobby::on_ShopBtn_clicked()
 {
-    this->show();
+    //this->show();
 }

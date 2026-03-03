@@ -2,7 +2,7 @@
 #include "ui_Match.h"
 
 Match::Match(QWidget *parent)
-    : QMainWindow(parent)
+    : QWidget(parent)
     , ui(new Ui::Match)
     , memoGroup(new QButtonGroup(this))
 {

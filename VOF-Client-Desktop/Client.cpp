@@ -123,11 +123,13 @@ void Client::slot_attach(QHostAddress ipAdressIn, quint16 portIn)
         m_tcpSocket->connectToHost(ipAdressIn, portIn);
 
         if (!m_tcpSocket->waitForConnected(3000)) {
-            LOG_OUT << "Could not connect:" << m_tcpSocket->errorString() << Qt::endl;
+            LOG_OUT << "Could not connect: " << m_tcpSocket->errorString() << Qt::endl;
             //startServer();
+            emit sig_connected();
             return;
         }
     }
+    emit sig_connected();
 }
 
 void Client::slot_detach()
