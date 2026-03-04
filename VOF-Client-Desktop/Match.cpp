@@ -1,6 +1,8 @@
 #include "Match.h"
 #include "ui_Match.h"
 
+#include <QTimer>
+
 Match::Match(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::Match)
@@ -8,6 +10,9 @@ Match::Match(QWidget *parent)
 {
     ui->setupUi(this);
     this->setFixedSize(this->size());
+
+    ui->score_P1->setRange(0, 100);
+    ui->score_P1->setValue(0);
 
     m_setUpMemoButtons();
 
@@ -115,7 +120,6 @@ void Match::handleCardClick(CardButton *btn)
     if (m_revealed[idx])
         return;
 
-    // 1) Feld aufdecken + Score berechnen
     GameLogic::RevealTileWithScore(
         m_field,
         m_revealed,
@@ -125,7 +129,6 @@ void Match::handleCardClick(CardButton *btn)
         m_level
         );
 
-    // 2) UI: Tile anzeigen
     quint8 value = m_field[idx];
 
     if (value == VOF::TILE_MINE) {
@@ -141,7 +144,6 @@ void Match::handleCardClick(CardButton *btn)
     for (int i = 0; i < 4; ++i)
         btn->memos[i]->hide();
 
-    // 3) Levelabschluss ausschließlich über GameLogic
     if (GameLogic::FinishLevelIfCompleted(
             m_field,
             m_revealed,
@@ -149,24 +151,75 @@ void Match::handleCardClick(CardButton *btn)
             m_totalScore,
             m_level))
     {
-        startLevel();   // erzeugt neues Feld + Reset
+
+         updateWidgets();
+
+        //Check for win after completing a level
+        if (m_totalScore >= 10)
+        {
+             updateWidgets();
+
+             ui->LevelLabel->setText("Gewonnen!");
+
+             // Block Board Inputs
+             for (int row = 0; row < 5; ++row) {
+                 for (int col = 0; col < 5; ++col) {
+                     if (auto *item = ui->gameGrid->itemAtPosition(row, col)) {
+                         if (auto *btn = qobject_cast<CardButton*>(item->widget())) {
+                             btn->setEnabled(false);
+                         }
+                     }
+                 }
+             }
+
+             m_winCountdown = 5;
+             ui->CurrentScoreLabel->setText(
+                 QString("Zurück in %1...").arg(m_winCountdown)
+                 );
+
+             m_winTimer = new QTimer(this);
+             m_winTimer->setInterval(1000);
+
+             connect(m_winTimer, &QTimer::timeout, this, [this]() {
+                 m_winCountdown--;
+
+                 if (m_winCountdown > 0) {
+                     ui->CurrentScoreLabel->setText(
+                         QString("Zurück zum Menü in %1...").arg(m_winCountdown)
+                         );
+                 } else {
+                     m_winTimer->stop();
+                     m_winTimer->deleteLater();
+                     m_winTimer = nullptr;
+
+                     m_level = 1;
+                     m_totalScore = 0;
+                     startLevel();
+
+                     emit sig_backToMenu();
+                     this->hide();
+                 }
+             });
+
+             m_winTimer->start();
+             return;
+        }
+
+        startLevel();
         return;
     }
 
-    // 4) Labels aktualisieren
-    ui->CurrentScoreLabel->setText(
-        QString("Current: %1").arg(m_currentScore)
-        );
-
-    ui->TotalScoreLabel->setText(
-        QString("Total: %1").arg(m_totalScore)
-        );
-
-    ui->LevelLabel->setText(
-        QString("Level: %1").arg(m_level)
-        );
+    updateWidgets();
 
     emit sig_action(currentAction, btn->c, btn->r);
+}
+
+void Match::updateWidgets()
+{
+    ui->CurrentScoreLabel->setText(QString("Current: %1").arg(m_currentScore)); // Current Score
+    ui->TotalScoreLabel->setText(QString("Total: %1").arg(m_totalScore)); // Total Score
+    ui->LevelLabel->setText(QString("Level: %1").arg(m_level)); // Current Level
+    ui->score_P1->setValue(m_totalScore); // Scorebar
 }
 
 void Match::startLevel()
@@ -178,6 +231,7 @@ void Match::startLevel()
 
     m_currentScore = 0;
     resetBoard();
+    updateWidgets();
 }
 
 void Match::updateRowColLabels(
@@ -238,7 +292,5 @@ void Match::resetBoard()
         }
     }
 
-    ui->CurrentScoreLabel->setText(QString("Current: %1").arg(m_currentScore));
-    ui->TotalScoreLabel->setText(QString("Total: %1").arg(m_totalScore));
-    ui->LevelLabel->setText(QString("Level: %1").arg(m_level));
+     updateWidgets();
 }

@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QButtonGroup>
 #include <QGridLayout>
+#include <QTimer>
 
 #include "CardButton.h"
 #include "GlobalDefines.h"
@@ -54,9 +55,13 @@ private:
     quint8 m_totalScore = 0;
     bool m_levelCompleted = false;
 
+    QTimer* m_winTimer = nullptr;
+    int m_winCountdown = 0;
+
     void m_setUpMemoButtons();
     void m_setMemoButtonsVisible(bool fVisible);
     void handleCardClick(CardButton *btn);
+    void updateWidgets();
 };
 
 #endif // MATCH_H
