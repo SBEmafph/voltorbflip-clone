@@ -176,7 +176,7 @@ QPushButton#ReplayBtn:hover {
       <property name="geometry">
        <rect>
         <x>800</x>
-        <y>580</y>
+        <y>570</y>
         <width>171</width>
         <height>39</height>
        </rect>
@@ -364,6 +364,15 @@ QPushButton#RulesBtn:hover {
        <bool>true</bool>
       </property>
      </widget>
+     <zorder>RulesBtn</zorder>
+     <zorder>ShopBtn</zorder>
+     <zorder>Titel</zorder>
+     <zorder>ReplayBtn</zorder>
+     <zorder>label_2</zorder>
+     <zorder>ExitBtn</zorder>
+     <zorder>PlayBtn</zorder>
+     <zorder>SettingsBtn</zorder>
+     <zorder>label</zorder>
     </widget>
    </widget>
   </widget>
