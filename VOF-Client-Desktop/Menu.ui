@@ -199,8 +199,8 @@ QPushButton#ReplayBtn:hover {
     border: 2px solid #ffffff;
 }
 
-QPushButton:hover {
-    background-color: #3cb079;
+QPushButton#ExitBtn:hover {
+    background-color: #e86241;
 }</string>
       </property>
       <property name="text">

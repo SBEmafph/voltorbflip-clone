@@ -1,6 +1,8 @@
 #include "Lobby.h"
 #include "./ui_Lobby.h"
+
 #include <QShowEvent>
+#include <QRandomGenerator>
 
 Lobby::Lobby(QWidget *parent)
     : QWidget(parent)
@@ -73,4 +75,20 @@ void Lobby::on_ReplayBtn_clicked()
 void Lobby::on_ShopBtn_clicked()
 {
     //this->show();
+}
+
+void Lobby::setPlayerName(const QString& name)
+{
+    QString finalName = name;
+
+    QStringList defaultNames = {"Giovanni", "Lance", "Maxie", "Cyrus", "Koga", "Ghetsis", "N", "Lysandre"};
+
+    // If Player doesn't set his own name, he gets 1 of 8 possible names assigned automatically
+    if(finalName.isEmpty())
+    {
+        int index = QRandomGenerator::global()->bounded(defaultNames.size());
+        finalName = defaultNames.at(index);
+    }
+
+    ui->player1->setText(finalName);
 }

@@ -1,5 +1,6 @@
 #include "Menu.h"
 #include "./ui_Menu.h"
+#include "Settings.h"
 
 #include <QCloseEvent>
 
@@ -77,6 +78,7 @@ Menu::~Menu()
 
 void Menu::on_PlayBtn_clicked()
 {
+    lobby->setPlayerName(SettingsWindow->getPlayerName());
     BrowserWindow->show();
 }
 
