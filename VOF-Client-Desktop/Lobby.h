@@ -20,6 +20,8 @@ public:
     explicit Lobby(QWidget *parent = nullptr);
     ~Lobby();
 
+    void setPlayerName(const QString& name);
+
 signals:
     void backToMenu();
     void startMatch();

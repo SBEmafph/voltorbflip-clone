@@ -6,6 +6,7 @@
 #include <QGridLayout>
 #include <QTimer>
 
+#include "Replay.h"
 #include "CardButton.h"
 #include "GlobalDefines.h"
 #include "Gamelogic.h"
@@ -22,14 +23,14 @@ public:
     explicit Match(QWidget *parent = nullptr);
     ~Match();
 
+	// Core game functions
     void m_startLevel();
     void m_updateRowColLabels(
         const QVector<quint8>& RowSums,
         const QVector<quint8>& ColSums,
         const QVector<quint8>& RowMines,
         const QVector<quint8>& ColMines
-        );
-
+    );
 
 signals:
     void sig_backToMenu();
@@ -40,28 +41,39 @@ private slots:
     void on_openMemoButtons();
     void on_closeMemoButtons();
     void on_updateEnemies();
+    void openReplay(int replayId);
 
 private:
+    // UI
     Ui::Match *ui;
     QWidget *gameContainer;
     QGridLayout *gridLayout;
 
+    // Game state
     VOF::Action currentAction = VOF::Click;
-    QButtonGroup *memoGroup;
-
-    Field m_field;          // 5x5 Spielfeld (25 Werte)
-    bool  m_revealed[25];   // Aufgedeckte Felder
+    Field m_field;            // 5x5 game field (25 values)
+    bool  m_revealed[25];     // revealed fields
     quint8 m_level = 1;
     quint8 m_currentScore = 0;
     quint8 m_totalScore = 0;
     bool m_levelCompleted = false;
 
-    QTimer* m_winTimer = nullptr;
-    int m_winCountdown = 0;
-
+    // Memo buttons
+    QButtonGroup *memoGroup;
     void m_setUpMemoButtons();
     void m_setMemoButtonsVisible(bool fVisible);
 
+    // Replay
+    QString buildReplayPath(int replayId) const;
+    QString m_replayFile;
+    int m_gameId = 1;
+    replay* replayWindow;
+
+    // Win/Lose handling
+    QTimer* m_winTimer = nullptr;
+    int m_winCountdown = 0;
+
+    // Helpers
     void m_setUpBoard();
     void m_resetBoard();
 
@@ -72,6 +84,7 @@ private:
 
     void m_updateWidgets();
     void m_updateTile(quint8 player, quint8 row, quint8 col, VOF::Tile tile);
+    QString buildFieldState() const;
 };
 
 #endif // MATCH_H

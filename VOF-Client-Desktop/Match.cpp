@@ -2,6 +2,8 @@
 #include "ui_Match.h"
 
 #include <QTimer>
+#include <QCoreApplication>
+#include <QDir>
 
 Match::Match(QWidget *parent)
     : QWidget(parent)
@@ -27,6 +29,12 @@ Match::Match(QWidget *parent)
     m_totalScore = 0;
 
     m_startLevel();
+
+    m_replayFile = buildReplayPath(m_gameId);
+    GameLogic::ResetReplayFile(m_replayFile);
+    GameLogic::ReplayStartGame(m_replayFile, m_gameId);
+
+    replayWindow = new replay(this);
 }
 
 Match::~Match()
@@ -189,6 +197,17 @@ void Match::m_handleCardClick(CardButton *btn)
         m_level
         );
 
+    GameLogic::ReplayLogAction(
+        m_replayFile,
+        m_gameId,
+        static_cast<int>(currentAction), // 0-Reveal Tile, 1-Set Memo, 2-Item Used, 3-Finished Level
+        m_level,
+        m_currentScore,
+        m_totalScore,
+        btn->r,
+        btn->c
+        );
+
     quint8 value = m_field[idx];
 
     if (value == VOF::TILE_MINE) {
@@ -221,6 +240,8 @@ void Match::m_handleCardClick(CardButton *btn)
 
              ui->LevelLabel->setText("Gewonnen!");
 
+             replayWindow->setGameResult(true);
+
              // Block Board Inputs
              for (int row = 0; row < 5; ++row) {
                  for (int col = 0; col < 5; ++col) {
@@ -245,7 +266,7 @@ void Match::m_handleCardClick(CardButton *btn)
 
                  if (m_winCountdown > 0) {
                      ui->CurrentScoreLabel->setText(
-                         QString("Zurück zum Menü in %1...").arg(m_winCountdown)
+                         QString("Zurück zum Menü in %1s").arg(m_winCountdown)
                          );
                  } else {
                      m_winTimer->stop();
@@ -255,6 +276,15 @@ void Match::m_handleCardClick(CardButton *btn)
                      m_level = 1;
                      m_totalScore = 0;
                      m_startLevel();
+
+                     GameLogic::ReplayEndGame(
+                         m_replayFile,
+                         m_gameId,
+                         m_level,
+                         m_totalScore
+                         );
+                     m_gameId++;
+                     m_replayFile = buildReplayPath(m_gameId);
 
                      emit sig_backToMenu();
                      this->hide();
@@ -368,4 +398,36 @@ void Match::m_resetBoard()
     }
 
     m_updateWidgets();
+}
+
+QString Match::buildFieldState() const
+{
+    QString state;
+
+    for (int i = 0; i < 25; ++i)
+    {
+        if (i > 0)
+            state += ";";
+
+        state += QString::number(m_field[i]);
+    }
+
+    return state;
+}
+
+QString Match::buildReplayPath(int replayId) const
+{
+    QString basePath = QCoreApplication::applicationDirPath() + "/Replays/";
+    QDir().mkpath(basePath); // Check if Folder even exists
+
+    return basePath + QString("replay%1.csv").arg(replayId);
+}
+
+void Match::openReplay(int replayId)
+{
+    m_gameId = replayId;
+    m_replayFile = buildReplayPath(replayId);
+
+    GameLogic::ResetReplayFile(m_replayFile);
+    GameLogic::ReplayStartGame(m_replayFile, m_gameId);
 }

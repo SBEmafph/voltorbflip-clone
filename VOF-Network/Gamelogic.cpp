@@ -3,6 +3,23 @@
 
 #include <QRandomGenerator>
 #include <QTextStream>
+#include <QFile>
+#include <QDateTime>
+
+static void writeReplayHeaderIfNeeded(const QString& filePath)
+{
+    QFile file(filePath);
+
+    if (!file.exists())
+    {
+        if (file.open(QIODevice::WriteOnly | QIODevice::Text))
+        {
+            QTextStream out(&file);
+            out << "gameid,action,date,time,level,currentscore,totalscore,field\n";
+            file.close();
+        }
+    }
+}
 
 GameLogic::GameLogic() {}
 
@@ -89,11 +106,7 @@ Field GameLogic::GenerateField5x5_Level(quint8 bLevel)
 }
 
 // ===== Calculate sums and mine counts =====
-void GameLogic::CalculateSumsAndMines(const Field& Field5x5,
-                                      QVector<quint8>& RowSums,
-                                      QVector<quint8>& ColSums,
-                                      QVector<quint8>& RowMines,
-                                      QVector<quint8>& ColMines)
+void GameLogic::CalculateSumsAndMines(const Field& Field5x5, QVector<quint8>& RowSums, QVector<quint8>& ColSums,QVector<quint8>& RowMines, QVector<quint8>& ColMines)
 {
     RowSums.resize(5);
     ColSums.resize(5);
@@ -209,4 +222,55 @@ bool GameLogic::FinishLevelIfCompleted(
         bLevel++;
 
     return true;
+}
+
+void GameLogic::ReplayStartGame(const QString& filePath, int gameId)
+{
+    writeReplayHeaderIfNeeded(filePath);
+
+    QFile file(filePath);
+    file.close();
+}
+
+void GameLogic::ReplayLogAction(const QString& filePath, int gameId, int action, int level, int currentScore, int totalScore, int row, int col)
+{
+    QFile file(filePath);
+
+    if (!file.open(QIODevice::Append | QIODevice::Text))
+        return;
+
+    QTextStream out(&file);
+
+    QDateTime now = QDateTime::currentDateTime();
+
+    QString field = QString("%1x%2").arg(row + 1).arg(col + 1);
+
+    out << gameId << ","
+        << action << ","
+        << now.toString("yyyy-MM-dd") << ","
+        << now.toString("HH:mm:ss") << ","
+        << level << ","
+        << currentScore << ","
+        << totalScore << ","
+        << field
+        << "\n";
+
+    file.close();
+}
+
+void GameLogic::ReplayEndGame(const QString& filePath, int gameId, int level, int totalScore)
+{
+    ReplayLogAction(filePath, gameId, 3, level, 0, totalScore, -1, -1);
+}
+
+void GameLogic::ResetReplayFile(const QString& filePath)
+{
+    QFile file(filePath);
+
+    if (file.open(QIODevice::WriteOnly | QIODevice::Text))
+    {
+        QTextStream out(&file);
+        out << "gameid,action,date,time,level,currentscore,totalscore,field\n";
+        file.close();
+    }
 }
