@@ -40,6 +40,24 @@ static const quint8 TILE_MINE = 0;        // Mine tile
 static const quint8 TILE_MIN_VALUE = 1;   // Minimum value tile
 static const quint8 TILE_MAX_VALUE = 9;   // Maximum value tile
 
+static QStringList playerColors = {
+    "#FF9999", // Rot (Spieler 1)
+    "#FFFF99", // Grün (Spieler 2)
+    "#99FF99", // Orange (Spieler 3)
+    "#99CCFF", // Blau (Spieler 4)
+    "#CC99FF", // Lila (Spieler 5)
+    "#99FFFF", // Türkis
+    "#FFD699",  // Pastell-Rot
+    "#FFB6C1"
+};
+
+static QStringList tileColors = {
+    "#45a746", // Grün (1 Punkt)
+    "#3792f5", // Blau (2 Punkte)
+    "#bf65dd", // Lila (3 Punkte)
+    "#d04006", // Rot (Bombe)
+};
+
 enum Tile : quint8{
     One = 1,
     Two = 2,

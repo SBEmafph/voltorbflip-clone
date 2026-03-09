@@ -21,9 +21,9 @@ class Match : public QWidget
 public:
     explicit Match(QWidget *parent = nullptr);
     ~Match();
-    void resetBoard();
-    void startLevel();
-    void updateRowColLabels(
+
+    void m_startLevel();
+    void m_updateRowColLabels(
         const QVector<quint8>& RowSums,
         const QVector<quint8>& ColSums,
         const QVector<quint8>& RowMines,
@@ -37,8 +37,9 @@ signals:
 
 private slots:
     void on_quitBtn_clicked();
-    void m_openMemoButtons();
-    void m_closeMemoButtons();
+    void on_openMemoButtons();
+    void on_closeMemoButtons();
+    void on_updateEnemies();
 
 private:
     Ui::Match *ui;
@@ -60,8 +61,17 @@ private:
 
     void m_setUpMemoButtons();
     void m_setMemoButtonsVisible(bool fVisible);
-    void handleCardClick(CardButton *btn);
-    void updateWidgets();
+
+    void m_setUpBoard();
+    void m_resetBoard();
+
+    void m_setUpEnemyBoards();
+    void m_resetEnemyBoards();
+
+    void m_handleCardClick(CardButton *btn);
+
+    void m_updateWidgets();
+    void m_updateTile(quint8 player, quint8 row, quint8 col, VOF::Tile tile);
 };
 
 #endif // MATCH_H

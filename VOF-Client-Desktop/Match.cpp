@@ -19,23 +19,14 @@ Match::Match(QWidget *parent)
     connect(ui->quitBtn, &QPushButton::clicked,
             this, &Match::on_quitBtn_clicked);
 
-    // Create 5x5 Matchboard
-    for (int row = 0; row < 5; ++row) {
-        for (int col = 0; col < 5; ++col) {
-            CardButton *btn = new CardButton(row, col, this);
-            btn->setStyleSheet("background-color: #2D7D46; border: 2px solid #E3B448;");
-            ui->gameGrid->addWidget(btn, row, col);
+    m_setUpBoard();
 
-            connect(btn, &QPushButton::clicked, this, [this, btn]() {
-                handleCardClick(btn);
-            });
-        }
-    }
+    m_setUpEnemyBoards();
 
     m_level = 1;
     m_totalScore = 0;
 
-    startLevel();
+    m_startLevel();
 }
 
 Match::~Match()
@@ -47,20 +38,27 @@ void Match::on_quitBtn_clicked()
 {
     m_level = 1;
     m_totalScore = 0;
-    startLevel();
+    m_startLevel();
+    m_resetBoard();
+    m_resetEnemyBoards();
 
     emit sig_backToMenu();
     this->hide();
 }
 
-void Match::m_openMemoButtons()
+void Match::on_openMemoButtons()
 {
     m_setMemoButtonsVisible(true);
 }
 
-void Match::m_closeMemoButtons()
+void Match::on_closeMemoButtons()
 {
     m_setMemoButtonsVisible(false);
+}
+
+void Match::on_updateEnemies()
+{
+
 }
 
 void Match::m_setUpMemoButtons()
@@ -68,12 +66,12 @@ void Match::m_setUpMemoButtons()
     ui->Memo1Btn->setCheckable(true);
     ui->Memo2Btn->setCheckable(true);
     ui->Memo3Btn->setCheckable(true);
-    ui->MemoOrbBtn->setCheckable(true);
+    ui->Memo0OrbBtn->setCheckable(true);
 
     memoGroup->addButton(ui->Memo1Btn, VOF::Note1);
     memoGroup->addButton(ui->Memo2Btn, VOF::Note2);
     memoGroup->addButton(ui->Memo3Btn, VOF::Note3);
-    memoGroup->addButton(ui->MemoOrbBtn, VOF::NoteBomb);
+    memoGroup->addButton(ui->Memo0OrbBtn, VOF::NoteBomb);
     memoGroup->setExclusive(true);
 
     connect(memoGroup, &QButtonGroup::idClicked, this,
@@ -94,9 +92,9 @@ void Match::m_setUpMemoButtons()
     m_setMemoButtonsVisible(false);
 
     connect(ui->OpenMemoBtn,  &QPushButton::clicked,
-            this, &Match::m_openMemoButtons);
+            this, &Match::on_openMemoButtons);
     connect(ui->CloseMemoBtn, &QPushButton::clicked,
-            this, &Match::m_closeMemoButtons);
+            this, &Match::on_closeMemoButtons);
 }
 
 void Match::m_setMemoButtonsVisible(bool fVisible)
@@ -104,10 +102,72 @@ void Match::m_setMemoButtonsVisible(bool fVisible)
     ui->Memo1Btn->setVisible(fVisible);
     ui->Memo2Btn->setVisible(fVisible);
     ui->Memo3Btn->setVisible(fVisible);
-    ui->MemoOrbBtn->setVisible(fVisible);
+    ui->Memo0OrbBtn->setVisible(fVisible);
 }
 
-void Match::handleCardClick(CardButton *btn)
+void Match::m_setUpBoard()
+{
+    // Create 5x5 Matchboard
+    for (int row = 0; row < 5; ++row) {
+        for (int col = 0; col < 5; ++col) {
+            CardButton *btn = new CardButton(row, col, this);
+            btn->setObjectName(QString("player_0_Tile_%1_%2").arg(row, col));
+            btn->setStyleSheet("background-color: #2D7D46; border: 2px solid #E3B448;");
+            ui->gameGrid->addWidget(btn, row, col);
+
+            connect(btn, &QPushButton::clicked, this, [this, btn]() {
+                m_handleCardClick(btn);
+            });
+        }
+    }
+}
+
+void Match::m_setUpEnemyBoards()
+{
+    //field showing other players
+    for(int player = 1; player < 8; player++) {
+        QWidget *enemyWidget = new QWidget(this);
+        enemyWidget->setObjectName(QString("enemy_%1").arg(player));
+        int playerRow = player % 4;
+        int playerCol = player / 4;
+
+        enemyWidget->setStyleSheet(QString(
+                                       ".QWidget { "
+                                       "   background-color: #309F6A; "
+                                       "   border: 1px solid %1; "
+                                       "}"
+                                       ).arg(VOF::playerColors[player]));
+
+        QGridLayout *enemylayout = new QGridLayout(enemyWidget);
+        enemylayout->setContentsMargins(1,1,1,1);
+        enemylayout->setSpacing(0);
+        for (int row = 0; row < 5; ++row) {
+            for (int col = 0; col < 5; ++col) {
+                QLabel *enemyField = new QLabel(" ", enemyWidget);
+                enemyField->setObjectName(QString("player_%1_Tile_%2_%3").arg(player).arg(row).arg(col));
+                enemyField->setAlignment(Qt::AlignCenter);
+                enemylayout->addWidget(enemyField, row, col);
+            }
+        }
+        ui->enemyGrid->addWidget(enemyWidget, playerRow, playerCol);
+    }
+}
+
+void Match::m_resetEnemyBoards(){
+    for(int player = 1; player < 8; player++) {
+        for (int row = 0; row < 5; ++row) {
+            for (int col = 0; col < 5; ++col) {
+                QString searchName = QString("player_%1_Tile_%2_%3").arg(player).arg(row).arg(col);
+                QLabel *foundTile = this->findChild<QLabel *>(searchName);
+                if (foundTile) {
+                    foundTile->setStyleSheet(QString("background-color: %1").arg("309F6A"));
+                }
+            }
+        }
+    }
+}
+
+void Match::m_handleCardClick(CardButton *btn)
 {
     const int idx = btn->r * 5 + btn->c;
 
@@ -152,12 +212,12 @@ void Match::handleCardClick(CardButton *btn)
             m_level))
     {
 
-         updateWidgets();
+         m_updateWidgets();
 
         //Check for win after completing a level
         if (m_totalScore >= 10)
         {
-             updateWidgets();
+             m_updateWidgets();
 
              ui->LevelLabel->setText("Gewonnen!");
 
@@ -194,7 +254,7 @@ void Match::handleCardClick(CardButton *btn)
 
                      m_level = 1;
                      m_totalScore = 0;
-                     startLevel();
+                     m_startLevel();
 
                      emit sig_backToMenu();
                      this->hide();
@@ -205,16 +265,20 @@ void Match::handleCardClick(CardButton *btn)
              return;
         }
 
-        startLevel();
+        m_startLevel();
         return;
     }
 
-    updateWidgets();
+    m_updateWidgets();
+
+    quint8 tileValue = m_field[idx];
+    if(tileValue == 0) tileValue = 4;
+    m_updateTile(1, btn->r, btn->c, static_cast<VOF::Tile>(tileValue));
 
     emit sig_action(currentAction, btn->c, btn->r);
 }
 
-void Match::updateWidgets()
+void Match::m_updateWidgets()
 {
     ui->CurrentScoreLabel->setText(QString("Current: %1").arg(m_currentScore)); // Current Score
     ui->TotalScoreLabel->setText(QString("Total: %1").arg(m_totalScore)); // Total Score
@@ -222,7 +286,18 @@ void Match::updateWidgets()
     ui->score_P1->setValue(m_totalScore); // Scorebar
 }
 
-void Match::startLevel()
+void Match::m_updateTile(quint8 player, quint8 row, quint8 col, VOF::Tile tile)
+{
+    QString searchName = QString("player_%1_Tile_%2_%3").arg(player).arg(row).arg(col);
+    QLabel *foundTile = this->findChild<QLabel *>(searchName);
+    LOG_OUT << searchName << foundTile;
+    if (foundTile) {
+        foundTile->setStyleSheet(QString("background-color: %1").arg(VOF::tileColors[tile-1]));
+    }
+
+}
+
+void Match::m_startLevel()
 {
     m_levelCompleted = false;
 
@@ -230,11 +305,11 @@ void Match::startLevel()
     std::fill(std::begin(m_revealed), std::end(m_revealed), false);
 
     m_currentScore = 0;
-    resetBoard();
-    updateWidgets();
+    m_resetBoard();
+    m_updateWidgets();
 }
 
-void Match::updateRowColLabels(
+void Match::m_updateRowColLabels(
     const QVector<quint8>& RowSums,
     const QVector<quint8>& ColSums,
     const QVector<quint8>& RowMines,
@@ -263,7 +338,7 @@ void Match::updateRowColLabels(
     }
 }
 
-void Match::resetBoard()
+void Match::m_resetBoard()
 {
     currentAction = VOF::Click;
 
@@ -271,7 +346,7 @@ void Match::resetBoard()
 
     QVector<quint8> rowSums, colSums, rowMines, colMines;
     GameLogic::CalculateSumsAndMines(m_field, rowSums, colSums, rowMines, colMines);
-    updateRowColLabels(rowSums, colSums, rowMines, colMines);
+    m_updateRowColLabels(rowSums, colSums, rowMines, colMines);
 
     memoGroup->setExclusive(false);
     if (memoGroup->checkedButton())
@@ -292,5 +367,5 @@ void Match::resetBoard()
         }
     }
 
-     updateWidgets();
+    m_updateWidgets();
 }

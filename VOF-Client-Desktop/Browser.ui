@@ -87,8 +87,8 @@ border: 5px solid #ffffff;</string>
     <rect>
      <x>150</x>
      <y>150</y>
-     <width>171</width>
-     <height>51</height>
+     <width>210</width>
+     <height>50</height>
     </rect>
    </property>
    <property name="font">
@@ -109,7 +109,7 @@ border: 2px solid #ffffff;</string>
     <enum>Qt::ScrollBarPolicy::ScrollBarAsNeeded</enum>
    </property>
    <property name="placeholderText">
-    <string>127.0.0.1:16000</string>
+    <string>127.0.0.1</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_4">
@@ -262,10 +262,10 @@ QPushButton#ConnectBtn:hover {
   <widget class="QTextEdit" name="m_SzPort">
    <property name="geometry">
     <rect>
-     <x>340</x>
+     <x>370</x>
      <y>150</y>
-     <width>101</width>
-     <height>51</height>
+     <width>80</width>
+     <height>50</height>
     </rect>
    </property>
    <property name="font">
