@@ -114,7 +114,6 @@ void Menu::on_ShopBtn_clicked()
     shopWindow->show();
 }
 
-
 void Menu::onExitBtn_clicked()
 {
     m_client->slot_detach();

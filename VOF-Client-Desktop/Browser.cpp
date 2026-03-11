@@ -31,5 +31,5 @@ void Browser::on_ConnectBtn_clicked()
 
 void Browser::on_ExitBtn_clicked()
 {
-    emit backToMenu();
+    this->hide();
 }
