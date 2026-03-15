@@ -16,7 +16,7 @@
   <property name="styleSheet">
    <string notr="true">background-color: #14845C;</string>
   </property>
-  <widget class="QLabel" name="player2">
+  <widget class="QLabel" name="player1">
    <property name="geometry">
     <rect>
      <x>370</x>
@@ -32,8 +32,16 @@
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">color: white;
-border: 2px solid #FFFF99;</string>
+    <string notr="true">QLabel{
+	color: white;
+	border: 2px solid #FFFF99;
+}
+QLabel[ready=&quot;true&quot;] {
+	color: #00FF00;
+	border: 2px solid #FFFF99;
+}
+
+</string>
    </property>
    <property name="frameShape">
     <enum>QFrame::Shape::Box</enum>
@@ -45,7 +53,7 @@ border: 2px solid #FFFF99;</string>
     <set>Qt::AlignmentFlag::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QPushButton" name="ShopBtn">
+  <widget class="QPushButton" name="shopBtn">
    <property name="geometry">
     <rect>
      <x>710</x>
@@ -62,14 +70,14 @@ border: 2px solid #FFFF99;</string>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">QPushButton#ShopBtn {
+    <string notr="true">QPushButton#shopBtn {
     border-radius: 10px;
     background-color: #309F6A;
     color: white;
     border: 2px solid #ffffff;
 }
 
-QPushButton#ShopBtn:hover {
+QPushButton#shopBtn:hover {
     background-color: #3cb079;
 }</string>
    </property>
@@ -110,7 +118,7 @@ background: url(:/images/images/CheckeredPattern.png);</string>
     <set>Qt::AlignmentFlag::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QLabel" name="player8">
+  <widget class="QLabel" name="player7">
    <property name="geometry">
     <rect>
      <x>530</x>
@@ -126,8 +134,14 @@ background: url(:/images/images/CheckeredPattern.png);</string>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">color: white;
-border: 2px solid #FFB6C1;</string>
+    <string notr="true">QLabel{
+	color: white;
+	border: 2px solid #FFB6C1;
+}
+QLabel[ready=&quot;true&quot;] {
+	color: #00FF00;
+	border: 2px solid #FFB6C1;
+}</string>
    </property>
    <property name="frameShape">
     <enum>QFrame::Shape::Box</enum>
@@ -177,7 +191,7 @@ QPushButton#inviteBtn:hover {
     </size>
    </property>
   </widget>
-  <widget class="QLabel" name="player5">
+  <widget class="QLabel" name="player4">
    <property name="geometry">
     <rect>
      <x>530</x>
@@ -193,8 +207,14 @@ QPushButton#inviteBtn:hover {
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">color: white;
-border: 2px solid #CC99FF;</string>
+    <string notr="true">QLabel{
+	color: white;
+	border: 2px solid #CC99FF;
+}
+QLabel[ready=&quot;true&quot;] {
+	color: #00FF00;
+	border: 2px solid #CC99FF;
+}</string>
    </property>
    <property name="frameShape">
     <enum>QFrame::Shape::Box</enum>
@@ -206,7 +226,7 @@ border: 2px solid #CC99FF;</string>
     <set>Qt::AlignmentFlag::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QLabel" name="player4">
+  <widget class="QLabel" name="player3">
    <property name="geometry">
     <rect>
      <x>370</x>
@@ -222,8 +242,14 @@ border: 2px solid #CC99FF;</string>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">color: white;
-border: 2px solid #99CCFF;</string>
+    <string notr="true">QLabel{
+	color: white;
+	border: 2px solid #99CCFF;
+}
+QLabel[ready=&quot;true&quot;] {
+	color: #00FF00;
+	border: 2px solid #99CCFF;
+}</string>
    </property>
    <property name="frameShape">
     <enum>QFrame::Shape::Box</enum>
@@ -235,7 +261,7 @@ border: 2px solid #99CCFF;</string>
     <set>Qt::AlignmentFlag::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QPushButton" name="ReplayBtn">
+  <widget class="QPushButton" name="replayBtn">
    <property name="geometry">
     <rect>
      <x>710</x>
@@ -252,14 +278,14 @@ border: 2px solid #99CCFF;</string>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">QPushButton#ReplayBtn {
+    <string notr="true">QPushButton#replayBtn {
     border-radius: 10px;
     background-color: #309F6A;
     color: white;
     border: 2px solid #ffffff;
 }
 
-QPushButton#ReplayBtn:hover {
+QPushButton#replayBtn:hover {
     background-color: #3cb079;
 }</string>
    </property>
@@ -273,7 +299,7 @@ QPushButton#ReplayBtn:hover {
     </size>
    </property>
   </widget>
-  <widget class="QLabel" name="player7">
+  <widget class="QLabel" name="player6">
    <property name="geometry">
     <rect>
      <x>530</x>
@@ -289,8 +315,15 @@ QPushButton#ReplayBtn:hover {
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">color: white;
-border: 2px solid #FFD699;</string>
+    <string notr="true">QLabel{
+	color: white;
+	border: 2px solid #FFD699;
+}
+QLabel[ready=&quot;true&quot;] {
+	color: #00FF00;
+	border: 2px solid #FFD699;
+}
+</string>
    </property>
    <property name="frameShape">
     <enum>QFrame::Shape::Box</enum>
@@ -314,7 +347,7 @@ border: 2px solid #FFD699;</string>
    <property name="font">
     <font>
      <family>Consolas</family>
-     <pointsize>12</pointsize>
+     <pointsize>16</pointsize>
      <bold>false</bold>
     </font>
    </property>
@@ -340,7 +373,7 @@ QPushButton#quitBtn:hover {
     </size>
    </property>
   </widget>
-  <widget class="QLabel" name="player1">
+  <widget class="QLabel" name="player0">
    <property name="geometry">
     <rect>
      <x>370</x>
@@ -356,8 +389,18 @@ QPushButton#quitBtn:hover {
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">color: white;
-border: 2px solid #FF9999;</string>
+    <string notr="true">QLabel {
+	color: white;
+	border: 2px solid #FF9999;
+}
+
+QLabel[ready=&quot;true&quot;] {
+	color: #00FF00;
+	border: 2px solid #FF9999;
+}
+
+	
+</string>
    </property>
    <property name="frameShape">
     <enum>QFrame::Shape::Box</enum>
@@ -369,7 +412,7 @@ border: 2px solid #FF9999;</string>
     <set>Qt::AlignmentFlag::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QLabel" name="player3">
+  <widget class="QLabel" name="player2">
    <property name="geometry">
     <rect>
      <x>370</x>
@@ -385,8 +428,15 @@ border: 2px solid #FF9999;</string>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">color: white;
-border: 2px solid #99FF99;</string>
+    <string notr="true">QLabel{
+	color: white;
+	border: 2px solid #99FF99;
+}
+QLabel[ready=&quot;true&quot;] {
+	color: #00FF00;
+	border: 2px solid #99FF99;
+}
+</string>
    </property>
    <property name="frameShape">
     <enum>QFrame::Shape::Box</enum>
@@ -398,7 +448,7 @@ border: 2px solid #99FF99;</string>
     <set>Qt::AlignmentFlag::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QLabel" name="player6">
+  <widget class="QLabel" name="player5">
    <property name="geometry">
     <rect>
      <x>530</x>
@@ -414,8 +464,15 @@ border: 2px solid #99FF99;</string>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">color: white;
-border: 2px solid #99FFFF;</string>
+    <string notr="true">QLabel{
+	color: white;
+	border: 2px solid #99FFFF;
+}
+QLabel[ready=&quot;true&quot;] {
+	color: #00FF00;
+	border: 2px solid #99FFFF;
+}
+</string>
    </property>
    <property name="frameShape">
     <enum>QFrame::Shape::Box</enum>
@@ -427,7 +484,7 @@ border: 2px solid #99FFFF;</string>
     <set>Qt::AlignmentFlag::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QPushButton" name="StartBtn">
+  <widget class="QPushButton" name="startBtn">
    <property name="geometry">
     <rect>
      <x>120</x>
@@ -444,19 +501,26 @@ border: 2px solid #99FFFF;</string>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">QPushButton#StartBtn {
+    <string notr="true">QPushButton#startBtn {
     border-radius: 10px;
     background-color: #309F6A;
     color: white;
     border: 2px solid #ffffff;
 }
 
-QPushButton#StartBtn:hover {
+QPushButton#startBtn[ready=&quot;true&quot;]{
+ 	border-radius: 10px;
+    background-color: #309F6A;
+    color: lime;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#startBtn:hover {
     background-color: #3cb079;
 }</string>
    </property>
    <property name="text">
-    <string>Start Game</string>
+    <string>Ready?</string>
    </property>
    <property name="iconSize">
     <size>

@@ -64,9 +64,27 @@ void Match::on_closeMemoButtons()
     m_setMemoButtonsVisible(false);
 }
 
-void Match::on_updateEnemies()
+void Match::slot_updateEnemyFields(const GameState& gameState, quint8 ownSlotID)
 {
+    for (auto it = gameState.tPlayerList.begin(); it != gameState.tPlayerList.end(); ++it)
+    {
+        quint8 playerId = it.key();
+        if (playerId == ownSlotID) continue; // Skip eigener Spieler
 
+        const PlayerSessionState& player = it.value();
+
+        // Alle revealed Tiles anzeigen
+        for (int i = 0; i < 25; ++i)
+        {
+            if (player.fRevealed[i])
+            {
+                int row = i / 5;
+                int col = i % 5;
+                VOF::Tile tileValue = static_cast<VOF::Tile>(player.bBoard[i]);
+                m_updateTile(playerId, row, col, tileValue);
+            }
+        }
+    }
 }
 
 void Match::m_setUpMemoButtons()
@@ -223,15 +241,9 @@ void Match::m_handleCardClick(CardButton *btn)
     for (int i = 0; i < 4; ++i)
         btn->memos[i]->hide();
 
-    if (GameLogic::FinishLevelIfCompleted(
-            m_field,
-            m_revealed,
-            m_currentScore,
-            m_totalScore,
-            m_level))
+    if (GameLogic::FinishLevelIfCompleted(m_field, m_revealed, m_currentScore, m_totalScore, m_level))
     {
-
-         m_updateWidgets();
+        m_updateWidgets();
 
         //Check for win after completing a level
         if (m_totalScore >= 10)
@@ -320,7 +332,7 @@ void Match::m_updateTile(quint8 player, quint8 row, quint8 col, VOF::Tile tile)
 {
     QString searchName = QString("player_%1_Tile_%2_%3").arg(player).arg(row).arg(col);
     QLabel *foundTile = this->findChild<QLabel *>(searchName);
-    LOG_OUT << searchName << foundTile;
+    LOG_OUT << searchName << " tile *" << foundTile << Qt::endl;
     if (foundTile) {
         foundTile->setStyleSheet(QString("background-color: %1").arg(VOF::tileColors[tile-1]));
     }

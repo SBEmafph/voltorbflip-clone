@@ -17,7 +17,7 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>VoltOrbFlip/Menu</string>
+   <string/>
   </property>
   <property name="windowIcon">
    <iconset>
@@ -38,7 +38,7 @@
      </rect>
     </property>
     <widget class="QWidget" name="menu">
-     <widget class="QPushButton" name="ShopBtn">
+     <widget class="QPushButton" name="shopBtn">
       <property name="geometry">
        <rect>
         <x>490</x>
@@ -55,14 +55,14 @@
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">QPushButton#ShopBtn {
+       <string notr="true">QPushButton#shopBtn {
     border-radius: 10px;
     background-color: #309F6A;
     color: white;
     border: 2px solid #ffffff;
 }
 
-QPushButton#ShopBtn:hover {
+QPushButton#shopBtn:hover {
     background-color: #3cb079;
 }</string>
       </property>
@@ -115,7 +115,7 @@ background: url(:/images/images/CheckeredPattern.png);</string>
        <set>Qt::AlignmentFlag::AlignCenter</set>
       </property>
      </widget>
-     <widget class="QPushButton" name="ReplayBtn">
+     <widget class="QPushButton" name="replayBtn">
       <property name="geometry">
        <rect>
         <x>250</x>
@@ -132,14 +132,14 @@ background: url(:/images/images/CheckeredPattern.png);</string>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">QPushButton#ReplayBtn {
+       <string notr="true">QPushButton#replayBtn {
     border-radius: 10px;
     background-color: #309F6A;
     color: white;
     border: 2px solid #ffffff;
 }
 
-QPushButton#ReplayBtn:hover {
+QPushButton#replayBtn:hover {
     background-color: #3cb079;
 }</string>
       </property>
@@ -172,19 +172,19 @@ QPushButton#ReplayBtn:hover {
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="ExitBtn">
+     <widget class="QPushButton" name="quitGameBtn">
       <property name="geometry">
        <rect>
         <x>800</x>
         <y>570</y>
-        <width>171</width>
+        <width>150</width>
         <height>39</height>
        </rect>
       </property>
       <property name="font">
        <font>
         <family>Consolas</family>
-        <pointsize>18</pointsize>
+        <pointsize>16</pointsize>
         <bold>false</bold>
        </font>
       </property>
@@ -199,12 +199,12 @@ QPushButton#ReplayBtn:hover {
     border: 2px solid #ffffff;
 }
 
-QPushButton#ExitBtn:hover {
+QPushButton#exitBtn:hover {
     background-color: #e86241;
 }</string>
       </property>
       <property name="text">
-       <string>Exit</string>
+       <string>Quit Game</string>
       </property>
       <property name="iconSize">
        <size>
@@ -225,7 +225,7 @@ QPushButton#ExitBtn:hover {
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="PlayBtn">
+     <widget class="QPushButton" name="playBtn">
       <property name="geometry">
        <rect>
         <x>360</x>
@@ -242,14 +242,14 @@ QPushButton#ExitBtn:hover {
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">QPushButton#PlayBtn {
+       <string notr="true">QPushButton#playBtn {
     border-radius: 10px;
     background-color: #309F6A;
     color: white;
     border: 2px solid #ffffff;
 }
 
-QPushButton#PlayBtn:hover {
+QPushButton#playBtn:hover {
     background-color: #3cb079;
 }</string>
       </property>
@@ -269,7 +269,7 @@ QPushButton#PlayBtn:hover {
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="SettingsBtn">
+     <widget class="QPushButton" name="settingsBtn">
       <property name="geometry">
        <rect>
         <x>370</x>
@@ -286,14 +286,14 @@ QPushButton#PlayBtn:hover {
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">QPushButton#SettingsBtn {
+       <string notr="true">QPushButton#settingsBtn {
     border-radius: 10px;
     background-color: #309F6A;
     color: white;
     border: 2px solid #ffffff;
 }
 
-QPushButton#SettingsBtn:hover {
+QPushButton#settingsBtn:hover {
     background-color: #3cb079;
 }</string>
       </property>
@@ -307,7 +307,7 @@ QPushButton#SettingsBtn:hover {
        </size>
       </property>
      </widget>
-     <widget class="QPushButton" name="RulesBtn">
+     <widget class="QPushButton" name="rulesBtn">
       <property name="geometry">
        <rect>
         <x>440</x>
@@ -324,14 +324,14 @@ QPushButton#SettingsBtn:hover {
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">QPushButton#RulesBtn {
+       <string notr="true">QPushButton#rulesBtn {
     border-radius: 5px;
     background-color: #309F6A;
     color: white;
     border: 2px solid #ffffff;
 }
 
-QPushButton#RulesBtn:hover {
+QPushButton#rulesBtn:hover {
     background-color: #3cb079;
 }</string>
       </property>
@@ -364,14 +364,14 @@ QPushButton#RulesBtn:hover {
        <bool>true</bool>
       </property>
      </widget>
-     <zorder>RulesBtn</zorder>
-     <zorder>ShopBtn</zorder>
+     <zorder>rulesBtn</zorder>
+     <zorder>shopBtn</zorder>
      <zorder>Titel</zorder>
-     <zorder>ReplayBtn</zorder>
+     <zorder>replayBtn</zorder>
      <zorder>label_2</zorder>
-     <zorder>ExitBtn</zorder>
-     <zorder>PlayBtn</zorder>
-     <zorder>SettingsBtn</zorder>
+     <zorder>quitGameBtn</zorder>
+     <zorder>playBtn</zorder>
+     <zorder>settingsBtn</zorder>
      <zorder>label</zorder>
     </widget>
    </widget>

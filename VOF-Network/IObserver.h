@@ -8,7 +8,7 @@ class IObserver
 public:
     virtual ~IObserver(){};
     virtual void updateFullState(const GameState &tState) = 0;
-    virtual void onPlayerReadyState(quint32 dwPlayerId, bool fIsReady) = 0;
+    virtual void slot_PlayerReadyState(quint32 dwPlayerId, bool fIsReady) = 0;
     virtual void onTileRevealed(quint32 dwPlayerId, quint8 bTileIndex, quint8 bValue) = 0;
 };
 

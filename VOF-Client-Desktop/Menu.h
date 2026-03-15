@@ -27,26 +27,30 @@ public:
     ~Menu();
     void m_setPlayerConfig(quint32 ID = 0, quint16 token = 0, QString name = 0, bool force = false);
 
+protected:
+    void closeEvent(QCloseEvent *event) override;
+
 private slots:
-    void on_PlayBtn_clicked();
-    void on_RulesBtn_clicked();
-    void on_ReplayBtn_clicked();
-    void on_ShopBtn_clicked();
-    void on_SettingsBtn_clicked();
-    void onExitBtn_clicked();
-    void on_BrowserConnect();
-    void on_backToMenu();
+    void on_playBtn_clicked();
+    void on_rulesBtn_clicked();
+    void on_replayBtn_clicked();
+    void on_shopBtn_clicked();
+    void on_settingsBtn_clicked();
+    void on_quitGameBtn_clicked();
+
+    void slot_BrowserConnect();
+    void slot_backToMenu();
 
 private:
     Ui::Menu *ui;
 
     Lobby *lobby;
-    rules *rulesWindow;
+    Rules *rulesWindow;
     Match *matchWindow;
     replay *replayWindow;
     shop *shopWindow;
     Settings *SettingsWindow;
-    Browser *BrowserWindow;
+    Browser *browserWindow;
     Client *m_client;
 };
 

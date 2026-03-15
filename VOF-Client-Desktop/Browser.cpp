@@ -17,19 +17,21 @@ Browser::~Browser()
     delete ui;
 }
 
-void Browser::on_ConnectBtn_clicked()
+void Browser::on_connectBtn_clicked()
 {
     QString SZIP = ui->m_SzIP->toPlainText();
     QString SZPort = ui->m_SzPort->toPlainText();
     if (SZIP.length() >= 6 && (SZPort.length() > 2)){
         QHostAddress adress(SZIP);
-        emit connectRequested(adress, SZPort.toInt());
+        emit sig_connectRequested(adress, SZPort.toInt());
         LOG_OUT << SZIP << " " << SZPort << " " << adress.toString();
+        return;
     }
-    emit connectRequested();
+    emit sig_connectRequested();
 }
 
-void Browser::on_ExitBtn_clicked()
+void Browser::on_exitBtn_clicked()
 {
-    emit backToMenu();
+    this->hide();
+    emit sig_disconnect();
 }

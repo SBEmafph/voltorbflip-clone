@@ -40,15 +40,26 @@ static const quint8 TILE_MINE = 0;        // Mine tile
 static const quint8 TILE_MIN_VALUE = 1;   // Minimum value tile
 static const quint8 TILE_MAX_VALUE = 9;   // Maximum value tile
 
+static QStringList defaultNames = {
+    "Giovanni",
+    "Lance",
+    "Maxie",
+    "Cyrus",
+    "Koga",
+    "Ghetsis",
+    "N",
+    "Lysandre"
+};
+
 static QStringList playerColors = {
     "#FF9999", // Rot (Spieler 1)
     "#FFFF99", // Grün (Spieler 2)
     "#99FF99", // Orange (Spieler 3)
     "#99CCFF", // Blau (Spieler 4)
     "#CC99FF", // Lila (Spieler 5)
-    "#99FFFF", // Türkis
-    "#FFD699",  // Pastell-Rot
-    "#FFB6C1"
+    "#99FFFF", // Türkis (Spieler 6)
+    "#FFD699", // Ocker (Spieler 7)
+    "#FFB6C1"  // Pastell-Rot (Spieler 8)
 };
 
 static QStringList tileColors = {
@@ -76,7 +87,7 @@ enum Action : quint8 {
 };
 
 // Commands sent over network
-enum Command : qint8 {
+enum Command : quint8 {
     LoginRequest    = 0x01,
     NewLoginConfig,
     LoginSuccess,
@@ -84,6 +95,7 @@ enum Command : qint8 {
     LobbyUpdate,
     GameStateUpdate,
     PlayerMove,
+    StartMatch,
     Quit,
     ErrorMessage    = 0x7F
 };

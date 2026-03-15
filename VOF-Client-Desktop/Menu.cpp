@@ -1,6 +1,7 @@
 #include "Menu.h"
 #include "./ui_Menu.h"
 #include "Settings.h"
+#include "Client.h"
 
 #include <QCloseEvent>
 
@@ -8,12 +9,12 @@ Menu::Menu(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::Menu)
     , lobby(new Lobby(this))
-    , rulesWindow(new rules(this))
+    , rulesWindow(new Rules(this))
     , matchWindow(new Match(this))
     , replayWindow(new replay(this))
     , shopWindow(new shop(this))
     , SettingsWindow(new Settings(this))
-    , BrowserWindow(new Browser(this))
+    , browserWindow(new Browser(this))
     , m_client(new Client(this))
 {
     ui->setupUi(this);
@@ -23,45 +24,75 @@ Menu::Menu(QWidget *parent)
     ui->stack->setCurrentWidget(ui->menu);
 
     // Browser Form
-    connect(BrowserWindow, &Browser::connectRequested,
-            m_client, &Client::slot_attach);
+    connect(browserWindow, &Browser::sig_connectRequested,
+            m_client, &Client::on_attach);
 
+    connect(browserWindow, &Browser::sig_disconnect,
+            m_client, &Client::on_detach);
+
+    // Client
     connect(m_client, &Client::sig_connected,
-            this, &Menu::on_BrowserConnect);
+            this, &Menu::slot_BrowserConnect);
+
+    connect(m_client, &Client::sig_lobbyUpdate,
+            lobby, &Lobby::slot_updateLobby);
+
+    connect(m_client, &Client::sig_setHostState,
+            lobby , &Lobby::slot_setHostState);
+
+    connect(lobby, &Lobby::sig_requestStart,
+            m_client , &Client::slot_sendStartMatch);
+
+    connect(m_client, &Client::sig_gameStateUpdate,
+            matchWindow, &Match::slot_updateEnemyFields);
+
+    connect(m_client, &Client::sig_matchStarted,
+            lobby, &Lobby::slot_startMatch);
+
+    // Lobby -> Client
+    connect(lobby, &Lobby::sig_isReady,
+            m_client , &Client::slot_changeReadyState);
 
     // Lobby → Match
-    connect(lobby, &Lobby::startMatch, this, [this]() {
+    connect(lobby, &Lobby::sig_startMatch, this, [this]() {
         ui->stack->setCurrentWidget(matchWindow);
     });
 
     // Lobby → zurück zum Menu
-    connect(lobby, &Lobby::backToMenu,
-            this, &Menu::on_backToMenu);
+    connect(lobby, &Lobby::sig_backToMenu,
+            this, &Menu::slot_backToMenu);
 
 
     // Match Form
     connect(matchWindow, &Match::sig_backToMenu,
-            this, &Menu::on_backToMenu);
+            this, &Menu::slot_backToMenu);
 
     connect(matchWindow, &Match::sig_action,
             m_client, &Client::slot_sendMatchAction);
 
-    connect(ui->ReplayBtn, &QPushButton::clicked,
-            this, &Menu::on_ReplayBtn_clicked);
-    connect(ui->ShopBtn, &QPushButton::clicked,
-            this, &Menu::on_ShopBtn_clicked);
-    connect(ui->SettingsBtn, &QPushButton::clicked,
-            this, &Menu::on_SettingsBtn_clicked);
-    connect(ui->PlayBtn, &QPushButton::clicked,
-            this, &Menu::on_PlayBtn_clicked);
-    connect(ui->ExitBtn, &QPushButton::clicked,
-            this, &Menu::onExitBtn_clicked);
+
+    //Menu Buttons
+    connect(ui->replayBtn, &QPushButton::clicked,
+            this, &Menu::on_replayBtn_clicked);
+    connect(ui->shopBtn, &QPushButton::clicked,
+            this, &Menu::on_shopBtn_clicked);
+    connect(ui->settingsBtn, &QPushButton::clicked,
+            this, &Menu::on_settingsBtn_clicked);
+    connect(ui->playBtn, &QPushButton::clicked,
+            this, &Menu::on_playBtn_clicked);
+    connect(ui->quitGameBtn, &QPushButton::clicked,
+            this, &Menu::on_quitGameBtn_clicked);
 }
 
 void Menu::m_setPlayerConfig(quint32 ID, quint16 token, QString name, bool force)
 {
-    m_client->m_updateConfig(ID, token, name, force);
+    m_client->m_updateInternalConfig(ID, token, name, force);
+    SettingsWindow->m_setPlayerName(name);
+}
 
+void Menu::closeEvent(QCloseEvent *event)
+{
+    on_quitGameBtn_clicked();
 }
 
 Menu::~Menu()
@@ -73,51 +104,51 @@ Menu::~Menu()
     delete replayWindow;
     delete shopWindow;
     delete SettingsWindow;
-    delete BrowserWindow;
+    delete browserWindow;
 }
 
-void Menu::on_PlayBtn_clicked()
+void Menu::on_playBtn_clicked()
 {
-    lobby->setPlayerName(SettingsWindow->getPlayerName());
-    BrowserWindow->show();
+    //lobby->setPlayerName(1, SettingsWindow->m_getPlayerName());
+    browserWindow->show();
 }
 
-void Menu::on_BrowserConnect()
+void Menu::slot_BrowserConnect()
 {
-    BrowserWindow->hide();
+    browserWindow->hide();
     ui->stack->setCurrentWidget(lobby);
 }
 
-void Menu::on_backToMenu()
+void Menu::slot_backToMenu()
 {
-    m_client->slot_detach();
+    m_client->on_detach();
     ui->stack->setCurrentWidget(ui->menu);
 }
 
-void Menu::on_RulesBtn_clicked()
+void Menu::on_rulesBtn_clicked()
 {
     rulesWindow->show();
 }
 
-void Menu::on_SettingsBtn_clicked()
+void Menu::on_settingsBtn_clicked()
 {
     SettingsWindow->show();
 }
 
-void Menu::on_ReplayBtn_clicked()
+void Menu::on_replayBtn_clicked()
 {
     replayWindow->show();
 }
 
-void Menu::on_ShopBtn_clicked()
+void Menu::on_shopBtn_clicked()
 {
     shopWindow->show();
 }
 
 
-void Menu::onExitBtn_clicked()
+void Menu::on_quitGameBtn_clicked()
 {
-    m_client->slot_detach();
+    m_client->on_detach();
 
     if (m_client->m_getTcpSocket()->state() == QAbstractSocket::UnconnectedState) {
         LOG_OUT << "Socket already closed. Quitting immediately." << Qt::endl;

@@ -9,7 +9,7 @@
 #include "Replay.h"
 #include "CardButton.h"
 #include "GlobalDefines.h"
-#include "Gamelogic.h"
+#include "GameLogic.h"
 
 namespace Ui {
 class Match;
@@ -36,11 +36,11 @@ signals:
     void sig_backToMenu();
     void sig_action(VOF::Action action, quint8 x, quint8 y);
 
-private slots:
+public slots:
     void on_quitBtn_clicked();
     void on_openMemoButtons();
     void on_closeMemoButtons();
-    void on_updateEnemies();
+    void slot_updateEnemyFields(const GameState& gameState, quint8 ownSlotID);
     void openReplay(int replayId);
 
 private:

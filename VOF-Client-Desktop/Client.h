@@ -17,29 +17,42 @@ class Client : public QObject
 signals:
     void sig_identificationSent();
     //void sig_matchAction(VOF::Action action, quint8 x, quint8 y);
+    void sig_newLogin(quint32 id, quint16 token, const QString& name, bool force);
     void sig_newLoginSaved();
     void sig_connected();
     void sig_lobbySelected();
-
-public:
-    explicit Client(QObject *parent = nullptr);
+    void sig_lobbyUpdate(const QString& name, quint8 bSlotID, bool fIsReady);
+    void sig_setHostState(bool isHost);
+    void sig_gameStateUpdate(const GameState& gameState, quint8 ownSlotID);
+    void sig_matchStarted();
 
 public slots:
-    void slot_onReadyRead();
-    void slot_attach(QHostAddress ipAdressIn = QHostAddress::LocalHost, quint16 port = 16000);
-    void slot_detach();
-    void slot_joinSelectedLobby();
+    void on_ReadyRead();
+    void on_attach(QHostAddress ipAdressIn = QHostAddress::LocalHost, quint16 port = 16000);
+    void on_detach();
 
     void m_readLobbyState();
     bool m_checkStartLobby();
-    void m_sendIdentification();
 
+    void slot_changeReadyState();
+    void slot_joinSelectedLobby();
+    void slot_sendStartMatch();
+    void slot_sendIdentification();
     void slot_sendMatchAction(VOF::Action action, quint8 x, quint8 y);
+    void slot_updateConfig(quint32 ID = 0, quint16 token = 0, QString name = "", bool force = false);
+    void m_updateLobbyState(const QString& name, quint8 bSlotID, bool fIsReady);
 
-    void m_updateConfig(quint32 ID = 0, quint16 token = 0, QString name = "", bool force = false);
+public:
+    explicit Client(QObject *parent = nullptr);
+    bool m_updateInternalConfig(
+        quint32 ID = 0,
+        quint16 token = 0,
+        QString name = "",
+        bool force = false
+    );
 
-    QTcpSocket* m_getTcpSocket() { return m_tcpSocket; };
-    void m_setTcpSocket(QTcpSocket * sIn) { m_tcpSocket = sIn; m_tcpSocket->setParent(this); }
+    QTcpSocket* m_getTcpSocket() { return m_pTcpSocket; };
+    void m_setTcpSocket(QTcpSocket * sIn) { m_pTcpSocket = sIn; m_pTcpSocket->setParent(this); }
 
     quint32 m_getID() { return m_dwID; }
     void m_setID(quint32 dwIDin) { m_dwID = dwIDin; }
@@ -50,23 +63,23 @@ public slots:
     QString m_getName() { return m_szName; }
     void m_setName(QString szNamein) { m_szName = szNamein; }
 
-    quint8 m_getLobbyID() { return m_bLobbyID; }
-    void m_setLobbyID(quint8 bLobbyIdIn) { m_bLobbyID = bLobbyIdIn; }
-
-
-private slots:
+    quint8 m_getLobbyID() { return m_bLobbySlotID; }
+    void m_setLobbyID(quint8 bLobbyIdIn) { m_bLobbySlotID = bLobbyIdIn; }
 
 private:
-    QTcpSocket *m_tcpSocket = nullptr;
+    QTcpSocket *m_pTcpSocket = nullptr;
     QDataStream m_in;
     QDataStream m_out;
 
     quint32 m_dwID;
     quint16 m_wToken;
     QString m_szName;
-    quint8 m_selectedLobbyID;
-    quint8 m_bLobbyID;
+    quint8 m_bLobbyID = 0;
+    quint8 m_bLobbySlotID;
+    bool m_fReady = false;
     bool m_fInLobby = false;
+
+    GameState m_tGamestate;
 
     void m_loadConfig(bool force = false);
     quint16 m_packMove(VOF::Action action, quint8 x, quint8 y);

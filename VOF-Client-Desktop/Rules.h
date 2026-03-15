@@ -5,25 +5,22 @@
 
 namespace Ui
 {
-    class rules;
+    class Rules;
 }
 
-class rules : public QWidget
+class Rules : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit rules(QWidget *parent = nullptr);
-    ~rules();
-
-signals:
-    void backToMenu();
+    explicit Rules(QWidget *parent = nullptr);
+    ~Rules();
 
 private slots:
     void on_exitBtn_clicked();
 
 private:
-    Ui::rules *ui;
+    Ui::Rules *ui;
 };
 
 #endif // RULES_H

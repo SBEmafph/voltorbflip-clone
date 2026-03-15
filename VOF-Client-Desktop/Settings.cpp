@@ -54,7 +54,7 @@ void Settings::on_saveBtn_clicked()
     }
 }
 
-QString Settings::getPlayerName() const
+QString Settings::m_getPlayerName() const
 {
     return m_playerName;
 }

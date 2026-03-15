@@ -1,9 +1,9 @@
 #include "Rules.h"
 #include "ui_Rules.h"
 
-rules::rules(QWidget *parent)
+Rules::Rules(QWidget *parent)
     : QWidget(parent)
-    , ui(new Ui::rules)
+    , ui(new Ui::Rules)
 {
     ui->setupUi(this);
 
@@ -11,12 +11,12 @@ rules::rules(QWidget *parent)
     this->setAttribute(Qt::WA_ShowWithoutActivating, false);
 }
 
-rules::~rules()
+Rules::~Rules()
 {
     delete ui;
 }
 
-void rules::on_exitBtn_clicked()
+void Rules::on_exitBtn_clicked()
 {
     this->hide();
 }

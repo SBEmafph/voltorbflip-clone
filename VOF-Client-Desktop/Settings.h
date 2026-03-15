@@ -17,7 +17,8 @@ public:
     explicit Settings(QWidget *parent = nullptr);
     ~Settings();
 
-    QString getPlayerName() const;
+    QString m_getPlayerName() const;
+    void m_setPlayerName(QString sz_nameIn) {m_playerName = sz_nameIn;};
 
 private slots:
     void on_ExitBtn_clicked();

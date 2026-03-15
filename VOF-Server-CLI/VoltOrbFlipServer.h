@@ -9,7 +9,7 @@
 #include "GlobalDefines.h"
 #include "NetworkObserver.h"
 #include "PlayerProfile.h"
-#include "Gamelogic.h"
+#include "GameLogic.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -24,7 +24,7 @@ class VoltOrbFlipServer : public QObject
 signals:
     // ===== Signals for client communication =====
     void sig_identificationValid(quint32 dwIDout, quint16 wTokenout);
-    void sig_lobbyUpdate(NWObs* pNWObs, quint8 lobbyIDin = 0);
+    void sig_lobbyUpdate(QString szName, quint8 bSlotID, quint8 bLobbyID = 0, bool fIsReady = 0);
     void sig_loginSuccessful();
 
 public:
@@ -46,12 +46,16 @@ public:
     Field m_convertBoardToField(const PlayerSessionState& player);
     void m_convertFieldToBoard(PlayerSessionState& player, const Field& field);
 
+    void m_broadcastStartMatch();
+
 public slots:
     // ===== Network / lobby handling =====
     void slot_assignLobby(NWObs* pNWObs, quint8 lobbyIDin = 0);
     void slot_attach();
     void slot_updateClientsGameState();
-    void slot_onLobbyStatusUpdate(quint32 dwPlayerId, bool fIsReady);
+    void slot_onLobbyStatusUpdate(QString szName, quint8 bSlotID, quint8 bLobbyID = 0, bool fIsReady = 0);
+    void slot_readyStateChanged(quint8 bLobbyID, quint8 bLobbySlotID, bool fIsReady);
+    void slot_processStartMatch(NWObs * pNWObs);
 
     // ===== Login / session handling =====
     void slot_processHandshake(NWObs* pNWObs, quint32 ID, quint16 token);

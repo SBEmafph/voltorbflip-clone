@@ -145,7 +145,7 @@ border: 2px solid #ffffff;</string>
     <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
    </property>
   </widget>
-  <widget class="QPushButton" name="ExitBtn">
+  <widget class="QPushButton" name="exitBtn">
    <property name="geometry">
     <rect>
      <x>460</x>
@@ -162,14 +162,14 @@ border: 2px solid #ffffff;</string>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">QPushButton#ExitBtn {
+    <string notr="true">QPushButton#exitBtn {
     border-radius: 5px;
     background-color: #de5331;
     color: white;
     border: 2px solid #ffffff;
 }
 
-QPushButton#ExitBtn:hover {
+QPushButton#exitBtn:hover {
     background-color: #e86241;
 }</string>
    </property>
@@ -183,7 +183,7 @@ QPushButton#ExitBtn:hover {
     </size>
    </property>
   </widget>
-  <widget class="QPushButton" name="ConnectBtn">
+  <widget class="QPushButton" name="connectBtn">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -200,14 +200,14 @@ QPushButton#ExitBtn:hover {
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">QPushButton#ConnectBtn {
+    <string notr="true">QPushButton#connectBtn {
     border-radius: 5px;
     background-color: #309F6A;
     color: white;
     border: 2px solid #ffffff;
 }
 
-QPushButton#ConnectBtn:hover {
+QPushButton#connectBtn:hover {
     background-color: #3cb079;
 }</string>
    </property>
@@ -296,8 +296,8 @@ border: 2px solid #ffffff;</string>
   <zorder>label_5</zorder>
   <zorder>label_6</zorder>
   <zorder>m_SzPort</zorder>
-  <zorder>ConnectBtn</zorder>
-  <zorder>ExitBtn</zorder>
+  <zorder>connectBtn</zorder>
+  <zorder>exitBtn</zorder>
  </widget>
  <resources>
   <include location="resources.qrc"/>
