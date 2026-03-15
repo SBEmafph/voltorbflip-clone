@@ -3,5 +3,8 @@
         <file>images/Voltorb.png</file>
         <file>images/CardPattern.png</file>
         <file>images/CheckeredPattern.png</file>
+        <file>images/defence.png</file>
+        <file>images/magnifying-glass.png</file>
+        <file>images/steal.png</file>
     </qresource>
 </RCC>
