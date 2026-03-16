@@ -49,7 +49,6 @@ Lobby::~Lobby()
 void Lobby::on_startBtn_clicked()
 {
     if(m_fIsHost){
-        // if (m_matchTimer->isActive()) { slot_onMatchTimeout(); }
         emit sig_requestStart();
     }
     else{
@@ -86,6 +85,12 @@ void Lobby::slot_onMatchTimeout()
 
 void Lobby::slot_startMatch()
 {
+    if (m_matchTimer->isActive()) {
+        m_matchTimer->stop();
+        m_secondsLeft = 10;
+        emit sig_startMatch();
+    }
+
     m_secondsLeft = 10;
     ui->timerLabel->setText("Game starts in " + QString::number(m_secondsLeft) + "s");
     m_matchTimer->start();

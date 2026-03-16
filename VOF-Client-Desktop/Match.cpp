@@ -1,5 +1,6 @@
 #include "Match.h"
 #include "ui_Match.h"
+#include "GameLogic.h"
 
 #include <QTimer>
 #include <QCoreApplication>
@@ -13,8 +14,7 @@ Match::Match(QWidget *parent)
     ui->setupUi(this);
     this->setFixedSize(this->size());
 
-    ui->score_P1->setRange(0, 100);
-    ui->score_P1->setValue(0);
+    m_initializeProgressBars();
 
     m_setUpMemoButtons();
 
@@ -27,8 +27,6 @@ Match::Match(QWidget *parent)
 
     m_level = 1;
     m_totalScore = 0;
-
-    m_startLevel();
 
     m_replayFile = buildReplayPath(m_gameId);
     GameLogic::ResetReplayFile(m_replayFile);
@@ -64,16 +62,13 @@ void Match::on_closeMemoButtons()
     m_setMemoButtonsVisible(false);
 }
 
-void Match::slot_updateEnemyFields(const GameState& gameState, quint8 ownSlotID)
+void Match::slot_updateBoard(quint8 ownSlotID)
 {
-    for (auto it = gameState.tPlayerList.begin(); it != gameState.tPlayerList.end(); ++it)
+    for (auto it = m_pGameState->tPlayerList.begin(); it != m_pGameState->tPlayerList.end(); ++it)
     {
         quint8 playerId = it.key();
-        if (playerId == ownSlotID) continue; // Skip eigener Spieler
-
         const PlayerSessionState& player = it.value();
 
-        // Alle revealed Tiles anzeigen
         for (int i = 0; i < 25; ++i)
         {
             if (player.fRevealed[i])
@@ -81,10 +76,21 @@ void Match::slot_updateEnemyFields(const GameState& gameState, quint8 ownSlotID)
                 int row = i / 5;
                 int col = i % 5;
                 VOF::Tile tileValue = static_cast<VOF::Tile>(player.bBoard[i]);
-                m_updateTile(playerId, row, col, tileValue);
+
+                if (playerId == ownSlotID) {
+                    m_updatePlayerTile(row, col);
+                }
+
+                m_updateEnemyTile(playerId, row, col, tileValue);
             }
         }
     }
+}
+
+void Match::slot_setUpGame(quint8 bSlotID)
+{
+    m_bSlotID = bSlotID;
+    m_startLevel();
 }
 
 void Match::m_setUpMemoButtons()
@@ -137,7 +143,7 @@ void Match::m_setUpBoard()
     for (int row = 0; row < 5; ++row) {
         for (int col = 0; col < 5; ++col) {
             CardButton *btn = new CardButton(row, col, this);
-            btn->setObjectName(QString("player_0_Tile_%1_%2").arg(row, col));
+            btn->setObjectName(QString("player_client_Tile_%1_%2").arg(row).arg(col));
             btn->setStyleSheet("background-color: #2D7D46; border: 2px solid #E3B448;");
             ui->gameGrid->addWidget(btn, row, col);
 
@@ -151,7 +157,7 @@ void Match::m_setUpBoard()
 void Match::m_setUpEnemyBoards()
 {
     //field showing other players
-    for(int player = 1; player < 8; player++) {
+    for(int player = 0; player < 8; player++) {
         QWidget *enemyWidget = new QWidget(this);
         enemyWidget->setObjectName(QString("enemy_%1").arg(player));
         int playerRow = player % 4;
@@ -203,12 +209,13 @@ void Match::m_handleCardClick(CardButton *btn)
         return;
     }
 
-    if (m_revealed[idx])
+    if (m_pGameState->tPlayerList[m_bSlotID].fRevealed[idx])
         return;
 
+    /*
     GameLogic::RevealTileWithScore(
-        m_field,
-        m_revealed,
+        m_pGameState->tPlayerList[m_bSlotID].bBoard,
+        m_pGameState->tPlayerList[m_bSlotID].fRevealed,
         btn->r,
         btn->c,
         m_currentScore,
@@ -226,22 +233,13 @@ void Match::m_handleCardClick(CardButton *btn)
         btn->c
         );
 
-    quint8 value = m_field[idx];
 
-    if (value == VOF::TILE_MINE) {
-        btn->setText("X");
-        btn->setStyleSheet("background-color: #B71C1C; color: white;");
-    } else {
-        btn->setText(QString::number(value));
-        btn->setStyleSheet("background-color: #4CAF50; color: black;");
-    }
-
-    btn->setEnabled(false);
-
-    for (int i = 0; i < 4; ++i)
-        btn->memos[i]->hide();
-
-    if (GameLogic::FinishLevelIfCompleted(m_field, m_revealed, m_currentScore, m_totalScore, m_level))
+    if (GameLogic::FinishLevelIfCompleted(
+            m_pGameState->tPlayerList[m_bSlotID].bBoard,
+            m_pGameState->tPlayerList[m_bSlotID].fRevealed,
+            m_currentScore,
+            m_totalScore,
+            m_level))
     {
         m_updateWidgets();
 
@@ -313,39 +311,87 @@ void Match::m_handleCardClick(CardButton *btn)
 
     m_updateWidgets();
 
-    quint8 tileValue = m_field[idx];
+    quint8 tileValue = m_pGameState->tPlayerList[m_bSlotID].bBoard[idx];
     if(tileValue == 0) tileValue = 4;
     m_updateTile(1, btn->r, btn->c, static_cast<VOF::Tile>(tileValue));
+    */
 
     emit sig_action(currentAction, btn->c, btn->r);
 }
 
-void Match::m_updateWidgets()
-{
-    ui->CurrentScoreLabel->setText(QString("Current: %1").arg(m_currentScore)); // Current Score
-    ui->TotalScoreLabel->setText(QString("Total: %1").arg(m_totalScore)); // Total Score
-    ui->LevelLabel->setText(QString("Level: %1").arg(m_level)); // Current Level
-    ui->score_P1->setValue(m_totalScore); // Scorebar
+void Match::m_initializeProgressBars(){
+    for(int i = 1; i < VOF::MAX_CLIENTS; i++){
+        QString searchName = QString("score_P%1").arg(i);
+        QProgressBar *foundTile = this->findChild<QProgressBar *>(searchName);
+        if(foundTile){
+            foundTile->setRange(0, 100);
+            foundTile->setValue(100);
+        }
+    }
 }
 
-void Match::m_updateTile(quint8 player, quint8 row, quint8 col, VOF::Tile tile)
+void Match::m_updateProgressBars(){
+    for (auto it = m_pGameState->tPlayerList.begin(); it != m_pGameState->tPlayerList.end(); ++it)
+    {
+        quint8 playerId = it.key();
+        const PlayerSessionState& player = it.value();
+
+        QString searchName = QString("score_P%1").arg(playerId+1);
+        QProgressBar *foundTile = this->findChild<QProgressBar *>(searchName);
+        if(foundTile){
+            foundTile->setValue(player.bTotalScore); // Scorebar
+        }
+    }
+}
+
+void Match::m_updateWidgets()
+{
+    const PlayerSessionState& playerClient = m_pGameState->tPlayerList[m_bSlotID];
+    ui->CurrentScoreLabel->setText(QString("Current: %1").arg(playerClient.bCurrentScore)); // Current Score
+    ui->TotalScoreLabel->setText(QString("Total: %1").arg(playerClient.bTotalScore)); // Total Score
+    ui->LevelLabel->setText(QString("Level: %1").arg(playerClient.bLevel)); // Current Level
+
+    m_updateProgressBars();
+}
+
+void Match::m_updateEnemyTile(quint8 player, quint8 row, quint8 col, VOF::Tile tile)
 {
     QString searchName = QString("player_%1_Tile_%2_%3").arg(player).arg(row).arg(col);
     QLabel *foundTile = this->findChild<QLabel *>(searchName);
-    LOG_OUT << searchName << " tile *" << foundTile << Qt::endl;
+    //LOG_OUT << searchName << " tile *" << foundTile << Qt::endl;
     if (foundTile) {
         foundTile->setStyleSheet(QString("background-color: %1").arg(VOF::tileColors[tile-1]));
     }
+}
 
+void Match::m_updatePlayerTile(quint8 row, quint8 col)
+{
+    QString searchName = QString("player_client_Tile_%1_%2").arg(row).arg(col);
+    CardButton *btn = this->findChild<CardButton *>(searchName);
+    //LOG_OUT << searchName << " tile *" << btn << Qt::endl;
+    if (btn) {
+        const int idx = btn->r * 5 + btn->c;
+        quint8 value = m_pGameState->tPlayerList[m_bSlotID].bBoard[idx];
+
+        if (value == VOF::Tile::Bomb) {
+            btn->setText("X");
+            btn->setStyleSheet("background-color: #B71C1C; color: white;");
+        } else {
+            btn->setText(QString::number(value));
+            btn->setStyleSheet("background-color: #4CAF50; color: black;");
+        }
+
+        btn->setEnabled(false);
+
+        for (int i = 0; i < 4; ++i)
+            btn->memos[i]->hide();
+
+        m_updateWidgets();
+    }
 }
 
 void Match::m_startLevel()
 {
-    m_levelCompleted = false;
-
-    m_field = GameLogic::GenerateField5x5_Level(m_level);
-    std::fill(std::begin(m_revealed), std::end(m_revealed), false);
-
     m_currentScore = 0;
     m_resetBoard();
     m_updateWidgets();
@@ -383,11 +429,16 @@ void Match::m_updateRowColLabels(
 void Match::m_resetBoard()
 {
     currentAction = VOF::Click;
-
     m_currentScore = 0;
 
     QVector<quint8> rowSums, colSums, rowMines, colMines;
-    GameLogic::CalculateSumsAndMines(m_field, rowSums, colSums, rowMines, colMines);
+    GameLogic::CalculateSumsAndMines(
+        m_pGameState->tPlayerList[m_bSlotID].bBoard,
+        rowSums,
+        colSums,
+        rowMines,
+        colMines
+        );
     m_updateRowColLabels(rowSums, colSums, rowMines, colMines);
 
     memoGroup->setExclusive(false);
@@ -408,8 +459,6 @@ void Match::m_resetBoard()
             }
         }
     }
-
-    m_updateWidgets();
 }
 
 QString Match::buildFieldState() const
@@ -421,7 +470,7 @@ QString Match::buildFieldState() const
         if (i > 0)
             state += ";";
 
-        state += QString::number(m_field[i]);
+        state += QString::number(m_pGameState->tPlayerList[m_bSlotID].bBoard[i]);
     }
 
     return state;

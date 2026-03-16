@@ -23,8 +23,9 @@ signals:
     void sig_lobbySelected();
     void sig_lobbyUpdate(const QString& name, quint8 bSlotID, bool fIsReady);
     void sig_setHostState(bool isHost);
-    void sig_gameStateUpdate(const GameState& gameState, quint8 ownSlotID);
+    void sig_gameStateUpdate(quint8 ownSlotID);
     void sig_matchStarted();
+    void sig_setUpGame(quint8 bSlotID);
 
 public slots:
     void on_ReadyRead();
@@ -66,6 +67,7 @@ public:
     quint8 m_getLobbyID() { return m_bLobbySlotID; }
     void m_setLobbyID(quint8 bLobbyIdIn) { m_bLobbySlotID = bLobbyIdIn; }
 
+    void setGameState(std::shared_ptr<GameState> gameState) { m_pGameState = gameState; };
 private:
     QTcpSocket *m_pTcpSocket = nullptr;
     QDataStream m_in;
@@ -79,7 +81,7 @@ private:
     bool m_fReady = false;
     bool m_fInLobby = false;
 
-    GameState m_tGamestate;
+    std::shared_ptr<GameState> m_pGameState;
 
     void m_loadConfig(bool force = false);
     quint16 m_packMove(VOF::Action action, quint8 x, quint8 y);

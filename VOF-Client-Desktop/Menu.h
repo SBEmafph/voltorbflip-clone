@@ -52,6 +52,7 @@ private:
     Settings *SettingsWindow;
     Browser *browserWindow;
     Client *m_client;
+    std::shared_ptr<GameState> m_pGameState;
 };
 
 

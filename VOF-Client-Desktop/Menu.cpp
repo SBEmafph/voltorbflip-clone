@@ -23,6 +23,10 @@ Menu::Menu(QWidget *parent)
     ui->stack->addWidget(matchWindow);  //index 2
     ui->stack->setCurrentWidget(ui->menu);
 
+    m_pGameState = std::make_shared<GameState>();
+    m_client->setGameState(m_pGameState);
+    matchWindow->setGameState(m_pGameState);
+
     // Browser Form
     connect(browserWindow, &Browser::sig_connectRequested,
             m_client, &Client::on_attach);
@@ -44,7 +48,10 @@ Menu::Menu(QWidget *parent)
             m_client , &Client::slot_sendStartMatch);
 
     connect(m_client, &Client::sig_gameStateUpdate,
-            matchWindow, &Match::slot_updateEnemyFields);
+            matchWindow, &Match::slot_updateBoard);
+
+    connect(m_client, &Client::sig_setUpGame,
+            matchWindow, &Match::slot_setUpGame);
 
     connect(m_client, &Client::sig_matchStarted,
             lobby, &Lobby::slot_startMatch);

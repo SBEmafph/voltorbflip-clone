@@ -9,7 +9,6 @@
 #include "Replay.h"
 #include "CardButton.h"
 #include "GlobalDefines.h"
-#include "GameLogic.h"
 
 namespace Ui {
 class Match;
@@ -32,6 +31,8 @@ public:
         const QVector<quint8>& ColMines
     );
 
+    void setGameState(std::shared_ptr<GameState> gameState) { m_pGameState = gameState; };
+
 signals:
     void sig_backToMenu();
     void sig_action(VOF::Action action, quint8 x, quint8 y);
@@ -40,7 +41,10 @@ public slots:
     void on_quitBtn_clicked();
     void on_openMemoButtons();
     void on_closeMemoButtons();
-    void slot_updateEnemyFields(const GameState& gameState, quint8 ownSlotID);
+
+    void slot_updateBoard(quint8 ownSlotID);
+    void slot_setUpGame(quint8 bSlotID);
+
     void openReplay(int replayId);
 
 private:
@@ -50,13 +54,14 @@ private:
     QGridLayout *gridLayout;
 
     // Game state
+    std::shared_ptr<GameState> m_pGameState;
+    quint8 m_bSlotID;
+
     VOF::Action currentAction = VOF::Click;
-    Field m_field;            // 5x5 game field (25 values)
-    bool  m_revealed[25];     // revealed fields
+
     quint8 m_level = 1;
     quint8 m_currentScore = 0;
     quint8 m_totalScore = 0;
-    bool m_levelCompleted = false;
 
     // Memo buttons
     QButtonGroup *memoGroup;
@@ -83,8 +88,12 @@ private:
     void m_handleCardClick(CardButton *btn);
 
     void m_updateWidgets();
-    void m_updateTile(quint8 player, quint8 row, quint8 col, VOF::Tile tile);
+    void m_updateEnemyTile(quint8 player, quint8 row, quint8 col, VOF::Tile tile);
+    void m_updatePlayerTile(quint8 row, quint8 col);
+
     QString buildFieldState() const;
+    void m_updateProgressBars();
+    void m_initializeProgressBars();
 };
 
 #endif // MATCH_H

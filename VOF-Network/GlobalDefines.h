@@ -31,6 +31,7 @@ static const quint8 MAX_CLIENTS = 8;
 // Board dimensions
 static const quint8 ROW_LENGTH = 5;
 static const quint8 COLUMN_LENGTH = 5;
+static const quint8 TILE_COUNT = ROW_LENGTH * COLUMN_LENGTH;
 
 // Server default port
 static const quint16 DEFAULT_PORT = 16000;
@@ -130,8 +131,8 @@ struct PlayerSessionState {
     quint8 bSlotId;
 
     // Game data only during match
-    quint8 bBoard[(VOF::ROW_LENGTH * VOF::COLUMN_LENGTH) - 1]; // 25 tiles
-    bool fRevealed[(VOF::ROW_LENGTH * VOF::COLUMN_LENGTH) - 1]; // revealed flags
+    quint8 bBoard[VOF::TILE_COUNT]; // 25 tiles
+    bool fRevealed[VOF::TILE_COUNT]; // revealed flags
     quint8 bCurrentScore = 0;
     quint8 bTotalScore = 0;
     quint8 bLevel = 1;

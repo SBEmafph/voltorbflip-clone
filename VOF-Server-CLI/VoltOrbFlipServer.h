@@ -9,7 +9,6 @@
 #include "GlobalDefines.h"
 #include "NetworkObserver.h"
 #include "PlayerProfile.h"
-#include "GameLogic.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -41,10 +40,6 @@ public:
     // ===== Match / game management =====
     void m_startMatch();
     void m_generateBoard(PlayerSessionState& player);
-
-    // ===== Conversion between internal board representations =====
-    Field m_convertBoardToField(const PlayerSessionState& player);
-    void m_convertFieldToBoard(PlayerSessionState& player, const Field& field);
 
     void m_broadcastStartMatch();
 
@@ -90,6 +85,7 @@ private:
     // ===== Game end / win condition handling =====
     void m_checkWinCondition();
     void m_handlePlayerWin(quint8 bWinnerSlot);
+    void m_revealBoard(PlayerSessionState &player);
 };
 
 #endif // VOLTORBFLIPSERVER_H

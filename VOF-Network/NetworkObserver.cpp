@@ -24,7 +24,7 @@ NWObs::NWObs(QTcpSocket* clientSocket, QObject* parent)
 void NWObs::updateFullState(const GameState &state)
 {
     m_out << VOF::Command::GameStateUpdate;
-
+    //LOG_OUT << "[NW] Updating full state " << Qt::endl;
     quint8 playerCount = state.tPlayerList.size();
     m_out << playerCount;
 
@@ -40,16 +40,22 @@ void NWObs::updateFullState(const GameState &state)
         m_out << player.bTotalScore;
         m_out << player.bLevel;
 
+        LOG_OUT << player.bBoard[0] << Qt::endl;
+
         // Nur revealed Tiles übertragen
         for (int i = 0; i < 25; ++i)
         {
-            if (player.fRevealed[i])
-            {
-                m_out << static_cast<quint8>(i); // Position
-                m_out << player.bBoard[i];       // Wert
+            if (slotId == m_bLobbySlotID){
+                m_out << static_cast<quint8>(i);
+                m_out << static_cast<quint8>(player.bBoard[i] + player.fRevealed[i] * 8);
+            }
+            else{
+                if(player.fRevealed[i]){
+                    m_out << static_cast<quint8>(i); // Position
+                    m_out << player.bBoard[i];       // Wert
+                }
             }
         }
-
         m_out << static_cast<quint8>(255);
     }
 }
@@ -131,8 +137,8 @@ void NWObs::slot_onReadyRead()
     quint8 command;
     m_in >> command;
 
-    LOG_OUT << "command " << command << Qt::endl;
-    LOG_OUT << "Bytes available: " << m_pTcpSocket->bytesAvailable() << Qt::endl;
+    //LOG_OUT << "command " << command << Qt::endl;
+    //LOG_OUT << "Bytes available: " << m_pTcpSocket->bytesAvailable() << Qt::endl;
 
     if(m_waitNewLoginAck)
     {
@@ -166,13 +172,11 @@ void NWObs::slot_onReadyRead()
         break;
     case VOF::Command::LobbyJoinRequest:
         m_in >> dwID >> wToken >> bLobbyID;
-        LOG_OUT << "lobbyjoinrequest " << " id " << dwID  << " token " << wToken << " lobby " << bLobbyID << Qt::endl;
+        //LOG_OUT << "lobbyjoinrequest " << " id " << dwID  << " token " << wToken << " lobby " << bLobbyID << Qt::endl;
         break;
     case VOF::Command::LobbyUpdate:
         m_in >> bLobbyID >> bSlotID >> fIsReady;
-        LOG_OUT << "ready " << fIsReady
-                << " lobby " << bLobbyID
-                << " slot " << bSlotID << Qt::endl;
+        //LOG_OUT << "ready " << fIsReady << " lobby " << bLobbyID << " slot " << bSlotID << Qt::endl;
         break;
     case VOF::Command::PlayerMove:
         m_in >> wPackedMove;

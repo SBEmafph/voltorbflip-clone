@@ -6,6 +6,8 @@
 Client::Client(QObject *parent)
     : QObject{parent}
     , m_pTcpSocket (new QTcpSocket(this))
+    , m_pGameState(std::make_shared<GameState>())
+
 {
     m_in.setDevice(m_pTcpSocket);
     m_in.setVersion(QDataStream::Qt_6_5);
@@ -75,29 +77,31 @@ void Client::on_ReadyRead()
 
         m_in >> command;
 
-        LOG_OUT << "command " << command << Qt::endl;
-
         switch (command){
         case VOF::Command::LoginRequest:{
+            //LOG_OUT << "LoginRequest " << Qt::endl;
             if (!m_in.commitTransaction()) return;
             slot_sendIdentification();
             break; }
         case VOF::Command::NewLoginConfig:{
+            //LOG_OUT << "NewLoginConfig " << Qt::endl;
             m_in >> tempID;
             m_in >> tempToken;
 
             if (!m_in.commitTransaction()) return;
-            LOG_OUT << "clientOnReadyRead Prev " << m_dwID << " : " << m_wToken << Qt::endl;
+            //LOG_OUT << "clientOnReadyRead Prev " << m_dwID << " : " << m_wToken << Qt::endl;
             m_dwID = tempID;
             m_wToken = tempToken;
-            LOG_OUT << "clientOnReadyRead After " << m_dwID << " : " << m_wToken << Qt::endl;
+            //LOG_OUT << "clientOnReadyRead After " << m_dwID << " : " << m_wToken << Qt::endl;
             emit sig_newLogin(m_dwID, m_wToken, m_szName, 0);
             break; }
         case VOF::Command::LoginSuccess: {
+            //LOG_OUT << "LoginSuccess " << Qt::endl;
             if (!m_in.commitTransaction()) return;
             emit sig_connected();
             break; }
         case VOF::Command::LobbyJoinRequest: {
+            LOG_OUT << "LobbyJoinRequest " << Qt::endl;
             if (!m_in.commitTransaction()) return;
             m_in >> slotID;
             if(slotID < VOF::MAX_CLIENTS){
@@ -108,33 +112,48 @@ void Client::on_ReadyRead()
             }
             break; }
         case VOF::Command::LobbyUpdate: {
+            //LOG_OUT << "LobbyUpdate " << Qt::endl;
             if (!m_in.commitTransaction()) return;
             m_in >> name >> slotID >> fIsReady;
-            LOG_OUT << "ready " << m_fReady
-                    << " slot " << slotID << Qt::endl;
+            // LOG_OUT << "ready " << m_fReady << " slot " << slotID << Qt::endl;
             m_updateLobbyState(name, slotID, fIsReady);
             break; }
         case VOF::Command::GameStateUpdate: {
+            LOG_OUT << "command " << command << Qt::endl;
             quint8 playerCount;
             m_in >> playerCount;
+            LOG_OUT << "playerCount " << playerCount << Qt::endl;
 
             if (!m_in.commitTransaction()) return;
             //TODO check gamestate and how it gets changed
-            m_tGamestate.tPlayerList.clear();
+            m_pGameState->tPlayerList.clear();
 
             for (int p = 0; p < playerCount; ++p)
             {
                 quint8 slotId;
-                PlayerSessionState player;
 
                 m_in.startTransaction();
 
+                //LOG_OUT << "slotId " << m_bLobbySlotID
+                //        << " player.bCurrentScore " << player.bCurrentScore
+                //        << " player.bTotalScore " << player.bTotalScore
+                //        << " player.bLevel " << player.bLevel
+                //        << Qt::endl;
+
                 m_in >> slotId;
+                PlayerSessionState player = m_pGameState->tPlayerList[slotId];
+
                 m_in >> player.tIdentity.name;
                 m_in >> player.fIsReady;
                 m_in >> player.bCurrentScore;
                 m_in >> player.bTotalScore;
                 m_in >> player.bLevel;
+
+                //LOG_OUT << "slotId " << m_bLobbySlotID
+                //        << " player.bCurrentScore " << player.bCurrentScore
+                //        << " player.bTotalScore " << player.bTotalScore
+                //        << " player.bLevel " << player.bLevel
+                //        << Qt::endl;
 
                 if (!m_in.commitTransaction()) return;
 
@@ -142,12 +161,12 @@ void Client::on_ReadyRead()
                 memset(player.bBoard, 0, 25);
                 memset(player.fRevealed, false, 25);
 
-
                 quint8 position;  // Revealed Tiles
                 while (true)
                 {
                     m_in.startTransaction();
                     m_in >> position;
+                    //LOG_OUT << player.bBoard[position] << Qt::endl;
 
                     if (!m_in.commitTransaction()) return;
 
@@ -159,18 +178,33 @@ void Client::on_ReadyRead()
 
                     if (!m_in.commitTransaction()) return;
 
-                    player.bBoard[position] = value;
-                    player.fRevealed[position] = true;
+                    if(slotId == m_bLobbySlotID){
+                        if(value > 8){
+                            player.bBoard[position] = (value - 8);
+                            player.fRevealed[position] = true;
+                        }
+                        else{
+                            player.bBoard[position] = value;
+                            player.fRevealed[position] = false;
+                        }
+                    }
+                    else{
+                        player.bBoard[position] = value;
+                        player.fRevealed[position] = true;
+                    }
+                    LOG_OUT << player.bBoard[position];
                 }
 
-                m_tGamestate.tPlayerList[slotId] = player;
+                LOG_OUT << Qt::endl;
+                m_pGameState->tPlayerList[slotId] = player;
             }
 
-            emit sig_gameStateUpdate(m_tGamestate, m_bLobbySlotID);
+            emit sig_gameStateUpdate(m_bLobbySlotID);
             break; }
         case VOF::Command::StartMatch: {
             LOG_OUT << "Match started by server" << Qt::endl;
             emit sig_matchStarted();
+            emit sig_setUpGame(m_bLobbySlotID);
             break; }
         default: {
             if (!m_in.commitTransaction()) return;
@@ -201,11 +235,11 @@ bool Client::m_checkStartLobby() //notworking
 void Client::slot_changeReadyState()
 {
     m_fReady = !m_fReady;
-    m_tGamestate.tPlayerList[m_bLobbySlotID].fIsReady = m_fReady;
+    m_pGameState->tPlayerList[m_bLobbySlotID].fIsReady = m_fReady;
 
-    LOG_OUT << "ready " << m_fReady
-            << " lobby " << m_bLobbyID
-            << " slot " << m_bLobbySlotID << Qt::endl;
+//    LOG_OUT << "ready " << m_fReady
+//            << " lobby " << m_bLobbyID
+//            << " slot " << m_bLobbySlotID << Qt::endl;
 
     m_out << VOF::Command::LobbyUpdate;
     m_out << m_bLobbyID;
@@ -228,6 +262,7 @@ void Client::on_attach(QHostAddress ipAdressIn, quint16 portIn)
         if (!m_pTcpSocket->waitForConnected(3000)) {
             LOG_OUT << "Could not connect: " << m_pTcpSocket->errorString() << Qt::endl;
             //startServer();
+            emit sig_connected(); //debug
             return;
         }
     }
@@ -349,17 +384,19 @@ void Client::slot_updateConfig(
 
 void Client::m_updateLobbyState(const QString &name, quint8 bSlotID, bool fIsReady)
 {
-    m_tGamestate.bLobbyId = 0;
+    LOG_OUT << name
+            //<< m_tGamestate->tPlayerList[bSlotID].tIdentity.name
+            << Qt::endl;
+    m_pGameState->bLobbyId = 0;
     if(name == "Waiting ..."){
-        m_tGamestate.tPlayerList[bSlotID].tIdentity.name = "";
+        m_pGameState->tPlayerList[bSlotID].tIdentity.name = "";
     }
     else{
-        m_tGamestate.tPlayerList[bSlotID].tIdentity.name = name;
+        m_pGameState->tPlayerList[bSlotID].tIdentity.name = name;
     }
-        m_tGamestate.tPlayerList[bSlotID].fIsReady = fIsReady;
-    LOG_OUT << "ready " << m_fReady
-            << " slot " << bSlotID << Qt::endl;
-    //LOG_OUT << name << m_tGamestate.tPlayerList[bSlotID].tIdentity.name << Qt::endl;
+        m_pGameState->tPlayerList[bSlotID].fIsReady = fIsReady;
+    //LOG_OUT << "ready " << m_fReady << " slot " << bSlotID << Qt::endl;
+
     emit sig_lobbyUpdate(name, bSlotID, fIsReady);
 }
 

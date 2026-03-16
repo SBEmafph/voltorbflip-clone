@@ -1,5 +1,4 @@
 #include "GameLogic.h"
-#include "GlobalDefines.h"
 
 #include <QRandomGenerator>
 #include <QTextStream>
@@ -24,43 +23,44 @@ static void writeReplayHeaderIfNeeded(const QString& filePath)
 GameLogic::GameLogic() {}
 
 // ===== Placing and initializing tile values =====
-void GameLogic::PlaceExactValue(Field& Field5x5, quint8 Value, int Count)
+void GameLogic::PlaceExactValue(quint8 (&field)[VOF::TILE_COUNT], quint8 Value, int Count)
 {
-    Q_ASSERT(Count <= 25);
+    Q_ASSERT(Count <= VOF::TILE_COUNT);
 
     int Placed = 0;
     while (Placed < Count)
     {
-        int Index = QRandomGenerator::global()->bounded(25);
-        if (Field5x5[Index] != VOF::TILE_MINE && Field5x5[Index] != 0)
+        int Index = QRandomGenerator::global()->bounded(VOF::TILE_COUNT);
+        if (field[Index] != VOF::TILE_MINE && field[Index] != 0)
             continue;
 
-        if (Field5x5[Index] == VOF::TILE_MINE)
+        if (field[Index] == VOF::TILE_MINE)
         {
-            Field5x5[Index] = Value;
+            field[Index] = Value;
             ++Placed;
         }
-        else if(Field5x5[Index] == 0)
+        else if(field[Index] == 0)
         {
-            Field5x5[Index] = Value;
+            field[Index] = Value;
             ++Placed;
         }
     }
 }
 
-void GameLogic::FillRemainingWithValue(Field& Field5x5, quint8 Value)
+void GameLogic::FillRemainingWithValue(quint8 (&field)[VOF::TILE_COUNT], quint8 Value)
 {
-    for (int i = 0; i < 25; ++i)
+    for (int i = 0; i < VOF::TILE_COUNT; ++i)
     {
-        if (Field5x5[i] == 0)
-            Field5x5[i] = Value;
+        if (field[i] == 0)
+            field[i] = Value;
     }
 }
 
 // ===== Generate field depending on level =====
-Field GameLogic::GenerateField5x5_Level(quint8 bLevel)
+void GameLogic::GenerateField5x5_Level(quint8 (&field)[VOF::TILE_COUNT], quint8 bLevel)
 {
-    Field Field5x5(25, VOF::TILE_MIN_VALUE);
+    //LOG_OUT << "[GL] generating field" << Qt::endl;
+    memset(field, VOF::Tile::One, sizeof(field));
 
     const int MineCount = 4 + bLevel; // Level1=5, Level2=6, Level3=7
 
@@ -68,10 +68,10 @@ Field GameLogic::GenerateField5x5_Level(quint8 bLevel)
     int placed = 0;
     while(placed < MineCount)
     {
-        int idx = QRandomGenerator::global()->bounded(25);
-        if(Field5x5[idx] != VOF::TILE_MINE)
+        int idx = QRandomGenerator::global()->bounded(VOF::TILE_COUNT);
+        if(field[idx] != VOF::Tile::Bomb)
         {
-            Field5x5[idx] = VOF::TILE_MINE;
+            field[idx] = VOF::Tile::Bomb;
             placed++;
         }
     }
@@ -83,10 +83,10 @@ Field GameLogic::GenerateField5x5_Level(quint8 bLevel)
     placed = 0;
     while(placed < twoCount)
     {
-        int idx = QRandomGenerator::global()->bounded(25);
-        if(Field5x5[idx] == VOF::TILE_MIN_VALUE)
+        int idx = QRandomGenerator::global()->bounded(VOF::TILE_COUNT);
+        if(field[idx] == VOF::Tile::One)
         {
-            Field5x5[idx] = 2;
+            field[idx] = VOF::Tile::Two;
             placed++;
         }
     }
@@ -94,19 +94,18 @@ Field GameLogic::GenerateField5x5_Level(quint8 bLevel)
     placed = 0;
     while(placed < threeCount)
     {
-        int idx = QRandomGenerator::global()->bounded(25);
-        if(Field5x5[idx] == VOF::TILE_MIN_VALUE)
+        int idx = QRandomGenerator::global()->bounded(VOF::TILE_COUNT);
+        if(field[idx] == VOF::Tile::One)
         {
-            Field5x5[idx] = 3;
+            field[idx] = VOF::Tile::Three;
             placed++;
         }
     }
-
-    return Field5x5;
+    //LOG_OUT << "[GL] finished generating field" << Qt::endl;
 }
 
 // ===== Calculate sums and mine counts =====
-void GameLogic::CalculateSumsAndMines(const Field& Field5x5, QVector<quint8>& RowSums, QVector<quint8>& ColSums,QVector<quint8>& RowMines, QVector<quint8>& ColMines)
+void GameLogic::CalculateSumsAndMines(const quint8 (&field)[VOF::TILE_COUNT], QVector<quint8>& RowSums, QVector<quint8>& ColSums,QVector<quint8>& RowMines, QVector<quint8>& ColMines)
 {
     RowSums.resize(5);
     ColSums.resize(5);
@@ -126,9 +125,9 @@ void GameLogic::CalculateSumsAndMines(const Field& Field5x5, QVector<quint8>& Ro
         for(int col=0; col<5; col++)
         {
             int idx = row*5 + col;
-            quint8 val = Field5x5[idx];
+            quint8 val = field[idx];
 
-            if(val == VOF::TILE_MINE)
+            if(val == VOF::Tile::Bomb)
             {
                 RowMines[row]++;
                 ColMines[col]++;
@@ -143,7 +142,7 @@ void GameLogic::CalculateSumsAndMines(const Field& Field5x5, QVector<quint8>& Ro
 }
 
 // ===== Print field =====
-void GameLogic::PrintField(const Field& Field5x5, const bool fRevealed[25])
+void GameLogic::PrintField(const quint8 (&field)[VOF::TILE_COUNT], const bool fRevealed[VOF::TILE_COUNT])
 {
     for(int row=0; row<5; row++)
     {
@@ -153,7 +152,7 @@ void GameLogic::PrintField(const Field& Field5x5, const bool fRevealed[25])
             if(fRevealed && !fRevealed[idx])
                 out << "* ";
             else
-                out << (Field5x5[idx] == VOF::TILE_MINE ? "X" : QString::number(Field5x5[idx])) << " ";
+                out << (field[idx] == VOF::TILE_MINE ? "X" : QString::number(field[idx])) << " ";
         }
         out << "\n";
     }
@@ -161,7 +160,7 @@ void GameLogic::PrintField(const Field& Field5x5, const bool fRevealed[25])
 }
 
 // ===== Check if level is completed =====
-bool GameLogic::IsLevelCompleted(const Field& field, const bool fRevealed[25])
+bool GameLogic::IsLevelCompleted(const quint8 (&field)[VOF::TILE_COUNT], const bool fRevealed[VOF::TILE_COUNT])
 {
     for(int row=0; row<5; row++)
     {
@@ -178,8 +177,8 @@ bool GameLogic::IsLevelCompleted(const Field& field, const bool fRevealed[25])
 
 // ===== Reveal tile, update score and level =====
 void GameLogic::RevealTileWithScore(
-    Field& field,
-    bool fRevealed[25],
+    const quint8 (&field)[VOF::TILE_COUNT],
+    bool fRevealed[VOF::TILE_COUNT],
     int row,
     int col,
     quint8& bCurrentScore,
@@ -206,8 +205,8 @@ void GameLogic::RevealTileWithScore(
 }
 
 bool GameLogic::FinishLevelIfCompleted(
-    const Field& field,
-    const bool fRevealed[25],
+    const quint8 (&field)[VOF::TILE_COUNT],
+    const bool fRevealed[VOF::TILE_COUNT],
     quint8& bCurrentScore,
     quint8& bTotalScore,
     quint8& bLevel)

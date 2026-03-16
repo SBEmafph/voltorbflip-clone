@@ -116,7 +116,7 @@ quint8 VoltOrbFlipServer::m_calculatePoints(quint8 &x, quint8 &y, PlayerSessionS
     if(tileValue != VOF::Tile::Bomb)
     {
         if(playerState.bCurrentScore != 0){
-            res *= playerState.bCurrentScore * tileValue;
+            res = playerState.bCurrentScore * tileValue;
         }
         else{
             res  = tileValue;
@@ -125,6 +125,7 @@ quint8 VoltOrbFlipServer::m_calculatePoints(quint8 &x, quint8 &y, PlayerSessionS
     else{
         LOG_OUT << "bomb" << Qt::endl;
     }
+    playerState.bCurrentScore = res;
     return res;
 }
 
@@ -306,6 +307,8 @@ void VoltOrbFlipServer::m_processInput(int playerId, std::string input)
 */
 void VoltOrbFlipServer::m_processInput(NWObs* pNWObs, quint16 playerMove)
 {
+    bool boardRegenNeeded = false;
+
     quint8 action;
     quint8 x;
     quint8 y;
@@ -313,7 +316,12 @@ void VoltOrbFlipServer::m_processInput(NWObs* pNWObs, quint16 playerMove)
     if(action == VOF::Action::Click){
         PlayerSessionState& pPlayerState = m_tGamestate.tPlayerList[pNWObs->m_getSlotID()] ;
         m_revealTile(x, y, pPlayerState);
-        m_calculatePoints(x, y, pPlayerState);
+        boardRegenNeeded = !(bool)m_calculatePoints(x, y, pPlayerState);
+    }
+    if(boardRegenNeeded){
+        m_revealBoard(m_tGamestate.tPlayerList[pNWObs->m_getSlotID()]);
+        //m_generateBoard(m_tGamestate.tPlayerList[pNWObs->m_getSlotID()]);
+        //slot_updateClientsGameState();
     }
     slot_updateClientsGameState();
 }
@@ -333,10 +341,8 @@ void VoltOrbFlipServer::m_applyMove(std::string input)
     int row = tileIndex / 5;
     int col = tileIndex % 5;
 
-    Field field = m_convertBoardToField(player);
-
     GameLogic::RevealTileWithScore(
-        field,
+        player.bBoard,
         player.fRevealed,
         row,
         col,
@@ -344,45 +350,36 @@ void VoltOrbFlipServer::m_applyMove(std::string input)
         player.bLevel
         );
 
-    m_convertFieldToBoard(player, field);
-
     slot_updateClientsGameState();
     m_checkWinCondition();
-}
-
-// ===== Conversions =====
-Field VoltOrbFlipServer::m_convertBoardToField(const PlayerSessionState& player)
-{
-    Field field(25);
-    for(int i = 0; i < 25; ++i)
-        field[i] = player.bBoard[i];
-    return field;
-}
-
-void VoltOrbFlipServer::m_convertFieldToBoard(PlayerSessionState& player, const Field& field)
-{
-    for(int i = 0; i < 25; ++i)
-        player.bBoard[i] = field[i];
 }
 
 // ===== Generate board =====
 void VoltOrbFlipServer::m_generateBoard(PlayerSessionState& player)
 {
-    Field field = GameLogic::GenerateField5x5_Level(player.bLevel);
+    //LOG_OUT << "[SV] generating board for player " << player.bSlotId << Qt::endl;
+    GameLogic::GenerateField5x5_Level(player.bBoard, player.bLevel);
 
     for(int i = 0; i < 25; ++i)
     {
-        player.bBoard[i] = field[i];
         player.fRevealed[i] = false;
     }
 
     player.bCurrentScore = 0;
-    m_checkWinCondition();
+    //LOG_OUT << "[SV] board for player " << player.bSlotId << " generated" << Qt::endl;
+}
+
+void VoltOrbFlipServer::m_revealBoard(PlayerSessionState& player){
+    for(int i = 0; i < 25; ++i)
+    {
+        player.fRevealed[i] = true;
+    }
 }
 
 // ===== Start match =====
 void VoltOrbFlipServer::m_startMatch()
 {
+    LOG_OUT << "[SV] starting... " << Qt::endl;
     m_tGamestate.fIsGameRunning = true;
 
     for(auto& player : m_tGamestate.tPlayerList)
