@@ -133,9 +133,10 @@ struct PlayerSessionState {
     // Game data only during match
     quint8 bBoard[VOF::TILE_COUNT]; // 25 tiles
     bool fRevealed[VOF::TILE_COUNT]; // revealed flags
-    quint8 bCurrentScore = 0;
-    quint8 bTotalScore = 0;
-    quint8 bLevel = 1;
+    quint8 bCurrentScore    = 0;
+    quint8 bTotalScore      = 0;
+    quint8 bLevel           = 1;
+    quint8 bombStreak       = 0; // Tracks consecutive bomb hits for level penalty
     bool fItemEquipped[3];
 
     QList<Move> currentMatchMoves;

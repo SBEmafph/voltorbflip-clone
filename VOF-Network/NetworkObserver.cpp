@@ -25,6 +25,9 @@ void NWObs::updateFullState(const GameState &state)
 {
     m_out << VOF::Command::GameStateUpdate;
     //LOG_OUT << "[NW] Updating full state " << Qt::endl;
+
+    m_out << state.fIsGameRunning;
+
     quint8 playerCount = state.tPlayerList.size();
     m_out << playerCount;
 

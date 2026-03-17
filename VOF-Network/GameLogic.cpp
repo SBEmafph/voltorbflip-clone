@@ -44,8 +44,8 @@ void GameLogic::GenerateField5x5_Level(quint8 (&field)[VOF::TILE_COUNT], quint8 
     }
 
     // Define amount of 2 and 3 values
-    int twoCount = (bLevel == 1) ? 2 : 3;
-    int threeCount = (bLevel == 3) ? 2 : 1;
+    int twoCount   = QRandomGenerator::global()->bounded(3, 3 + bLevel); // Level1: 3, Level2: 3-4, Level3: 3-5
+    int threeCount = QRandomGenerator::global()->bounded(1, 1 + bLevel); // Level1: 1, Level2: 1-2, Level3: 1-3
 
     // Place value 2 tiles
     placed = 0;

@@ -81,6 +81,7 @@ private:
     void m_unpackMove(quint8 &action, quint8 &x, quint8 &y, quint16 playerMove);
     void m_revealTile(quint8 &x, quint8 &y, PlayerSessionState &playerState);
     quint8 m_calculatePoints(quint8 &x, quint8 &y, PlayerSessionState &playerState);
+    void m_handleBombHit(PlayerSessionState& player);
 
     // ===== Game end / win condition handling =====
     void m_checkWinCondition();

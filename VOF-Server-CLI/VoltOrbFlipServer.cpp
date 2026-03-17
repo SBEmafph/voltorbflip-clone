@@ -129,6 +129,26 @@ quint8 VoltOrbFlipServer::m_calculatePoints(quint8 &x, quint8 &y, PlayerSessionS
     return res;
 }
 
+void VoltOrbFlipServer::m_handleBombHit(PlayerSessionState &player)
+{
+    player.bCurrentScore = 0;
+    player.bombStreak++;
+
+    if (player.bombStreak >= 3)
+    {
+        // Drop the player down one level after 3 consecutive bomb hits
+        if (player.bLevel > 1)
+            player.bLevel--;
+
+        player.bombStreak = 0;
+        LOG_OUT << "[SV] 3 bombs in a row! Level decreased to " << player.bLevel << Qt::endl;
+    }
+    else
+    {
+        LOG_OUT << "[SV] Bomb hit! Current streak: " << player.bombStreak << Qt::endl;
+    }
+}
+
 void VoltOrbFlipServer::m_startServer(quint16 port)
 {
     QHostAddress ipAddress;
@@ -291,39 +311,51 @@ void VoltOrbFlipServer::slot_detach(NWObs* pNWObs)
     m_clients.remove(pNWObs->m_getId());
     pNWObs->deleteLater();
 }
-/*
-void VoltOrbFlipServer::m_processInput(int playerId, std::string input)
-{
-    if(!m_tGamestate.tPlayerList.contains(playerId))
-        return;
 
-    PlayerSessionState& player = m_tGamestate.tPlayerList[playerId];
-
-    if(!m_verifyInput(input))
-        return;
-
-    m_applyMove(input);
-}
-*/
 void VoltOrbFlipServer::m_processInput(NWObs* pNWObs, quint16 playerMove)
 {
-    bool boardRegenNeeded = false;
-
-    quint8 action;
-    quint8 x;
-    quint8 y;
+    quint8 action, x, y;
     m_unpackMove(action, x, y, playerMove);
-    if(action == VOF::Action::Click){
-        PlayerSessionState& pPlayerState = m_tGamestate.tPlayerList[pNWObs->m_getSlotID()] ;
-        m_revealTile(x, y, pPlayerState);
-        boardRegenNeeded = !(bool)m_calculatePoints(x, y, pPlayerState);
-    }
-    if(boardRegenNeeded){
-        m_revealBoard(m_tGamestate.tPlayerList[pNWObs->m_getSlotID()]);
-        //m_generateBoard(m_tGamestate.tPlayerList[pNWObs->m_getSlotID()]);
-        //slot_updateClientsGameState();
-    }
+
+    if(action != VOF::Action::Click)
+        return;
+
+
+    quint8 slot = pNWObs->m_getSlotID();
+    PlayerSessionState& player = m_tGamestate.tPlayerList[slot];
+
+    m_revealTile(x, y, player);
+    bool bombHit    = !(bool)m_calculatePoints(x, y, player);
+    bool levelDone  = !bombHit && GameLogic::FinishLevelIfCompleted(
+                         player.bBoard, player.fRevealed,
+                         player.bCurrentScore, player.bTotalScore, player.bLevel);
+
+    if(bombHit)
+        m_revealBoard(player); // Show full board so client can see where the bomb was
+
+    // Send current state immediately so the client sees the result for 2s
     slot_updateClientsGameState();
+
+    if(levelDone)
+        m_checkWinCondition(); // Check win before scheduling next board
+
+    // Schedule board reset after 2s on bomb or level completion
+    // On a win, m_handlePlayerWin takes over — no new board needed
+    bool needsNewBoard = (bombHit || levelDone) && m_tGamestate.fIsGameRunning;
+    if(needsNewBoard)
+    {
+        QTimer::singleShot(2000, this, [this, slot, bombHit]()
+                           {
+                               PlayerSessionState& p = m_tGamestate.tPlayerList[slot];
+                               if(bombHit)
+                               {
+                                   p.bCurrentScore = 0;
+                                   m_handleBombHit(p);
+                               }
+                               m_generateBoard(p);
+                               slot_updateClientsGameState();
+                           });
+    }
 }
 
 bool VoltOrbFlipServer::m_verifyInput(std::string input)

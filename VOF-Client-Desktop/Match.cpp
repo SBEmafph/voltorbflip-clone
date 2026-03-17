@@ -62,6 +62,34 @@ void Match::on_closeMemoButtons()
 
 void Match::slot_updateBoard(quint8 ownSlotID)
 {
+    // Win/Lose handling — erst nach Timer rauswerfen
+    if (!m_pGameState->fIsGameRunning)
+    {
+        if (!m_winTimer || !m_winTimer->isActive())
+        {
+            m_winTimer = new QTimer(this);
+            m_winTimer->setSingleShot(true);
+            connect(m_winTimer, &QTimer::timeout, this, [this]()
+                    {
+                        emit sig_backToMenu();
+                    });
+            m_winTimer->start(10000);
+        }
+        return;
+    }
+
+    // reset board visually if server sent a completely fresh board
+    const PlayerSessionState& ownPlayer = m_pGameState->tPlayerList[ownSlotID];
+    bool isFullReset = true;
+    for (int i = 0; i < 25; ++i)
+    {
+        if (ownPlayer.fRevealed[i]) { isFullReset = false; break; }
+    }
+    if (isFullReset) {
+        m_resetBoard();
+        m_resetEnemyBoards();
+    }
+
     for (auto it = m_pGameState->tPlayerList.begin(); it != m_pGameState->tPlayerList.end(); ++it)
     {
         quint8 playerId = it.key();
@@ -184,13 +212,13 @@ void Match::m_setUpEnemyBoards()
 }
 
 void Match::m_resetEnemyBoards(){
-    for(int player = 1; player < 8; player++) {
+    for(int player = 0; player < 8; player++) {
         for (int row = 0; row < 5; ++row) {
             for (int col = 0; col < 5; ++col) {
                 QString searchName = QString("player_%1_Tile_%2_%3").arg(player).arg(row).arg(col);
                 QLabel *foundTile = this->findChild<QLabel *>(searchName);
                 if (foundTile) {
-                    foundTile->setStyleSheet(QString("background-color: %1").arg("309F6A"));
+                    foundTile->setStyleSheet(QString("background-color: %1").arg("#309F6A"));
                 }
             }
         }

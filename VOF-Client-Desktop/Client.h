@@ -26,6 +26,7 @@ signals:
     void sig_gameStateUpdate(quint8 ownSlotID);
     void sig_matchStarted();
     void sig_setUpGame(quint8 bSlotID);
+    void sig_matchEnded();
 
 public slots:
     void on_ReadyRead();

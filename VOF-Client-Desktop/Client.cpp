@@ -120,9 +120,15 @@ void Client::on_ReadyRead()
             break; }
         case VOF::Command::GameStateUpdate: {
             LOG_OUT << "command " << command << Qt::endl;
+            bool fIsGameRunning;
             quint8 playerCount;
+            m_in >> fIsGameRunning;
             m_in >> playerCount;
+
             LOG_OUT << "playerCount " << playerCount << Qt::endl;
+
+            bool wasRunning = m_pGameState->fIsGameRunning;
+            m_pGameState->fIsGameRunning = fIsGameRunning;
 
             if (!m_in.commitTransaction()) return;
             //TODO check gamestate and how it gets changed
@@ -200,6 +206,12 @@ void Client::on_ReadyRead()
             }
 
             emit sig_gameStateUpdate(m_bLobbySlotID);
+
+            if (wasRunning && !fIsGameRunning)
+            {
+                emit sig_matchEnded();
+            }
+
             break; }
         case VOF::Command::StartMatch: {
             LOG_OUT << "Match started by server" << Qt::endl;

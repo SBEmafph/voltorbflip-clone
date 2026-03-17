@@ -56,6 +56,9 @@ Menu::Menu(QWidget *parent)
     connect(m_client, &Client::sig_matchStarted,
             lobby, &Lobby::slot_startMatch);
 
+    connect(m_client, &Client::sig_matchEnded,
+            this,     &Menu::slot_backToMenu);
+
     // Lobby -> Client
     connect(lobby, &Lobby::sig_isReady,
             m_client , &Client::slot_changeReadyState);
