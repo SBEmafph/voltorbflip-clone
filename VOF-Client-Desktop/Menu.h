@@ -31,11 +31,16 @@ protected:
     void closeEvent(QCloseEvent *event) override;
 
 private slots:
+    // Window navigation buttons
     void on_playBtn_clicked();
     void on_rulesBtn_clicked();
     void on_replayBtn_clicked();
     void on_shopBtn_clicked();
     void on_settingsBtn_clicked();
+    /** @brief Close Game
+    *
+    *  Closes the application and the connection to the server
+    */
     void on_quitGameBtn_clicked();
 
     void slot_BrowserConnect();
