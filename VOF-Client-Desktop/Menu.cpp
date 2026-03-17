@@ -152,6 +152,7 @@ void Menu::on_shopBtn_clicked()
     shopWindow->show();
 }
 
+
 void Menu::on_quitGameBtn_clicked()
 {
     m_client->on_detach();
