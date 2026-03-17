@@ -2,6 +2,7 @@
 *.user
 *.user.*
 *.autosave
+.qtcreator/
 
 # --- Build-Artefakte (sehr wichtig!) ---
 # Ignoriert die typischen Shadow-Build-Ordner
