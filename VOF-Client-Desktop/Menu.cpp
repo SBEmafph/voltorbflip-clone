@@ -87,8 +87,6 @@ Menu::Menu(QWidget *parent)
             this, &Menu::on_settingsBtn_clicked);
     connect(ui->playBtn, &QPushButton::clicked,
             this, &Menu::on_playBtn_clicked);
-    connect(ui->quitGameBtn, &QPushButton::clicked,
-            this, &Menu::on_quitGameBtn_clicked);
 }
 
 void Menu::m_setPlayerConfig(quint32 ID, quint16 token, QString name, bool force)
@@ -99,7 +97,13 @@ void Menu::m_setPlayerConfig(quint32 ID, quint16 token, QString name, bool force
 
 void Menu::closeEvent(QCloseEvent *event)
 {
+    if (m_isQuitting) {
+        event->accept();
+        return;
+    }
+
     on_quitGameBtn_clicked();
+    event->ignore();
 }
 
 Menu::~Menu()
@@ -155,14 +159,17 @@ void Menu::on_shopBtn_clicked()
 
 void Menu::on_quitGameBtn_clicked()
 {
+    if (m_isQuitting) return;
+    m_isQuitting = true;
+
     m_client->on_detach();
 
     if (m_client->m_getTcpSocket()->state() == QAbstractSocket::UnconnectedState) {
         LOG_OUT << "Socket already closed. Quitting immediately." << Qt::endl;
         qApp->quit();
     } else {
-        connect(m_client->m_getTcpSocket(),
-        &QTcpSocket::disconnected, qApp, &QCoreApplication::quit);
+        connect(m_client->m_getTcpSocket(), &QTcpSocket::disconnected,
+                qApp, &QCoreApplication::quit);
         QTimer::singleShot(1000, qApp, &QCoreApplication::quit);
     }
 }
