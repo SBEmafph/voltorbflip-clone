@@ -87,6 +87,7 @@ private:
     void m_checkWinCondition();
     void m_handlePlayerWin(quint8 bWinnerSlot);
     void m_revealBoard(PlayerSessionState &player);
+    void m_writeWinnerEntry(const QString &name, quint8 totalScore);
 };
 
 #endif // VOLTORBFLIPSERVER_H

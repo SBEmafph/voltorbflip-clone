@@ -444,6 +444,9 @@ void VoltOrbFlipServer::m_handlePlayerWin(quint8 bWinnerSlot)
 {
     LOG_OUT << "[SV] Player on Slot " << bWinnerSlot << " wins the match!" << Qt::endl;
 
+    PlayerSessionState& winner = m_tGamestate.tPlayerList[bWinnerSlot];
+    m_writeWinnerEntry(winner.tIdentity.name, winner.bTotalScore);
+
     m_tGamestate.fIsGameRunning = false;
     slot_updateClientsGameState();
 
@@ -468,4 +471,33 @@ void VoltOrbFlipServer::m_handlePlayerWin(quint8 bWinnerSlot)
         m_tGamestate.fIsGameRunning = false;
         slot_updateClientsGameState();
     });
+}
+
+void VoltOrbFlipServer::m_writeWinnerEntry(const QString& name, quint8 totalScore)
+{
+    const QString filePath = "winners.csv";
+    QFile file(filePath);
+
+    // Header nur beim ersten Mal schreiben
+    if (!file.exists())
+    {
+        if (file.open(QIODevice::WriteOnly | QIODevice::Text))
+        {
+            QTextStream out(&file);
+            out << "name,totalscore,date,time\n";
+            file.close();
+        }
+    }
+
+    // Eintrag anhängen
+    if (file.open(QIODevice::Append | QIODevice::Text))
+    {
+        QTextStream out(&file);
+        QDateTime now = QDateTime::currentDateTime();
+        out << name << ","
+            << totalScore << ","
+            << now.toString("yyyy-MM-dd") << ","
+            << now.toString("HH:mm:ss") << "\n";
+        file.close();
+    }
 }
