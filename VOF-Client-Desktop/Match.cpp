@@ -14,7 +14,19 @@ Match::Match(QWidget *parent)
     ui->setupUi(this);
     this->setFixedSize(this->size());
 
-    m_initializeProgressBars();
+    m_gameId = 1;
+    m_replayFile = buildReplayPath(m_gameId);
+
+    GameLogic::ResetReplayFile(m_replayFile);
+    GameLogic::ReplayStartGame(m_replayFile, m_gameId);
+
+    m_gameId = 1;
+    m_replayFile = buildReplayPath(m_gameId);
+
+    GameLogic::ResetReplayFile(m_replayFile);
+    GameLogic::ReplayStartGame(m_replayFile, m_gameId);
+
+    m_initializeProgressBars();  
 
     m_setUpMemoButtons();
 
@@ -28,11 +40,23 @@ Match::Match(QWidget *parent)
     m_level = 1;
     m_totalScore = 0;
 
-    m_replayFile = buildReplayPath(m_gameId);
-    GameLogic::ResetReplayFile(m_replayFile);
-    GameLogic::ReplayStartGame(m_replayFile, m_gameId);
+    startLevel();
 
     replayWindow = new replay(this);
+
+    connect(replayWindow, &replay::replayImported, this, [this](int importedId){
+
+        int nextId = findNextFreeReplayId();
+
+        if (nextId == -1)
+            nextId = 1;
+
+        m_gameId = nextId;
+        m_replayFile = buildReplayPath(m_gameId);
+
+        GameLogic::ResetReplayFile(m_replayFile);
+        GameLogic::ReplayStartGame(m_replayFile, m_gameId);
+    });
 }
 
 Match::~Match()
@@ -293,8 +317,13 @@ void Match::m_handleCardClick(CardButton *btn)
                          m_level,
                          m_totalScore
                          );
-                     m_gameId++;
-                     m_replayFile = buildReplayPath(m_gameId);
+
+                     int nextId = findNextFreeReplayId();
+                     if (nextId != -1)
+                     {
+                         m_gameId = nextId;
+                         m_replayFile = buildReplayPath(m_gameId);
+                     }
 
                      emit sig_backToMenu();
                      this->hide();
@@ -492,3 +521,35 @@ void Match::openReplay(int replayId)
     GameLogic::ResetReplayFile(m_replayFile);
     GameLogic::ReplayStartGame(m_replayFile, m_gameId);
 }
+
+int Match::findNextFreeReplayId() const
+{
+    QString basePath = QCoreApplication::applicationDirPath() + "/Replays/";
+
+    for (int i = 1; i <= 5; ++i) {
+        QString filePath = basePath + QString("replay%1.csv").arg(i);
+
+        QFile file(filePath);
+        bool isFree = true;
+
+        if (file.exists()) {
+            if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+                int lineCount = 0;
+                while (!file.atEnd()) {
+                    QByteArray line = file.readLine().trimmed();
+                    if (!line.isEmpty())
+                        lineCount++;
+                }
+                file.close();
+                if (lineCount > 1)
+                    isFree = false;
+            }
+        }
+
+        if (isFree)
+            return i;
+    }
+
+    return -1; // Keine freie Datei
+}
+
