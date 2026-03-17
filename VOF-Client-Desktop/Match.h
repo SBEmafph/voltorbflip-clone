@@ -22,7 +22,7 @@ public:
     explicit Match(QWidget *parent = nullptr);
     ~Match();
 
-	// Core game functions
+    // Core game functions
     void m_startLevel();
     void m_updateRowColLabels(
         const QVector<quint8>& RowSums,
@@ -73,7 +73,6 @@ private:
     QString m_replayFile;
     int m_gameId = 1;
     replay* replayWindow;
-    int findNextFreeReplayId() const;
 
     // Win/Lose handling
     QTimer* m_winTimer = nullptr;
