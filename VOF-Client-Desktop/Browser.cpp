@@ -33,5 +33,4 @@ void Browser::on_connectBtn_clicked()
 void Browser::on_exitBtn_clicked()
 {
     this->hide();
-    emit sig_disconnect();
 }

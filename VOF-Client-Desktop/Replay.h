@@ -28,11 +28,17 @@ protected:
 private slots:
     void on_exitBtn_clicked();
     void onReplayBtnClicked();
+    void on_importBtn_clicked();
+    void on_exportBtn_clicked();
 
 private:
     Ui::replay *ui;
     bool m_gameWon = false;
     QString buildReplayPath(int gameId) const;
+    void resetAllReplays();
+
+signals:
+    void replayImported(int replayId);
 };
 
 #endif // REPLAY_H
