@@ -13,6 +13,7 @@ static void writeReplayHeaderIfNeeded(const QString& filePath)
     {
         if (file.open(QIODevice::WriteOnly | QIODevice::Text))
         {
+            // Write replay header if it doesn't exist
             QTextStream out(&file);
             out << "gameid,action,date,time,level,currentscore,totalscore,field\n";
             file.close();
@@ -22,44 +23,10 @@ static void writeReplayHeaderIfNeeded(const QString& filePath)
 
 GameLogic::GameLogic() {}
 
-// ===== Placing and initializing tile values =====
-void GameLogic::PlaceExactValue(quint8 (&field)[VOF::TILE_COUNT], quint8 Value, int Count)
-{
-    Q_ASSERT(Count <= VOF::TILE_COUNT);
-
-    int Placed = 0;
-    while (Placed < Count)
-    {
-        int Index = QRandomGenerator::global()->bounded(VOF::TILE_COUNT);
-        if (field[Index] != VOF::TILE_MINE && field[Index] != 0)
-            continue;
-
-        if (field[Index] == VOF::TILE_MINE)
-        {
-            field[Index] = Value;
-            ++Placed;
-        }
-        else if(field[Index] == 0)
-        {
-            field[Index] = Value;
-            ++Placed;
-        }
-    }
-}
-
-void GameLogic::FillRemainingWithValue(quint8 (&field)[VOF::TILE_COUNT], quint8 Value)
-{
-    for (int i = 0; i < VOF::TILE_COUNT; ++i)
-    {
-        if (field[i] == 0)
-            field[i] = Value;
-    }
-}
-
-// ===== Generate field depending on level =====
 void GameLogic::GenerateField5x5_Level(quint8 (&field)[VOF::TILE_COUNT], quint8 bLevel)
 {
     //LOG_OUT << "[GL] generating field" << Qt::endl;
+    // Set  all Tiles of board to 1 by default
     memset(field, VOF::Tile::One, sizeof(field));
 
     const int MineCount = 4 + bLevel; // Level1=5, Level2=6, Level3=7
@@ -76,10 +43,11 @@ void GameLogic::GenerateField5x5_Level(quint8 (&field)[VOF::TILE_COUNT], quint8 
         }
     }
 
-    // Place 2 and 3 values
+    // Define amount of 2 and 3 values
     int twoCount = (bLevel == 1) ? 2 : 3;
     int threeCount = (bLevel == 3) ? 2 : 1;
 
+    // Place value 2 tiles
     placed = 0;
     while(placed < twoCount)
     {
@@ -91,6 +59,7 @@ void GameLogic::GenerateField5x5_Level(quint8 (&field)[VOF::TILE_COUNT], quint8 
         }
     }
 
+    // Place value 3 tiles
     placed = 0;
     while(placed < threeCount)
     {
@@ -104,14 +73,15 @@ void GameLogic::GenerateField5x5_Level(quint8 (&field)[VOF::TILE_COUNT], quint8 
     //LOG_OUT << "[GL] finished generating field" << Qt::endl;
 }
 
-// ===== Calculate sums and mine counts =====
 void GameLogic::CalculateSumsAndMines(const quint8 (&field)[VOF::TILE_COUNT], QVector<quint8>& RowSums, QVector<quint8>& ColSums,QVector<quint8>& RowMines, QVector<quint8>& ColMines)
 {
+    // Set size to 5
     RowSums.resize(5);
     ColSums.resize(5);
     RowMines.resize(5);
     ColMines.resize(5);
 
+    // Reset the info field for each row/collum
     for(int i=0;i<5;i++)
     {
         RowSums[i] = 0;
@@ -120,6 +90,7 @@ void GameLogic::CalculateSumsAndMines(const quint8 (&field)[VOF::TILE_COUNT], QV
         ColMines[i] = 0;
     }
 
+    // Check board and count Points and Bombs for each row/collum
     for(int row=0; row<5; row++)
     {
         for(int col=0; col<5; col++)
@@ -141,7 +112,6 @@ void GameLogic::CalculateSumsAndMines(const quint8 (&field)[VOF::TILE_COUNT], QV
     }
 }
 
-// ===== Print field =====
 void GameLogic::PrintField(const quint8 (&field)[VOF::TILE_COUNT], const bool fRevealed[VOF::TILE_COUNT])
 {
     for(int row=0; row<5; row++)
@@ -159,7 +129,6 @@ void GameLogic::PrintField(const quint8 (&field)[VOF::TILE_COUNT], const bool fR
     out << "\n";
 }
 
-// ===== Check if level is completed =====
 bool GameLogic::IsLevelCompleted(const quint8 (&field)[VOF::TILE_COUNT], const bool fRevealed[VOF::TILE_COUNT])
 {
     for(int row=0; row<5; row++)
@@ -175,14 +144,7 @@ bool GameLogic::IsLevelCompleted(const quint8 (&field)[VOF::TILE_COUNT], const b
     return true;
 }
 
-// ===== Reveal tile, update score and level =====
-void GameLogic::RevealTileWithScore(
-    const quint8 (&field)[VOF::TILE_COUNT],
-    bool fRevealed[VOF::TILE_COUNT],
-    int row,
-    int col,
-    quint8& bCurrentScore,
-    quint8& /* bLevel */)   // Level hier ignorieren
+void GameLogic::RevealTileWithScore(const quint8 (&field)[VOF::TILE_COUNT], bool fRevealed[VOF::TILE_COUNT], int row, int col, quint8& bCurrentScore, quint8& bLevel)   // Ignore level
 {
     int idx = row * 5 + col;
 
@@ -204,12 +166,7 @@ void GameLogic::RevealTileWithScore(
         bCurrentScore *= value;
 }
 
-bool GameLogic::FinishLevelIfCompleted(
-    const quint8 (&field)[VOF::TILE_COUNT],
-    const bool fRevealed[VOF::TILE_COUNT],
-    quint8& bCurrentScore,
-    quint8& bTotalScore,
-    quint8& bLevel)
+bool GameLogic::FinishLevelIfCompleted(const quint8 (&field)[VOF::TILE_COUNT], const bool fRevealed[VOF::TILE_COUNT], quint8& bCurrentScore, quint8& bTotalScore, quint8& bLevel)
 {
     if (!IsLevelCompleted(field, fRevealed))
         return false;
@@ -241,7 +198,6 @@ void GameLogic::ReplayLogAction(const QString& filePath, int gameId, int action,
     QTextStream out(&file);
 
     QDateTime now = QDateTime::currentDateTime();
-
     QString field = QString("%1x%2").arg(row + 1).arg(col + 1);
 
     out << gameId << ","
@@ -268,6 +224,7 @@ void GameLogic::ResetReplayFile(const QString& filePath)
 
     if (file.open(QIODevice::WriteOnly | QIODevice::Text))
     {
+        // Write replay header
         QTextStream out(&file);
         out << "gameid,action,date,time,level,currentscore,totalscore,field\n";
         file.close();
