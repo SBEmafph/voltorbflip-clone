@@ -45,8 +45,6 @@ public slots:
     void slot_updateBoard(quint8 ownSlotID);
     void slot_setUpGame(quint8 bSlotID);
 
-    void openReplay(int replayId);
-
 private:
     // UI
     Ui::Match *ui;
@@ -69,10 +67,8 @@ private:
     void m_setMemoButtonsVisible(bool fVisible);
 
     // Replay
-    QString buildReplayPath(int replayId) const;
     QString m_replayFile;
     int m_gameId = 1;
-    replay* replayWindow;
 
     // Win/Lose handling
     QTimer* m_winTimer = nullptr;

@@ -28,11 +28,9 @@ Match::Match(QWidget *parent)
     m_level = 1;
     m_totalScore = 0;
 
-    m_replayFile = buildReplayPath(m_gameId);
-    GameLogic::ResetReplayFile(m_replayFile);
+    m_gameId   = replay::findNextFreeReplayId();
+    m_replayFile = replay::buildReplayPath(m_gameId);
     GameLogic::ReplayStartGame(m_replayFile, m_gameId);
-
-    replayWindow = new replay(this);
 }
 
 Match::~Match()
@@ -212,16 +210,6 @@ void Match::m_handleCardClick(CardButton *btn)
     if (m_pGameState->tPlayerList[m_bSlotID].fRevealed[idx])
         return;
 
-    /*
-    GameLogic::RevealTileWithScore(
-        m_pGameState->tPlayerList[m_bSlotID].bBoard,
-        m_pGameState->tPlayerList[m_bSlotID].fRevealed,
-        btn->r,
-        btn->c,
-        m_currentScore,
-        m_level
-        );
-
     GameLogic::ReplayLogAction(
         m_replayFile,
         m_gameId,
@@ -232,89 +220,6 @@ void Match::m_handleCardClick(CardButton *btn)
         btn->r,
         btn->c
         );
-
-
-    if (GameLogic::FinishLevelIfCompleted(
-            m_pGameState->tPlayerList[m_bSlotID].bBoard,
-            m_pGameState->tPlayerList[m_bSlotID].fRevealed,
-            m_currentScore,
-            m_totalScore,
-            m_level))
-    {
-        m_updateWidgets();
-
-        //Check for win after completing a level
-        if (m_totalScore >= 10)
-        {
-             m_updateWidgets();
-
-             ui->LevelLabel->setText("Gewonnen!");
-
-             replayWindow->setGameResult(true);
-
-             // Block Board Inputs
-             for (int row = 0; row < 5; ++row) {
-                 for (int col = 0; col < 5; ++col) {
-                     if (auto *item = ui->gameGrid->itemAtPosition(row, col)) {
-                         if (auto *btn = qobject_cast<CardButton*>(item->widget())) {
-                             btn->setEnabled(false);
-                         }
-                     }
-                 }
-             }
-
-             m_winCountdown = 5;
-             ui->CurrentScoreLabel->setText(
-                 QString("Zurück in %1...").arg(m_winCountdown)
-                 );
-
-             m_winTimer = new QTimer(this);
-             m_winTimer->setInterval(1000);
-
-             connect(m_winTimer, &QTimer::timeout, this, [this]() {
-                 m_winCountdown--;
-
-                 if (m_winCountdown > 0) {
-                     ui->CurrentScoreLabel->setText(
-                         QString("Zurück zum Menü in %1s").arg(m_winCountdown)
-                         );
-                 } else {
-                     m_winTimer->stop();
-                     m_winTimer->deleteLater();
-                     m_winTimer = nullptr;
-
-                     m_level = 1;
-                     m_totalScore = 0;
-                     m_startLevel();
-
-                     GameLogic::ReplayEndGame(
-                         m_replayFile,
-                         m_gameId,
-                         m_level,
-                         m_totalScore
-                         );
-                     m_gameId++;
-                     m_replayFile = buildReplayPath(m_gameId);
-
-                     emit sig_backToMenu();
-                     this->hide();
-                 }
-             });
-
-             m_winTimer->start();
-             return;
-        }
-
-        m_startLevel();
-        return;
-    }
-
-    m_updateWidgets();
-
-    quint8 tileValue = m_pGameState->tPlayerList[m_bSlotID].bBoard[idx];
-    if(tileValue == 0) tileValue = 4;
-    m_updateTile(1, btn->r, btn->c, static_cast<VOF::Tile>(tileValue));
-    */
 
     emit sig_action(currentAction, btn->c, btn->r);
 }
@@ -474,21 +379,4 @@ QString Match::buildFieldState() const
     }
 
     return state;
-}
-
-QString Match::buildReplayPath(int replayId) const
-{
-    QString basePath = QCoreApplication::applicationDirPath() + "/Replays/";
-    QDir().mkpath(basePath); // Check if Folder even exists
-
-    return basePath + QString("replay%1.csv").arg(replayId);
-}
-
-void Match::openReplay(int replayId)
-{
-    m_gameId = replayId;
-    m_replayFile = buildReplayPath(replayId);
-
-    GameLogic::ResetReplayFile(m_replayFile);
-    GameLogic::ReplayStartGame(m_replayFile, m_gameId);
 }

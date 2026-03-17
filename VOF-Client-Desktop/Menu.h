@@ -58,6 +58,8 @@ private:
     Browser *browserWindow;
     Client *m_client;
     std::shared_ptr<GameState> m_pGameState;
+
+    bool m_isQuitting = false;
 };
 
 
