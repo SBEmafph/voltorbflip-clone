@@ -73,7 +73,6 @@ private:
     QString m_replayFile;
     int m_gameId = 1;
     replay* replayWindow;
-    int findNextFreeReplayId() const;
 
     // Win/Lose handling
     QTimer* m_winTimer = nullptr;
