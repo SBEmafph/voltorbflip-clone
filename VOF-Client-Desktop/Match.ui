@@ -596,6 +596,7 @@ background-color: #309F6A;</string>
     <property name="font">
      <font>
       <family>Consolas</family>
+      <pointsize>16</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -647,6 +648,7 @@ background: #DE7055;</string>
     <property name="font">
      <font>
       <family>Consolas</family>
+      <pointsize>16</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -676,6 +678,7 @@ background: #DE7055;</string>
     <property name="font">
      <font>
       <family>Consolas</family>
+      <pointsize>16</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -727,6 +730,7 @@ background: #45A746;</string>
     <property name="font">
      <font>
       <family>Consolas</family>
+      <pointsize>16</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -756,6 +760,7 @@ background: #45A746;</string>
     <property name="font">
      <font>
       <family>Consolas</family>
+      <pointsize>16</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -785,6 +790,7 @@ background: #E69F43;</string>
     <property name="font">
      <font>
       <family>Consolas</family>
+      <pointsize>16</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -836,6 +842,7 @@ background: #E69F43;</string>
     <property name="font">
      <font>
       <family>Consolas</family>
+      <pointsize>16</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -865,6 +872,7 @@ background: #3792F5;</string>
     <property name="font">
      <font>
       <family>Consolas</family>
+      <pointsize>16</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -916,6 +924,7 @@ background: #3792F5;</string>
     <property name="font">
      <font>
       <family>Consolas</family>
+      <pointsize>16</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -967,6 +976,7 @@ background: #BF65DD;</string>
     <property name="font">
      <font>
       <family>Consolas</family>
+      <pointsize>16</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -1027,6 +1037,7 @@ QPushButton#ItemBtn:hover {
     <property name="font">
      <font>
       <family>Consolas</family>
+      <pointsize>16</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -1078,6 +1089,7 @@ background: #BF65DD;</string>
     <property name="font">
      <font>
       <family>Consolas</family>
+      <pointsize>16</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -1120,8 +1132,8 @@ background: #BF65DD;</string>
    <widget class="QLabel" name="Px_4">
     <property name="geometry">
      <rect>
-      <x>275</x>
-      <y>505</y>
+      <x>280</x>
+      <y>510</y>
       <width>81</width>
       <height>31</height>
      </rect>
@@ -1129,6 +1141,7 @@ background: #BF65DD;</string>
     <property name="font">
      <font>
       <family>Consolas</family>
+      <pointsize>16</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -1149,8 +1162,8 @@ background: #3792F5;</string>
    <widget class="QLabel" name="Mx_4">
     <property name="geometry">
      <rect>
-      <x>275</x>
-      <y>535</y>
+      <x>280</x>
+      <y>540</y>
       <width>81</width>
       <height>51</height>
      </rect>
@@ -1158,6 +1171,7 @@ background: #3792F5;</string>
     <property name="font">
      <font>
       <family>Consolas</family>
+      <pointsize>16</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -1200,8 +1214,8 @@ background: #3792F5;</string>
    <widget class="QLabel" name="Px_3">
     <property name="geometry">
      <rect>
-      <x>185</x>
-      <y>505</y>
+      <x>190</x>
+      <y>510</y>
       <width>81</width>
       <height>31</height>
      </rect>
@@ -1209,6 +1223,7 @@ background: #3792F5;</string>
     <property name="font">
      <font>
       <family>Consolas</family>
+      <pointsize>16</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -1229,8 +1244,8 @@ background: #E69F43;</string>
    <widget class="QLabel" name="Mx_3">
     <property name="geometry">
      <rect>
-      <x>185</x>
-      <y>535</y>
+      <x>190</x>
+      <y>540</y>
       <width>81</width>
       <height>51</height>
      </rect>
@@ -1238,6 +1253,7 @@ background: #E69F43;</string>
     <property name="font">
      <font>
       <family>Consolas</family>
+      <pointsize>16</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -1291,8 +1307,8 @@ background: #E69F43;</string>
    <widget class="QLabel" name="Mx_2">
     <property name="geometry">
      <rect>
-      <x>95</x>
-      <y>535</y>
+      <x>100</x>
+      <y>540</y>
       <width>81</width>
       <height>51</height>
      </rect>
@@ -1300,6 +1316,7 @@ background: #E69F43;</string>
     <property name="font">
      <font>
       <family>Consolas</family>
+      <pointsize>16</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -1320,8 +1337,8 @@ background: #45A746;</string>
    <widget class="QLabel" name="Px_2">
     <property name="geometry">
      <rect>
-      <x>95</x>
-      <y>505</y>
+      <x>100</x>
+      <y>510</y>
       <width>81</width>
       <height>31</height>
      </rect>
@@ -1329,6 +1346,7 @@ background: #45A746;</string>
     <property name="font">
      <font>
       <family>Consolas</family>
+      <pointsize>16</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -1371,8 +1389,8 @@ background: #45A746;</string>
    <widget class="QLabel" name="Px_1">
     <property name="geometry">
      <rect>
-      <x>5</x>
-      <y>505</y>
+      <x>10</x>
+      <y>510</y>
       <width>81</width>
       <height>31</height>
      </rect>
@@ -1380,6 +1398,7 @@ background: #45A746;</string>
     <property name="font">
      <font>
       <family>Consolas</family>
+      <pointsize>16</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -1400,8 +1419,8 @@ background: #DE7055;</string>
    <widget class="QLabel" name="Mx_1">
     <property name="geometry">
      <rect>
-      <x>5</x>
-      <y>535</y>
+      <x>10</x>
+      <y>540</y>
       <width>81</width>
       <height>51</height>
      </rect>
@@ -1409,6 +1428,7 @@ background: #DE7055;</string>
     <property name="font">
      <font>
       <family>Consolas</family>
+      <pointsize>16</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -1424,6 +1444,94 @@ background: #DE7055;</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_14">
+    <property name="geometry">
+     <rect>
+      <x>285</x>
+      <y>545</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background: #3792F5;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="resources.qrc">:/images/images/Voltorb.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_15">
+    <property name="geometry">
+     <rect>
+      <x>195</x>
+      <y>545</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background: #E69F43;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="resources.qrc">:/images/images/Voltorb.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_16">
+    <property name="geometry">
+     <rect>
+      <x>105</x>
+      <y>545</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background: #45A746;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="resources.qrc">:/images/images/Voltorb.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_17">
+    <property name="geometry">
+     <rect>
+      <x>15</x>
+      <y>545</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background: #DE7055;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="resources.qrc">:/images/images/Voltorb.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
     </property>
    </widget>
   </widget>
