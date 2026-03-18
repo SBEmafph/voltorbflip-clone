@@ -1,0 +1,830 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>shop</class>
+ <widget class="QWidget" name="shop">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>450</height>
+   </rect>
+  </property>
+  <property name="font">
+   <font>
+    <pointsize>18</pointsize>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>VoltOrbFlip/Shop</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: #14845C;</string>
+  </property>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>801</width>
+     <height>451</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+     <pointsize>28</pointsize>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;
+border: 5px solid #ffffff;</string>
+   </property>
+   <property name="lineWidth">
+    <number>-1</number>
+   </property>
+   <property name="midLineWidth">
+    <number>0</number>
+   </property>
+   <property name="text">
+    <string>Shop</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="buy1Btn">
+   <property name="geometry">
+    <rect>
+     <x>520</x>
+     <y>117</y>
+     <width>111</width>
+     <height>54</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#buy1Btn {
+	border-radius: 5px;
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#buy1Btn:hover {
+    background-color: #3cb079;
+}</string>
+   </property>
+   <property name="text">
+    <string>Purchase</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="equip1Btn">
+   <property name="geometry">
+    <rect>
+     <x>640</x>
+     <y>117</y>
+     <width>131</width>
+     <height>54</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#equip1Btn {
+	border-radius: 5px;
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#equip1Btn:hover {
+    background-color: #3cb079;
+}</string>
+   </property>
+   <property name="text">
+    <string>Equip-0</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>31</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="resources.qrc">:/images/images/Voltorb.png</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>80</y>
+     <width>761</width>
+     <height>301</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;
+border: 2px solid #ffffff;</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Shape::Box</enum>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="buy2Btn">
+   <property name="geometry">
+    <rect>
+     <x>520</x>
+     <y>217</y>
+     <width>111</width>
+     <height>54</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#buy2Btn {
+	border-radius: 5px;
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#buy2Btn:hover {
+    background-color: #3cb079;
+}</string>
+   </property>
+   <property name="text">
+    <string>Purchase</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="equip2Btn">
+   <property name="geometry">
+    <rect>
+     <x>640</x>
+     <y>217</y>
+     <width>131</width>
+     <height>54</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#equip2Btn {
+	border-radius: 5px;
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#equip2Btn:hover {
+    background-color: #3cb079;
+}</string>
+   </property>
+   <property name="text">
+    <string>Equip-0</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="buy3Btn">
+   <property name="geometry">
+    <rect>
+     <x>520</x>
+     <y>317</y>
+     <width>111</width>
+     <height>54</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#buy3Btn {
+	border-radius: 5px;
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#buy3Btn:hover {
+    background-color: #3cb079;
+}</string>
+   </property>
+   <property name="text">
+    <string>Purchase</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="equip3Btn">
+   <property name="geometry">
+    <rect>
+     <x>640</x>
+     <y>317</y>
+     <width>131</width>
+     <height>54</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#equip3Btn {
+	border-radius: 5px;
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#equip3Btn:hover {
+    background-color: #3cb079;
+}</string>
+   </property>
+   <property name="text">
+    <string>Equip-0</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="exitBtn">
+   <property name="geometry">
+    <rect>
+     <x>660</x>
+     <y>400</y>
+     <width>121</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+     <pointsize>16</pointsize>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#exitBtn {
+    border-radius: 5px;
+    background-color: #de5331;
+    color: white;
+    border: 2px solid #ffffff;
+}
+
+QPushButton#exitBtn:hover {
+    background-color: #e86241;
+}</string>
+   </property>
+   <property name="text">
+    <string>Exit</string>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>20</width>
+     <height>20</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>760</x>
+     <y>10</y>
+     <width>31</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="resources.qrc">:/images/images/Voltorb.png</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="icon1">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>90</y>
+     <width>81</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel#icon1 {
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="resources.qrc">:/images/images/magnifying-glass.png</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="icon2">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>190</y>
+     <width>81</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel#icon2 {
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="resources.qrc">:/images/images/defence.png</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="icon3">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>290</y>
+     <width>81</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel#icon3 {
+    background-color: #309F6A;
+    color: white;
+    border: 2px solid #ffffff;
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="resources.qrc">:/images/images/steal.png</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="price1">
+   <property name="geometry">
+    <rect>
+     <x>520</x>
+     <y>90</y>
+     <width>111</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;
+border: 2px solid #ffffff;</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Shape::Box</enum>
+   </property>
+   <property name="text">
+    <string>Cost: 10P</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignmentFlag::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="price2">
+   <property name="geometry">
+    <rect>
+     <x>520</x>
+     <y>190</y>
+     <width>111</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;
+border: 2px solid #ffffff;</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Shape::Box</enum>
+   </property>
+   <property name="text">
+    <string>Cost: 10P</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignmentFlag::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="price3">
+   <property name="geometry">
+    <rect>
+     <x>520</x>
+     <y>290</y>
+     <width>111</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;
+border: 2px solid #ffffff;</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Shape::Box</enum>
+   </property>
+   <property name="text">
+    <string>Cost: 10P</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignmentFlag::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="own1">
+   <property name="geometry">
+    <rect>
+     <x>640</x>
+     <y>90</y>
+     <width>131</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;
+border: 2px solid #ffffff;</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Shape::Box</enum>
+   </property>
+   <property name="text">
+    <string>Owned: </string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignmentFlag::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="own2">
+   <property name="geometry">
+    <rect>
+     <x>640</x>
+     <y>190</y>
+     <width>131</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;
+border: 2px solid #ffffff;</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Shape::Box</enum>
+   </property>
+   <property name="text">
+    <string>Owned: </string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignmentFlag::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="own3">
+   <property name="geometry">
+    <rect>
+     <x>640</x>
+     <y>290</y>
+     <width>131</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;
+border: 2px solid #ffffff;</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Shape::Box</enum>
+   </property>
+   <property name="text">
+    <string>Owned: </string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignmentFlag::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="itemName1">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>90</y>
+     <width>391</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;
+border: 2px solid #ffffff;</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Shape::Box</enum>
+   </property>
+   <property name="text">
+    <string>Magnifying Glass</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignmentFlag::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="itemName2">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>190</y>
+     <width>391</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;
+border: 2px solid #ffffff;</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Shape::Box</enum>
+   </property>
+   <property name="text">
+    <string>Shield</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignmentFlag::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="itemName3">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>290</y>
+     <width>391</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;
+border: 2px solid #ffffff;</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Shape::Box</enum>
+   </property>
+   <property name="text">
+    <string>Point Steal</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignmentFlag::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="description1">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>119</y>
+     <width>391</width>
+     <height>52</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;
+border: 2px solid #ffffff;
+background-color: #309F6A;</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Shape::Box</enum>
+   </property>
+   <property name="text">
+    <string>Reveal random safe tile</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignmentFlag::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="description2">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>219</y>
+     <width>391</width>
+     <height>52</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;
+border: 2px solid #ffffff;
+background-color: #309F6A;</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Shape::Box</enum>
+   </property>
+   <property name="text">
+    <string>Prevent score loss from Voltorb</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignmentFlag::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="description3">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>319</y>
+     <width>391</width>
+     <height>52</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;
+border: 2px solid #ffffff;
+background-color: #309F6A;</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Shape::Box</enum>
+   </property>
+   <property name="text">
+    <string>Steal 10 Points from random player</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignmentFlag::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="points">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>400</y>
+     <width>141</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;
+border: 2px solid #ffffff;
+background-color: #309F6A;</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Shape::Box</enum>
+   </property>
+   <property name="text">
+    <string>Points: 0</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignmentFlag::AlignCenter</set>
+   </property>
+  </widget>
+  <zorder>label_2</zorder>
+  <zorder>label</zorder>
+  <zorder>buy1Btn</zorder>
+  <zorder>equip1Btn</zorder>
+  <zorder>label_3</zorder>
+  <zorder>buy2Btn</zorder>
+  <zorder>equip2Btn</zorder>
+  <zorder>buy3Btn</zorder>
+  <zorder>equip3Btn</zorder>
+  <zorder>exitBtn</zorder>
+  <zorder>label_4</zorder>
+  <zorder>icon1</zorder>
+  <zorder>icon2</zorder>
+  <zorder>icon3</zorder>
+  <zorder>price1</zorder>
+  <zorder>price2</zorder>
+  <zorder>price3</zorder>
+  <zorder>own1</zorder>
+  <zorder>own2</zorder>
+  <zorder>own3</zorder>
+  <zorder>itemName1</zorder>
+  <zorder>itemName2</zorder>
+  <zorder>itemName3</zorder>
+  <zorder>description1</zorder>
+  <zorder>description2</zorder>
+  <zorder>description3</zorder>
+  <zorder>points</zorder>
+ </widget>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
+ <connections/>
+</ui>
