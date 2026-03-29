@@ -31,6 +31,7 @@ static const quint8 MAX_CLIENTS = 8;
 // Board dimensions
 static const quint8 ROW_LENGTH = 5;
 static const quint8 COLUMN_LENGTH = 5;
+static const quint8 TILE_COUNT = ROW_LENGTH * COLUMN_LENGTH;
 
 // Server default port
 static const quint16 DEFAULT_PORT = 16000;
@@ -39,6 +40,35 @@ static const quint16 DEFAULT_PORT = 16000;
 static const quint8 TILE_MINE = 0;        // Mine tile
 static const quint8 TILE_MIN_VALUE = 1;   // Minimum value tile
 static const quint8 TILE_MAX_VALUE = 9;   // Maximum value tile
+
+static QStringList defaultNames = {
+    "Giovanni",
+    "Lance",
+    "Maxie",
+    "Cyrus",
+    "Koga",
+    "Ghetsis",
+    "N",
+    "Lysandre"
+};
+
+static QStringList playerColors = {
+    "#FF9999", // Rot (Spieler 1)
+    "#FFFF99", // Grün (Spieler 2)
+    "#99FF99", // Orange (Spieler 3)
+    "#99CCFF", // Blau (Spieler 4)
+    "#CC99FF", // Lila (Spieler 5)
+    "#99FFFF", // Türkis (Spieler 6)
+    "#FFD699", // Ocker (Spieler 7)
+    "#FFB6C1"  // Pastell-Rot (Spieler 8)
+};
+
+static QStringList tileColors = {
+    "#45a746", // Grün (1 Punkt)
+    "#3792f5", // Blau (2 Punkte)
+    "#bf65dd", // Lila (3 Punkte)
+    "#d04006", // Rot (Bombe)
+};
 
 enum Tile : quint8{
     One = 1,
@@ -58,7 +88,7 @@ enum Action : quint8 {
 };
 
 // Commands sent over network
-enum Command : qint8 {
+enum Command : quint8 {
     LoginRequest    = 0x01,
     NewLoginConfig,
     LoginSuccess,
@@ -66,6 +96,7 @@ enum Command : qint8 {
     LobbyUpdate,
     GameStateUpdate,
     PlayerMove,
+    StartMatch,
     Quit,
     ErrorMessage    = 0x7F
 };
@@ -100,11 +131,12 @@ struct PlayerSessionState {
     quint8 bSlotId;
 
     // Game data only during match
-    quint8 bBoard[(VOF::ROW_LENGTH * VOF::COLUMN_LENGTH) - 1]; // 25 tiles
-    bool fRevealed[(VOF::ROW_LENGTH * VOF::COLUMN_LENGTH) - 1]; // revealed flags
-    quint8 bCurrentScore = 0;
-    quint8 bTotalScore = 0;
-    quint8 bLevel = 1;
+    quint8 bBoard[VOF::TILE_COUNT]; // 25 tiles
+    bool fRevealed[VOF::TILE_COUNT]; // revealed flags
+    quint8 bCurrentScore    = 0;
+    quint8 bTotalScore      = 0;
+    quint8 bLevel           = 1;
+    quint8 bombStreak       = 0; // Tracks consecutive bomb hits for level penalty
     bool fItemEquipped[3];
 
     QList<Move> currentMatchMoves;

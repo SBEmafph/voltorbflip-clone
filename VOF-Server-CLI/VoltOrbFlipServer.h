@@ -9,7 +9,6 @@
 #include "GlobalDefines.h"
 #include "NetworkObserver.h"
 #include "PlayerProfile.h"
-#include "Gamelogic.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -24,7 +23,7 @@ class VoltOrbFlipServer : public QObject
 signals:
     // ===== Signals for client communication =====
     void sig_identificationValid(quint32 dwIDout, quint16 wTokenout);
-    void sig_lobbyUpdate(NWObs* pNWObs, quint8 lobbyIDin = 0);
+    void sig_lobbyUpdate(QString szName, quint8 bSlotID, quint8 bLobbyID = 0, bool fIsReady = 0);
     void sig_loginSuccessful();
 
 public:
@@ -42,16 +41,16 @@ public:
     void m_startMatch();
     void m_generateBoard(PlayerSessionState& player);
 
-    // ===== Conversion between internal board representations =====
-    Field m_convertBoardToField(const PlayerSessionState& player);
-    void m_convertFieldToBoard(PlayerSessionState& player, const Field& field);
+    void m_broadcastStartMatch();
 
 public slots:
     // ===== Network / lobby handling =====
     void slot_assignLobby(NWObs* pNWObs, quint8 lobbyIDin = 0);
     void slot_attach();
     void slot_updateClientsGameState();
-    void slot_onLobbyStatusUpdate(quint32 dwPlayerId, bool fIsReady);
+    void slot_onLobbyStatusUpdate(QString szName, quint8 bSlotID, quint8 bLobbyID = 0, bool fIsReady = 0);
+    void slot_readyStateChanged(quint8 bLobbyID, quint8 bLobbySlotID, bool fIsReady);
+    void slot_processStartMatch(NWObs * pNWObs);
 
     // ===== Login / session handling =====
     void slot_processHandshake(NWObs* pNWObs, quint32 ID, quint16 token);
@@ -82,10 +81,13 @@ private:
     void m_unpackMove(quint8 &action, quint8 &x, quint8 &y, quint16 playerMove);
     void m_revealTile(quint8 &x, quint8 &y, PlayerSessionState &playerState);
     quint8 m_calculatePoints(quint8 &x, quint8 &y, PlayerSessionState &playerState);
+    void m_handleBombHit(PlayerSessionState& player);
 
     // ===== Game end / win condition handling =====
     void m_checkWinCondition();
     void m_handlePlayerWin(quint8 bWinnerSlot);
+    void m_revealBoard(PlayerSessionState &player);
+    void m_writeWinnerEntry(const QString &name, quint8 totalScore);
 };
 
 #endif // VOLTORBFLIPSERVER_H

@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
 
     QString profile = (argc > 1) ? argv[1] : "DefaultPlayer";
     a.setApplicationName("VoltOrbFlip_" + profile);
-    QString szID = (argc > 2) ? argv[2] : 0;
+    QString szID = (argc > 2) ? argv[2] : "1";
     quint32 ID = szID.toInt();
     QString szToken = (argc > 3) ? argv[3] : 0;
     quint16 Token = szToken.toInt();

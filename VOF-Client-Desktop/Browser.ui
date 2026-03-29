@@ -85,10 +85,10 @@ border: 5px solid #ffffff;</string>
   <widget class="QTextEdit" name="m_SzIP">
    <property name="geometry">
     <rect>
-     <x>155</x>
+     <x>150</x>
      <y>150</y>
-     <width>300</width>
-     <height>51</height>
+     <width>210</width>
+     <height>50</height>
     </rect>
    </property>
    <property name="font">
@@ -109,7 +109,7 @@ border: 2px solid #ffffff;</string>
     <enum>Qt::ScrollBarPolicy::ScrollBarAsNeeded</enum>
    </property>
    <property name="placeholderText">
-    <string>127.0.0.1:16000</string>
+    <string>127.0.0.1</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_4">
@@ -118,7 +118,7 @@ border: 2px solid #ffffff;</string>
      <x>180</x>
      <y>110</y>
      <width>251</width>
-     <height>41</height>
+     <height>31</height>
     </rect>
    </property>
    <property name="font">
@@ -145,7 +145,7 @@ border: 2px solid #ffffff;</string>
     <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
    </property>
   </widget>
-  <widget class="QPushButton" name="ExitBtn">
+  <widget class="QPushButton" name="exitBtn">
    <property name="geometry">
     <rect>
      <x>460</x>
@@ -162,14 +162,14 @@ border: 2px solid #ffffff;</string>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">QPushButton#ExitBtn {
+    <string notr="true">QPushButton#exitBtn {
     border-radius: 5px;
     background-color: #de5331;
     color: white;
     border: 2px solid #ffffff;
 }
 
-QPushButton#ExitBtn:hover {
+QPushButton#exitBtn:hover {
     background-color: #e86241;
 }</string>
    </property>
@@ -183,7 +183,7 @@ QPushButton#ExitBtn:hover {
     </size>
    </property>
   </widget>
-  <widget class="QPushButton" name="ConnectBtn">
+  <widget class="QPushButton" name="connectBtn">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -200,14 +200,14 @@ QPushButton#ExitBtn:hover {
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">QPushButton#ConnectBtn {
+    <string notr="true">QPushButton#connectBtn {
     border-radius: 5px;
     background-color: #309F6A;
     color: white;
     border: 2px solid #ffffff;
 }
 
-QPushButton#ConnectBtn:hover {
+QPushButton#connectBtn:hover {
     background-color: #3cb079;
 }</string>
    </property>
@@ -259,6 +259,45 @@ QPushButton#ConnectBtn:hover {
     <bool>true</bool>
    </property>
   </widget>
+  <widget class="QTextEdit" name="m_SzPort">
+   <property name="geometry">
+    <rect>
+     <x>370</x>
+     <y>150</y>
+     <width>80</width>
+     <height>50</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="layoutDirection">
+    <enum>Qt::LayoutDirection::LeftToRight</enum>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;
+background-color: #309F6A;
+border: 2px solid #ffffff;</string>
+   </property>
+   <property name="horizontalScrollBarPolicy">
+    <enum>Qt::ScrollBarPolicy::ScrollBarAsNeeded</enum>
+   </property>
+   <property name="placeholderText">
+    <string>16000</string>
+   </property>
+  </widget>
+  <zorder>label_2</zorder>
+  <zorder>label_3</zorder>
+  <zorder>m_SzIP</zorder>
+  <zorder>label_4</zorder>
+  <zorder>label_5</zorder>
+  <zorder>label_6</zorder>
+  <zorder>m_SzPort</zorder>
+  <zorder>connectBtn</zorder>
+  <zorder>exitBtn</zorder>
  </widget>
  <resources>
   <include location="resources.qrc"/>

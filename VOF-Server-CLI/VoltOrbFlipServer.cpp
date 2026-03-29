@@ -7,28 +7,62 @@
 VoltOrbFlipServer::VoltOrbFlipServer(QObject *parent)
     : m_pTcpServer(new QTcpServer(this))
 {
-    connect(m_pTcpServer, &QTcpServer::newConnection, this, &VoltOrbFlipServer::slot_attach);
+    connect(m_pTcpServer, &QTcpServer::newConnection,
+            this, &VoltOrbFlipServer::slot_attach);
+
+    connect(this, &VoltOrbFlipServer::sig_lobbyUpdate,
+            this, &VoltOrbFlipServer::slot_onLobbyStatusUpdate);
+
     m_startServer(16000);
 }
 
 void VoltOrbFlipServer::slot_updateClientsGameState()
 {
-    for (NWObs* player : m_clients) {
+    for (NWObs* player : std::as_const(m_lobby)) {
         player->updateFullState(m_tGamestate);
     }
 }
 
-void VoltOrbFlipServer::slot_onLobbyStatusUpdate(quint32 dwPlayerId, bool fIsReady)
+void VoltOrbFlipServer::slot_onLobbyStatusUpdate(QString szName, quint8 bSlotID, quint8 bLobbyID, bool fIsReady)
 {
-    for (NWObs* player : m_clients) {
-        player->onPlayerStatusChanged(dwPlayerId, fIsReady);
+    for (NWObs* player : std::as_const(m_lobby)) {
+        player->sendLobbySlotInfo(szName, bSlotID, fIsReady);
+    }
+}
+
+void VoltOrbFlipServer::m_broadcastStartMatch()
+{
+    LOG_OUT << "[SV] Broadcasting start match to all clients" << Qt::endl;
+    for (NWObs* player : std::as_const(m_lobby)) {
+        player->m_sendStartMatch();
+    }
+}
+
+void VoltOrbFlipServer::slot_readyStateChanged(quint8 bLobbyID, quint8 bLobbySlotID, bool fIsReady)
+{
+    m_tGamestate.tPlayerList[bLobbySlotID].fIsReady = fIsReady;
+    QString tempName = m_tGamestate.tPlayerList[bLobbySlotID].tIdentity.name; //didn't wanna have it in the signal
+    LOG_OUT << "lobby " << (int)bLobbyID
+            << " slot " << (int)bLobbySlotID
+            << " ready " << (int)fIsReady
+            << " tempname " << tempName
+            << Qt::endl;
+    emit sig_lobbyUpdate(tempName, bLobbySlotID, bLobbyID, fIsReady);
+}
+
+void VoltOrbFlipServer::slot_processStartMatch(NWObs *pNWObs)
+{
+    if (pNWObs->m_getSlotID() == 0) {
+        LOG_OUT << "[SV] Host starting match" << Qt::endl;
+        m_startMatch(); // Bestehende Server-Logic
+        m_broadcastStartMatch();
     }
 }
 
 quint8 VoltOrbFlipServer::m_findFirstFreeSlot()
 {
     quint8 slotId = 0;
-    while(m_clients.contains(slotId)) {
+    while(m_lobby.contains(slotId)) {
         slotId++;
     }
     return slotId;
@@ -82,7 +116,7 @@ quint8 VoltOrbFlipServer::m_calculatePoints(quint8 &x, quint8 &y, PlayerSessionS
     if(tileValue != VOF::Tile::Bomb)
     {
         if(playerState.bCurrentScore != 0){
-            res *= playerState.bCurrentScore * tileValue;
+            res = playerState.bCurrentScore * tileValue;
         }
         else{
             res  = tileValue;
@@ -91,7 +125,28 @@ quint8 VoltOrbFlipServer::m_calculatePoints(quint8 &x, quint8 &y, PlayerSessionS
     else{
         LOG_OUT << "bomb" << Qt::endl;
     }
+    playerState.bCurrentScore = res;
     return res;
+}
+
+void VoltOrbFlipServer::m_handleBombHit(PlayerSessionState &player)
+{
+    player.bCurrentScore = 0;
+    player.bombStreak++;
+
+    if (player.bombStreak >= 3)
+    {
+        // Drop the player down one level after 3 consecutive bomb hits
+        if (player.bLevel > 1)
+            player.bLevel--;
+
+        player.bombStreak = 0;
+        LOG_OUT << "[SV] 3 bombs in a row! Level decreased to " << player.bLevel << Qt::endl;
+    }
+    else
+    {
+        LOG_OUT << "[SV] Bomb hit! Current streak: " << player.bombStreak << Qt::endl;
+    }
 }
 
 void VoltOrbFlipServer::m_startServer(quint16 port)
@@ -126,19 +181,33 @@ void VoltOrbFlipServer::slot_attach()
     player->m_requestIdentification();
     connect(clientConnection, &QAbstractSocket::disconnected,
             clientConnection, &QObject::deleteLater);
+
+
     connect(player, &NWObs::sig_identificationReceived,
             this, &VoltOrbFlipServer::slot_processHandshake);
+
     connect(player, &NWObs::sig_newAccountRequested,
             this, &VoltOrbFlipServer::slot_provideNewLogin);
+
     connect(player, &NWObs::sig_lobbyRequest,
             this, &VoltOrbFlipServer::slot_assignLobby);
+
+    connect(player, &NWObs::sig_readyStateChanged,
+            this, &VoltOrbFlipServer::slot_readyStateChanged);
+
     connect(player, &NWObs::sig_quit,
             this, &VoltOrbFlipServer::slot_detach);
+
     connect(player, &NWObs::sig_playerMove,
             this, &VoltOrbFlipServer::m_processInput);
 
+    connect(player, &NWObs::sig_startMatchRequested,
+            this, &VoltOrbFlipServer::slot_processStartMatch);
+
+
     connect(this, &VoltOrbFlipServer::sig_loginSuccessful,
             player, &NWObs::slot_loginSuccessful);
+
 }
 
 void VoltOrbFlipServer::slot_assignLobby(NWObs* pNWObs, quint8 lobbyIDin)
@@ -146,11 +215,28 @@ void VoltOrbFlipServer::slot_assignLobby(NWObs* pNWObs, quint8 lobbyIDin)
     if (m_lobby.count() < VOF::MAX_CLIENTS) {
         quint8 slotID = m_findFirstFreeSlot();
         m_lobby.insert(slotID, pNWObs);
-        pNWObs->m_setSlotId(lobbyIDin);
+        pNWObs->m_assignSlotID(slotID);
+
+        quint32 playerId = pNWObs->m_getId();
+        if (m_playerDatabase.contains(playerId)) {
+            PlayerProfile& profile = m_playerDatabase[playerId];
+            m_tGamestate.tPlayerList[slotID].tIdentity = profile.identity;
+            m_tGamestate.tPlayerList[slotID].fIsReady = false;
+        }
+
         LOG_OUT << "[SV] Welcome Player " << pNWObs->m_getId()
                 << " in Lobby " << lobbyIDin
                 << " on Lobby Slot " << slotID << Qt::endl;
-        emit sig_lobbyUpdate(pNWObs, lobbyIDin);
+
+        for (auto it = m_lobby.begin(); it != m_lobby.end(); ++it) {
+            if (it.value() != pNWObs) { // Nicht sich selbst
+                quint8 bSlotId = it.key();
+                NWObs* existingPlayer = it.value();
+                pNWObs->sendLobbySlotInfo(existingPlayer->m_getName(), bSlotId, existingPlayer->m_getReady());
+            }
+        }
+        //LOG_OUT << pNWObs->m_getName() << slotID << Qt::endl;
+        emit sig_lobbyUpdate(pNWObs->m_getName(), slotID);
     } else {
         LOG_OUT << "[SV] ERR: Lobby " << lobbyIDin << " Already Full" << Qt::endl;
     }
@@ -164,9 +250,10 @@ void VoltOrbFlipServer::slot_processHandshake(NWObs* pNWObs, quint32 idIn, quint
     if(m_playerDatabase.contains(idIn)){ //known ID
         LOG_OUT << "[SV] known ID : " << idIn << Qt::endl;
         if(!m_clients.contains(idIn)){ //currently not connected
-            PlayerProfile existingPlayer = m_playerDatabase[idIn];
+            PlayerProfile &existingPlayer = m_playerDatabase[idIn];
             if (existingPlayer.token == tokenIn) {
                 LOG_OUT << "[SV] INF: Welcome back " << idIn << Qt::endl;
+                existingPlayer.identity.name = pNWObs->m_getName();
                 emit sig_loginSuccessful();
                 return;
             } else {
@@ -194,6 +281,7 @@ void VoltOrbFlipServer::slot_provideNewLogin(NWObs* pNWObs)
 
     PlayerProfile profile;
     profile.identity.id = dwID;
+    profile.identity.name = pNWObs->m_getName();
     profile.token = wToken;
     m_playerDatabase.insert(dwID, profile);
     m_clients.insert(dwID, pNWObs);
@@ -217,38 +305,57 @@ void VoltOrbFlipServer::slot_refreshToken(NWObs* pNWObs)
 
 void VoltOrbFlipServer::slot_detach(NWObs* pNWObs)
 {
-    quint32 dwID = pNWObs->m_getId();
-    LOG_OUT << "[SV] INF: Goodbye " << dwID << Qt::endl;
-    m_lobby.remove(dwID);
-    m_clients.remove(dwID);
+    LOG_OUT << "[SV] INF: Goodbye " << pNWObs->m_getId() << Qt::endl;
+    emit sig_lobbyUpdate("Waiting ...", pNWObs->m_getSlotID(), 0 , 0);
+    m_lobby.remove(pNWObs->m_getSlotID());
+    m_clients.remove(pNWObs->m_getId());
     pNWObs->deleteLater();
 }
-/*
-void VoltOrbFlipServer::m_processInput(int playerId, std::string input)
-{
-    if(!m_tGamestate.tPlayerList.contains(playerId))
-        return;
 
-    PlayerSessionState& player = m_tGamestate.tPlayerList[playerId];
-
-    if(!m_verifyInput(input))
-        return;
-
-    m_applyMove(input);
-}
-*/
 void VoltOrbFlipServer::m_processInput(NWObs* pNWObs, quint16 playerMove)
 {
-    quint8 action;
-    quint8 x;
-    quint8 y;
+    quint8 action, x, y;
     m_unpackMove(action, x, y, playerMove);
-    if(action == VOF::Action::Click){
-        PlayerSessionState& pPlayerState = m_tGamestate.tPlayerList[pNWObs->m_getSlotId()] ;
-        m_revealTile(x, y, pPlayerState);
-        m_calculatePoints(x, y, pPlayerState);
-    }
+
+    if(action != VOF::Action::Click)
+        return;
+
+
+    quint8 slot = pNWObs->m_getSlotID();
+    PlayerSessionState& player = m_tGamestate.tPlayerList[slot];
+
+    m_revealTile(x, y, player);
+    bool bombHit    = !(bool)m_calculatePoints(x, y, player);
+    bool levelDone  = !bombHit && GameLogic::FinishLevelIfCompleted(
+                         player.bBoard, player.fRevealed,
+                         player.bCurrentScore, player.bTotalScore, player.bLevel);
+
+    if(bombHit)
+        m_revealBoard(player); // Show full board so client can see where the bomb was
+
+    // Send current state immediately so the client sees the result for 2s
     slot_updateClientsGameState();
+
+    if(levelDone)
+        m_checkWinCondition(); // Check win before scheduling next board
+
+    // Schedule board reset after 2s on bomb or level completion
+    // On a win, m_handlePlayerWin takes over — no new board needed
+    bool needsNewBoard = (bombHit || levelDone) && m_tGamestate.fIsGameRunning;
+    if(needsNewBoard)
+    {
+        QTimer::singleShot(2000, this, [this, slot, bombHit]()
+                           {
+                               PlayerSessionState& p = m_tGamestate.tPlayerList[slot];
+                               if(bombHit)
+                               {
+                                   p.bCurrentScore = 0;
+                                   m_handleBombHit(p);
+                               }
+                               m_generateBoard(p);
+                               slot_updateClientsGameState();
+                           });
+    }
 }
 
 bool VoltOrbFlipServer::m_verifyInput(std::string input)
@@ -266,10 +373,8 @@ void VoltOrbFlipServer::m_applyMove(std::string input)
     int row = tileIndex / 5;
     int col = tileIndex % 5;
 
-    Field field = m_convertBoardToField(player);
-
     GameLogic::RevealTileWithScore(
-        field,
+        player.bBoard,
         player.fRevealed,
         row,
         col,
@@ -277,45 +382,36 @@ void VoltOrbFlipServer::m_applyMove(std::string input)
         player.bLevel
         );
 
-    m_convertFieldToBoard(player, field);
-
     slot_updateClientsGameState();
     m_checkWinCondition();
-}
-
-// ===== Conversions =====
-Field VoltOrbFlipServer::m_convertBoardToField(const PlayerSessionState& player)
-{
-    Field field(25);
-    for(int i = 0; i < 25; ++i)
-        field[i] = player.bBoard[i];
-    return field;
-}
-
-void VoltOrbFlipServer::m_convertFieldToBoard(PlayerSessionState& player, const Field& field)
-{
-    for(int i = 0; i < 25; ++i)
-        player.bBoard[i] = field[i];
 }
 
 // ===== Generate board =====
 void VoltOrbFlipServer::m_generateBoard(PlayerSessionState& player)
 {
-    Field field = GameLogic::GenerateField5x5_Level(player.bLevel);
+    //LOG_OUT << "[SV] generating board for player " << player.bSlotId << Qt::endl;
+    GameLogic::GenerateField5x5_Level(player.bBoard, player.bLevel);
 
     for(int i = 0; i < 25; ++i)
     {
-        player.bBoard[i] = field[i];
         player.fRevealed[i] = false;
     }
 
     player.bCurrentScore = 0;
-    m_checkWinCondition();
+    //LOG_OUT << "[SV] board for player " << player.bSlotId << " generated" << Qt::endl;
+}
+
+void VoltOrbFlipServer::m_revealBoard(PlayerSessionState& player){
+    for(int i = 0; i < 25; ++i)
+    {
+        player.fRevealed[i] = true;
+    }
 }
 
 // ===== Start match =====
 void VoltOrbFlipServer::m_startMatch()
 {
+    LOG_OUT << "[SV] starting... " << Qt::endl;
     m_tGamestate.fIsGameRunning = true;
 
     for(auto& player : m_tGamestate.tPlayerList)
@@ -348,6 +444,9 @@ void VoltOrbFlipServer::m_handlePlayerWin(quint8 bWinnerSlot)
 {
     LOG_OUT << "[SV] Player on Slot " << bWinnerSlot << " wins the match!" << Qt::endl;
 
+    PlayerSessionState& winner = m_tGamestate.tPlayerList[bWinnerSlot];
+    m_writeWinnerEntry(winner.tIdentity.name, winner.bTotalScore);
+
     m_tGamestate.fIsGameRunning = false;
     slot_updateClientsGameState();
 
@@ -372,4 +471,33 @@ void VoltOrbFlipServer::m_handlePlayerWin(quint8 bWinnerSlot)
         m_tGamestate.fIsGameRunning = false;
         slot_updateClientsGameState();
     });
+}
+
+void VoltOrbFlipServer::m_writeWinnerEntry(const QString& name, quint8 totalScore)
+{
+    const QString filePath = "winners.csv";
+    QFile file(filePath);
+
+    // Header nur beim ersten Mal schreiben
+    if (!file.exists())
+    {
+        if (file.open(QIODevice::WriteOnly | QIODevice::Text))
+        {
+            QTextStream out(&file);
+            out << "name,totalscore,date,time\n";
+            file.close();
+        }
+    }
+
+    // Eintrag anhängen
+    if (file.open(QIODevice::Append | QIODevice::Text))
+    {
+        QTextStream out(&file);
+        QDateTime now = QDateTime::currentDateTime();
+        out << name << ","
+            << totalScore << ","
+            << now.toString("yyyy-MM-dd") << ","
+            << now.toString("HH:mm:ss") << "\n";
+        file.close();
+    }
 }

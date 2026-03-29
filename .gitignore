@@ -4,6 +4,8 @@
 *.autosave
 .qtcreator/
 
+diff.txt
+
 # --- Build-Artefakte (sehr wichtig!) ---
 # Ignoriert die typischen Shadow-Build-Ordner
 build-*/

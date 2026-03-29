@@ -1,5 +1,6 @@
 #include "Browser.h"
 #include "ui_Browser.h"
+#include "GlobalDefines.h"
 
 Browser::Browser(QWidget *parent)
     : QWidget(parent)
@@ -16,12 +17,21 @@ Browser::~Browser()
     delete ui;
 }
 
-void Browser::on_ConnectBtn_clicked()
+void Browser::on_connectBtn_clicked()
 {
-    emit connectRequested();
+    QString SZIP = ui->m_SzIP->toPlainText();
+    QString SZPort = ui->m_SzPort->toPlainText();
+    if (SZIP.length() >= 6 && (SZPort.length() > 2)){
+        QHostAddress adress(SZIP);
+        emit sig_connectRequested(adress, SZPort.toInt());
+        LOG_OUT << SZIP << " " << SZPort << " " << adress.toString();
+        return;
+    }
+    emit sig_connectRequested();
 }
 
-void Browser::on_ExitBtn_clicked()
+void Browser::on_exitBtn_clicked()
 {
     this->hide();
+    emit sig_disconnect();
 }
